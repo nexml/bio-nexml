@@ -110,15 +110,31 @@ module Bio
 
         #assuming the cursor is before the first trees
         #move the cursor to the first otus
-        @reader.read until element?( "otus" )
+        @reader.read until element?( "trees" )
 
-        @otus_set = []
-        while element?( 'otus' )
-          @otus_set << parse_otus
+        @trees_set = []
+        while element?( 'trees' )
+          @trees_set << parse_trees
           @reader.read
         end
 
-        @otus_set
+        @trees_set
+      end
+
+      def parse_trees
+        @trees = NeXML::Trees.new( @reader[ 'id' ], @reader[ 'label' ] )
+
+        #parse the child 'tree's
+        until end_element?( "trees" )
+          @reader.read
+          if element?( "tree" )
+            tree = NeXML::Tree.new( @reader[ 'id' ], @reader[ 'label' ] )
+            @trees.tree << tree
+          end
+        end
+
+        #return the newly create trees object
+        @trees
       end
 
     end #end Parser class
