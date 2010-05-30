@@ -1,17 +1,21 @@
 require "elements"
 
 require "rubygems"
-require "libxml"
+require "xml"
+
+require "ruby-debug"
+#Debugger.start
 
 module Bio
   module NeXML
+    include LibXML
 
     def self.parse( nexml )
       Parser.new( nexml )
     end
 
     class Parser
-      attr_reader :version, :generator
+      attr_reader :version, :generator, :otus, :trees
 
       def initialize( nexml )
         #initialize a libxml cursor
@@ -25,6 +29,12 @@ module Bio
         @generator = @reader[ 'generator' ]
 
         #perhaps a namespace api as well
+        
+        #parse all the 'otus' element
+        @otus = parse_all_otus
+
+        #parse all the 'trees' element
+        @trees = parse_all_trees
       end
 
       #Determine if the 'nexml' is a file, string, or an io
@@ -40,17 +50,15 @@ module Bio
         end
       end
 
-      #Move to the given element.
-      #This function should be used carefully.
-      #Since libxml's cursor only moves in the forward direction
-      #it will reach the end of the document if the 'element' is 
-      #not found rendering the cursor useless for any further
-      #usage.
-      #def move_to( element )
-        #while @reader.read do
-          #return element if element?( element )
-        #end
-      #end
+      #Close the assosicated XML::Reader object
+      def close
+        @reader.close
+      end
+
+      private
+
+      #Move to an element. If the element is not found the method will run into an infinite loop
+      #so use it carefully.
       def move_to( element )
         @reader.read until element?( element )
       end
@@ -65,76 +73,158 @@ module Bio
         ( @reader.node_type == XML::Reader::TYPE_END_ELEMENT ) and ( @reader.local_name == name )
       end
 
-      #Close the assosicated XML::Reader object
-      def close
-        @reader.close
-      end
+      #When this function is called the cursor will be at 'nexml' element.
+      #This function will parse all 'otus' element and return an array of
+      #'otus' objects.
+      def parse_all_otus
+        #Move to the first 'otus'
+        move_to( "otus" )
 
-      def otus
-        #return any existing otus
-        return @otus_set if @otus_set
-
-        #assuming the cursor is before the first otus
-        #move the cursor to the first otus
-        @reader.read until element?( "otus" )
-
-        @otus_set = []
+        otus = []
         while element?( 'otus' )
-          @otus_set << parse_otus
+          otus << parse_each_otus
           @reader.read
         end
 
-        @otus_set
+        otus
       end
 
-      def parse_otus
+      #When this function is called the cursor will be at one of the
+      #'otus' element. This function returns an object corresponding
+      #to an individual 'otus' element.
+      def parse_each_otus
         #create a new otus
-        @otus = NeXML::Otus.new( @reader[ 'id' ], @reader[ 'label' ] )
+        otus = NeXML::Otus.new( @reader[ 'id' ], @reader[ 'label' ] )
 
+        #parse all its child 'otu' elements
+        otus.otu = parse_all_otu
+
+        otus
+      end
+
+      #When this function is called the cursor will be at on of the
+      #'otus' element. This function will parse all the child 'otu'
+      #elements and return an array of 'otu' objects.
+      def parse_all_otu
+        #Move to the first 'otu'
+        move_to( "otu" )
+
+        otu = []
         #parse the child 'otu's
-        until end_element?( "otus" )
+        while element?( "otu" )
+          otu << parse_each_otu
           @reader.read
-          if element?( "otu" )
-            otu = Otu.new( @reader[ 'id' ], @reader[ 'label' ] )
-            @otus.otu << otu
-          end
         end
 
-        #return the newly create otu object
-        @otus
+        otu
       end
-      
-      def trees
-        #return any existing otus
-        return @trees_set if @trees_set
 
-        #assuming the cursor is before the first trees
-        #move the cursor to the first otus
-        @reader.read until element?( "trees" )
+      #When this function is called the cursor will be at one of the
+      #'otu' element. This function returns an object corresponding
+      #to an individual 'otu' element.
+      def parse_each_otu
+        Otu.new( @reader[ 'id' ], @reader[ 'label' ] )
+      end
 
-        @trees_set = []
+      #When this function is called the cursor will be at the last 'otus'
+      #element. This function will parse all 'trees' element and return an
+      #array of 'trees' objects.
+      def parse_all_trees
+        #Move to the first 'trees'
+        move_to( "trees" )
+
+        trees = []
         while element?( 'trees' )
-          @trees_set << parse_trees
+          trees << parse_each_trees
           @reader.read
         end
 
-        @trees_set
+        trees
       end
 
-      def parse_trees
-        @trees = NeXML::Trees.new( @reader[ 'id' ], @reader[ 'label' ] )
+      #When this function is called the cursor will be at one of the
+      #'trees' element. This function returns an object corresponding
+      #to an individual 'trees' element.
+      def parse_each_trees
+        #create a new tree
+        trees = NeXML::Trees.new( @reader[ 'id' ], @reader[ 'label' ] )
 
-        #parse the child 'tree's
-        until end_element?( "trees" )
+        #parse all its child 'tree' elements
+        trees.tree = parse_all_tree
+
+        trees
+      end
+
+      #When this function is called the cursor will be at one of the
+      #'trees' element. This function will parse all child 'tree' element
+      #and return an array of 'tree' objects.
+      def parse_all_tree
+        #Move the cursor to the first tree
+        move_to( 'tree' )
+
+        tree = []
+        while element?( 'tree' )
+          tree << parse_each_tree
           @reader.read
-          if element?( "tree" )
-            tree = NeXML::Tree.new( @reader[ 'id' ], @reader[ 'label' ] )
-            @trees.tree << tree
-          end
         end
 
-        #return the newly create trees object
-        @trees
+        tree
+      end
+
+      #When this function is called the cursor will be at one of the
+      #'tree' element. This function returns an object corresponding
+      #to an individual 'tree' element.
+      def parse_each_tree
+        tree = NeXML::Tree.new( @reader[ 'id' ], @reader[ 'label' ] )
+
+        #parse all its nodes
+        parse_all_node( tree )
+
+        #parse all its edges
+        parse_all_edge( tree )
+
+        tree
+      end
+
+      #When this function is called the cursor will be at one of the
+      #'tree' element. This function parses the nodes of the tree and
+      #returns an array of 'node' objects.
+      def parse_all_node( tree )
+        #Move the cursor to the first node
+        move_to( 'node' )
+
+        while element?( "node" )
+          node = parse_each_node
+          tree.add_node( node )
+          @reader.read
+        end
+      end
+
+      #When this function is called the curso is at one of the 'node'.
+      #This fucntion returns a 'node' object.
+      def parse_each_node
+        NeXML::Node.new( @reader[ 'id' ], @reader[ 'label' ] )
+      end
+
+      #When this function is called the cursor is at the last 'node'
+      #element. This function parses all the edges of the tree and 
+      #returns an array of edge objects.
+      def parse_all_edge( tree )
+        move_to( 'edge' )
+
+        while element?( 'edge' )
+          edge = parse_each_edge
+          @reader.read
+        end
+
+      end
+
+      #When this function is called the cursor is at an edge.
+      #This function returns an edge object.
+      def parse_each_edge
+        NeXML::Edge.new( @reader[ 'id' ], @reader[ 'source' ],
+                         @reader[ 'target' ], @reader[ 'length' ],
+                         @reader[ 'label' ] )
       end
 
     end #end Parser class
@@ -142,3 +232,6 @@ module Bio
   end #end NeXML module
 
 end #end Bio module
+
+#n = Bio::NeXML.parse "examples/test.xml"
+#Debugger.stop
