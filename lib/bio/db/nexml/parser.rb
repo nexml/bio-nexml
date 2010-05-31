@@ -202,7 +202,10 @@ module Bio
           case local_name
           when "node"
             #parse child 'node' element
-            puts "node"
+            node = parse_node
+
+            #and add it to the 'tree'
+            tree.add_node( node )
           when "edge"
             #parse child 'edge' element
             puts "edge"
@@ -214,6 +217,27 @@ module Bio
 
         #return the 'tree' object
         tree
+      end
+
+      #When this function is called the cursor is at a 'node' element.
+      #Return - a 'node' object.
+      def parse_node
+        #start with a new 'otu' object
+        node = NeXML::Node.new( @reader[ 'id' ], @reader[ 'label' ] )
+
+        #according to the schema a 'node' may have no child element.
+        return node if empty_element?
+
+        while next_node
+          case local_name
+          when 'node'
+            #end of current 'node' element has been reached
+            break
+          end
+        end
+
+        #return the 'node' object
+        node
       end
 
     end #end Parser class
