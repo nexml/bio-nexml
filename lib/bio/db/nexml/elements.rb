@@ -47,12 +47,26 @@ module Bio
     class Nexml
       include Annotated
       attr_accessor :version, :generator
+      #attr_accessor :otus_set, :trees_set, :characters_set
       
       def initialize( version, generator = nil )
         @version = version
         @generator = generator
       end
-    end
+
+      def otus
+        @otus_set ||= []
+      end
+
+      def trees
+        @trees_set ||= []
+      end
+
+      def characters
+        @characters_set
+      end
+
+    end #end class Nexml
 
     module Labelled
       include Annotated
@@ -118,11 +132,15 @@ module Bio
 
     class Otus
       include IDTagged
-      attr_accessor :otu
+      #attr_accessor :otu
 
       def initialize( id, label = nil )
         @id = id
         @label = label
+      end
+
+      def otu
+        @otu_set ||= []
       end
 
     end #end class Otus
@@ -162,12 +180,16 @@ module Bio
 
     class Trees
       include TaxaLinked
-      attr_accessor :tree
 
       def initialize( id, label = nil )
         @id = id
         @label = label
       end
+
+      def tree
+        @tree_set ||= []
+      end
+
     end #end class Trees
 
   end #end module NeXML
