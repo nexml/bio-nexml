@@ -17,9 +17,11 @@ module Bio
     class Parser
       attr_reader :version, :generator, :otus, :trees
 
-      def initialize( nexml )
+      def initialize( nexml, validate = false )
         #initialize a libxml cursor
         @reader = read( nexml )
+
+        validate_nexml if validate
 
         #start at the root element
         move_to( "nexml" )
@@ -56,6 +58,11 @@ module Bio
       end
 
       private
+
+      def validate_nexml
+        valid = @reader.schema_validate( "schema/nexml.xsd" )
+        return true if valid == 0
+      end
 
       #Move to an element. If the element is not found the method will run into an infinite loop
       #so use it carefully.
@@ -233,5 +240,6 @@ module Bio
 
 end #end Bio module
 
-#n = Bio::NeXML.parse "examples/test.xml"
+n = Bio::NeXML.parse "examples/test.xml"
+puts "hi"
 #Debugger.stop
