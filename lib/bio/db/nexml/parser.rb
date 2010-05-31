@@ -44,11 +44,11 @@ module Bio
       def read( nexml )
         case nexml
         when /\.xml$/
-          XML::Reader.file( nexml, :options => XML::Parser::Options::NOBLANKS )
+          XML::Reader.file( nexml, :options => parse_opts )
         when IO
-          XML::Reader.io( nexml, :options => XML::Parser::Options::NOBLANKS )
+          XML::Reader.io( nexml, :options => parse_opts )
         when String
-          XML::Reader.string( nexml, :options => XML::Parser::Options::NOBLANKS )
+          XML::Reader.string( nexml, :options => parse_opts )
         end
       end
 
@@ -58,6 +58,16 @@ module Bio
       end
 
       private
+
+      #Define XML parsing options for the libxml parser.
+      #1. remove blank nodes
+      #2. substitute entities 
+      #3. forbid network access
+      def parse_opts
+        XML::Parser::Options::NOBLANKS |
+          XML::Parser::Options::NOENT  |
+          XML:: Parser::Options::NONET
+      end
 
       def validate_nexml
         valid = @reader.schema_validate( "schema/nexml.xsd" )
@@ -240,6 +250,5 @@ module Bio
 
 end #end Bio module
 
-n = Bio::NeXML.parse "examples/test.xml"
-puts "hi"
+#n = Bio::NeXML.parse "examples/test.xml"
 #Debugger.stop
