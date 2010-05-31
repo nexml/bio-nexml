@@ -3,7 +3,59 @@ require "../../tree"
 module Bio
   module NeXML
 
+    module Base
+      def xml_base
+        @xml_base
+      end
+      
+      def xml_base=( base )
+        @xml_base = base
+      end
+
+      def xml_id
+        @xml_id
+      end
+
+      def xml_id=( id )
+        @xml_id = id
+      end
+
+      def xml_lang
+        @xml_lang
+      end
+
+      def xml_lang=( lang )
+        @xml_lang = lang
+      end
+
+      def xml_space
+        @xml_space
+      end
+
+      def xml_space=( space )
+        @xml_space = space
+      end
+
+      #xlink:href not done yet
+
+    end #end module Base
+
+    module Annotated
+      include Base
+    end
+
+    class Nexml
+      include Annotated
+      attr_accessor :version, :generator
+      
+      def initialize( version, generator = nil )
+        @version = version
+        @generator = generator
+      end
+    end
+
     module Labelled
+      include Annotated
 
       def label
         @label
