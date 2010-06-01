@@ -301,6 +301,9 @@ module Bio
   ### Service libraries
   autoload :Command,        'bio/command'
 
+  ### NeXML lib
+  autoload :NeXML,          'bio/db/nexml/elements'
+
   ### Provide BioRuby shell 'command' also as 'Bio.command' (like ChemRuby)
 
   def self.method_missing(*args)

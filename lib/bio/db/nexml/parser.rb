@@ -1,10 +1,7 @@
-require "elements"
+#require "ruby-debug"
+#Debugger.start
 
-require "rubygems"
-require "xml"
-
-require "ruby-debug"
-Debugger.start
+require 'xml'
 
 module Bio
   module NeXML
@@ -275,4 +272,4 @@ module Bio
 end #end Bio module
 
 #n = Bio::NeXML.parse "examples/test.xml"
-Debugger.stop
+#Debugger.stop
