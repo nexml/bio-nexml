@@ -1,4 +1,11 @@
-require "../../tree"
+require "bio/tree"
+
+# Autoload definition
+module Bio
+  module NeXML
+    autoload :Parser, 'bio/db/nexml/parser'
+  end
+end
 
 module Bio
   module NeXML
@@ -7,7 +14,7 @@ module Bio
       def xml_base
         @xml_base
       end
-      
+
       def xml_base=( base )
         @xml_base = base
       end
