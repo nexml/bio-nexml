@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<nex:nexml 
+	version="0.8"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.nexml.org/1.0 ../xsd/nexml.xsd"
+	xmlns:nex="http://www.nexml.org/1.0"
+	generator="mesquite"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://www.nexml.org/1.0">
+        <otus id="taxa2" label="My taxa block">
+            <otu id="t1"/>
+            <otu id="t2"/>
+            <otu id="t3"/>
+            <otu id="t4"/>
+            <otu id="t5"/>
+	</otus>
+        <otus id="blah"/>
+        <otus id="taxa2">
+<!-- the members then indicate which class(es) they belong to -->
+            <otu id="t1" class="class1 class3" label="Pan paniscus"/>
+            <otu id="t2" class="class1 class3" label="Gorilla gorilla"/>
+            <otu id="t3" class="class2 class3" label="Eulemur mongoz"/>
+            <otu id="t4" class="class2 class3" label="Lemur catta"/>
+            <otu id="t5" class="class3" label="Rhinopithecus roxellana"/>
+        </otus>
+	<trees otus="tax1" id="Trees" label="TreesBlockFromXML">
+		<tree id="tree1" xsi:type="nex:FloatTree" label="tree1">
+			<node id="n1" label="n1" root="true"/>
+			<node id="n2" label="n2" otu="t1"/>
+			<node id="n3" label="n3"/>
+                        <node id="n4" label="n4"/>
+			<node id="n5" label="n5" otu="t3"/>
+			<node id="n6" label="n6" otu="t2"/>
+			<node id="n7" label="n7"/>
+			<node id="n8" label="n8" otu="t5"/>
+			<node id="n9" label="n9" otu="t4"/>
+			<edge source="n1" target="n3" id="e1" length="0.34534"/>			
+			<edge source="n1" target="n2" id="e2" length="0.4353"/>
+			<edge source="n3" target="n4" id="e3" length="0.324"/>
+			<edge source="n3" target="n7" id="e4" length="0.3247"/>
+			<edge source="n4" target="n5" id="e5" length="0.234"/>
+			<edge source="n4" target="n6" id="e6" length="0.3243"/>
+			<edge source="n7" target="n8" id="e7" length="0.32443"/>
+			<edge source="n7" target="n9" id="e8" length="0.2342"/>
+		</tree>
+		<tree id="tree2" xsi:type="nex:IntTree" label="tree2">
+			<node id="n1" label="n1"/>
+			<node id="n2" label="n2" otu="t1"/>
+			<node id="n3" label="n3"/>
+                        <node id="n4" label="n4"/>
+			<node id="n5" label="n5" otu="t3"/>
+			<node id="n6" label="n6" otu="t2"/>
+			<node id="n7" label="n7"/>
+			<node id="n8" label="n8" otu="t5"/>
+			<node id="n9" label="n9" otu="t4"/>
+			<edge source="n1" target="n3" id="e1" length="1"/>			
+			<edge source="n1" target="n2" id="e2" length="2"/>
+			<edge source="n3" target="n4" id="e3" length="3"/>
+			<edge source="n3" target="n7" id="e4" length="1"/>
+			<edge source="n4" target="n5" id="e5" length="2"/>
+			<edge source="n4" target="n6" id="e6" length="1"/>
+			<edge source="n7" target="n8" id="e7" length="1"/>
+			<edge source="n7" target="n9" id="e8" length="1"/>
+		</tree>	
+	</trees>
+        <trees otus="tax1" id="Trees2" label="TreesBlockFromXML">
+            <tree id="tree3" xsi:type="nex:IntTree" label="tree3">
+                <node id="n1" label="n1"/>
+                <edge source="n1" target="n3" id="e1" length="1"/>			
+            </tree>
+        </trees>
+</nex:nexml>
