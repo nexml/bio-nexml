@@ -4,7 +4,7 @@ require "rubygems"
 require "xml"
 
 require "ruby-debug"
-#Debugger.start
+Debugger.start
 
 module Bio
   module NeXML
@@ -208,7 +208,12 @@ module Bio
             tree.add_node( node )
           when "edge"
             #parse child 'edge' element
-            puts "edge"
+            edge = parse_edge
+
+            #and add it to the 'tree'
+            source_node = tree.get_node_by_name( edge.source )
+            target_node = tree.get_node_by_name( edge.target )
+            tree.add_edge( source_node, target_node )
           when "tree"
             #end of current 'tree' element has been reached
             break
@@ -222,12 +227,14 @@ module Bio
       #When this function is called the cursor is at a 'node' element.
       #Return - a 'node' object.
       def parse_node
-        #start with a new 'otu' object
+        #start with a new 'node' object
         node = NeXML::Node.new( @reader[ 'id' ], @reader[ 'label' ] )
+        node.name = node.id
 
         #according to the schema a 'node' may have no child element.
         return node if empty_element?
 
+        #else, if 'node' has child elements
         while next_node
           case local_name
           when 'node'
@@ -240,6 +247,27 @@ module Bio
         node
       end
 
+      #When this function is called the cursor is at a 'edge' element.
+      #Return - a 'edge' object.
+      def parse_edge
+        #start with a new 'edge' object
+        edge = NeXML::Edge.new( @reader[ 'id' ], @reader[ 'source' ], @reader[ 'target' ] )
+
+        #according to the schema an 'edge' may have no child element.
+        return edge if empty_element?
+
+        while next_node
+          case local_name
+          when 'edge'
+            #end of current 'edge' element has been reached
+            break
+          end
+        end
+
+        #return the 'edge' object
+        edge
+      end
+
     end #end Parser class
 
   end #end NeXML module
@@ -247,4 +275,4 @@ module Bio
 end #end Bio module
 
 #n = Bio::NeXML.parse "examples/test.xml"
-#Debugger.stop
+Debugger.stop
