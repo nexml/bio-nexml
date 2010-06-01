@@ -158,11 +158,14 @@ module Bio
 
     class Edge < Bio::Tree::Edge
       include IDTagged
+      attr_accessor :source, :target
 
       def initialize( id, source, target, length = nil, label = nil )
         super()
         @id = id
         @label = label
+        @source = source
+        @target = target
       end
 
     end #end class Edge
