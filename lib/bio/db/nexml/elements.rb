@@ -1,12 +1,3 @@
-require "bio/tree"
-
-# Autoload definition
-module Bio
-  module NeXML
-    autoload :Parser, 'bio/db/nexml/parser'
-  end
-end
-
 module Bio
   module NeXML
 

@@ -302,7 +302,7 @@ module Bio
   autoload :Command,        'bio/command'
 
   ### NeXML lib
-  autoload :NeXML,          'bio/db/nexml/elements'
+  autoload :NeXML,          'bio/db/nexml/nexml'
 
   ### Provide BioRuby shell 'command' also as 'Bio.command' (like ChemRuby)
 

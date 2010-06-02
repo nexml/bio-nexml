@@ -1,8 +1,6 @@
 #require "ruby-debug"
 #Debugger.start
 
-require 'xml'
-
 module Bio
   module NeXML
     include LibXML
