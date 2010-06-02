@@ -200,7 +200,13 @@ module Bio
       #Return - a 'tree' object.
       def parse_tree
         #start with a new 'tree' object
-        tree = NeXML::Tree.new( @reader[ 'id' ], @reader[ 'label' ] )
+        type = @reader[ 'xsi:type' ]
+        case type
+        when "nex:FloatTree"
+          tree = NeXML::IntTree.new( @reader[ 'id' ], @reader[ 'label' ] )
+        when "nex:IntTree"
+          tree = NeXML::FloatTree.new( @reader[ 'id' ], @reader[ 'label' ] )
+        end
 
         #a 'tree' element *will* have child nodes.
         while next_node

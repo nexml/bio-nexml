@@ -202,6 +202,9 @@ module Bio
 
     end #end class Tree
 
+    class IntTree < Tree ; end
+    class FloatTree < Tree ; end
+
     class Trees
       include TaxaLinked
 
