@@ -214,7 +214,7 @@ module Bio
             #and add it to the 'tree'
             source_node = tree.get_node_by_name( edge.source )
             target_node = tree.get_node_by_name( edge.target )
-            tree.add_edge( source_node, target_node )
+            tree.add_edge( source_node, target_node, edge )
           when "tree"
             #end of current 'tree' element has been reached
             break
@@ -234,7 +234,6 @@ module Bio
 
         otu = @nexml.id_hash[ @reader[ 'otu' ] ]
         node.otu = otu
-        pp node.otu
 
         #according to the schema a 'node' may have no child element.
         return node if empty_element?
@@ -256,7 +255,9 @@ module Bio
       #Return - a 'edge' object.
       def parse_edge
         #start with a new 'edge' object
-        edge = NeXML::Edge.new( @reader[ 'id' ], @reader[ 'source' ], @reader[ 'target' ] )
+        edge = NeXML::Edge.new( @reader[ 'id' ], @reader[ 'source' ],
+                                @reader[ 'target' ],
+                                @reader[ 'length' ] )
 
         #according to the schema an 'edge' may have no child element.
         return edge if empty_element?
