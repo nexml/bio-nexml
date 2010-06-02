@@ -172,9 +172,13 @@ module Bio
       #When this function is called the cursor is at a 'trees' element.
       #Return - a 'trees' object.
       def parse_trees
+        #if the trees is taxa linked
+        if taxa = @reader[ 'otus' ]
+          otus = @nexml.id_hash[ taxa ]
+        end
+
         #start with a new 'trees' object
-        trees = NeXML::Trees.new( @reader[ 'id' ], @reader[ 'label' ] )
-        trees.otus = @nexml.id_hash[ @reader[ 'otus' ] ]
+        trees = NeXML::Trees.new( @reader[ 'id' ], @reader[ 'label' ], otus )
 
         #a 'trees' element *will* have child nodes.
         while next_node
@@ -206,15 +210,13 @@ module Bio
             node = parse_node
 
             #and add it to the 'tree'
-            tree.add_node( node )
+            tree.add_node node
           when "edge"
             #parse child 'edge' element
             edge = parse_edge
 
             #and add it to the 'tree'
-            source_node = tree.get_node_by_name( edge.source )
-            target_node = tree.get_node_by_name( edge.target )
-            tree.add_edge( source_node, target_node, edge )
+            tree.add_edge edge
           when "tree"
             #end of current 'tree' element has been reached
             break
@@ -228,12 +230,13 @@ module Bio
       #When this function is called the cursor is at a 'node' element.
       #Return - a 'node' object.
       def parse_node
-        #start with a new 'node' object
-        node = NeXML::Node.new( @reader[ 'id' ], @reader[ 'label' ] )
-        node.name = node.id
+        #is this node taxon linked
+        if taxon = @reader[ 'otu' ]
+          otu = @nexml.id_hash[ taxon ]
+        end
 
-        otu = @nexml.id_hash[ @reader[ 'otu' ] ]
-        node.otu = otu
+        #start with a new 'node' object
+        node = NeXML::Node.new( @reader[ 'id' ], @reader[ 'label' ], otu )
 
         #according to the schema a 'node' may have no child element.
         return node if empty_element?

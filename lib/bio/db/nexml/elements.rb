@@ -150,10 +150,17 @@ module Bio
     class Node < Bio::Tree::Node
       include TaxonLinked
 
-      def initialize( id, label = nil )
-        super()
+      def initialize( id, label = nil, otu = nil )
+        #use id for node's name
+        super id
         @id = id
         @label = label
+        otu = otu
+      end
+
+      def otu=( otu )
+        @otu = otu
+        taxonomy_id = otu.id
       end
 
     end #end class Node
@@ -181,14 +188,21 @@ module Bio
         @label = label
       end
 
+      def add_edge( edge )
+        source = get_node_by_name( edge.source )
+        target = get_node_by_name( edge.target )
+        super source, target, edge
+      end
+
     end #end class Tree
 
     class Trees
       include TaxaLinked
 
-      def initialize( id, label = nil )
+      def initialize( id, label = nil, otus = nil )
         @id = id
         @label = label
+        @otus = otus
       end
 
       def tree
