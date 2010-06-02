@@ -211,6 +211,9 @@ module Bio
 
             #and add it to the 'tree'
             tree.add_node node
+
+            #root?
+            tree.root = node if node.root?
           when "edge"
             #parse child 'edge' element
             edge = parse_edge
@@ -236,7 +239,8 @@ module Bio
         end
 
         #start with a new 'node' object
-        node = NeXML::Node.new( @reader[ 'id' ], @reader[ 'label' ], otu )
+        node = NeXML::Node.new( @reader[ 'id' ], @reader[ 'label' ], otu,
+                                @reader[ 'root' ] )
 
         #according to the schema a 'node' may have no child element.
         return node if empty_element?

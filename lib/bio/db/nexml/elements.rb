@@ -149,18 +149,24 @@ module Bio
 
     class Node < Bio::Tree::Node
       include TaxonLinked
+      attr_writer :root
 
-      def initialize( id, label = nil, otu = nil )
+      def initialize( id, label = nil, otu = nil, root = false )
         #use id for node's name
         super id
         @id = id
         @label = label
+        @root = root
         otu = otu
       end
 
       def otu=( otu )
         @otu = otu
         taxonomy_id = otu.id
+      end
+
+      def root?
+        @root
       end
 
     end #end class Node
