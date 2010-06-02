@@ -45,19 +45,32 @@ module Bio
     class Nexml
       include Annotated
       attr_accessor :version, :generator
-      #attr_accessor :otus_set, :trees_set, :characters_set
       
       def initialize( version, generator = nil )
         @version = version
         @generator = generator
       end
 
-      def id_hash
-        @id_hash ||= {}
+      def otus_set
+        @otus_set ||= {}
       end
 
       def otus
-        @otus_set ||= []
+        otus_set.values
+      end
+
+      def each_otus
+        otus_set.each_value do |otus|
+          yield otus
+        end
+      end
+
+      def get_otu_by_id( id )
+        each_otus do |otus|
+          return otus[ id ] if otus.has_otu? id
+        end
+        
+        nil
       end
 
       def trees
@@ -134,15 +147,34 @@ module Bio
 
     class Otus
       include IDTagged
-      #attr_accessor :otu
+      include Enumerable
 
       def initialize( id, label = nil )
         @id = id
         @label = label
       end
 
-      def otu
-        @otu_set ||= []
+      def otu_set
+        @otu_set ||= {}
+      end
+
+      def otus
+        @otu_set.values
+      end
+
+      def each
+        @otu_set.each_value do |otu|
+          yield otu
+        end
+      end
+      alias :each_otu :each
+
+      def []( key )
+        otu_set[ key ]
+      end
+
+      def has_otu?( id )
+        otu_set.has_key? id
       end
 
     end #end class Otus
