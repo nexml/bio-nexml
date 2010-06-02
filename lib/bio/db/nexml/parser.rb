@@ -38,9 +38,8 @@ module Bio
         while next_node
           case local_name
           when "otus"
-            otus = parse_otus
-            @nexml.id_hash[ "#{otus.id}" ] = otus
-            @nexml.otus << otus
+            id, otus = parse_otus
+            @nexml.otus_set[ id ] = otus
           when "trees"
             @nexml.trees << parse_trees
           when "characters"
@@ -124,8 +123,10 @@ module Bio
       #When this function is called the cursor is at an 'otus' element.
       #Return - an 'otus' object
       def parse_otus
-        #start with a new 'otus' object
-        otus = NeXML::Otus.new( @reader[ 'id' ], @reader[ 'label' ] )
+        id = @reader[ 'id' ]
+        label = @reader[ 'label' ]
+
+        otus = NeXML::Otus.new( id, label )
 
         #according to the schema an 'otus' may have no child element.
         return otus if empty_element?
@@ -135,9 +136,8 @@ module Bio
           case local_name
           when "otu"
             #parse child otu element
-            otu = parse_otu
-            @nexml.id_hash[ "#{otu.id}" ] = otu
-            otus.otu << otu
+            otu_id, otu = parse_otu
+            otus.otu_set[ otu_id ] = otu
           when "otus"
             #end of current 'otus' element has been reached
             break
@@ -145,17 +145,19 @@ module Bio
         end
 
         #return the 'otus' object
-        otus
+        [id, otus]
       end
 
       #When this function is called the cursor is at an 'otu' element.
       #Return - an 'otu' object.
       def parse_otu
-        #start with a new 'otu' object
-        otu = NeXML::Otu.new( @reader[ 'id' ], @reader[ 'label' ] )
+        id = @reader[ 'id' ]
+        label = @reader[ 'label' ]
+
+        otu = NeXML::Otu.new( id, label )
 
         #according to the schema an 'otu' may have no child element.
-        return otu if empty_element?
+        return id, otu if empty_element?
 
         while next_node
           case local_name
@@ -166,7 +168,7 @@ module Bio
         end
 
         #return the 'otu' object
-        otu
+        [id, otu]
       end
 
       #When this function is called the cursor is at a 'trees' element.
@@ -174,7 +176,7 @@ module Bio
       def parse_trees
         #if the trees is taxa linked
         if taxa = @reader[ 'otus' ]
-          otus = @nexml.id_hash[ taxa ]
+          otus = @nexml.otus_set[ taxa ]
         end
 
         #start with a new 'trees' object
@@ -241,7 +243,8 @@ module Bio
       def parse_node
         #is this node taxon linked
         if taxon = @reader[ 'otu' ]
-          otu = @nexml.id_hash[ taxon ]
+          #otu = @nexml.otu_set[ taxon ]
+          otu = nil
         end
 
         #start with a new 'node' object
