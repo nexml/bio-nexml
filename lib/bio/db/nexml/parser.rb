@@ -38,7 +38,9 @@ module Bio
         while next_node
           case local_name
           when "otus"
-            @nexml.otus << parse_otus
+            otus = parse_otus
+            @nexml.id_hash[ "#{otus.id}" ] = otus
+            @nexml.otus << otus
           when "trees"
             @nexml.trees << parse_trees
           when "characters"
@@ -133,7 +135,9 @@ module Bio
           case local_name
           when "otu"
             #parse child otu element
-            otus.otu << parse_otu
+            otu = parse_otu
+            @nexml.id_hash[ "#{otu.id}" ] = otu
+            otus.otu << otu
           when "otus"
             #end of current 'otus' element has been reached
             break
@@ -170,6 +174,7 @@ module Bio
       def parse_trees
         #start with a new 'trees' object
         trees = NeXML::Trees.new( @reader[ 'id' ], @reader[ 'label' ] )
+        trees.otus = @nexml.id_hash[ @reader[ 'otus' ] ]
 
         #a 'trees' element *will* have child nodes.
         while next_node
@@ -226,6 +231,10 @@ module Bio
         #start with a new 'node' object
         node = NeXML::Node.new( @reader[ 'id' ], @reader[ 'label' ] )
         node.name = node.id
+
+        otu = @nexml.id_hash[ @reader[ 'otu' ] ]
+        node.otu = otu
+        pp node.otu
 
         #according to the schema a 'node' may have no child element.
         return node if empty_element?
