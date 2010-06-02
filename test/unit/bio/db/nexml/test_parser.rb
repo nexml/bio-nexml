@@ -7,17 +7,20 @@ load Pathname.new(File.join(File.dirname(__FILE__), ['..'] * 4,
 require 'test/unit'
 
 require 'rubygems'
-require 'bio/db/nexml/parser'
-require 'bio/db/nexml/elements'
+require 'bio/db/nexml/nexml'
 
 module Bio
   module NeXML
-    class TestParser
+    class TestParser < Test::Unit::TestCase
 
-      def initialize
+      def setup
         doc = Parser.new( "test.xml", true )
         @nexml = doc.parse
         doc.close
+      end
+
+      def teardown
+        @nexml = nil
       end
 
       def test_for_otus
@@ -30,9 +33,6 @@ module Bio
         end
       end
 
-      def teardown
-        @nexml = nil
-      end
     end #end class TestParser
 
   end #end module NeXML
