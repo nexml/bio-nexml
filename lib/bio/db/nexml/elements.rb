@@ -52,6 +52,10 @@ module Bio
         @generator = generator
       end
 
+      def id_hash
+        @id_hash ||= {}
+      end
+
       def otus
         @otus_set ||= []
       end
@@ -113,7 +117,7 @@ module Bio
       end
 
       def otu=( otu )
-        @otu
+        @otu = otu
       end
 
     end #end module TaxonLinked
