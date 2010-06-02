@@ -1,3 +1,5 @@
+#Test suite for nexml lib.
+
 # loading helper routine for testing bioruby
 require 'pathname'
 load Pathname.new(File.join(File.dirname(__FILE__), ['..'] * 4,
