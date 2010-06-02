@@ -163,7 +163,7 @@ module Bio
       attr_accessor :source, :target
 
       def initialize( id, source, target, length = nil, label = nil )
-        super()
+        super length
         @id = id
         @label = label
         @source = source
