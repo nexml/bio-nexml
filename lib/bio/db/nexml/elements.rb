@@ -319,6 +319,10 @@ module Bio
     class IntTree < Tree ; end
     class FloatTree < Tree ; end
 
+    class Network < Tree; end
+    class IntNetwork < Tree; end
+    class FloatNetwork < Tree; end
+
     class Trees
       include TaxaLinked
       include Enumerable
