@@ -41,7 +41,7 @@ module Bio
             id, otus = parse_otus
             @nexml.otus_set[ id ] = otus
           when "trees"
-            @nexml.trees_set << parse_trees
+            @nexml.add_trees( parse_trees )
           when "characters"
             puts "characters"
           end
