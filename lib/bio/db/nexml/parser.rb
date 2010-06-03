@@ -194,6 +194,8 @@ module Bio
           when "tree"
             #parse child 'tree' element
             trees << parse_tree
+          when "network"
+            trees << parse_network
           when "trees"
             #end of current 'trees' element has been reached
             break
@@ -226,14 +228,20 @@ module Bio
 
             #root?
             tree.root = node if node.root?
-          when "edge", "rootedge"
+          when "rootedge"
             #parse child 'edge' element
             edge = parse_edge( type )
 
             #and add it to the 'tree'
             tree.add_edge edge
 
-            tree.rootedge = edge if local_name == "rootedge"
+            tree.rootedge = edge
+          when "edge"
+            #parse child 'edge' element
+            edge = parse_edge( type )
+
+            #and add it to the 'tree'
+            tree.add_edge edge
           when "tree"
             #end of current 'tree' element has been reached
             break
@@ -242,6 +250,43 @@ module Bio
 
         #return the 'tree' object
         tree
+      end
+
+      def parse_network
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+
+        type = attribute( 'xsi:type' )[4..-1]
+        klass = NeXML.const_get type
+        network = klass.new( id, label )
+
+        #a 'network' element *will* have child nodes.
+        while next_node
+          case local_name
+          when "node"
+            #parse child 'node' element
+            node = parse_node
+
+            #and add it to the 'network'
+            network.add_node node
+
+            #root?
+            network.root = node if node.root?
+          when "edge"
+            #parse child 'edge' element
+            edge = parse_edge( type )
+
+            #and add it to the 'network'
+            network.add_edge edge
+
+          when "network"
+            #end of current 'network' element has been reached
+            break
+          end
+        end
+
+        #return the 'network' object
+        network
       end
 
       #When this function is called the cursor is at a 'node' element.
@@ -282,7 +327,7 @@ module Bio
         target = attribute( 'target' )
         length = attribute( 'length' )
         
-        type.sub! "Tree", "Edge"
+        type.sub!(/Tree|Network/, "Edge")
         klass = NeXML.const_get type
         edge = klass.new( id, source, target, length )
 
