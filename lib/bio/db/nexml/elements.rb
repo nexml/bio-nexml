@@ -271,7 +271,29 @@ module Bio
         @target = target
       end
 
+      def length
+        distance
+      end
+
+      def length=( length )
+        distance = length
+      end
+
     end #end class Edge
+
+    class IntEdge < Edge
+      def initialize( id, source, target, length = nil, label = nil )
+        length = length.to_i
+        super
+      end
+    end
+
+    class FloatEdge < Edge
+      def initialize( id, source, target, length = nil, label = nil )
+        length = length.to_f
+        super
+      end
+    end
 
     class Tree < Bio::Tree
       include IDTagged
