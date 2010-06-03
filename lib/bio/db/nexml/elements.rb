@@ -74,14 +74,25 @@ module Bio
       end
 
       def trees_set
-        @trees_set ||= []
+        @trees_set ||= {}
       end
-      alias trees trees_set
+
+      def trees
+        trees_set.values
+      end
 
       def each_trees
-        trees_set.each do |trees|
+        trees.each do |trees|
           yield trees
         end
+      end
+
+      def get_trees_by_id( id )
+        trees_set[ id ]
+      end
+
+      def add_trees( trees )
+        trees_set[ trees.id ] = trees
       end
 
       def characters
