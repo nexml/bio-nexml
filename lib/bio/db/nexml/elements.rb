@@ -73,12 +73,18 @@ module Bio
         nil
       end
 
-      def trees
+      def trees_set
         @trees_set ||= []
+      end
+      alias trees trees_set
+
+      def each_trees
+        trees_set.each do |trees|
+          yield trees
+        end
       end
 
       def characters
-        @characters_set
       end
 
     end #end class Nexml
@@ -239,6 +245,7 @@ module Bio
 
     class Trees
       include TaxaLinked
+      include Enumerable
 
       def initialize( id, label = nil, otus = nil )
         @id = id
@@ -246,10 +253,32 @@ module Bio
         @otus = otus
       end
 
-      def tree
-        @tree_set ||= []
+      def tree_set
+        @tree_set ||= {}
       end
 
+      def <<( tree )
+        tree_set[ tree.id ] = tree
+      end
+
+      def trees
+        tree_set.values
+      end
+
+      def each
+        trees.each do |tree|
+          yield tree
+        end
+      end
+      alias each_tree each
+
+      def []( id )
+        tree_set[ id ]
+      end
+
+      def has_tree?( id )
+        tree_set.has_key? id
+      end
     end #end class Trees
 
   end #end module NeXML
