@@ -241,15 +241,16 @@ module Bio
       #When this function is called the cursor is at a 'node' element.
       #Return - a 'node' object.
       def parse_node
+        id = @reader[ 'id' ]
+        label = @reader[ 'label' ]
+        root = @reader[ 'root' ] ? true : false
+
         #is this node taxon linked
-        if taxon = @reader[ 'otu' ]
-          #otu = @nexml.otu_set[ taxon ]
-          otu = nil
+        if otu_id = @reader[ 'otu' ]
+          otu = @nexml.get_otu_by_id otu_id
         end
 
-        #start with a new 'node' object
-        node = NeXML::Node.new( @reader[ 'id' ], @reader[ 'label' ], otu,
-                                @reader[ 'root' ] )
+        node = NeXML::Node.new( id, label, otu, root )
 
         #according to the schema a 'node' may have no child element.
         return node if empty_element?
