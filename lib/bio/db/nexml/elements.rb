@@ -51,28 +51,37 @@ module Bio
         @generator = generator
       end
 
+      #Return a hash of 'otus' objects or an empty hash
+      #if no 'otus' object has been created yet.
       def otus_set
         @otus_set ||= {}
       end
 
+      #Return an array of 'otus' objects.
       def otus
         otus_set.values
       end
 
+      #Iterate over each 'otus' object.
       def each_otus
         otus_set.each_value do |otus|
           yield otus
         end
       end
 
+      #Return an 'otus' object with the given id or nil
+      #if the 'otus' is not found.
       def get_otus_by_id( id )
         otus_set[ id ]
       end
 
+      #Add an 'otus' object.
       def add_otus( otus )
         otus_set[ otus.id ] = otus
       end
 
+      #Return an 'otu' object with the given id or nil
+      #if the 'otu' is not found.
       def get_otu_by_id( id )
         each_otus do |otus|
           return otus[ id ] if otus.has_otu? id
@@ -81,24 +90,30 @@ module Bio
         nil
       end
 
+      #Return a hash of 'trees' objects or an empty hash
+      #if no 'trees' object has been created yet.
       def trees_set
         @trees_set ||= {}
       end
 
+      #Return an array of 'trees' objects.
       def trees
         trees_set.values
       end
 
+      #Iterate over each 'trees' object.
       def each_trees
         trees.each do |trees|
           yield trees
         end
       end
 
+      #Return an 'trees' object with the given id or nil.
       def get_trees_by_id( id )
         trees_set[ id ]
       end
 
+      #Add a 'trees' object.
       def add_trees( trees )
         trees_set[ trees.id ] = trees
       end
@@ -179,14 +194,18 @@ module Bio
         @label = label
       end
 
+      #Return a hash of 'otu' objects or
+      #an empty hash if no 'otu' object created yet.
       def otu_set
         @otu_set ||= {}
       end
 
+      #Return an array of 'otu' objects.
       def otus
         @otu_set.values
       end
 
+      #Iterate over all 'otu' object.
       def each
         @otu_set.each_value do |otu|
           yield otu
@@ -194,14 +213,18 @@ module Bio
       end
       alias :each_otu :each
 
+      #Use array notation to access an 'otu'
       def []( key )
         otu_set[ key ]
       end
 
+      #Checks if this 'otus' contains an 'otu'
+      #with the given id.
       def has_otu?( id )
         otu_set.has_key? id
       end
 
+      #Add an 'otu' to this 'otus'
       def <<( otu )
         otu_set[ otu.id ] = otu
       end
@@ -223,11 +246,13 @@ module Bio
         @root = root
       end
 
+      #Assign an otu to a node.
       def otu=( otu )
         @otu = otu
         taxonomy_id = otu.id
       end
 
+      #Is it a root node?
       def root?
         @root
       end
@@ -257,6 +282,7 @@ module Bio
         @label = label
       end
 
+      #Add an edge to the tree.
       def add_edge( edge )
         source = get_node_by_name( edge.source )
         target = get_node_by_name( edge.target )
@@ -282,14 +308,17 @@ module Bio
         @tree_set ||= {}
       end
 
+      #Add a 'tree'.
       def <<( tree )
         tree_set[ tree.id ] = tree
       end
 
+      #Return an array of 'tree' objects.
       def trees
         tree_set.values
       end
 
+      #Iterate over each 'tree' object.
       def each
         trees.each do |tree|
           yield tree
@@ -297,6 +326,8 @@ module Bio
       end
       alias each_tree each
 
+      #Access child tree objects with a hash like notation
+      #given its id.
       def []( id )
         tree_set[ id ]
       end
