@@ -217,8 +217,10 @@ module Bio
         super id
         @id = id
         @label = label
+        #this is a little confusing
+        #does not call otu= if self is not use
+        self.otu = otu if otu
         @root = root
-        otu = otu
       end
 
       def otu=( otu )
