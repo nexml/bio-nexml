@@ -30,7 +30,9 @@ module Bio
         skip_leader
 
         #start with a new Nexml object
-        @nexml = NeXML::Nexml.new( @reader[ 'version' ], @reader[ 'generator' ] )
+        version = attribute( 'version' )
+        generator = attribute( 'generator' )
+        @nexml = NeXML::Nexml.new( version, generator )
 
         #perhaps a namespace api as well
         
@@ -82,6 +84,10 @@ module Bio
         @reader.local_name
       end
 
+      def attribute( name )
+        @reader[ name ]
+      end
+
       def next_node
         while @reader.read
           return true if element_start? or element_end?
@@ -122,8 +128,8 @@ module Bio
       #When this function is called the cursor is at an 'otus' element.
       #Return - an 'otus' object
       def parse_otus
-        id = @reader[ 'id' ]
-        label = @reader[ 'label' ]
+        id = attribute( 'id' )
+        label = attribute( 'label' )
 
         otus = NeXML::Otus.new( id, label )
 
@@ -149,8 +155,8 @@ module Bio
       #When this function is called the cursor is at an 'otu' element.
       #Return - an 'otu' object.
       def parse_otu
-        id = @reader[ 'id' ]
-        label = @reader[ 'label' ]
+        id = attribute( 'id' )
+        label = attribute( 'label' )
 
         otu = NeXML::Otu.new( id, label )
 
@@ -173,12 +179,12 @@ module Bio
       #Return - a 'trees' object.
       def parse_trees
         #if the trees is taxa linked
-        if taxa = @reader[ 'otus' ]
+        if taxa = attribute( 'otus' )
           otus = @nexml.otus_set[ taxa ]
         end
 
-        id = @reader[ 'id' ]
-        label = @reader[ 'label' ]
+        id = attribute( 'id' )
+        label = attribute( 'label' )
 
         trees = NeXML::Trees.new( id, label, otus )
 
@@ -201,13 +207,15 @@ module Bio
       #When this function is called the cursor is at a 'tree' element.
       #Return - a 'tree' object.
       def parse_tree
-        #start with a new 'tree' object
-        type = @reader[ 'xsi:type' ]
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+
+        type = attribute( 'xsi:type' )
         case type
         when "nex:FloatTree"
-          tree = NeXML::IntTree.new( @reader[ 'id' ], @reader[ 'label' ] )
+          tree = NeXML::IntTree.new( id, label )
         when "nex:IntTree"
-          tree = NeXML::FloatTree.new( @reader[ 'id' ], @reader[ 'label' ] )
+          tree = NeXML::FloatTree.new( id, label )
         end
 
         #a 'tree' element *will* have child nodes.
@@ -241,12 +249,12 @@ module Bio
       #When this function is called the cursor is at a 'node' element.
       #Return - a 'node' object.
       def parse_node
-        id = @reader[ 'id' ]
-        label = @reader[ 'label' ]
-        root = @reader[ 'root' ] ? true : false
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+        root = attribute( 'root' ) ? true : false
 
         #is this node taxon linked
-        if otu_id = @reader[ 'otu' ]
+        if otu_id = attribute( 'otu' )
           otu = @nexml.get_otu_by_id otu_id
         end
 
@@ -271,10 +279,12 @@ module Bio
       #When this function is called the cursor is at a 'edge' element.
       #Return - a 'edge' object.
       def parse_edge
-        #start with a new 'edge' object
-        edge = NeXML::Edge.new( @reader[ 'id' ], @reader[ 'source' ],
-                                @reader[ 'target' ],
-                                @reader[ 'length' ] )
+        id = attribute( 'id' )
+        source = attribute( 'source' )
+        target = attribute( 'target' )
+        length = attribute( 'length' )
+
+        edge = NeXML::Edge.new( id, source, target, length )
 
         #according to the schema an 'edge' may have no child element.
         return edge if empty_element?
