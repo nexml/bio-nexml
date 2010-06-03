@@ -136,8 +136,7 @@ module Bio
           case local_name
           when "otu"
             #parse child otu element
-            otu_id, otu = parse_otu
-            otus.otu_set[ otu_id ] = otu
+            otus << parse_otu
           when "otus"
             #end of current 'otus' element has been reached
             break
@@ -157,7 +156,7 @@ module Bio
         otu = NeXML::Otu.new( id, label )
 
         #according to the schema an 'otu' may have no child element.
-        return id, otu if empty_element?
+        return otu if empty_element?
 
         while next_node
           case local_name
@@ -168,7 +167,7 @@ module Bio
         end
 
         #return the 'otu' object
-        [id, otu]
+        otu
       end
 
       #When this function is called the cursor is at a 'trees' element.
