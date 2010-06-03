@@ -183,6 +183,10 @@ module Bio
         otu_set.has_key? id
       end
 
+      def <<( otu )
+        otu_set[ otu.id ] = otu
+      end
+
     end #end class Otus
 
     class Node < Bio::Tree::Node
