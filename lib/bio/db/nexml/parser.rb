@@ -38,8 +38,7 @@ module Bio
         while next_node
           case local_name
           when "otus"
-            id, otus = parse_otus
-            @nexml.otus_set[ id ] = otus
+            @nexml.add_otus( parse_otus )
           when "trees"
             @nexml.add_trees( parse_trees )
           when "characters"
@@ -144,7 +143,7 @@ module Bio
         end
 
         #return the 'otus' object
-        [id, otus]
+        otus
       end
 
       #When this function is called the cursor is at an 'otu' element.

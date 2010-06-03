@@ -65,6 +65,14 @@ module Bio
         end
       end
 
+      def get_otus_by_id( id )
+        otus_set[ id ]
+      end
+
+      def add_otus( otus )
+        otus_set[ otus.id ] = otus
+      end
+
       def get_otu_by_id( id )
         each_otus do |otus|
           return otus[ id ] if otus.has_otu? id
