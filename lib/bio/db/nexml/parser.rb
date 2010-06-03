@@ -210,13 +210,9 @@ module Bio
         id = attribute( 'id' )
         label = attribute( 'label' )
 
-        type = attribute( 'xsi:type' )
-        case type
-        when "nex:FloatTree"
-          tree = NeXML::IntTree.new( id, label )
-        when "nex:IntTree"
-          tree = NeXML::FloatTree.new( id, label )
-        end
+        type = attribute( 'xsi:type' )[4..-1]
+        klass = NeXML.const_get type
+        tree = klass.new( id, label )
 
         #a 'tree' element *will* have child nodes.
         while next_node
@@ -232,7 +228,7 @@ module Bio
             tree.root = node if node.root?
           when "edge"
             #parse child 'edge' element
-            edge = parse_edge
+            edge = parse_edge( type )
 
             #and add it to the 'tree'
             tree.add_edge edge
@@ -278,13 +274,15 @@ module Bio
 
       #When this function is called the cursor is at a 'edge' element.
       #Return - a 'edge' object.
-      def parse_edge
+      def parse_edge( type )
         id = attribute( 'id' )
         source = attribute( 'source' )
         target = attribute( 'target' )
         length = attribute( 'length' )
-
-        edge = NeXML::Edge.new( id, source, target, length )
+        
+        type.sub! "Tree", "Edge"
+        klass = NeXML.const_get type
+        edge = klass.new( id, source, target, length )
 
         #according to the schema an 'edge' may have no child element.
         return edge if empty_element?
