@@ -226,12 +226,14 @@ module Bio
 
             #root?
             tree.root = node if node.root?
-          when "edge"
+          when "edge", "rootedge"
             #parse child 'edge' element
             edge = parse_edge( type )
 
             #and add it to the 'tree'
             tree.add_edge edge
+
+            tree.rootedge = edge if local_name == "rootedge"
           when "tree"
             #end of current 'tree' element has been reached
             break

@@ -282,21 +282,24 @@ module Bio
     end #end class Edge
 
     class IntEdge < Edge
+
       def initialize( id, source, target, length = nil, label = nil )
         length = length.to_i
         super
       end
-    end
+
+    end #end class IntEdge
 
     class FloatEdge < Edge
       def initialize( id, source, target, length = nil, label = nil )
         length = length.to_f
         super
       end
-    end
+    end #end class FloatEdge
 
     class Tree < Bio::Tree
       include IDTagged
+      attr_accessor :rootedge
 
       def initialize( id, label = nil )
         super()
