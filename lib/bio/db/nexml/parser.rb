@@ -41,7 +41,7 @@ module Bio
             id, otus = parse_otus
             @nexml.otus_set[ id ] = otus
           when "trees"
-            @nexml.trees << parse_trees
+            @nexml.trees_set << parse_trees
           when "characters"
             puts "characters"
           end
@@ -179,15 +179,17 @@ module Bio
           otus = @nexml.otus_set[ taxa ]
         end
 
-        #start with a new 'trees' object
-        trees = NeXML::Trees.new( @reader[ 'id' ], @reader[ 'label' ], otus )
+        id = @reader[ 'id' ]
+        label = @reader[ 'label' ]
+
+        trees = NeXML::Trees.new( id, label, otus )
 
         #a 'trees' element *will* have child nodes.
         while next_node
           case local_name
           when "tree"
             #parse child 'tree' element
-            trees.tree << parse_tree
+            trees << parse_tree
           when "trees"
             #end of current 'trees' element has been reached
             break
