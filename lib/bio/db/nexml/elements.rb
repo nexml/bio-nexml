@@ -44,11 +44,21 @@ module Bio
 
     class Nexml
       include Annotated
+      include Enumerable
       attr_accessor :version, :generator
       
       def initialize( version, generator = nil )
         @version = version
         @generator = generator
+      end
+
+      def <<( element )
+        case element
+        when Otus
+          add_otus element
+        when Trees
+          add_trees element
+        end
       end
 
       #Return a hash of 'otus' objects or an empty hash
@@ -57,15 +67,40 @@ module Bio
         @otus_set ||= {}
       end
 
-      #Return an array of 'otus' objects.
-      def otus
-        otus_set.values
+      #Return a hash of 'trees' objects or an empty hash
+      #if no 'trees' object has been created yet.
+      def trees_set
+        @trees_set ||= {}
+      end
+
+      #Add an 'otus' object.
+      def add_otus( otus )
+        otus_set[ otus.id ] = otus
+      end
+      
+      #Add a 'trees' object.
+      def add_trees( trees )
+        trees_set[ trees.id ] = trees
       end
 
       #Iterate over each 'otus' object.
       def each_otus
         otus_set.each_value do |otus|
           yield otus
+        end
+      end
+      
+      #Iterate over each 'trees' object.
+      def each_trees
+        trees_set.each_value do |trees|
+          yield trees
+        end
+      end
+
+      #Iterate over each 'tree' object.
+      def each
+        trees_set.each_value do |trees|
+          trees.each{ |tree| yield tree }
         end
       end
 
@@ -75,37 +110,14 @@ module Bio
         otus_set[ id ]
       end
 
-      #Add an 'otus' object.
-      def add_otus( otus )
-        otus_set[ otus.id ] = otus
-      end
-
       #Return an 'otu' object with the given id or nil
       #if the 'otu' is not found.
       def get_otu_by_id( id )
-        each_otus do |otus|
+        otus_set.each_value do |otus|
           return otus[ id ] if otus.has_otu? id
         end
         
         nil
-      end
-
-      #Return a hash of 'trees' objects or an empty hash
-      #if no 'trees' object has been created yet.
-      def trees_set
-        @trees_set ||= {}
-      end
-
-      #Return an array of 'trees' objects.
-      def trees
-        trees_set.values
-      end
-
-      #Iterate over each 'trees' object.
-      def each_trees
-        trees.each do |trees|
-          yield trees
-        end
       end
 
       #Return an 'trees' object with the given id or nil.
@@ -113,9 +125,21 @@ module Bio
         trees_set[ id ]
       end
 
-      #Add a 'trees' object.
-      def add_trees( trees )
-        trees_set[ trees.id ] = trees
+      #Return a 'tree' object with the given id or nil.
+      def get_tree_by_id( id )
+        trees_set.each_value do |trees|
+          return trees[ id ] if trees.has? id
+        end
+      end
+
+      #Return an array of 'otus' objects.
+      def otus
+        otus_set.values
+      end
+
+      #Return an array of 'trees' objects.
+      def trees
+        trees_set.values
       end
 
       def characters
@@ -352,14 +376,14 @@ module Bio
       end
 
       #Add a 'tree' or a 'network'.
-      def <<( tree )
+      def <<( element )
         #order of the when clause matters here
         #as a network is a tree too.
-        case tree
+        case element
         when Network
-        network_set[ tree.id ] = tree
+          add_network element
         when Tree
-        tree_set[ tree.id ] = tree
+          add_tree element
         end
       end
       
@@ -373,6 +397,14 @@ module Bio
       #an empty hash if none exists.
       def network_set
         @network_set ||= {}
+      end
+
+      def add_network( netowrk )
+        network_set[ netowrk.id ] = netowrk
+      end
+
+      def add_tree( tree )
+        tree_set[ tree.id ] = tree
       end
 
       #Return an array of 'tree' objects.
