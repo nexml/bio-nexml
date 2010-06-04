@@ -369,6 +369,42 @@ module Bio
         childrens
       end
 
+      def descendents( node, *root )
+        if root.empty?
+          raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
+          root = self.root
+        end
+        descendent = {}
+        root.each do |r|
+          descendent[ r ] = super( node, r )
+        end
+        descendent
+      end
+
+      def lowest_common_ancestor( node1, node2, *root )
+        if root.empty?
+          raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
+          root = self.root
+        end
+        lca = {}
+        root.each do |r|
+          lca[ r ] = super( node1, node2, r )
+        end
+        lca
+      end
+
+      def ancestors( node, *root )
+        if root.empty?
+          raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
+          root = self.root
+        end
+        ancestor = {}
+        root.each do |r|
+          ancestor[ r ] = super( node, r )
+        end
+        ancestor
+      end
+
     end #end class Tree
 
     class IntTree < Tree ; end
