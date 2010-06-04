@@ -331,11 +331,42 @@ module Bio
         @label = label
       end
 
+      def root
+        @root ||= []
+      end
+
       #Add an edge to the tree.
       def add_edge( edge )
         source = get_node_by_name( edge.source )
         target = get_node_by_name( edge.target )
         super source, target, edge
+      end
+
+      def parent( node, *root )
+        if root.empty?
+          raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
+          root = self.root
+        end
+        parents = {}
+        root.each do |r|
+          parents[ r ] = super( node, r )
+        end
+        parents
+      end
+
+      def children( node, *root )
+        if root.empty?
+          raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
+          root = self.root
+        end
+        childrens = {}
+        root.each do |r|
+          c = adjacent_nodes(node)
+          c.delete(parent(node, r)[ r ])
+          childrens[ r ] = c
+        end
+
+        childrens
       end
 
     end #end class Tree

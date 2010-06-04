@@ -227,7 +227,7 @@ module Bio
             tree.add_node node
 
             #root?
-            tree.root = node if node.root?
+            tree.root << node if node.root?
           when "rootedge"
             #parse child 'edge' element
             edge = parse_edge( type )
