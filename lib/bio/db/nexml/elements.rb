@@ -320,8 +320,9 @@ module Bio
     class FloatTree < Tree ; end
 
     class Network < Tree; end
-    class IntNetwork < Tree; end
-    class FloatNetwork < Tree; end
+
+    class IntNetwork < Network; end
+    class FloatNetwork < Network; end
 
     class Trees
       include TaxaLinked
@@ -333,13 +334,45 @@ module Bio
         @otus = otus
       end
 
+      #Access child tree objects with a hash like notation
+      #given its id.
+      def []( id )
+        tree_set[ id ] or network_set[ id ]
+      end
+
+      #Iterate over child elements, i.e. all the
+      #'tree' and 'network' object.
+      def each
+        tree_set.each_value do |tree|
+          yield tree
+        end
+        network_set.each_value do |network|
+          yield network
+        end
+      end
+
+      #Add a 'tree' or a 'network'.
+      def <<( tree )
+        #order of the when clause matters here
+        #as a network is a tree too.
+        case tree
+        when Network
+        network_set[ tree.id ] = tree
+        when Tree
+        tree_set[ tree.id ] = tree
+        end
+      end
+      
+      #Returns a hash of 'tree' objects or
+      #an empty hash if none exists.
       def tree_set
         @tree_set ||= {}
       end
 
-      #Add a 'tree'.
-      def <<( tree )
-        tree_set[ tree.id ] = tree
+      #Returns a hash of 'network' objects or
+      #an empty hash if none exists.
+      def network_set
+        @network_set ||= {}
       end
 
       #Return an array of 'tree' objects.
@@ -347,23 +380,61 @@ module Bio
         tree_set.values
       end
 
+      #Return an array of 'network' objects.
+      def networks
+        network_set.values
+      end
+
       #Iterate over each 'tree' object.
-      def each
-        trees.each do |tree|
+      def each_tree
+        tree_set.each_value do |tree|
           yield tree
         end
       end
-      alias each_tree each
 
-      #Access child tree objects with a hash like notation
-      #given its id.
-      def []( id )
-        tree_set[ id ]
+      #Iterate over each 'network' object.
+      def each_network
+        network_set.each_value do |network|
+          yield network
+        end
       end
 
+      #Find if a 'tree' with the given id exists
+      #or not.
       def has_tree?( id )
         tree_set.has_key? id
       end
+
+      #Find if a 'network' with the given id exists
+      #or not.
+      def has_network?( id )
+        network_set.has_key? id
+      end
+
+      def has?( id )
+        has_tree?( id ) or has_network?( id )
+      end
+
+      def number_of_trees
+        tree_set.length
+      end
+
+      def number_of_networks
+        network_set.length
+      end
+
+      def number_of_graphs
+        number_of_trees + number_of_networks
+      end
+
+      def get_tree_by_id( id )
+        tree_set[ id ]
+      end
+
+      def get_network_by_id( id )
+        network_set[ id ]
+      end
+
     end #end class Trees
 
   end #end module NeXML
