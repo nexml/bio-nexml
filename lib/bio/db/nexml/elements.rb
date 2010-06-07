@@ -329,9 +329,8 @@ module Bio
       end
     end
 
-    class Tree < Bio::Tree
+    class AbstractTree < Bio::Tree
       include IDTagged
-      attr_accessor :rootedge
 
       def initialize( id, label = nil )
         super()
@@ -343,11 +342,52 @@ module Bio
         @root ||= []
       end
 
+      def node_set
+        @node_set ||= {}
+      end
+
+      def edge_set
+        @edge_set ||= {}
+      end
+
+      def get_node_by_id( id )
+        node_set[ id ]
+      end
+      alias get_node_by_name get_node_by_id
+
+      def get_edge_by_id( id )
+        edge_set[ id ]
+      end
+
+      def add_node( node )
+        node_set[ node.id ] = node
+        super
+      end
+
+      def nodes
+        node_set.values
+      end
+
+      alias extended_edges edges
+      def edges
+        edge_set.values
+      end
+
       #Add an edge to the tree.
       def add_edge( edge )
+        edge_set[ edge.id ] = edge
         source = get_node_by_name( edge.source )
         target = get_node_by_name( edge.target )
         super source, target, edge
+      end
+
+    end
+
+    class Tree < AbstractTree
+      attr_accessor :rootedge
+
+      def initialize( id, label = nil )
+        super
       end
 
       #Add a rootedge to the tree
@@ -423,7 +463,13 @@ module Bio
     class IntTree < Tree ; end
     class FloatTree < Tree ; end
 
-    class Network < Tree; end
+    class Network < AbstractTree
+
+      def initialize( id, label = nil )
+        super
+      end
+
+    end
 
     class IntNetwork < Network; end
     class FloatNetwork < Network; end
