@@ -321,6 +321,12 @@ module Bio
       end
     end #end class FloatEdge
 
+    class RootEdge < Edge
+      def initialize( id, target, length = nil, label = nil )
+        super( id, nil, target, length, label )
+      end
+    end
+
     class Tree < Bio::Tree
       include IDTagged
       attr_accessor :rootedge
@@ -340,6 +346,11 @@ module Bio
         source = get_node_by_name( edge.source )
         target = get_node_by_name( edge.target )
         super source, target, edge
+      end
+
+      #Add a rootedge to the tree
+      def add_rootedge( edge )
+        self.rootedge = edge
       end
 
       def parent( node, *root )
