@@ -80,6 +80,14 @@ module Bio
       end
 
       def test_each
+        tree = Bio::NeXML::IntTree.new 'tree'
+        trees = Bio::NeXML::Trees.new 'trees'
+        trees << tree
+        @nexml << trees
+
+        @nexml.each do |t|
+          assert_not_nil t.id
+        end
       end
 
       def test_get_otus_by_id
@@ -90,6 +98,12 @@ module Bio
       end
 
       def test_get_otu_by_id
+        otu = Bio::NeXML::Otu.new 'otu'
+        otus = Bio::NeXML::Otus.new 'otus'
+        otus << otu
+        @nexml << otus
+
+        assert @nexml.get_otu_by_id 'otu'
       end
 
       def test_get_trees_by_id
@@ -100,6 +114,12 @@ module Bio
       end
 
       def test_get_tree_by_id
+        tree = Bio::NeXML::IntTree.new 'tree'
+        trees = Bio::NeXML::Trees.new 'trees'
+        trees << tree
+        @nexml << trees
+
+        assert @nexml.get_tree_by_id 'tree'
       end
 
     end #end class TestNexml
