@@ -230,12 +230,10 @@ module Bio
             tree.root << node if node.root?
           when "rootedge"
             #parse child 'edge' element
-            edge = parse_edge( type )
+            rootedge = parse_rootedge( type )
 
             #and add it to the 'tree'
-            tree.add_edge edge
-
-            tree.rootedge = edge
+            tree.add_rootedge rootedge
           when "edge"
             #parse child 'edge' element
             edge = parse_edge( type )
@@ -344,6 +342,28 @@ module Bio
 
         #return the 'edge' object
         edge
+      end
+
+      def parse_rootedge( type )
+        id = attribute( 'id' )
+        target = attribute( 'target' )
+        length = attribute( 'length' )
+        
+        rootedge = RootEdge.new( id, target, length )
+
+        #according to the schema an 'edge' may have no child element.
+        return rootedge if empty_element?
+
+        while next_node
+          case local_name
+          when 'rootedge'
+            #end of current 'rootedge' element has been reached
+            break
+          end
+        end
+
+        #return the 'rootedge' object
+        rootedge
       end
 
     end #end Parser class
