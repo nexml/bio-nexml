@@ -395,6 +395,17 @@ module Bio
         self.rootedge = edge
       end
 
+      def target_cache
+        @target_cache ||= []
+      end
+
+      def add_edge( edge )
+        target = get_node_by_name( edge.target )
+        raise "Target exists." if target_cache.include? target
+        target_cache << target
+        super
+      end
+
       def parent( node, *root )
         if root.empty?
           raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
