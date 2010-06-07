@@ -60,7 +60,6 @@ module Bio
           add_trees element
         end
       end
-      alias apend <<
 
       #Return a hash of 'otus' objects or an empty hash
       #if no 'otus' object has been created yet.
@@ -254,7 +253,7 @@ module Bio
       def <<( otu )
         otu_set[ otu.id ] = otu
       end
-      alias add_out <<
+      alias add_otu <<
 
     end #end class Otus
 
