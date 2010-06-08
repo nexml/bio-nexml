@@ -256,5 +256,198 @@ module Bio
 
     end #end class TestOtus
 
-  end
-end
+    class TestNode < Test::Unit::TestCase
+
+      def setup
+        @node = Bio::NeXML::Node.new 'node1'
+      end
+    
+      def teardown
+        @node = nil
+      end
+
+      def test_otu=
+        assert_nil @node.otu
+
+        otu = Bio::NeXML::Otu.new 'otu1'
+        @node.otu = otu
+
+        assert_not_nil @node.otu
+        assert_equal @node.taxonomy_id, otu.id
+      end
+
+      def test_root?
+        @node.root = true
+        assert @node.root?
+      end
+    
+    end #end class TestNode
+
+    class TestEdge < Test::Unit::TestCase
+
+      def setup
+        target = Bio::NeXML::Node.new 'target'
+        source = Bio::NeXML::Node.new 'source'
+        @edge = Bio::NeXML::Edge.new 'edge1', source, target, 1
+      end
+
+      def teardown
+        @edge = nil
+      end
+
+      def test_length
+        assert_equal @edge.length, 1
+      end
+
+      def test_length=
+        @edge.length = 2
+        assert_equal @edge.length, 2
+      end 
+
+    end
+
+    class TestTrees < Test::Unit::TestCase
+
+      def setup
+        @trees = Bio::NeXML::Trees.new 'trees1'
+      end
+
+      def teardown
+        @trees = nil
+      end
+
+      def test_hash_notation
+        tree = Bio::NeXML::Tree.new 'tree1'
+        @trees << tree
+        assert_not_nil @trees[ 'tree1' ]
+      end
+
+      def test_tree_set
+        assert_instance_of Hash, @trees.tree_set
+      end
+
+      def test_network_set
+        assert_instance_of Hash, @trees.network_set
+      end
+
+      def test_trees
+        assert_instance_of Array, @trees.trees
+      end
+
+      def test_networks
+        assert_instance_of Array, @trees.networks
+      end
+
+      def test_add_tree
+        assert_send [@trees.tree_set, :empty?]
+
+        tree = Bio::NeXML::Tree.new 'tree1'
+        @trees.add_tree tree
+
+        not_empty = !@trees.tree_set.empty?
+        assert not_empty
+      end
+
+      def test_add_network
+        assert_send [@trees.network_set, :empty?]
+
+        network = Bio::NeXML::Network.new 'network1'
+        @trees.add_network network
+
+        not_empty = !@trees.network_set.empty?
+        assert not_empty
+      end
+
+      def test_has_tree?
+        tree = Bio::NeXML::Tree.new 'tree1'
+        @trees.add_tree tree
+        assert @trees.has_tree? tree.id
+      end
+
+      def test_has_network?
+        network = Bio::NeXML::Network.new 'network1'
+        @trees.add_network network
+        assert @trees.has_network? network.id
+      end
+
+      def test_has?
+        network = Bio::NeXML::Network.new 'network1'
+        @trees.add_network network
+        assert @trees.has_network? network.id
+      end
+    
+      def test_number_of_trees
+        tree = Bio::NeXML::Tree.new 'tree1'
+        @trees.add_tree tree
+        assert_equal 1, @trees.number_of_trees
+      end
+
+      def test_number_of_networks
+        network = Bio::NeXML::Network.new 'network1'
+        @trees.add_network network
+        assert_equal 1, @trees.number_of_networks
+      end
+
+      def test_number_of_graphs
+        tree = Bio::NeXML::Tree.new 'tree1'
+        @trees.add_tree tree
+        network = Bio::NeXML::Network.new 'network1'
+        @trees.add_network network
+        assert_equal 2, @trees.number_of_graphs
+      end
+
+      def test_get_tree_by_id
+        tree = Bio::NeXML::Tree.new 'tree1'
+        @trees.add_tree tree
+        assert_not_nil @trees.get_tree_by_id 'tree1'
+      end
+
+      def test_get_network_by_id
+        network = Bio::NeXML::Network.new 'network1'
+        @trees.add_network network
+        assert_not_nil @trees.get_network_by_id 'network1'
+      end
+
+      def test_each_tree
+        tree = Bio::NeXML::Tree.new 'tree1'
+        @trees.add_tree tree
+        c = 0
+        @trees.each_tree {|t| c+=1 }
+        assert_equal 1, c
+      end
+
+      def test_each_network
+        network = Bio::NeXML::Network.new 'network1'
+        @trees.add_network network
+        c = 0
+        @trees.each_network {|t| c+=1 }
+        assert_equal 1, c
+      end
+
+      def test_each
+        tree = Bio::NeXML::Tree.new 'tree1'
+        @trees.add_tree tree
+        network = Bio::NeXML::Network.new 'network1'
+        @trees.add_network network
+        c = 0
+        @trees.each {|t| c+=1 }
+        assert_equal 2, c
+      end
+
+    end #end class TestTrees
+
+    #class TestTree < Test::Unit::TestCase
+
+      #def setup
+        #@tree = Bio::NeXML::Tree.new 'tree'
+      #end
+
+      #def teardown
+        #@tree = nil
+      #end
+
+    #end #end class TestTree
+
+  end #end module NeXML
+
+end #end module Bio

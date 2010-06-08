@@ -266,8 +266,6 @@ module Bio
         super id
         @id = id
         @label = label
-        #this is a little confusing
-        #does not call otu= if self is not use
         self.otu = otu if otu
         @root = root
       end
@@ -275,7 +273,7 @@ module Bio
       #Assign an otu to a node.
       def otu=( otu )
         @otu = otu
-        taxonomy_id = otu.id
+        self.taxonomy_id = otu.id
       end
 
       #Is it a root node?
@@ -298,11 +296,11 @@ module Bio
       end
 
       def length
-        distance
+        self.distance
       end
 
       def length=( length )
-        distance = length
+        self.distance = length
       end
 
     end #end class Edge
@@ -583,6 +581,7 @@ module Bio
       def has?( id )
         has_tree?( id ) or has_network?( id )
       end
+      alias include? has?
 
       def number_of_trees
         tree_set.length
