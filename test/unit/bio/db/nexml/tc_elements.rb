@@ -436,17 +436,90 @@ module Bio
 
     end #end class TestTrees
 
-    #class TestTree < Test::Unit::TestCase
+    class TestAbstractTree < Test::Unit::TestCase
 
-      #def setup
-        #@tree = Bio::NeXML::Tree.new 'tree'
-      #end
+      def setup
+        @atree = Bio::NeXML::AbstractTree.new 'tree'
+      end
 
-      #def teardown
-        #@tree = nil
-      #end
+      def teardown
+        @atree = nil
+      end
 
-    #end #end class TestTree
+      def test_root
+        assert_instance_of Array, @atree.root
+      end
+
+      def test_node_set
+        assert_instance_of Hash, @atree.node_set
+      end
+
+      def test_edge_set
+        assert_instance_of Hash, @atree.edge_set
+      end
+
+      def test_add_node
+        assert_send [@atree.node_set, :empty?]
+
+        node = Bio::NeXML::Node.new 'node1'
+        @atree.add_node node
+
+        not_empty = !@atree.node_set.empty?
+        assert not_empty
+      end
+
+      def test_add_edge
+        assert_send [@atree.edge_set, :empty?]
+
+        source = Bio::NeXML::Node.new 'node1'
+        target = Bio::NeXML::Node.new 'node2'
+        edge = Bio::NeXML::Edge.new 'e1', source, target, 1
+        @atree.add_edge edge
+
+        not_empty = !@atree.edge_set.empty?
+        assert not_empty
+      end
+
+      def test_get_node_by_id
+        node = Bio::NeXML::Node.new 'node1'
+        @atree.add_node node
+
+        assert @atree.get_node_by_id 'node1'
+      end
+
+      def test_get_edge_by_id
+        source = Bio::NeXML::Node.new 'node1'
+        target = Bio::NeXML::Node.new 'node2'
+        edge = Bio::NeXML::Edge.new 'e1', source, target, 1
+        @atree.add_edge edge
+
+        assert @atree.get_edge_by_id 'e1'
+      end
+
+    end #end class TestTree
+
+    class TestTree < Test::Unit::TestCase
+
+      def setup
+        @tree = Bio::NeXML::Tree.new 'tree'
+      end
+
+      def teardown
+        @tree = nil
+      end
+
+      def test_add_rootedge
+        target = Bio::NeXML::Node.new 'node1'
+        re = Bio::NeXML::RootEdge.new 're1', target, 2
+        @tree.add_rootedge re
+        assert @tree.rootedge
+      end
+
+      def test_target_cache
+        assert_instance_of Array, @tree.target_cache
+      end
+
+    end
 
   end #end module NeXML
 
