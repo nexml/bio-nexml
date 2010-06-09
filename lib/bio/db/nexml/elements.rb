@@ -146,6 +146,8 @@ module Bio
         trees_set.each_value do |trees|
           return trees[ id ] if trees.has? id
         end
+
+        nil
       end
 
       def get_characters_by_id( id )
@@ -252,16 +254,23 @@ module Bio
 
       #Iterate over all 'otu' object.
       def each
-        @otu_set.each_value do |otu|
+        otu_set.each_value do |otu|
           yield otu
         end
       end
       alias :each_otu :each
 
+      def each_with_id
+        otu_set.each do |id, otu|
+          yield id, otu
+        end
+      end
+
       #Use array notation to access an 'otu'
       def []( key )
         otu_set[ key ]
       end
+      alias get_otu_by_id []
 
       #Checks if this 'otus' contains an 'otu'
       #with the given id.
