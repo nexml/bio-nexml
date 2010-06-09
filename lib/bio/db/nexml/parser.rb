@@ -44,7 +44,7 @@ module Bio
           when "trees"
             @nexml.add_trees( parse_trees )
           when "characters"
-            puts "characters"
+            @nexml.add_characters( parse_characters )
           end
         end
 
@@ -230,7 +230,7 @@ module Bio
             tree.root << node if node.root?
           when "rootedge"
             #parse child 'edge' element
-            rootedge = parse_rootedge( type )
+            rootedge = parse_rootedge
 
             #and add it to the 'tree'
             tree.add_rootedge rootedge
@@ -344,7 +344,7 @@ module Bio
         edge
       end
 
-      def parse_rootedge( type )
+      def parse_rootedge
         id = attribute( 'id' )
         target = attribute( 'target' )
         length = attribute( 'length' )
@@ -366,6 +366,96 @@ module Bio
         rootedge
       end
 
+      def parse_characters
+        #if the characters is taxa linked
+        if taxa = attribute( 'otus' )
+          otus = @nexml.otus_set[ taxa ]
+        end
+
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+
+        characters = Bio::NeXML::Characters.new id, otus, label
+
+        #according to the schema a 'characters' will have a child
+        while next_node
+          case local_name
+          when 'format'
+            characters << parse_format
+          when 'matrix'
+            characters << parse_matrix
+          when 'characters'
+            break
+          end #end case
+        end #end while
+
+        characters
+      end #end parse_characters
+
+      def parse_format
+        format = Bio::NeXML::Format.new
+
+        #according to the schema a concrete characters type
+        #will have a child element.
+        while next_node
+          case local_name
+          when 'states'
+            format << parse_states
+          when 'char'
+            format << parse_char
+          when 'format'
+            break
+          end #end case
+        end #end while
+
+        format
+      end #end parse_format
+
+      def parse_states
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+
+        states = Bio::NeXML::States.new id, label
+
+        while next_node
+          case local_name
+          when 'state'
+            states.add_state parse_state
+          when 'states'
+            break
+          end
+        end
+
+        states
+      end
+
+      def parse_state
+        id = attribute( 'id' )
+        symbol = attribute( 'symbol' )
+
+        state = Bio::NeXML::State.new id, symbol
+
+        return state if empty_element?
+
+        while next_node
+          case local_name
+          when 'state'
+            break
+          end
+        end
+
+        state
+      end
+
+      def parse_char
+        id = attribute( 'id' )
+        char = Bio::NeXML::Char.new id
+      end
+
+      def parse_matrix
+        matrix = Bio::NeXML::Matrix.new
+      end
+      
     end #end Parser class
 
   end #end NeXML module

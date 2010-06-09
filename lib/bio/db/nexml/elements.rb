@@ -58,6 +58,8 @@ module Bio
           add_otus element
         when Trees
           add_trees element
+        when Characters
+          add_characters element
         end
       end
 
@@ -73,6 +75,10 @@ module Bio
         @trees_set ||= {}
       end
 
+      def characters_set
+        @characters_set ||= {}
+      end
+
       #Add an 'otus' object.
       def add_otus( otus )
         otus_set[ otus.id ] = otus
@@ -81,6 +87,10 @@ module Bio
       #Add a 'trees' object.
       def add_trees( trees )
         trees_set[ trees.id ] = trees
+      end
+
+      def add_characters( characters )
+        characters_set[ characters.id ] = characters
       end
 
       #Iterate over each 'otus' object.
@@ -94,6 +104,12 @@ module Bio
       def each_trees
         trees_set.each_value do |trees|
           yield trees
+        end
+      end
+
+      def each_characters
+        characters_set.each_value do |char|
+          yield char
         end
       end
 
@@ -132,6 +148,10 @@ module Bio
         end
       end
 
+      def get_characters_by_id( id )
+        characters_set[ id ]
+      end
+
       #Return an array of 'otus' objects.
       def otus
         otus_set.values
@@ -143,6 +163,7 @@ module Bio
       end
 
       def characters
+        characters_set.values
       end
 
     end #end class Nexml
@@ -604,6 +625,118 @@ module Bio
       end
 
     end #end class Trees
+
+    class Characters
+      include IDTagged
+      include TaxaLinked
+      attr_accessor :format, :matrix
+
+      def initialize( id, otus = nil, label = nil )
+        @id = id
+        @otus = otus
+        @label = label
+      end
+
+      def <<( element )
+        case element
+        when Format
+          add_format element
+        when Matrix
+          add_matrix element
+        end
+      end
+
+      def add_format( format )
+        self.format = format
+      end
+
+      def add_matrix( matrix )
+        self.matrix = matrix
+      end
+
+    end
+
+    class Format
+
+      def <<( element )
+        case element
+        when States
+          add_states element
+        when Char
+          add_char element
+        end
+      end
+
+      def states_set
+        @states_set ||= {}
+      end
+
+      def char_set
+        @char_set ||= {}
+      end
+
+      def states
+        states_set.values
+      end
+
+      def chars
+        char_set.values
+      end
+
+      def add_states( states )
+        states_set[ states.id ] = states
+      end
+
+      def add_char( char )
+        char_set[ char.id ] = char
+      end
+
+    end
+
+    class States
+      include IDTagged
+      
+      def initialize( id, label = nil )
+        @id = id
+        @label = label
+      end
+
+      def state_set
+        @state_set ||= {}
+      end
+
+      def states
+        state_set.values
+      end
+
+      def add_state( state )
+        state_set[ state.id ] = state
+      end
+
+    end
+
+    class State
+      include IDTagged
+      attr_accessor :symbol
+
+      def initialize( id, symbol, label = nil )
+        @id = id
+        @symbol = symbol
+        @label = label
+      end
+
+    end
+
+    class Char
+      include IDTagged
+      
+      def initialize( id )
+        @id = id
+      end
+    end
+
+    class Matrix
+    end
 
   end #end module NeXML
 
