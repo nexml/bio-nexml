@@ -10,7 +10,6 @@ module Bio
         @doc.close
       end
 
-      #test if the parser can parse or not
       def test_parse
         nexml = @doc.parse
         assert_instance_of Bio::NeXML::Nexml, nexml, "Should return an object of Bio::NeXML::Nexml"
