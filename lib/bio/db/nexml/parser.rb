@@ -30,7 +30,9 @@ module Bio
         skip_leader
 
         #start with a new Nexml object
-        @nexml = NeXML::Nexml.new( @reader[ 'version' ], @reader[ 'generator' ] )
+        version = attribute( 'version' )
+        generator = attribute( 'generator' )
+        @nexml = NeXML::Nexml.new( version, generator )
 
         #perhaps a namespace api as well
         
@@ -42,7 +44,7 @@ module Bio
           when "trees"
             @nexml.add_trees( parse_trees )
           when "characters"
-            puts "characters"
+            @nexml.add_characters( parse_characters )
           end
         end
 
@@ -80,6 +82,10 @@ module Bio
 
       def local_name
         @reader.local_name
+      end
+
+      def attribute( name )
+        @reader[ name ]
       end
 
       def next_node
@@ -122,8 +128,8 @@ module Bio
       #When this function is called the cursor is at an 'otus' element.
       #Return - an 'otus' object
       def parse_otus
-        id = @reader[ 'id' ]
-        label = @reader[ 'label' ]
+        id = attribute( 'id' )
+        label = attribute( 'label' )
 
         otus = NeXML::Otus.new( id, label )
 
@@ -149,8 +155,8 @@ module Bio
       #When this function is called the cursor is at an 'otu' element.
       #Return - an 'otu' object.
       def parse_otu
-        id = @reader[ 'id' ]
-        label = @reader[ 'label' ]
+        id = attribute( 'id' )
+        label = attribute( 'label' )
 
         otu = NeXML::Otu.new( id, label )
 
@@ -173,12 +179,12 @@ module Bio
       #Return - a 'trees' object.
       def parse_trees
         #if the trees is taxa linked
-        if taxa = @reader[ 'otus' ]
+        if taxa = attribute( 'otus' )
           otus = @nexml.otus_set[ taxa ]
         end
 
-        id = @reader[ 'id' ]
-        label = @reader[ 'label' ]
+        id = attribute( 'id' )
+        label = attribute( 'label' )
 
         trees = NeXML::Trees.new( id, label, otus )
 
@@ -188,6 +194,8 @@ module Bio
           when "tree"
             #parse child 'tree' element
             trees << parse_tree
+          when "network"
+            trees << parse_network
           when "trees"
             #end of current 'trees' element has been reached
             break
@@ -201,14 +209,12 @@ module Bio
       #When this function is called the cursor is at a 'tree' element.
       #Return - a 'tree' object.
       def parse_tree
-        #start with a new 'tree' object
-        type = @reader[ 'xsi:type' ]
-        case type
-        when "nex:FloatTree"
-          tree = NeXML::IntTree.new( @reader[ 'id' ], @reader[ 'label' ] )
-        when "nex:IntTree"
-          tree = NeXML::FloatTree.new( @reader[ 'id' ], @reader[ 'label' ] )
-        end
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+
+        type = attribute( 'xsi:type' )[4..-1]
+        klass = NeXML.const_get type
+        tree = klass.new( id, label )
 
         #a 'tree' element *will* have child nodes.
         while next_node
@@ -221,10 +227,16 @@ module Bio
             tree.add_node node
 
             #root?
-            tree.root = node if node.root?
+            tree.root << node if node.root?
+          when "rootedge"
+            #parse child 'edge' element
+            rootedge = parse_rootedge
+
+            #and add it to the 'tree'
+            tree.add_rootedge rootedge
           when "edge"
             #parse child 'edge' element
-            edge = parse_edge
+            edge = parse_edge( type )
 
             #and add it to the 'tree'
             tree.add_edge edge
@@ -238,15 +250,52 @@ module Bio
         tree
       end
 
+      def parse_network
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+
+        type = attribute( 'xsi:type' )[4..-1]
+        klass = NeXML.const_get type
+        network = klass.new( id, label )
+
+        #a 'network' element *will* have child nodes.
+        while next_node
+          case local_name
+          when "node"
+            #parse child 'node' element
+            node = parse_node
+
+            #and add it to the 'network'
+            network.add_node node
+
+            #root?
+            network.root = node if node.root?
+          when "edge"
+            #parse child 'edge' element
+            edge = parse_edge( type )
+
+            #and add it to the 'network'
+            network.add_edge edge
+
+          when "network"
+            #end of current 'network' element has been reached
+            break
+          end
+        end
+
+        #return the 'network' object
+        network
+      end
+
       #When this function is called the cursor is at a 'node' element.
       #Return - a 'node' object.
       def parse_node
-        id = @reader[ 'id' ]
-        label = @reader[ 'label' ]
-        root = @reader[ 'root' ] ? true : false
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+        root = attribute( 'root' ) ? true : false
 
         #is this node taxon linked
-        if otu_id = @reader[ 'otu' ]
+        if otu_id = attribute( 'otu' )
           otu = @nexml.get_otu_by_id otu_id
         end
 
@@ -270,11 +319,15 @@ module Bio
 
       #When this function is called the cursor is at a 'edge' element.
       #Return - a 'edge' object.
-      def parse_edge
-        #start with a new 'edge' object
-        edge = NeXML::Edge.new( @reader[ 'id' ], @reader[ 'source' ],
-                                @reader[ 'target' ],
-                                @reader[ 'length' ] )
+      def parse_edge( type )
+        id = attribute( 'id' )
+        source = attribute( 'source' )
+        target = attribute( 'target' )
+        length = attribute( 'length' )
+        
+        type.sub!(/Tree|Network/, "Edge")
+        klass = NeXML.const_get type
+        edge = klass.new( id, source, target, length )
 
         #according to the schema an 'edge' may have no child element.
         return edge if empty_element?
@@ -291,6 +344,118 @@ module Bio
         edge
       end
 
+      def parse_rootedge
+        id = attribute( 'id' )
+        target = attribute( 'target' )
+        length = attribute( 'length' )
+        
+        rootedge = RootEdge.new( id, target, length )
+
+        #according to the schema an 'edge' may have no child element.
+        return rootedge if empty_element?
+
+        while next_node
+          case local_name
+          when 'rootedge'
+            #end of current 'rootedge' element has been reached
+            break
+          end
+        end
+
+        #return the 'rootedge' object
+        rootedge
+      end
+
+      def parse_characters
+        #if the characters is taxa linked
+        if taxa = attribute( 'otus' )
+          otus = @nexml.otus_set[ taxa ]
+        end
+
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+
+        characters = Bio::NeXML::Characters.new id, otus, label
+
+        #according to the schema a 'characters' will have a child
+        while next_node
+          case local_name
+          when 'format'
+            characters << parse_format
+          when 'matrix'
+            characters << parse_matrix
+          when 'characters'
+            break
+          end #end case
+        end #end while
+
+        characters
+      end #end parse_characters
+
+      def parse_format
+        format = Bio::NeXML::Format.new
+
+        #according to the schema a concrete characters type
+        #will have a child element.
+        while next_node
+          case local_name
+          when 'states'
+            format << parse_states
+          when 'char'
+            format << parse_char
+          when 'format'
+            break
+          end #end case
+        end #end while
+
+        format
+      end #end parse_format
+
+      def parse_states
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+
+        states = Bio::NeXML::States.new id, label
+
+        while next_node
+          case local_name
+          when 'state'
+            states.add_state parse_state
+          when 'states'
+            break
+          end
+        end
+
+        states
+      end
+
+      def parse_state
+        id = attribute( 'id' )
+        symbol = attribute( 'symbol' )
+
+        state = Bio::NeXML::State.new id, symbol
+
+        return state if empty_element?
+
+        while next_node
+          case local_name
+          when 'state'
+            break
+          end
+        end
+
+        state
+      end
+
+      def parse_char
+        id = attribute( 'id' )
+        char = Bio::NeXML::Char.new id
+      end
+
+      def parse_matrix
+        matrix = Bio::NeXML::Matrix.new
+      end
+      
     end #end Parser class
 
   end #end NeXML module

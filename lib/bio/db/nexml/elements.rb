@@ -44,11 +44,23 @@ module Bio
 
     class Nexml
       include Annotated
+      include Enumerable
       attr_accessor :version, :generator
       
       def initialize( version, generator = nil )
         @version = version
         @generator = generator
+      end
+
+      def <<( element )
+        case element
+        when Otus
+          add_otus element
+        when Trees
+          add_trees element
+        when Characters
+          add_characters element
+        end
       end
 
       #Return a hash of 'otus' objects or an empty hash
@@ -57,15 +69,54 @@ module Bio
         @otus_set ||= {}
       end
 
-      #Return an array of 'otus' objects.
-      def otus
-        otus_set.values
+      #Return a hash of 'trees' objects or an empty hash
+      #if no 'trees' object has been created yet.
+      def trees_set
+        @trees_set ||= {}
+      end
+
+      def characters_set
+        @characters_set ||= {}
+      end
+
+      #Add an 'otus' object.
+      def add_otus( otus )
+        otus_set[ otus.id ] = otus
+      end
+      
+      #Add a 'trees' object.
+      def add_trees( trees )
+        trees_set[ trees.id ] = trees
+      end
+
+      def add_characters( characters )
+        characters_set[ characters.id ] = characters
       end
 
       #Iterate over each 'otus' object.
       def each_otus
         otus_set.each_value do |otus|
           yield otus
+        end
+      end
+      
+      #Iterate over each 'trees' object.
+      def each_trees
+        trees_set.each_value do |trees|
+          yield trees
+        end
+      end
+
+      def each_characters
+        characters_set.each_value do |char|
+          yield char
+        end
+      end
+
+      #Iterate over each 'tree' object.
+      def each
+        trees_set.each_value do |trees|
+          trees.each{ |tree| yield tree }
         end
       end
 
@@ -75,37 +126,14 @@ module Bio
         otus_set[ id ]
       end
 
-      #Add an 'otus' object.
-      def add_otus( otus )
-        otus_set[ otus.id ] = otus
-      end
-
       #Return an 'otu' object with the given id or nil
       #if the 'otu' is not found.
       def get_otu_by_id( id )
-        each_otus do |otus|
+        otus_set.each_value do |otus|
           return otus[ id ] if otus.has_otu? id
         end
         
         nil
-      end
-
-      #Return a hash of 'trees' objects or an empty hash
-      #if no 'trees' object has been created yet.
-      def trees_set
-        @trees_set ||= {}
-      end
-
-      #Return an array of 'trees' objects.
-      def trees
-        trees_set.values
-      end
-
-      #Iterate over each 'trees' object.
-      def each_trees
-        trees.each do |trees|
-          yield trees
-        end
       end
 
       #Return an 'trees' object with the given id or nil.
@@ -113,12 +141,29 @@ module Bio
         trees_set[ id ]
       end
 
-      #Add a 'trees' object.
-      def add_trees( trees )
-        trees_set[ trees.id ] = trees
+      #Return a 'tree' object with the given id or nil.
+      def get_tree_by_id( id )
+        trees_set.each_value do |trees|
+          return trees[ id ] if trees.has? id
+        end
+      end
+
+      def get_characters_by_id( id )
+        characters_set[ id ]
+      end
+
+      #Return an array of 'otus' objects.
+      def otus
+        otus_set.values
+      end
+
+      #Return an array of 'trees' objects.
+      def trees
+        trees_set.values
       end
 
       def characters
+        characters_set.values
       end
 
     end #end class Nexml
@@ -202,7 +247,7 @@ module Bio
 
       #Return an array of 'otu' objects.
       def otus
-        @otu_set.values
+        otu_set.values
       end
 
       #Iterate over all 'otu' object.
@@ -223,11 +268,13 @@ module Bio
       def has_otu?( id )
         otu_set.has_key? id
       end
+      alias include? has_otu?
 
       #Add an 'otu' to this 'otus'
       def <<( otu )
         otu_set[ otu.id ] = otu
       end
+      alias add_otu <<
 
     end #end class Otus
 
@@ -240,8 +287,6 @@ module Bio
         super id
         @id = id
         @label = label
-        #this is a little confusing
-        #does not call otu= if self is not use
         self.otu = otu if otu
         @root = root
       end
@@ -249,7 +294,7 @@ module Bio
       #Assign an otu to a node.
       def otu=( otu )
         @otu = otu
-        taxonomy_id = otu.id
+        self.taxonomy_id = otu.id
       end
 
       #Is it a root node?
@@ -271,9 +316,39 @@ module Bio
         @target = target
       end
 
+      def length
+        self.distance
+      end
+
+      def length=( length )
+        self.distance = length
+      end
+
     end #end class Edge
 
-    class Tree < Bio::Tree
+    class IntEdge < Edge
+
+      def initialize( id, source, target, length = nil, label = nil )
+        length = length.to_i
+        super
+      end
+
+    end #end class IntEdge
+
+    class FloatEdge < Edge
+      def initialize( id, source, target, length = nil, label = nil )
+        length = length.to_f
+        super
+      end
+    end #end class FloatEdge
+
+    class RootEdge < Edge
+      def initialize( id, target, length = nil, label = nil )
+        super( id, nil, target, length, label )
+      end
+    end
+
+    class AbstractTree < Bio::Tree
       include IDTagged
 
       def initialize( id, label = nil )
@@ -282,17 +357,152 @@ module Bio
         @label = label
       end
 
+      def root
+        @root ||= []
+      end
+
+      def node_set
+        @node_set ||= {}
+      end
+
+      def edge_set
+        @edge_set ||= {}
+      end
+
+      def get_node_by_id( id )
+        node_set[ id ]
+      end
+      alias get_node_by_name get_node_by_id
+
+      def get_edge_by_id( id )
+        edge_set[ id ]
+      end
+
+      def add_node( node )
+        node_set[ node.id ] = node
+        super
+      end
+
+      def nodes
+        node_set.values
+      end
+
+      alias extended_edges edges
+      def edges
+        edge_set.values
+      end
+
       #Add an edge to the tree.
       def add_edge( edge )
+        edge_set[ edge.id ] = edge
         source = get_node_by_name( edge.source )
         target = get_node_by_name( edge.target )
         super source, target, edge
+      end
+
+    end
+
+    class Tree < AbstractTree
+      attr_accessor :rootedge
+
+      def initialize( id, label = nil )
+        super
+      end
+
+      #Add a rootedge to the tree
+      def add_rootedge( edge )
+        self.rootedge = edge
+      end
+
+      def target_cache
+        @target_cache ||= []
+      end
+
+      def add_edge( edge )
+        target = get_node_by_name( edge.target )
+        raise "Target exists." if target_cache.include? target
+        target_cache << target
+        super
+      end
+
+      def parent( node, *root )
+        if root.empty?
+          raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
+          root = self.root
+        end
+        parents = {}
+        root.each do |r|
+          parents[ r ] = super( node, r )
+        end
+        parents
+      end
+
+      def children( node, *root )
+        if root.empty?
+          raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
+          root = self.root
+        end
+        childrens = {}
+        root.each do |r|
+          c = adjacent_nodes(node)
+          c.delete(parent(node, r)[ r ])
+          childrens[ r ] = c
+        end
+
+        childrens
+      end
+
+      def descendents( node, *root )
+        if root.empty?
+          raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
+          root = self.root
+        end
+        descendent = {}
+        root.each do |r|
+          descendent[ r ] = super( node, r )
+        end
+        descendent
+      end
+
+      def lowest_common_ancestor( node1, node2, *root )
+        if root.empty?
+          raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
+          root = self.root
+        end
+        lca = {}
+        root.each do |r|
+          lca[ r ] = super( node1, node2, r )
+        end
+        lca
+      end
+
+      def ancestors( node, *root )
+        if root.empty?
+          raise IndexError, 'can not get parent for unrooted tree' if self.root.empty?
+          root = self.root
+        end
+        ancestor = {}
+        root.each do |r|
+          ancestor[ r ] = super( node, r )
+        end
+        ancestor
       end
 
     end #end class Tree
 
     class IntTree < Tree ; end
     class FloatTree < Tree ; end
+
+    class Network < AbstractTree
+
+      def initialize( id, label = nil )
+        super
+      end
+
+    end
+
+    class IntNetwork < Network; end
+    class FloatNetwork < Network; end
 
     class Trees
       include TaxaLinked
@@ -304,12 +514,52 @@ module Bio
         @otus = otus
       end
 
+      #Access child tree objects with a hash like notation
+      #given its id.
+      def []( id )
+        tree_set[ id ] or network_set[ id ]
+      end
+
+      #Iterate over child elements, i.e. all the
+      #'tree' and 'network' object.
+      def each
+        tree_set.each_value do |tree|
+          yield tree
+        end
+        network_set.each_value do |network|
+          yield network
+        end
+      end
+
+      #Add a 'tree' or a 'network'.
+      def <<( element )
+        #order of the when clause matters here
+        #as a network is a tree too.
+        case element
+        when Network
+          add_network element
+        when Tree
+          add_tree element
+        end
+      end
+      
+      #Returns a hash of 'tree' objects or
+      #an empty hash if none exists.
       def tree_set
         @tree_set ||= {}
       end
 
-      #Add a 'tree'.
-      def <<( tree )
+      #Returns a hash of 'network' objects or
+      #an empty hash if none exists.
+      def network_set
+        @network_set ||= {}
+      end
+
+      def add_network( netowrk )
+        network_set[ netowrk.id ] = netowrk
+      end
+
+      def add_tree( tree )
         tree_set[ tree.id ] = tree
       end
 
@@ -318,24 +568,175 @@ module Bio
         tree_set.values
       end
 
+      #Return an array of 'network' objects.
+      def networks
+        network_set.values
+      end
+
       #Iterate over each 'tree' object.
-      def each
-        trees.each do |tree|
+      def each_tree
+        tree_set.each_value do |tree|
           yield tree
         end
       end
-      alias each_tree each
 
-      #Access child tree objects with a hash like notation
-      #given its id.
-      def []( id )
-        tree_set[ id ]
+      #Iterate over each 'network' object.
+      def each_network
+        network_set.each_value do |network|
+          yield network
+        end
       end
 
+      #Find if a 'tree' with the given id exists
+      #or not.
       def has_tree?( id )
         tree_set.has_key? id
       end
+
+      #Find if a 'network' with the given id exists
+      #or not.
+      def has_network?( id )
+        network_set.has_key? id
+      end
+
+      def has?( id )
+        has_tree?( id ) or has_network?( id )
+      end
+      alias include? has?
+
+      def number_of_trees
+        tree_set.length
+      end
+
+      def number_of_networks
+        network_set.length
+      end
+
+      def number_of_graphs
+        number_of_trees + number_of_networks
+      end
+
+      def get_tree_by_id( id )
+        tree_set[ id ]
+      end
+
+      def get_network_by_id( id )
+        network_set[ id ]
+      end
+
     end #end class Trees
+
+    class Characters
+      include IDTagged
+      include TaxaLinked
+      attr_accessor :format, :matrix
+
+      def initialize( id, otus = nil, label = nil )
+        @id = id
+        @otus = otus
+        @label = label
+      end
+
+      def <<( element )
+        case element
+        when Format
+          add_format element
+        when Matrix
+          add_matrix element
+        end
+      end
+
+      def add_format( format )
+        self.format = format
+      end
+
+      def add_matrix( matrix )
+        self.matrix = matrix
+      end
+
+    end
+
+    class Format
+
+      def <<( element )
+        case element
+        when States
+          add_states element
+        when Char
+          add_char element
+        end
+      end
+
+      def states_set
+        @states_set ||= {}
+      end
+
+      def char_set
+        @char_set ||= {}
+      end
+
+      def states
+        states_set.values
+      end
+
+      def chars
+        char_set.values
+      end
+
+      def add_states( states )
+        states_set[ states.id ] = states
+      end
+
+      def add_char( char )
+        char_set[ char.id ] = char
+      end
+
+    end
+
+    class States
+      include IDTagged
+      
+      def initialize( id, label = nil )
+        @id = id
+        @label = label
+      end
+
+      def state_set
+        @state_set ||= {}
+      end
+
+      def states
+        state_set.values
+      end
+
+      def add_state( state )
+        state_set[ state.id ] = state
+      end
+
+    end
+
+    class State
+      include IDTagged
+      attr_accessor :symbol
+
+      def initialize( id, symbol, label = nil )
+        @id = id
+        @symbol = symbol
+        @label = label
+      end
+
+    end
+
+    class Char
+      include IDTagged
+      
+      def initialize( id )
+        @id = id
+      end
+    end
+
+    class Matrix
+    end
 
   end #end module NeXML
 
