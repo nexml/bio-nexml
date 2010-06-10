@@ -178,15 +178,13 @@ module Bio
       #When this function is called the cursor is at a 'trees' element.
       #Return - a 'trees' object.
       def parse_trees
-        #if the trees is taxa linked
-        if taxa = attribute( 'otus' )
-          otus = @nexml.otus_set[ taxa ]
-        end
+        otus_id = attribute( 'otus' )
+        otus = @nexml.get_otus_by_id( otus_id )
 
         id = attribute( 'id' )
         label = attribute( 'label' )
 
-        trees = NeXML::Trees.new( id, label, otus )
+        trees = NeXML::Trees.new( id, otus, label )
 
         #a 'trees' element *will* have child nodes.
         while next_node
@@ -213,7 +211,7 @@ module Bio
         label = attribute( 'label' )
 
         type = attribute( 'xsi:type' )[4..-1]
-        klass = NeXML.const_get type
+        klass = NeXML.const_get( type )
         tree = klass.new( id, label )
 
         #a 'tree' element *will* have child nodes.
@@ -299,7 +297,7 @@ module Bio
           otu = @nexml.get_otu_by_id otu_id
         end
 
-        node = NeXML::Node.new( id, label, otu, root )
+        node = NeXML::Node.new( id, otu, root, label )
 
         #according to the schema a 'node' may have no child element.
         return node if empty_element?
@@ -415,7 +413,7 @@ module Bio
         id = attribute( 'id' )
         label = attribute( 'label' )
 
-        states = Bio::NeXML::States.new id, label
+        states = Bio::NeXML::States.new( id, label )
 
         while next_node
           case local_name
@@ -432,8 +430,9 @@ module Bio
       def parse_state
         id = attribute( 'id' )
         symbol = attribute( 'symbol' )
+        label = attribute( 'label' )
 
-        state = Bio::NeXML::State.new id, symbol
+        state = Bio::NeXML::State.new( id, symbol, label )
 
         return state if empty_element?
 
@@ -449,8 +448,19 @@ module Bio
 
       def parse_char
         id = attribute( 'id' )
-        char = Bio::NeXML::Char.new id
-      end
+        label = attribute( 'label' )
+        char = Bio::NeXML::Char.new( id, label )
+
+        return char if empty_element?
+
+        while next_node
+          case local_name
+          when 'char'
+            break
+          end #end case
+        end #end while
+
+      end #end method parse_char
 
       def parse_matrix
         matrix = Bio::NeXML::Matrix.new
