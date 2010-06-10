@@ -291,7 +291,7 @@ module Bio
       include TaxonLinked
       attr_writer :root
 
-      def initialize( id, label = nil, otu = nil, root = false )
+      def initialize( id, otu = nil, root = false, label = nil )
         #use id for node's name
         super id
         @id = id
@@ -517,7 +517,7 @@ module Bio
       include TaxaLinked
       include Enumerable
 
-      def initialize( id, label = nil, otus = nil )
+      def initialize( id, otus, label = nil )
         @id = id
         @label = label
         @otus = otus
