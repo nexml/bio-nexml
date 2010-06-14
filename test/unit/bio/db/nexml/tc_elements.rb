@@ -44,7 +44,8 @@ module Bio
       def test_add_trees
         assert_send [@nexml.trees_set, :empty?]
 
-        trees = Bio::NeXML::Trees.new 'trees'
+        otus = Bio::NeXML::Otus.new 'otus'
+        trees = Bio::NeXML::Trees.new 'trees', otus
         @nexml.add_trees trees
         
         not_empty = !@nexml.trees_set.empty?
@@ -54,7 +55,8 @@ module Bio
       def test_append
         assert_send [@nexml.trees_set, :empty?]
 
-        trees = Bio::NeXML::Trees.new 'trees'
+        otus = Bio::NeXML::Otus.new 'otus'
+        trees = Bio::NeXML::Trees.new 'trees', otus
         @nexml << trees
         
         not_empty = !@nexml.trees_set.empty?
@@ -71,7 +73,8 @@ module Bio
       end
 
       def test_each_trees
-        trees = Bio::NeXML::Trees.new 'trees'
+        otus = Bio::NeXML::Otus.new 'otus'
+        trees = Bio::NeXML::Trees.new 'trees', otus
         @nexml.add_trees trees
 
         @nexml.each do |t|
@@ -81,7 +84,8 @@ module Bio
 
       def test_each
         tree = Bio::NeXML::IntTree.new 'tree'
-        trees = Bio::NeXML::Trees.new 'trees'
+        otus = Bio::NeXML::Otus.new 'otus'
+        trees = Bio::NeXML::Trees.new 'trees', otus
         trees << tree
         @nexml << trees
 
@@ -107,7 +111,8 @@ module Bio
       end
 
       def test_get_trees_by_id
-        trees = Bio::NeXML::Trees.new 'trees'
+        otus = Bio::NeXML::Otus.new 'otus'
+        trees = Bio::NeXML::Trees.new 'trees', otus
         @nexml.add_trees trees
 
         assert @nexml.get_trees_by_id 'trees'
@@ -115,7 +120,8 @@ module Bio
 
       def test_get_tree_by_id
         tree = Bio::NeXML::IntTree.new 'tree'
-        trees = Bio::NeXML::Trees.new 'trees'
+        otus = Bio::NeXML::Otus.new 'otus'
+        trees = Bio::NeXML::Trees.new 'trees', otus
         trees << tree
         @nexml << trees
 
@@ -309,7 +315,8 @@ module Bio
     class TestTrees < Test::Unit::TestCase
 
       def setup
-        @trees = Bio::NeXML::Trees.new 'trees1'
+        otus = Bio::NeXML::Otus.new 'otus'
+        @trees = Bio::NeXML::Trees.new 'trees', otus
       end
 
       def teardown
@@ -517,6 +524,242 @@ module Bio
 
       def test_target_cache
         assert_instance_of Array, @tree.target_cache
+      end
+
+    end
+
+    class TestCharacters < Test::Unit::TestCase
+      
+      def setup
+        otus = Bio::NeXML::Otus.new 'otus'
+        @characters = Bio::NeXML::Characters.new 'characters', otus
+      end
+
+      def test_is_idtagged
+        @otu.class.ancestors.include? Bio::NeXML::IDTagged
+      end
+
+      def test_is_labelled
+        @otu.class.ancestors.include? Bio::NeXML::Labelled
+      end
+
+      def test_format
+        assert_nil @characters.format
+
+        format = Bio::NeXML::Format.new
+        @characters.format = format
+
+        assert_equal @characters.format, format
+      end
+
+      def test_matrix
+        assert_nil @characters.matrix
+
+        matrix = Bio::NeXML::Matrix.new
+        @characters.matrix = matrix
+
+        assert_not_nil @characters.matrix
+        assert_equal @characters.matrix, matrix
+      end
+
+      def test_append
+        format = Bio::NeXML::Format.new
+        matrix = Bio::NeXML::Matrix.new
+
+        @characters << format
+        @characters << matrix
+
+        assert_equal @characters.format, format
+        assert_equal @characters.matrix, matrix
+      end
+    end
+
+    class TestDnaSeqs < Test::Unit::TestCase
+
+      def setup
+        otus = Bio::NeXML::Otus.new 'otus'
+        @dnaseqs = Bio::NeXML::DnaSeqs.new 'ds1', otus
+      end
+
+      def test_format=
+        format = Bio::NeXML::DnaFormat.new
+        assert_nothing_raised( InvalidFormatExcetpion ) {@dnaseqs.format = format}
+
+        format = Bio::NeXML::Format.new
+        assert_raise( InvalidFormatExcetpion ) {@dnaseqs.format = format }
+      end
+
+    end #end TestDnaSeqs
+
+    class TestRnaSeqs < Test::Unit::TestCase
+
+      def setup
+        otus = Bio::NeXML::Otus.new 'otus'
+        @rnaseqs = Bio::NeXML::RnaSeqs.new 'rs1', otus
+      end
+
+      def test_format=
+        format = Bio::NeXML::RnaFormat.new
+        assert_nothing_raised( InvalidFormatExcetpion ) {@rnaseqs.format = format}
+
+        format = Bio::NeXML::Format.new
+        assert_raise( InvalidFormatExcetpion ) {@rnaseqs.format = format }
+      end
+
+    end #end TestRnaSeqs
+
+    class TestRestrictionSeqs < Test::Unit::TestCase
+
+      def setup
+        otus = Bio::NeXML::Otus.new 'otus'
+        @restrictionseqs = Bio::NeXML::RestrictionSeqs.new 'rs1', otus
+      end
+
+      def test_format=
+        format = Bio::NeXML::RestrictionFormat.new
+        assert_nothing_raised( InvalidFormatExcetpion ) {@restrictionseqs.format = format}
+
+        format = Bio::NeXML::Format.new
+        assert_raise( InvalidFormatExcetpion ) {@restrictionseqs.format = format }
+      end
+
+    end #end TestRestrictionSeqs
+
+    class TestProteinSeqs < Test::Unit::TestCase
+
+      def setup
+        otus = Bio::NeXML::Otus.new 'otus'
+        @proteinseqs = Bio::NeXML::ProteinSeqs.new 'ps1', otus
+      end
+
+      def test_format=
+        format = Bio::NeXML::ProteinFormat.new
+        assert_nothing_raised( InvalidFormatExcetpion ) {@proteinseqs.format = format}
+
+        format = Bio::NeXML::Format.new
+        assert_raise( InvalidFormatExcetpion ) {@proteinseqs.format = format }
+      end
+
+    end #end TestProteinSeqs
+
+    class TestStandardSeqs < Test::Unit::TestCase
+
+      def setup
+        otus = Bio::NeXML::Otus.new 'otus'
+        @standardseqs = Bio::NeXML::StandardSeqs.new 'ss1', otus
+      end
+
+      def test_format=
+        format = Bio::NeXML::StandardFormat.new
+        assert_nothing_raised( InvalidFormatExcetpion ) {@standardseqs.format = format }
+
+        format = Bio::NeXML::Format.new
+        assert_raise( InvalidFormatExcetpion ) {@standardseqs.format = format}
+      end
+
+    end #end TestStandardSeqs
+
+    class TestContinuousSeqs < Test::Unit::TestCase
+
+      def setup
+        otus = Bio::NeXML::Otus.new 'otus'
+        @continuousseqs = Bio::NeXML::ContinuousSeqs.new 'cs1', otus
+      end
+
+      def test_format=
+        format = Bio::NeXML::ContinuousFormat.new
+        assert_nothing_raised( InvalidFormatExcetpion ) {@continuousseqs.format = format}
+
+        format = Bio::NeXML::Format.new
+        assert_raise( InvalidFormatExcetpion ) {@continuousseqs.format = format}
+      end
+
+    end #end class TestContinuousSeqs
+
+    class TestProteinFormat < Test::Unit::TestCase
+
+      def setup
+        @pf = Bio::NeXML::ProteinFormat.new
+      end
+
+      def test_add_states=
+        ps = Bio::NeXML::ProteinStates.new 'ps1'
+        assert_nothing_raised( InvalidStatesException ){ @pf << ps }
+
+        s = Bio::NeXML::States.new 's1'
+        assert_raise( InvalidFormatExcetpion ) { @pf << s }
+      end
+
+    end
+
+    #class TestContinuousFormat < Test::Unit::TestCase
+      
+      #def setup
+        #@cf = Bio::NeXML::ContinuousFormat.new
+      #end
+
+    #end
+
+    class TestDnaFormat < Test::Unit::TestCase
+
+      def setup
+        @df = Bio::NeXML::DnaFormat.new
+      end
+
+      def test_add_states=
+        ds = Bio::NeXML::DnaStates.new 'ds1'
+        assert_nothing_raised( InvalidStatesException ){ @df << ds }
+
+        s = Bio::NeXML::States.new 's1'
+        assert_raise( InvalidFormatExcetpion ) { @df << s }
+      end
+
+    end
+
+    class TestRnaFormat < Test::Unit::TestCase
+
+      def setup
+        @rf = Bio::NeXML::RnaFormat.new
+      end
+
+      def test_add_states=
+        rs = Bio::NeXML::RnaStates.new 'rs1'
+        assert_nothing_raised( InvalidStatesException ){ @rf << rs }
+
+        s = Bio::NeXML::States.new 's1'
+        assert_raise( InvalidFormatExcetpion ) { @rf << s }
+      end
+
+    end
+
+    class TestRestrictionFormat < Test::Unit::TestCase
+
+      def setup
+        @ref = Bio::NeXML::RestrictionFormat.new
+      end
+
+      def test_add_states=
+        rs = Bio::NeXML::RestrictionStates.new 'rs1'
+        assert_nothing_raised( InvalidStatesException ){ @ref << rs }
+
+        s = Bio::NeXML::States.new 's1'
+        assert_raise( InvalidFormatExcetpion ) { @ref << s }
+      end
+
+    end
+
+    class TestStandardFormat < Test::Unit::TestCase
+
+      def setup
+        @sf = Bio::NeXML::StandardFormat.new
+      end
+
+      def test_add_states=
+        ss = Bio::NeXML::StandardStates.new 'ss1'
+        assert_nothing_raised( InvalidStatesException ){ @sf << ss }
+
+        s = Bio::NeXML::States.new 's1'
+        assert_raise( InvalidFormatExcetpion ) { @sf << s }
       end
 
     end
