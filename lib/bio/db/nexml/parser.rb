@@ -84,13 +84,17 @@ module Bio
         @reader.local_name
       end
 
+      def value
+        @reader.value
+      end
+
       def attribute( name )
         @reader[ name ]
       end
 
       def next_node
         while @reader.read
-          return true if element_start? or element_end?
+          return true if element_start? or element_end? or text_node?
         end
         false
       end
@@ -119,6 +123,10 @@ module Bio
       #Check if 'name'( without prefix ) is the end of an element or not.
       def element_end?
         @reader.node_type == XML::Reader::TYPE_END_ELEMENT
+      end
+
+      def text_node?
+        @reader.node_type == XML::Reader::TYPE_TEXT
       end
 
       def empty_element?
@@ -365,23 +373,27 @@ module Bio
       end
 
       def parse_characters
-        #if the characters is taxa linked
-        if taxa = attribute( 'otus' )
-          otus = @nexml.otus_set[ taxa ]
-        end
+        #get the taxon linkage
+        otus_id = attribute( 'otus' )
+        otus = @nexml.get_otus_by_id( otus_id )
 
+        #other attributes
         id = attribute( 'id' )
         label = attribute( 'label' )
 
-        characters = Bio::NeXML::Characters.new id, otus, label
+        #determine the type
+        type = attribute( 'xsi:type' )[ 4..-1 ]
+        klass = NeXML.const_get( type )
+
+        characters = klass.new( id, otus, label )
 
         #according to the schema a 'characters' will have a child
         while next_node
           case local_name
           when 'format'
-            characters << parse_format
+            characters << parse_format( type )
           when 'matrix'
-            characters << parse_matrix
+            characters << parse_matrix( type )
           when 'characters'
             break
           end #end case
@@ -390,17 +402,19 @@ module Bio
         characters
       end #end parse_characters
 
-      def parse_format
-        format = Bio::NeXML::Format.new
+      def parse_format( type )
+        type = type.sub(/Seqs|Cells/, "Format")
+        klass = NeXML.const_get type
+        format = klass.new
 
         #according to the schema a concrete characters type
         #will have a child element.
         while next_node
           case local_name
           when 'states'
-            format << parse_states
+            format << parse_states( type )
           when 'char'
-            format << parse_char
+            format << parse_char( type, format.states_set )
           when 'format'
             break
           end #end case
@@ -409,16 +423,18 @@ module Bio
         format
       end #end parse_format
 
-      def parse_states
+      def parse_states( type )
         id = attribute( 'id' )
         label = attribute( 'label' )
 
-        states = Bio::NeXML::States.new( id, label )
+        type = type.sub(/Format/, "States")
+        klass = NeXML.const_get type
+        states = klass.new( id, label )
 
         while next_node
           case local_name
           when 'state'
-            states.add_state parse_state
+            states.add_state parse_state( type )
           when 'states'
             break
           end
@@ -427,12 +443,14 @@ module Bio
         states
       end
 
-      def parse_state
+      def parse_state( type )
         id = attribute( 'id' )
         symbol = attribute( 'symbol' )
         label = attribute( 'label' )
 
-        state = Bio::NeXML::State.new( id, symbol, label )
+        type = type[ 0..-2 ]
+        klass = NeXML.const_get type
+        state = klass.new( id, symbol, label )
 
         return state if empty_element?
 
@@ -446,10 +464,17 @@ module Bio
         state
       end
 
-      def parse_char
+      def parse_char( type, states )
         id = attribute( 'id' )
         label = attribute( 'label' )
-        char = Bio::NeXML::Char.new( id, label )
+        states_id = attribute( 'states' )
+
+        type = type.sub( /Format/, "Char" )
+        klass = NeXML.const_get( type )
+        char = klass.new( id, label )
+
+        states = states[ states_id ]
+        char.states = states
 
         return char if empty_element?
 
@@ -460,12 +485,98 @@ module Bio
           end #end case
         end #end while
 
+        char
       end #end method parse_char
 
-      def parse_matrix
-        matrix = Bio::NeXML::Matrix.new
-      end
+      def parse_matrix( type )
+        type = type[ 0..-2 ]
+        type << "Matrix"
+        klass = NeXML.const_get type
+
+        matrix = klass.new
+
+        while next_node
+          case local_name
+          when 'row'
+            matrix << parse_row( type )
+          when 'matrix'
+            break
+          end
+        end
+
+        matrix
+      end #end method parse_matrix
       
+      def parse_row( type )
+        id = attribute( 'id' )
+        label = attribute( 'label' )
+
+        type = type.sub( /Matrix/, "Row" )
+        klass = NeXML.const_get type
+
+        row = klass.new( id, label )
+
+        while next_node
+          case local_name
+          when 'seq'
+            row << parse_seq( type )
+          when 'cell'
+            row << parse_cell( type )
+          when 'row'
+            break
+          end
+        end
+
+        row
+      end #end class parse_row
+
+      def parse_seq( type )
+        type = type[ 0..-4 ]
+        klass = NeXML.const_get type
+
+        seq = klass.new
+
+        return seq if empty_element?
+
+        while next_node
+          case local_name
+          when '#text'
+            seq.value = value
+          when 'seq'
+            break
+          end
+        end
+
+        seq
+      end
+
+      def parse_cell( type )
+        type = type[ 0..-4 ]
+        klass = NeXML.const_get type
+
+        cell = klass.new
+
+        char_id = attribute( 'char' )
+        state_id = attribute( 'state' )
+
+        char = @nexml.get_char_by_id( char_id )
+        state = @nexml.get_state_by_id( state_id )
+
+        cell.state = state
+        cell.char = char
+
+        return cell if empty_element?
+
+        while next_node
+          case local_name
+          when 'cell'
+            break
+          end
+        end
+
+        cell
+      end
+
     end #end Parser class
 
   end #end NeXML module
