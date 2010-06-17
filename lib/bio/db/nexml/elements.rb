@@ -1196,6 +1196,7 @@ module Bio
       end
 
       # Find a <em>states</em> element by id.
+      # ---
       # *Arguments*:
       # * id( required ) - id of the <em>states</em> element to be found.
       # *Returns*: the <em>states</em> element if found, nil otherwise.
@@ -1204,6 +1205,7 @@ module Bio
       end
 
       # Find a <em>char</em> element by id.
+      # ---
       # *Arguments*:
       # * id( required ) - id of the <em>char</em> element to be found.
       # *Returns*: the <em>char</em> element if found, nil otherwise.
@@ -1211,29 +1213,53 @@ module Bio
         char_set[ id ]
       end
 
+      # Access <em>states</em> and <em>char</em> using the hash notation.
+      # ---
+      # *Arguments*:
+      # * id( required ) - id of the <em>states</em> or the <em>char</em> element to be accessed.
+      # *Returns*: the <em>states</em> or the <em>char</em> element if found, nil otherwise.
       def []( id )
         char_set[ id ] or states_set[ id ]
       end
 
+      # Determine if a <em>states</em> element belongs to this object.
+      # ---
+      # *Arguments*:
+      # * id( required ) - id of the <em>states</em> element to be checked.
+      # *Returns*: true if the <em>states</em> element is found, false otherwise.
       def has_states?( id )
         states_set.has_key? id
       end
 
+      # Determine if a <em>char</em> element belongs to this object.
+      # ---
+      # *Arguments*:
+      # * id( required ) - id of the <em>char</em> element to be checked.
+      # *Returns*: true if the <em>char</em> element is found, false otherwise.
       def has_char?( id )
         char_set.has_key? id
       end
 
+      # Determine if a <em>states</em> or a <em>char</em> element belongs to this object.
+      # ---
+      # *Arguments*:
+      # * id( required ) - id of the <em>states</em> or the <em>char</em> element to be checked.
+      # *Returns*: true if the <em>states</em> or the <em>char</em> element is found, false otherwise.
       def has?( id )
         has_states?( id ) or has_char?( id )
       end
       alias include? has?
 
+      # Call the block for each <em>states</em> element in self passing that object as
+      # a parameter
       def each_states
         states_set.each_value do |states|
           yield states
         end
       end
 
+      # Call the block for each <em>char</em> element in self passing that object as
+      # a parameter
       def each_char
         char_set.each_value do |char|
           yield char
@@ -1242,6 +1268,8 @@ module Bio
 
     end #end class Format
 
+    # = DESCRIPTION
+    # Concrete <em>format</em> implementation of <em>AAFormat</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAFormat] type.
     class ProteinFormat < Format
       
       def initialize( states = nil, char = nil )
@@ -1249,24 +1277,44 @@ module Bio
         self << char
       end
 
+      # Add a single <em>states</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::ProteinStates object.
+      # *Raises*:
+      # * InvalidStatesException - if states is not of the correct type.
       def add_states( states )
         raise InvalidStatesException, "ProteinStates expected" unless states.instance_of? ProteinStates
         states_set[ states.id ] = states
       end
 
+      # Add a single <em>char</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * char( required ) - a Bio::NeXML::ProteinChar object.
+      # *Raises*:
+      # * InvalidCharException - if states is not of the correct type.
       def add_char( char )
-        raise InvalidCharException, "ProteinCharexpected" unless states.instance_of? ProteinChar
+        raise InvalidCharException, "ProteinChar expected" unless states.instance_of? ProteinChar
         char_set[ char.id ] = char
       end
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>format</em> implementation of <em>ContinuousFormat</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#ContinuousFormat] type.
     class ContinuousFormat < Format
 
       def initialize( char = nil )
         self << char
       end
 
+      # Add a single <em>char</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * char( required ) - a Bio::NeXML::ContinuousChar object.
+      # *Raises*:
+      # * InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "ContinuousChar expected" unless char.instance_of? ContinuousChar
         char_set[ char.id ] = char
@@ -1274,6 +1322,8 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>format</em> implementation of <em>DnaFormat</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#DNAFormat] type.
     class DnaFormat < Format
 
       def initialize( states = nil, char = nil )
@@ -1281,11 +1331,23 @@ module Bio
         self << char
       end
 
+      # Add a single <em>states</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::DnaStates object.
+      # *Raises*:
+      # * InvalidStatesException - if states is not of the correct type.
       def add_states( states )
         raise InvalidStatesException, "DnaStates expected" unless states.instance_of? DnaStates
         states_set[ states.id ] = states
       end
 
+      # Add a single <em>char</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * char( required ) - a Bio::NeXML::DnaChar object.
+      # *Raises*:
+      # * InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "DnaChar expected" unless char.instance_of? DnaChar
         char_set[ char.id ] = char
@@ -1293,6 +1355,8 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>format</em> implementation of <em>RnaFormat</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#RNAFormat] type.
     class RnaFormat < Format
 
       def initialize( states = nil, char = nil )
@@ -1300,11 +1364,23 @@ module Bio
         self << char
       end
       
+      # Add a single <em>states</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::RnaStates object.
+      # *Raises*:
+      # * InvalidStatesException - if states is not of the correct type.
       def add_states( states )
         raise InvalidStatesException, "RnaStates expected" unless states.instance_of? RnaStates
         states_set[ states.id ] = states
       end
 
+      # Add a single <em>char</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * char( required ) - a Bio::NeXML::RnaChar object.
+      # *Raises*:
+      # * InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "RnaChar expected" unless char.instance_of? RnaChar
         char_set[ char.id ] = char
@@ -1312,6 +1388,8 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>format</em> implementation of <em>RestrictionFormat</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#RestrictionFormat] type.
     class RestrictionFormat < Format
 
       def initialize( states = nil, char = nil )
@@ -1319,11 +1397,23 @@ module Bio
         self << char
       end
 
+      # Add a single <em>states</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::RestrictionStates object.
+      # *Raises*:
+      # * InvalidStatesException - if states is not of the correct type.
       def add_states( states )
         raise InvalidStatesException, "RestrictionStates expected" unless states.instance_of? RestrictionStates
         states_set[ states.id ] = states
       end
 
+      # Add a single <em>char</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * char( required ) - a Bio::NeXML::RestrictionChar object.
+      # *Raises*:
+      # * InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "RestrictionChar expected" unless char.instance_of? RestrictionChar
         char_set[ char.id ] = char
@@ -1331,6 +1421,8 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>format</em> implementation of <em>StandardFormat</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#StandardFormat] type.
     class StandardFormat < Format
 
       def initialize( states = nil, char = nil )
@@ -1338,11 +1430,23 @@ module Bio
         self << char
       end
 
+      # Add a single <em>states</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::StandardStates object.
+      # *Raises*:
+      # * InvalidStatesException - if states is not of the correct type.
       def add_states( states )
         raise InvalidStatesException, "StandardStates expected" unless states.instance_of? StandardStates
         states_set[ states.id ] = states
       end
 
+      # Add a single <em>char</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * char( required ) - a Bio::NeXML::StandardChar object.
+      # *Raises*:
+      # * InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "StandardChar expected" unless char.instance_of? StandardChar
         char_set[ char.id ] = char
