@@ -1129,7 +1129,8 @@ module Bio
 
     # = DESCRIPTION
     # Abstract <em>format</em> implementation of <em>AbstractFormat</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractFormat] type.
-    # This class defines several convinence methods for its concrete subtypes. A concrete subtype must define <tt>add_states</tt> and <tt>add_char</tt> method.
+    # A concrete subtype must define <tt>add_states</tt> and <tt>add_char</tt> method to add a single <em>states</em> or <em>char</em> element.
+    # This class defines several convinence methods for its concrete subtypes. 
     class Format
 
       def <<( elements )
@@ -1142,22 +1143,37 @@ module Bio
         end
       end
 
+      # Provide a hash storage for Bio::NeXML::States object.
+      #---
+      # *Returns*: a hash of Bio::NeXML::States objects or an empty hash
+      #if none exist.
       def states_set
         @states_set ||= {}
       end
 
+      # Provide a hash storage for Bio::NeXML::Char object.
+      #---
+      # *Returns*: a hash of Bio::NeXML::Char objects or an empty hash
+      #if none exist.
       def char_set
         @char_set ||= {}
       end
 
+      # *Returns*: an array of Bio::NeXML::States objects.
       def states
         states_set.values
       end
 
+      # *Returns*: an array of Bio::NeXML::Char objects.
       def chars
         char_set.values
       end
 
+      # Abstract method. Add <em>states</em> elements to the object.
+      # It calls <tt>add_states</tt> method of its concrete subtype to add each <em>states</em> element.
+      # ---
+      # *Arguments*:
+      # * a comman seperated list of Bio::NeXML::States objects.
       def states=( states )
         if states.instance_of?( Array )
           states.each { |ss| add_states( ss ) }
@@ -1166,6 +1182,11 @@ module Bio
         end
       end
 
+      # Abstract method. Add <em>char</em> elements to the object.
+      # It calls <tt>add_char</tt> method of its concrete subtype to add each <em>char</em> element.
+      # ---
+      # *Arguments*:
+      # * a comman seperated list of Bio::NeXML::Char objects.
       def chars=( chars )
         if chars.instance_of? Array
           chars.each { |char| add_char( char ) }
@@ -1174,10 +1195,18 @@ module Bio
         end
       end
 
+      # Find a <em>states</em> element by id.
+      # *Arguments*:
+      # * id( required ) - id of the <em>states</em> element to be found.
+      # *Returns*: the <em>states</em> element if found, nil otherwise.
       def get_states_by_id( id )
         states_set[ id ]
       end
 
+      # Find a <em>char</em> element by id.
+      # *Arguments*:
+      # * id( required ) - id of the <em>char</em> element to be found.
+      # *Returns*: the <em>char</em> element if found, nil otherwise.
       def get_char_by_id( id )
         char_set[ id ]
       end
