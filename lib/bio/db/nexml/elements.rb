@@ -1,6 +1,15 @@
 module Bio
   module NeXML
 
+    #exception classes
+    class InvalidRowException < Exception; end
+    class InvalidMatrixException < Exception; end
+    class InvalidCharException < Exception; end
+    class InvalidStateException < Exception; end
+    class InvalidStatesException < Exception; end
+    class InvalidFormatExcetpion < Exception; end
+    class InvalidFormatExcetpion < Exception; end
+
     module Base
       def xml_base
         @xml_base
@@ -52,6 +61,8 @@ module Bio
         @generator = generator
       end
 
+      #Append a Otus, Trees, or Characters object to any
+      #Nexml object.
       def <<( element )
         case element
         when Otus
@@ -75,6 +86,8 @@ module Bio
         @trees_set ||= {}
       end
 
+      #Return a hash of 'characters' objects or an empty hash
+      #if no 'characters' object has been created yet.
       def characters_set
         @characters_set ||= {}
       end
@@ -89,6 +102,7 @@ module Bio
         trees_set[ trees.id ] = trees
       end
 
+      #Add a 'characters' object.
       def add_characters( characters )
         characters_set[ characters.id ] = characters
       end
@@ -107,6 +121,7 @@ module Bio
         end
       end
 
+      #Iterate over each 'characters' object.
       def each_characters
         characters_set.each_value do |char|
           yield char
@@ -150,10 +165,12 @@ module Bio
         nil
       end
 
+      #Return an 'characters' object with the given id or nil.
       def get_characters_by_id( id )
         characters_set[ id ]
       end
 
+      #Return an 'states' object with the given id or nil.
       def get_states_by_id( id )
         characters_set.each_value do |characters|
           format = characters.format
@@ -165,7 +182,7 @@ module Bio
         nil
       end
 
-
+      #Return an 'char' object with the given id or nil.
       def get_char_by_id( id )
         characters_set.each_value do |characters|
           format = characters.format
@@ -175,6 +192,7 @@ module Bio
         nil
       end
 
+      #Return an 'state' object with the given id or nil.
       def get_state_by_id( id )
         characters_set.each_value do |characters|
           format = characters.format
@@ -196,6 +214,7 @@ module Bio
         trees_set.values
       end
 
+      #Return an array of 'characters' objects.
       def characters
         characters_set.values
       end
@@ -204,53 +223,25 @@ module Bio
 
     module Labelled
       include Annotated
-
-      def label
-        @label
-      end
-      
-      def label=( label )
-        @label = label
-      end
+      attr_accessor :label
 
     end #end module Labelled
 
     module IDTagged
       include Labelled
-
-      def id
-        @id
-      end
-      
-      def id=( id )
-        @id = id
-      end
+      attr_accessor :id
 
     end #end module IDTagged
 
     module TaxaLinked
       include IDTagged
-
-      def otus
-        @otus
-      end
-
-      def otus=( otus )
-        @otus = otus
-      end
+      attr_accessor :otus
 
     end #end module TaxaLinked
 
     module TaxonLinked
       include IDTagged
-
-      def otu
-        @otu
-      end
-
-      def otu=( otu )
-        @otu = otu
-      end
+      attr_accessor :otu
 
     end #end module TaxonLinked
 
@@ -667,8 +658,6 @@ module Bio
 
     end #end class Trees
 
-    class InvalidFormatExcetpion < Exception; end
-
     class Characters
       include IDTagged
       include TaxaLinked
@@ -1036,12 +1025,12 @@ module Bio
       end
 
       def add_states( states )
-        raise InvalidStatesException, "ProteinStates expected" unless states.instance_of? Bio::NeXML::ProteinStates
+        raise InvalidStatesException, "ProteinStates expected" unless states.instance_of? ProteinStates
         super
       end
 
       def add_char( char )
-        raise InvalidCharException, "ProteinCharexpected" unless states.instance_of? Bio::NeXML::ProteinChar
+        raise InvalidCharException, "ProteinCharexpected" unless states.instance_of? ProteinChar
         super
       end
 
@@ -1063,12 +1052,12 @@ module Bio
       end
 
       def add_states( states )
-        raise InvalidStatesException, "DnaStates expected" unless states.instance_of? Bio::NeXML::DnaStates
+        raise InvalidStatesException, "DnaStates expected" unless states.instance_of? DnaStates
         super
       end
 
       def add_char( states )
-        raise InvalidCharException, "DnaChar expected" unless states.instance_of? Bio::NeXML::DnaChar
+        raise InvalidCharException, "DnaChar expected" unless states.instance_of? DnaChar
         super
       end
 
@@ -1082,12 +1071,12 @@ module Bio
       end
       
       def add_states( states )
-        raise InvalidStatesException, "RnaStates expected" unless states.instance_of? Bio::NeXML::RnaStates
+        raise InvalidStatesException, "RnaStates expected" unless states.instance_of? RnaStates
         super
       end
 
       def add_char( states )
-        raise InvalidCharException, "RnaChar expected" unless states.instance_of? Bio::NeXML::RnaChar
+        raise InvalidCharException, "RnaChar expected" unless states.instance_of? RnaChar
         super
       end
 
@@ -1101,12 +1090,12 @@ module Bio
       end
 
       def add_states( states )
-        raise InvalidStatesException, "RestrictionStates expected" unless states.instance_of? Bio::NeXML::RestrictionStates
+        raise InvalidStatesException, "RestrictionStates expected" unless states.instance_of? RestrictionStates
         super
       end
 
       def add_char( states )
-        raise InvalidCharException, "RestrictionChar expected" unless states.instance_of? Bio::NeXML::RestrictionChar
+        raise InvalidCharException, "RestrictionChar expected" unless states.instance_of? RestrictionChar
         super
       end
 
@@ -1120,18 +1109,16 @@ module Bio
       end
 
       def add_states( states )
-        raise InvalidStatesException, "StandardStates expected" unless states.instance_of? Bio::NeXML::StandardStates
+        raise InvalidStatesException, "StandardStates expected" unless states.instance_of? StandardStates
         super
       end
 
       def add_char( states )
-        raise InvalidCharException, "StandardChar expected" unless states.instance_of? Bio::NeXML::StandardChar
+        raise InvalidCharException, "StandardChar expected" unless states.instance_of? StandardChar
         super
       end
 
     end
-
-    class InvalidStatesException < Exception; end
 
     class States
       include IDTagged
@@ -1240,8 +1227,6 @@ module Bio
       
     end #end class StandardStates
 
-    class InvalidStateException < Exception; end
-
     class State
       include IDTagged
       attr_accessor :symbol
@@ -1293,8 +1278,6 @@ module Bio
       end
 
     end
-
-    class InvalidCharException < Exception; end
 
     class Char
       include IDTagged
@@ -1355,8 +1338,6 @@ module Bio
       end
 
     end
-
-    class InvalidMatrixException < Exception; end
 
     class Matrix
 
@@ -1510,8 +1491,6 @@ module Bio
       end
 
     end
-
-    class InvalidRowException < Exception; end
 
     class Row
       include IDTagged
