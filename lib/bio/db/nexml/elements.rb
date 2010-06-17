@@ -663,7 +663,7 @@ module Bio
     end #end class Trees
 
     # = DESCRIPTION
-    # Abstract class. Represents an abstract <em>characters</em> block (<em>AbstractBlock</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractBlock] ).
+    # Abstract <em>characters</em> implementation of <em>AbstractBlock</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractBlock] type.
     # A concrete subclass must define a <tt>format=</tt> method.
     class Characters
 
@@ -688,9 +688,8 @@ module Bio
     end #end class Characters
 
     # = DESCRIPTION
-    # Abstract class. Represents an abstract <em>characters</em> block that take raw
-    # character sequences ( <em>AbstractSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractSeqs] ).
-    # A concrete subclass must define a <tt>matrix=</tt> method.
+    # Abstract <em>characters</em> implementation of <em>AbstractSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractSeqs] type.
+    # A concrete subclass must define a <tt>format=</tt> and <tt>matrix=</tt> method.
     class Seqs < Characters
 
       attr_reader :matrix
@@ -718,9 +717,8 @@ module Bio
     end #end class Seqs
 
     # = DESCRIPTION
-    # Abstract class. Represents an abstract <em>characters</em> block that take granular
-    # character observations ( <em>AbstractCells</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractCells] ).
-    # A concrete subclass must define a <tt>method=</tt> method.
+    # Abstract <em>characters</em> implementation of <em>AbstractCells</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractCells] type.
+    # A concrete subclass must define a <tt>format=</tt> and <tt>matrix=</tt> method.
     class Cells < Characters
 
       def initialize( id, otus, label = nil )
@@ -746,8 +744,7 @@ module Bio
     end #end class Cells
 
     # = DESCRIPTION
-    # Bio::NeXML::DnaSeqs objects are a concrete NeXML 'characters' block
-    # that take raw dna sequence ( DnaSeqs[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DnaSeqs] ).
+    # Concrete <em>characters</em> implementation of ( <em>DnaSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DnaSeqs] ) type.
     class DnaSeqs < Seqs
 
       def initialize( id, otus, label = nil )
@@ -755,6 +752,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::DnaFormat object.
       # *Raises*
@@ -764,6 +762,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::DnaSeqMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "DnaSeqMatrix expected." unless matrix.instance_of? DnaSeqMatrix
         @matrix = matrix
@@ -772,8 +776,7 @@ module Bio
     end #end class DnaSeqs
 
     # = DESCRIPTION
-    # Bio::NeXML::RnaSeqs objects are a concrete NeXML 'characters' block
-    # that take raw rna sequence ( RnaSeqs[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RnaSeqs] ).
+    # Concrete <em>characters</em> implementation of ( <em>RnaSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RnaSeqs] ) type.
     class RnaSeqs < Seqs
 
       def initialize( id, otus, label = nil )
@@ -781,6 +784,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::RnaFormat object.
       # *Raises*
@@ -790,6 +794,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::RnaSeqMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "RnaSeqMatrix expected." unless matrix.instance_of? RnaSeqMatrix
         @matrix = matrix
@@ -797,9 +807,8 @@ module Bio
 
     end #end class RnaSeqs
 
-      # = DESCRIPTION
-      # Bio::NeXML::RestrictionSeqs objects are a concrete NeXML 'characters' block
-      # that take raw restriction sequence ( RestrictionSeqs[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionSeqs] ).
+    # = DESCRIPTION
+    # Concrete <em>characters</em> implementation of ( <em>RestrictionSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionSeqs] ) type.
     class RestrictionSeqs < Seqs
 
       def initialize( id, otus, label = nil )
@@ -807,6 +816,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::RestrictionFormat object.
       # *Raises*
@@ -816,6 +826,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::RestrictionSeqMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "RestrictionSeqMatrix expected." unless matrix.instance_of? RestrictionSeqMatrix
         @matrix = matrix
@@ -824,8 +840,7 @@ module Bio
     end #end class RestrictionSeqs
 
     # = DESCRIPTION
-    # Bio::NeXML::ProteinSeqs objects are a concrete NeXML 'characters' block
-    # that take raw protein sequence ( ProteinSeqs[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#ProteinSeqs] ).
+    # Concrete <em>characters</em> implementation of ( <em>ProteinSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#ProteinSeqs] ) type.
     class ProteinSeqs < Seqs
 
       def initialize( id, otus, label = nil )
@@ -833,6 +848,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::ProteinFormat object.
       # *Raises*
@@ -842,6 +858,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::ProteinSeqMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "ProteinSeqMatrix expected." unless matrix.instance_of? ProteinSeqMatrix
         @matrix = matrix
@@ -850,8 +872,7 @@ module Bio
     end #end class ProteinSeqs
 
     # = DESCRIPTION
-    # Bio::NeXML::StandardSeqs objects are a concrete NeXML 'characters' block
-    # that take raw standard sequence ( StandardSeqs[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardSeqs] ).
+    # Concrete <em>characters</em> implementation of ( <em>StandardSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardSeqs] ) type.
     class StandardSeqs < Seqs
 
       def initialize( id, otus, label = nil )
@@ -859,6 +880,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::StandardFormat object.
       # *Raises*
@@ -868,6 +890,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::StandardSeqMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "StandardSeqMatrix expected." unless matrix.instance_of? StandardSeqMatrix
         @matrix = matrix
@@ -876,8 +904,7 @@ module Bio
     end #end class StandardSeqs
 
     # = DESCRIPTION
-    # Bio::NeXML::ContinuousSeqs objects are a concrete NeXML 'characters' block
-    # that take raw continuous sequence ( ContinuousSeqs[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousSeqs] ).
+    # Concrete <em>characters</em> implementation of ( <em>ContinuousSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousSeqs] ) type.
     class ContinuousSeqs < Seqs
 
       def initialize( id, otus, label = nil )
@@ -885,6 +912,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::ContinuousFormat object.
       # *Raises*
@@ -894,6 +922,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::ContinuousSeqMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "ContinuousSeqMatrix expected." unless matrix.instance_of? ContinuousSeqMatrix
         @matrix = matrix
@@ -902,8 +936,7 @@ module Bio
     end #end class ContinuousSeqs
 
     # = DESCRIPTION
-    # Bio::NeXML::DnaCells objects are a concrete NeXML 'characters' block
-    # that take granular dna character observations ( DnaCells[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DnaCells] ).
+    # Concrete <em>characters</em> implementation of ( <em>DnaCells</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DnaCells] ) type.
     class DnaCells < Cells
 
       def initialize( id, otus, label = nil )
@@ -911,6 +944,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::DnaFormat object.
       # *Raises*
@@ -920,6 +954,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::DnaCellMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "DnaCellMatrix expected." unless matrix.instance_of? DnaCellMatrix
         @matrix = matrix
@@ -928,8 +968,7 @@ module Bio
     end #end class DnaCells
 
     # = DESCRIPTION
-    # Bio::NeXML::DnaCells objects are a concrete NeXML 'characters' block
-    # that take granular rna character observations ( RnaCells[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RnaCells] ).
+    # Concrete <em>characters</em> implementation of ( <em>RnaCells</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RnaCells] ) type.
     class RnaCells < Cells
 
       def initialize( id, otus, label = nil )
@@ -937,6 +976,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::RnaFormat object.
       # *Raises*
@@ -946,6 +986,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::RnaCellMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "RnaCellMatrix expected." unless matrix.instance_of? RnaCellMatrix
         @matrix = matrix
@@ -954,8 +1000,7 @@ module Bio
     end #end class RnaCells
 
     # = DESCRIPTION
-    # Bio::NeXML::DnaCells objects are a concrete NeXML 'characters' block
-    # that take granular restriction character observations ( RestrictionCells[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionCells] ).
+    # Concrete <em>characters</em> implementation of ( <em>RestrictionCells</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionCells] ) type.
     class RestrictionCells < Cells
 
       def initialize( id, otus, label = nil )
@@ -963,6 +1008,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::RestrictionFormat object.
       # *Raises*
@@ -972,6 +1018,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::RestrictionCellMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "RestrictionCellMatrix expected." unless matrix.instance_of? RestrictionCellMatrix
         @matrix = matrix
@@ -980,8 +1032,7 @@ module Bio
     end #end class RestrictionCells
 
     # = DESCRIPTION
-    # Bio::NeXML::DnaCells objects are a concrete NeXML 'characters' block
-    # that take granular protein character observations ( ProteinCells[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#ProteinCells] ).
+    # Concrete <em>characters</em> implementation of ( <em>ProteinCells</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#ProteinCells] ) type.
     class ProteinCells < Cells
 
       def initialize( id, otus, label = nil )
@@ -989,6 +1040,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::ProteinFormat object.
       # *Raises*
@@ -998,6 +1050,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::ProteinCellMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "ProteinCellMatrix expected." unless matrix.instance_of? ProteinCellMatrix
         @matrix = matrix
@@ -1006,8 +1064,7 @@ module Bio
     end #end class ProteinCells
 
     # = DESCRIPTION
-    # Bio::NeXML::DnaCells objects are a concrete NeXML 'characters' block
-    # that take granular standard character observations ( StandardCells[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardCells] ).
+    # Concrete <em>characters</em> implementation of ( <em>StandardCells</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardCells] ) type.
     class StandardCells < Cells
 
       def initialize( id, otus, label = nil )
@@ -1015,6 +1072,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::StandardFormat object.
       # *Raises*
@@ -1024,6 +1082,12 @@ module Bio
         @format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::StandardCellMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "StandardCellMatrix expected." unless matrix.instance_of? StandardCellMatrix
         @matrix = matrix
@@ -1032,8 +1096,7 @@ module Bio
     end #end class StandardCells
 
     # = DESCRIPTION
-    # Bio::NeXML::ContinuousCells objects are a concrete NeXML 'characters' block
-    # that take granular continuous character observations ( ContinuousCells[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousCells] ).
+    # Concrete <em>characters</em> implementation of ( <em>ContinuousCells</em>[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousCells] ) type.
     class ContinuousCells < Cells
 
       def initialize( id, otus, label = nil )
@@ -1041,6 +1104,7 @@ module Bio
       end
 
       # Add a <em>format</em> element to the object.
+      # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::ContinuousFormat object.
       # *Raises*
@@ -1050,6 +1114,12 @@ module Bio
         @Format = format
       end
 
+      # Add a <em>matrix</em> element to the object.
+      # ---
+      # *Arguments*
+      # * matrix( required ) - a Bio::NeXML::ContinuousCellMatrix object.
+      # *Raises*
+      # * InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "ContinuousCellMatrix expected." unless matrix.instance_of? ContinuousCellMatrix
         @matrix = matrix
