@@ -1127,6 +1127,9 @@ module Bio
 
     end #end class ContinuousCells
 
+    # = DESCRIPTION
+    # Abstract <em>format</em> implementation of <em>AbstractFormat</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractFormat] type.
+    # This class defines several convinence methods for its concrete subtypes. A concrete subtype must define <tt>add_states</tt> and <tt>add_char</tt> method.
     class Format
 
       def <<( elements )
@@ -1157,9 +1160,7 @@ module Bio
 
       def states=( states )
         if states.instance_of?( Array )
-          states.each do |ss|
-            add_states( ss )
-          end
+          states.each { |ss| add_states( ss ) }
         else
           add_states( states )
         end
@@ -1167,20 +1168,10 @@ module Bio
 
       def chars=( chars )
         if chars.instance_of? Array
-          chars.each do |char|
-            add_char( char )
-          end
+          chars.each { |char| add_char( char ) }
         else
           add_char( chars )
         end
-      end
-
-      def add_states( states )
-        states_set[ states.id ] = states
-      end
-
-      def add_char( char )
-        char_set[ char.id ] = char
       end
 
       def get_states_by_id( id )
@@ -1231,12 +1222,12 @@ module Bio
 
       def add_states( states )
         raise InvalidStatesException, "ProteinStates expected" unless states.instance_of? ProteinStates
-        super
+        states_set[ states.id ] = states
       end
 
       def add_char( char )
         raise InvalidCharException, "ProteinCharexpected" unless states.instance_of? ProteinChar
-        super
+        char_set[ char.id ] = char
       end
 
     end
@@ -1245,6 +1236,11 @@ module Bio
 
       def initialize( char = nil )
         self << char
+      end
+
+      def add_char( char )
+        raise InvalidCharException, "ContinuousChar expected" unless char.instance_of? ContinuousChar
+        char_set[ char.id ] = char
       end
 
     end
@@ -1258,12 +1254,12 @@ module Bio
 
       def add_states( states )
         raise InvalidStatesException, "DnaStates expected" unless states.instance_of? DnaStates
-        super
+        states_set[ states.id ] = states
       end
 
-      def add_char( states )
-        raise InvalidCharException, "DnaChar expected" unless states.instance_of? DnaChar
-        super
+      def add_char( char )
+        raise InvalidCharException, "DnaChar expected" unless char.instance_of? DnaChar
+        char_set[ char.id ] = char
       end
 
     end
@@ -1277,12 +1273,12 @@ module Bio
       
       def add_states( states )
         raise InvalidStatesException, "RnaStates expected" unless states.instance_of? RnaStates
-        super
+        states_set[ states.id ] = states
       end
 
-      def add_char( states )
-        raise InvalidCharException, "RnaChar expected" unless states.instance_of? RnaChar
-        super
+      def add_char( char )
+        raise InvalidCharException, "RnaChar expected" unless char.instance_of? RnaChar
+        char_set[ char.id ] = char
       end
 
     end
@@ -1296,12 +1292,12 @@ module Bio
 
       def add_states( states )
         raise InvalidStatesException, "RestrictionStates expected" unless states.instance_of? RestrictionStates
-        super
+        states_set[ states.id ] = states
       end
 
-      def add_char( states )
-        raise InvalidCharException, "RestrictionChar expected" unless states.instance_of? RestrictionChar
-        super
+      def add_char( char )
+        raise InvalidCharException, "RestrictionChar expected" unless char.instance_of? RestrictionChar
+        char_set[ char.id ] = char
       end
 
     end
@@ -1315,12 +1311,12 @@ module Bio
 
       def add_states( states )
         raise InvalidStatesException, "StandardStates expected" unless states.instance_of? StandardStates
-        super
+        states_set[ states.id ] = states
       end
 
-      def add_char( states )
-        raise InvalidCharException, "StandardChar expected" unless states.instance_of? StandardChar
-        super
+      def add_char( char )
+        raise InvalidCharException, "StandardChar expected" unless char.instance_of? StandardChar
+        char_set[ char.id ] = char
       end
 
     end
