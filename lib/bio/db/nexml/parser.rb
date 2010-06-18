@@ -468,13 +468,11 @@ module Bio
         id = attribute( 'id' )
         label = attribute( 'label' )
         states_id = attribute( 'states' )
+        states = states[ states_id ]
 
         type = type.sub( /Format/, "Char" )
         klass = NeXML.const_get( type )
-        char = klass.new( id, label )
-
-        states = states[ states_id ]
-        char.states = states
+        char = klass.new( id, states, label )
 
         return char if empty_element?
 
