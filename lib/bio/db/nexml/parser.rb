@@ -577,7 +577,7 @@ module Bio
         state_id = attribute( 'state' )
 
         char = char_cache[ char_id ] 
-        state = state_cache[ state_id ]
+        state = ( klass != Bio::NeXML::ContinuousCell ? state_cache[ state_id ] : state_id )
         
         cell.state = state
         cell.char = char
