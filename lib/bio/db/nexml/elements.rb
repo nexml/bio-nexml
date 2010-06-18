@@ -1640,6 +1640,12 @@ module Bio
         super
       end
 
+      # Assign a symbol to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * symbol( required ) - a Protein( or amino acid ) token.
+      # *Raises*:
+      # * InvalidTokenExcetpion - if symbol is not valid.
       def symbol=( symbol )
         raise InvalidTokenExcetpion, "Not a valid Protein token." unless symbol =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ]/
         @symbol = symbol
@@ -1655,6 +1661,12 @@ module Bio
         super
       end
 
+      # Assign a symbol to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * symbol( required ) - a DNA token.
+      # *Raises*:
+      # * InvalidTokenExcetpion - if symbol is not valid.
       def symbol=( symbol )
         raise InvalidTokenExcetpion, "Not a valid DNA token." unless symbol =~ /[ABCDGHKMNRSTVWXY\-\?]/
         @symbol = symbol
@@ -1670,6 +1682,12 @@ module Bio
         super
       end
 
+      # Assign a symbol to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * symbol( required ) - a RNA token.
+      # *Raises*:
+      # * InvalidTokenExcetpion - if symbol is not valid.
       def symbol=( symbol )
         raise InvalidTokenExcetpion, "Not a valid RNA token." unless symbol =~ /[\-\?ABCDGHKMNRSUVWXY]/
         @symbol = symbol
@@ -1685,6 +1703,12 @@ module Bio
         super
       end
 
+      # Assign a symbol to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * symbol( required ) - a Restriction token.
+      # *Raises*:
+      # * InvalidTokenExcetpion - if symbol is not valid.
       def symbol=( symbol )
         raise InvalidTokenExcetpion, "Not a valid Restriction token." unless symbol =~ /0|1/
         @symbol = symbol.to_i
@@ -1700,6 +1724,12 @@ module Bio
         super
       end
 
+      # Assign a symbol to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * symbol( required ) - a Standard token.
+      # *Raises*:
+      # * InvalidTokenExcetpion - if symbol is not valid.
       def symbol=( symbol )
         raise InvalidTokenExcetpion, "Not a valid Standard token." unless symbol =~ /^\d$/
         @symbol = symbol.to_i
