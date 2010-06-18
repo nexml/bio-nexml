@@ -1616,54 +1616,87 @@ module Bio
       
     end #end class StandardStates
 
+    # = DESCRIPTION
+    # Abstract <em>state</em> implementation of <em>StandardState</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractState] type.
+    # A concrete subtype must define a <tt>symbol=</tt> method.
     class State
       include IDTagged
-      attr_accessor :symbol
+      attr_reader :symbol
 
-      def initialize( id, symbol, label = nil )
+      def initialize( id, symbol = nil, label = nil )
         @id = id
         @label = label
-        self.symbol = symbol
+        self.symbol = symbol if symbol
       end
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>state</em> implementation of <em>AAState</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAState] type.
     class ProteinState < State
 
       def initialize( id, symbol, label = nil )
         super
       end
 
+      def symbol=( symbol )
+        @symbol = symbol
+      end
+
     end
 
+    # = DESCRIPTION
+    # Concrete <em>state</em> implementation of <em>DNAState</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DNAState] type.
     class DnaState < State
 
       def initialize( id, symbol, label = nil )
         super
       end
 
+      def symbol=( symbol )
+        @symbol = symbol
+      end
+
     end
 
+    # = DESCRIPTION
+    # Concrete <em>state</em> implementation of <em>RNAState</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RNAState] type.
     class RnaState < State
 
       def initialize( id, symbol, label = nil )
         super
       end
 
+      def symbol=( symbol )
+        @symbol = symbol
+      end
+
     end
 
+    # = DESCRIPTION
+    # Concrete <em>state</em> implementation of <em>RestrictionState</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionState] type.
     class RestrictionState < State
 
       def initialize( id, symbol, label = nil )
         super
       end
 
+      def symbol=( symbol )
+        @symbol = symbol
+      end
+
     end
 
+    # = DESCRIPTION
+    # Concrete <em>state</em> implementation of <em>StandardState</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardState] type.
     class StandardState < State
 
       def initialize( id, symbol, label = nil )
         super
+      end
+
+      def symbol=( symbol )
+        @symbol = symbol
       end
 
     end
