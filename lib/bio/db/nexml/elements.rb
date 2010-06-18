@@ -2037,6 +2037,7 @@ module Bio
 
     end
 
+    # Abstract <em>row</em> implementation. This class defines convinence methods for its concrete subtypes.
     class Row
       include TaxonLinked
 
@@ -2058,6 +2059,8 @@ module Bio
 
     end #end class Row
 
+    # Abstract <em>row</em> implementation of <em>AbstractSeqRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractSeqRow] type.
+    # A concrete subtype must define <tt>seq=</tt> method.
     class SeqRow < Row
       attr_reader :seq
 
@@ -2071,6 +2074,8 @@ module Bio
 
     end #end class SeqRow
 
+    # = DESCRIPTION
+    # Concrete <em>row</em> implementation of <em>DNAMatrixSeqRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DNAMatrixSeqRow] type.
     class DnaSeqRow < SeqRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2084,6 +2089,8 @@ module Bio
 
     end #class DnaSeqRow
 
+    # = DESCRIPTION
+    # Concrete <em>row</em> implementation of <em>RNAMatrixSeqRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RNAMatrixSeqRow] type.
     class RnaSeqRow < SeqRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2097,6 +2104,8 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>row</em> implementation of <em>AAMatrixSeqRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAMatrixSeqRow] type.
     class ProteinSeqRow < SeqRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2110,6 +2119,8 @@ module Bio
 
     end #end class ProteinSeqRow
 
+    # = DESCRIPTION
+    # Concrete <em>row</em> implementation of <em>StandardMatrixSeqRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardMatrixSeqRow] type.
     class StandardSeqRow < SeqRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2123,6 +2134,8 @@ module Bio
 
     end #end class StandardSeqRow
 
+    # = DESCRIPTION
+    # Concrete <em>row</em> implementation of <em>RestrictionMatrixSeqRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionMatrixSeqRow] type.
     class RestrictionSeqRow < SeqRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2136,6 +2149,8 @@ module Bio
 
     end #end class RestrictionSeqRow
 
+    # = DESCRIPTION
+    # Concrete <em>row</em> implementation of <em>RestrictionMatrixSeqRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionMatrixSeqRow] type.
     class ContinuousSeqRow < SeqRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2149,16 +2164,28 @@ module Bio
 
     end #end class ContinuousSeqRow
 
+    # = DESCRIPTION
+    # Abstract <em>row</em> implementation of <em>AbstractObsRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractObsRow] type.
+    # A concrete subtype must define <tt>add_cell</tt> method to assign a single <em>cell</em> element to <tt>self</tt>.
     class CellRow < Row
 
       def initialize( id, otu = nil, label = nil )
         super
       end
 
+      # Provide an array storage for Bio::NeXML::Cell object.
+      #---
+      # *Returns*: an array of Bio::NeXML::Cell objects or an empty array
+      #if none exist.
       def cells
         @cells ||= []
       end
 
+      # Abstract method. Add <em>cell</em> elements to <tt>self</tt>.
+      # It calls <tt>add_cell</tt> method of its concrete subtype to add each <em>cell</em> element.
+      # ---
+      # *Arguments*:
+      # * a comman seperated list of Bio::NeXML::Cell objects.
       def cells=( cells )
         if cells.instance_of? Array
           cells.each do |cell|
@@ -2259,6 +2286,12 @@ module Bio
     # Concrete <em>seq</em> implementation of <em>DNASeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/dna/#DNASeq] type.
     class DnaSeq < Seq
 
+      # Assign a value to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * value( requried ) - a DNA sequence
+      # *Raises*:
+      # * InvalidSequenceExcetpion - if value is not of the correct type.
       def value=( value )
         raise InvalidSequenceExcetpion, "DNA sequence expected." unless value =~ /[\-\?ABCDGHKMNRSTVWXY\s]*/
         @value = value
@@ -2270,6 +2303,12 @@ module Bio
     # Concrete <em>seq</em> implementation of <em>RNASeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/rna/#RNASeq] type.
     class RnaSeq < Seq
 
+      # Assign a value to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * value( requried ) - a RNA sequence
+      # *Raises*:
+      # * InvalidSequenceExcetpion - if value is not of the correct type.
       def value=( value )
         raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[\-\?ABCDGHKMNRSUVWXY\s]*/
         @value = value
@@ -2281,6 +2320,12 @@ module Bio
     # Concrete <em>seq</em> implementation of <em>StandardSeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardSeq] type.
     class StandardSeq < Seq
 
+      # Assign a value to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * value( requried ) - a Standard sequence
+      # *Raises*:
+      # * InvalidSequenceExcetpion - if value is not of the correct type.
       def value=( value )
         raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
         @value = value
@@ -2292,6 +2337,12 @@ module Bio
     # Concrete <em>seq</em> implementation of <em>RestrictionSeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionSeq] type.
     class RestrictionSeq < Seq
 
+      # Assign a value to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * value( requried ) - a Restriction sequence
+      # *Raises*:
+      # * InvalidSequenceExcetpion - if value is not of the correct type.
       def value=( value )
         raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[01\s]*/
         @value = value
@@ -2303,6 +2354,12 @@ module Bio
     # Concrete <em>seq</em> implementation of <em>ContinuousSeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousSeq] type.
     class ContinuousSeq < Seq
 
+      # Assign a value to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * value( requried ) - a Continuous sequence
+      # *Raises*:
+      # * InvalidSequenceExcetpion - if value is not of the correct type.
       def value=( value )
         raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
         @value = value
@@ -2314,6 +2371,12 @@ module Bio
     # Concrete <em>seq</em> implementation of <em>AASeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/protein/#AASeq] type.
     class ProteinSeq < Seq
 
+      # Assign a value to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * value( requried ) - a Protein sequence
+      # *Raises*:
+      # * InvalidSequenceExcetpion - if value is not of the correct type.
       def value=( value )
         raise InvalidSequenceExcetpion, "Protein sequence expected." unless value =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ\s]*/
         @value = value
@@ -2332,11 +2395,23 @@ module Bio
     # Concrete <em>cell</em> implementation of <em>DNAObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DNAObs] type.
     class DnaCell < Cell
 
+      # Assign a <em>char</em> element to self.
+      # ---
+      # *Arguments*:
+      # * char( required ) = a Bio::NeXML::DnaChar object.
+      # *Raises*:
+      # * InvalidCharException - if char is not of the correct type.
       def char=( char )
         raise InvalidCharException, "DnaChar expected" unless char.instance_of? DnaChar
         @char = char
       end
 
+      # Assign a <em>state</em> element to self.
+      # ---
+      # *Arguments*:
+      # * state( required ) = a Bio::NeXML::DnaState object.
+      # *Raises*:
+      # * InvalidStateException - if state if not of the correct type.
       def state=( state )
         raise InvalidStateException, "DnaState expected." unless state.instance_of? DnaState
         @state = state
@@ -2348,11 +2423,23 @@ module Bio
     # Concrete <em>cell</em> implementation of <em>RNAObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RNAObs] type.
     class RnaCell < Cell
 
+      # Assign a <em>char</em> element to self.
+      # ---
+      # *Arguments*:
+      # * char( required ) = a Bio::NeXML::RnaChar object.
+      # *Raises*:
+      # * InvalidCharException - if char is not of the correct type.
       def char=( char )
         raise InvalidCharException, "RnaChar expected" unless char.instance_of? RnaChar
         @char = char
       end
 
+      # Assign a <em>state</em> element to self.
+      # ---
+      # *Arguments*:
+      # * state( required ) = a Bio::NeXML::RnaState object.
+      # *Raises*:
+      # * InvalidStateException - if state if not of the correct type.
       def state=( state )
         @state = state
         raise InvalidStateException, "RnaState expected." unless state.instance_of? RnaState
@@ -2364,11 +2451,23 @@ module Bio
     # Concrete <em>cell</em> implementation of <em>AAObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAObs] type.
     class ProteinCell < Cell
 
+      # Assign a <em>char</em> element to self.
+      # ---
+      # *Arguments*:
+      # * char( required ) = a Bio::NeXML::ProteinChar object.
+      # *Raises*:
+      # * InvalidCharException - if char is not of the correct type.
       def char=( char )
         raise InvalidCharException, "ProteinChar expected" unless char.instance_of? ProteinChar
         @char = char
       end
 
+      # Assign a <em>state</em> element to self.
+      # ---
+      # *Arguments*:
+      # * state( required ) = a Bio::NeXML::ProteinState object.
+      # *Raises*:
+      # * InvalidStateException - if state if not of the correct type.
       def state=( state )
         raise InvalidStateException, "ProteinState expected" unless state.instance_of? ProteinState
         @state = state
@@ -2380,11 +2479,23 @@ module Bio
     # Concrete <em>cell</em> implementation of <em>StandardObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardObs] type.
     class StandardCell < Cell
 
+      # Assign a <em>char</em> element to self.
+      # ---
+      # *Arguments*:
+      # * char( required ) = a Bio::NeXML::StandardChar object.
+      # *Raises*:
+      # * InvalidCharException - if char is not of the correct type.
       def char=( char )
         raise InvalidCharException, "StandardChar expected" unless char.instance_of? StandardChar
         @char = char
       end
 
+      # Assign a <em>state</em> element to self.
+      # ---
+      # *Arguments*:
+      # * state( required ) = a Bio::NeXML::StandardState object.
+      # *Raises*:
+      # * InvalidStateException - if state if not of the correct type.
       def state=( state )
         raise InvalidStateException, "StandardState expected" unless state.instance_of? StandardState
         @state = state
@@ -2396,11 +2507,23 @@ module Bio
     # Concrete <em>cell</em> implementation of <em>RestrictionObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionObs] type.
     class RestrictionCell < Cell
 
+      # Assign a <em>char</em> element to self.
+      # ---
+      # *Arguments*:
+      # * char( required ) = a Bio::NeXML::RestrictionChar object.
+      # *Raises*:
+      # * InvalidCharException - if char is not of the correct type.
       def char=( char )
         raise InvalidCharException, "RestrictionChar expected" unless char.instance_of? RestrictionChar
         @char = char
       end
 
+      # Assign a <em>state</em> element to self.
+      # ---
+      # *Arguments*:
+      # * state( required ) = a Bio::NeXML::RestrictionState object.
+      # *Raises*:
+      # * InvalidStateException - if state if not of the correct type.
       def state=( state )
         raise InvalidStateException, "RestrictionState expected" unless state.instance_of? RestrictionState
         @state = state
@@ -2412,11 +2535,23 @@ module Bio
     # Concrete <em>cell</em> implementation of <em>ContinuousObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousObs] type.
     class ContinuousCell < Cell
 
+      # Assign a <em>char</em> element to self.
+      # ---
+      # *Arguments*:
+      # * char( required ) = a Bio::NeXML::ContinuousChar object.
+      # *Raises*:
+      # * InvalidCharException - if char is not of the correct type.
       def char=( char )
         raise InvalidCharException, "ContinuousChar expected" unless char.instance_of? ContinuousChar
         @char = char
       end
 
+      # Assign a <em>state</em> element to self.
+      # ---
+      # *Arguments*:
+      # * state( required ) = string form of float numeric type.
+      # *Raises*:
+      # * InvalidStateException - if state if not of the correct type.
       def state=( state )
         raise InvalidTokenExcetpion, "ContinuousToken expected" unless state =~ /^[+-]?\d*(\.\d+)?$/
         @state = state
