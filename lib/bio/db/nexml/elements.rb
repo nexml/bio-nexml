@@ -1867,6 +1867,9 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Absctract <em>matrix</em> class. This class provides convinence methods for its concrete subtypes.
+    # A concrete subtype must define a <tt>add_row</tt> method to add a single <em>row</em> element.
     class Matrix
 
       def row_set
@@ -1888,26 +1891,15 @@ module Bio
       end
       alias << rows=
 
-      def add_row( row )
-        row_set[ row.id ] = row
-      end
-
     end
 
-    class SeqMatrix < Matrix
-
-      def add_row( row )
-        raise InvalidRowException, "SeqRow expected." unless row.kind_of? SeqRow
-        super
-      end
-
-    end
+    class SeqMatrix < Matrix; end
 
     class ProteinSeqMatrix < SeqMatrix
 
       def add_row( row )
         raise InvalidRowException, "ProteinSeqRow expected." unless row.instance_of? ProteinSeqRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
@@ -1916,7 +1908,7 @@ module Bio
 
       def add_row( row )
         raise InvalidRowException, "ContinuousSeqRow expected." unless row.instance_of? ContinuousSeqRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
@@ -1925,7 +1917,7 @@ module Bio
 
       def add_row( row )
         raise InvalidRowException, "DnaSeqRow expected." unless row.instance_of? DnaSeqRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
@@ -1934,7 +1926,7 @@ module Bio
 
       def add_row( row )
         raise InvalidRowException, "RnaSeqRow expected." unless row.instance_of? RnaSeqRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
@@ -1943,7 +1935,7 @@ module Bio
 
       def add_row( row )
         raise InvalidRowException, "RestrictionSeqRow expected." unless row.instance_of? RestrictionSeqRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
@@ -1952,25 +1944,18 @@ module Bio
 
       def add_row( row )
         raise InvalidRowException, "StandardSeqRow expected." unless row.instance_of? StandardSeqRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
 
-    class CellMatrix < Matrix
-
-      def add_row( row )
-        raise InvalidRowException, "CellRow expected." unless row.kind_of? CellRow
-        super
-      end
-
-    end
+    class CellMatrix < Matrix; end
 
     class ProteinCellMatrix < CellMatrix
 
       def add_row( row )
         raise InvalidRowException, "ProteinCellRow expected." unless row.instance_of? ProteinCellRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
@@ -1979,7 +1964,7 @@ module Bio
 
       def add_row( row )
         raise InvalidRowException, "DnaCellRow expected." unless row.instance_of? DnaCellRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
@@ -1988,7 +1973,7 @@ module Bio
 
       def add_row( row )
         raise InvalidRowException, "RnaCellRow expected." unless row.instance_of? RnaCellRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
@@ -1997,7 +1982,7 @@ module Bio
 
       def add_row( row )
         raise InvalidRowException, "StandardCellRow expected." unless row.instance_of? StandardCellRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
@@ -2006,7 +1991,7 @@ module Bio
 
       def add_row( row )
         raise InvalidRowException, "ContinuousCellRow expected." unless row.instance_of? ContinuousCellRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
@@ -2015,7 +2000,7 @@ module Bio
 
       def add_row( row )
         raise InvalidRowException, "RestrictionCellRow expected." unless row.instance_of? RestrictionCellRow
-        super
+        row_set[ row.id ] = row
       end
 
     end
