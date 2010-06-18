@@ -14,6 +14,7 @@ module Bio
     class InvalidFormatExcetpion < Exception; end
     class InvalidFormatExcetpion < Exception; end
     class InvalidTokenExcetpion < Exception; end
+    class InvalidSequenceExcetpion < Exception; end
 
     module Base
       def xml_base
@@ -1490,7 +1491,7 @@ module Bio
             add_state( state )
           end
         else
-          add_state( state )
+          add_state( states )
         end
       end
       alias << states=
@@ -1611,23 +1612,55 @@ module Bio
       # *Raises*:
       # * InvalidStateException - if states is not of the correct type.
       def add_state( state )
+        p state.class
         raise InvalidStateException, "StandardState expected." unless state.instance_of? StandardState
         state_set[ state.id ] = state
       end
       
     end #end class StandardStates
 
+    module Ambiguous
+      attr_writer :polymorphic, :uncertain
+
+      def polymorphic?
+        @polymorphic
+      end
+
+      def uncertain?
+        @polymorphic
+      end
+
+      def ambiguity
+        polymorphic? ? "polymorphic" : "uncertain"
+      end
+
+      def members
+        @members ||= []
+      end
+
+    end
+
     # = DESCRIPTION
     # Abstract <em>state</em> implementation of <em>StandardState</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractState] type.
     # A concrete subtype must define a <tt>symbol=</tt> method.
     class State
       include IDTagged
+      include Ambiguous
       attr_reader :symbol
 
       def initialize( id, symbol = nil, label = nil )
         @id = id
         @label = label
         self.symbol = symbol if symbol
+      end
+
+    end #enc class State
+
+    class Member
+      attr_accessor :state
+
+      def initialize( state )
+        self.state = state
       end
 
     end
@@ -2006,7 +2039,6 @@ module Bio
     end
 
     class Row
-      include IDTagged
       include TaxonLinked
 
       def initialize( id, otu = nil, label = nil )
@@ -2028,10 +2060,14 @@ module Bio
     end #end class Row
 
     class SeqRow < Row
-      attr_accessor :seq
+      attr_reader :seq
 
       def initialize( id, otu = nil, label = nil )
         super
+      end
+
+      def seq_value
+        seq.value
       end
 
     end #end class SeqRow
@@ -2043,8 +2079,8 @@ module Bio
       end
 
       def seq=( seq )
-        raise InvalidSeqException, "DnaSeq required." unless seq.instance_of? DnaSeq
-        super
+        raise InvalidSeqException, "DnaSeq expected." unless seq.instance_of? DnaSeq
+        @seq = seq
       end
 
     end #class DnaSeqRow
@@ -2056,8 +2092,8 @@ module Bio
       end
 
       def seq=( seq )
-        raise InvalidSeqException, "RnaSeq required." unless seq.instance_of? RnaSeq
-        super
+        raise InvalidSeqException, "RnaSeq expected." unless seq.instance_of? RnaSeq
+        @seq = seq
       end
 
     end
@@ -2069,8 +2105,8 @@ module Bio
       end
 
       def seq=( seq )
-        raise InvalidSeqException, "ProteinSeq required." unless seq.instance_of? ProteinSeq
-        super
+        raise InvalidSeqException, "ProteinSeq expected." unless seq.instance_of? ProteinSeq
+        @seq = seq
       end
 
     end #end class ProteinSeqRow
@@ -2082,8 +2118,8 @@ module Bio
       end
 
       def seq=( seq )
-        raise InvalidSeqException, "StandardSeq required." unless seq.instance_of? StandardSeq
-        super
+        raise InvalidSeqException, "StandardSeq expected." unless seq.instance_of? StandardSeq
+        @seq = seq
       end
 
     end #end class StandardSeqRow
@@ -2095,8 +2131,8 @@ module Bio
       end
 
       def seq=( seq )
-        raise InvalidSeqException, "RestrictionSeq required." unless seq.instance_of? RestrictionSeq
-        super
+        raise InvalidSeqException, "RestrictionSeq expected." unless seq.instance_of? RestrictionSeq
+        @seq = seq
       end
 
     end #end class RestrictionSeqRow
@@ -2108,8 +2144,8 @@ module Bio
       end
 
       def seq=( seq )
-        raise InvalidSeqException, "ContinuousSeq required." unless seq.instance_of? ContinuousSeq
-        super
+        raise InvalidSeqException, "ContinuousSeq expected." unless seq.instance_of? ContinuousSeq
+        @seq = seq
       end
 
     end #end class ContinuousSeqRow
@@ -2134,10 +2170,6 @@ module Bio
         end
       end
 
-      def add_cell( cell )
-        cells << cell
-      end
-
     end #enc class CellRow
 
     class DnaCellRow < CellRow
@@ -2148,7 +2180,7 @@ module Bio
 
       def add_cell( cell )
         raise InvalidCellException, "DnaCell expected" unless cell.instance_of? DnaCell
-        super
+        cells << cell
       end
 
     end #end class DnaCellRow
@@ -2161,7 +2193,7 @@ module Bio
 
       def add_cell( cell )
         raise InvalidCellException, "RnaCell expected" unless cell.instance_of? RnaCell
-        super
+        cells << cell
       end
 
     end #end class RnaCellRow
@@ -2174,7 +2206,7 @@ module Bio
 
       def add_cell( cell )
         raise InvalidCellException, "ProteinCell expected" unless cell.instance_of? ProteinCell
-        super
+        cells << cell
       end
 
     end #end class ProteinCellRow
@@ -2187,7 +2219,7 @@ module Bio
 
       def add_cell( cell )
         raise InvalidCellException, "ContinuousCell expected" unless cell.instance_of? ContinuousCell
-        super
+        cells << cell
       end
 
     end #end class ContinuousCellRow
@@ -2200,7 +2232,7 @@ module Bio
 
       def add_cell( cell )
         raise InvalidCellException, "RestrictionCell expected" unless cell.instance_of? RestrictionCell
-        super
+        cells << cell
       end
 
     end #end class RestrictionCellRow
@@ -2213,32 +2245,185 @@ module Bio
 
       def add_cell( cell )
         raise InvalidCellException, "StandardCell expected" unless cell.instance_of? StandardCell
-        super
+        cells << cell
       end
 
     end #end class StandardCellRow
 
+    # = DESCRIPTION
+    # Abstract <em>seq</em> implementation.  A concrete subtype must implement <tt>value=</tt> method.
     class Seq
-      attr_accessor :value
+      attr_reader :value
     end
 
-    class DnaSeq < Seq; end
-    class RnaSeq < Seq; end
-    class StandardSeq < Seq; end
-    class RestrictionSeq < Seq; end
-    class ContinuousSeq < Seq; end
-    class ProteinSeq < Seq; end
+    # = DESCRIPTION
+    # Concrete <em>seq</em> implementation of <em>DNASeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/dna/#DNASeq] type.
+    class DnaSeq < Seq
 
+      def value=( value )
+        #raise InvalidSequenceExcetpion, "DNA sequence expected." unless value =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ\s]\*/
+        @value = value
+      end
+
+    end
+
+    # = DESCRIPTION
+    # Concrete <em>seq</em> implementation of <em>RNASeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/rna/#RNASeq] type.
+    class RnaSeq < Seq
+
+      def value=( value )
+        #raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[\-\?ABCDGHKMNRSUVWXY\s]*/
+        @value = value
+      end
+
+    end
+
+    # = DESCRIPTION
+    # Concrete <em>seq</em> implementation of <em>StandardSeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardSeq] type.
+    class StandardSeq < Seq
+
+      def value=( value )
+        #raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
+        @value = value
+      end
+
+    end
+
+    # = DESCRIPTION
+    # Concrete <em>seq</em> implementation of <em>RestrictionSeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionSeq] type.
+    class RestrictionSeq < Seq
+
+      def value=( value )
+        #raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[01\s]*/
+        @value = value
+      end
+
+    end
+
+    # = DESCRIPTION
+    # Concrete <em>seq</em> implementation of <em>ContinuousSeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousSeq] type.
+    class ContinuousSeq < Seq
+
+      def value=( value )
+        #raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
+        @value = value
+      end
+
+    end
+
+    # = DESCRIPTION
+    # Concrete <em>seq</em> implementation of <em>AASeq</em>[http://www.nexml.org/nexml/html/doc/schema-1/characters/protein/#AASeq] type.
+    class ProteinSeq < Seq
+
+      def value=( value )
+        #raise InvalidSequenceExcetpion, "Protein sequence expected." unless value =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ\s]*/
+        @value = value
+      end
+
+    end
+
+    # = DESCRIPTION
+    # Absctract <em>cell</em> implementation of <em>AbstractObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractObs] type.
+    # A concrete subtype must implement <tt>char=</tt> and <tt>state=</tt> methods.
     class Cell
-      attr_accessor :char, :state
+      attr_reader :char, :state
     end
 
-    class DnaCell < Cell; end
-    class RnaCell < Cell; end
-    class ProteinCell < Cell; end
-    class StandardCell < Cell; end
-    class RestrictionCell < Cell; end
-    class ContinuousCell < Cell; end
+    # = DESCRIPTION
+    # Concrete <em>cell</em> implementation of <em>DNAObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DNAObs] type.
+    class DnaCell < Cell
+
+      def char=( char )
+        raise InvalidCharException, "DnaChar expected" unless char.instance_of? DnaChar
+        @char = char
+      end
+
+      def state=( state )
+        raise InvalidStateException, "DnaState expected." unless state.instance_of? DnaState
+        @state = state
+      end
+      
+    end #end class DnaCell
+
+    # = DESCRIPTION
+    # Concrete <em>cell</em> implementation of <em>RNAObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RNAObs] type.
+    class RnaCell < Cell
+
+      def char=( char )
+        raise InvalidCharException, "RnaChar expected" unless char.instance_of? RnaChar
+        @char = char
+      end
+
+      def state=( state )
+        @state = state
+        raise InvalidStateException, "RnaState expected." unless state.instance_of? RnaState
+      end
+      
+    end #end class RnaCell
+
+    # = DESCRIPTION
+    # Concrete <em>cell</em> implementation of <em>AAObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAObs] type.
+    class ProteinCell < Cell
+
+      def char=( char )
+        raise InvalidCharException, "ProteinChar expected" unless char.instance_of? ProteinChar
+        @char = char
+      end
+
+      def state=( state )
+        raise InvalidStateException, "ProteinState expected" unless state.instance_of? ProteinState
+        @state = state
+      end
+      
+    end #end class ProteinCell
+    
+    # = DESCRIPTION
+    # Concrete <em>cell</em> implementation of <em>StandardObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardObs] type.
+    class StandardCell < Cell
+
+      def char=( char )
+        raise InvalidCharException, "StandardChar expected" unless char.instance_of? StandardChar
+        @char = char
+      end
+
+      def state=( state )
+        raise InvalidStateException, "StandardState expected" unless state.instance_of? StandardState
+        @state = state
+      end
+      
+    end #end class StandardCell
+
+    # = DESCRIPTION
+    # Concrete <em>cell</em> implementation of <em>RestrictionObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionObs] type.
+    class RestrictionCell < Cell
+
+      def char=( char )
+        raise InvalidCharException, "RestrictionChar expected" unless char.instance_of? RestrictionChar
+        @char = char
+      end
+
+      def state=( state )
+        raise InvalidStateException, "RestrictionState expected" unless state.instance_of? RestrictionState
+        @state = state
+      end
+      
+    end #end class RestrictionCell
+
+    # = DESCRIPTION
+    # Concrete <em>cell</em> implementation of <em>ContinuousObs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousObs] type.
+    class ContinuousCell < Cell
+
+      def char=( char )
+        raise InvalidCharException, "ContinuousChar expected" unless char.instance_of? ContinuousChar
+        @char = char
+      end
+
+      def state=( state )
+        #raise InvalidTokenExcetpion, "ContinuousToken expected" unless state =~ //
+        @state = state
+      end
+      
+    end #end class ContinuousCell
 
   end #end module NeXML
 

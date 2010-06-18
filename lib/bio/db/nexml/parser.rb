@@ -10,6 +10,13 @@ module Bio
     #end
 
     class Parser
+      def state_cache
+        @state_cache ||= {}
+      end
+
+      def char_cache
+        @char_cache ||= {}
+      end
 
       def initialize( nexml, validate = false )
         #initialize a libxml cursor
@@ -433,8 +440,8 @@ module Bio
 
         while next_node
           case local_name
-          when 'state'
-            states.add_state parse_state( type )
+          when 'state', 'polymorphic_state_set', 'uncertain_state_set'
+            states << parse_state( type )
           when 'states'
             break
           end
@@ -452,16 +459,27 @@ module Bio
         klass = NeXML.const_get type
         state = klass.new( id, symbol, label )
 
+        state_cache[ state.id ] = state
+
         return state if empty_element?
 
         while next_node
           case local_name
-          when 'state'
+          when 'state', 'polymorphic_state_set', 'uncertain_state_set'
             break
+          when 'member'
+            state.members << parse_member
           end
         end
 
         state
+      end
+
+      def parse_member
+        state_id = attribute( 'state' )
+        state = state_cache[ state_id ]
+
+        Bio::NeXML::Member.new state
       end
 
       def parse_char( type, states )
@@ -474,6 +492,7 @@ module Bio
         klass = NeXML.const_get( type )
         char = klass.new( id, states, label )
 
+        char_cache[ char.id ] = char
         return char if empty_element?
 
         while next_node
@@ -557,9 +576,9 @@ module Bio
         char_id = attribute( 'char' )
         state_id = attribute( 'state' )
 
-        char = @nexml.get_char_by_id( char_id )
-        state = @nexml.get_state_by_id( state_id )
-
+        char = char_cache[ char_id ] 
+        state = state_cache[ state_id ]
+        
         cell.state = state
         cell.char = char
 
