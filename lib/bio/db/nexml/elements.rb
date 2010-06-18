@@ -1737,62 +1737,132 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Abstract <em>char</em> implementation of <em>AbstractChar</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractChar] type.
+    # A concrete subtype must define <tt>states=</tt> method to assigna a <em>states</em> element to <tt>self</tt>.
     class Char
       include IDTagged
-      attr_accessor :states
+      attr_reader :states
       
-      def initialize( id, label = nil )
+      def initialize( id, states = nil, label = nil )
         @id = id
-        self.states = states
         @label = label 
+        self.states = states if states
       end
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>char</em> implementation of <em>AAChar</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAChar] type.
     class ProteinChar < Char
 
-      def initialize( id, label = nil )
+      def initialize( id, states, label = nil )
         super
+      end
+
+      # Add a <em>states</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::ProteinStates object.
+      # *Raises*:
+      # * InvalidStatesException - if states is not of the correct type.
+      def states=( states )
+        raise InvalidStatesException, "ProteinStates expected" unless states.instance_of? ProteinStates
+        @states = states
       end
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>char</em> implementation of <em>DNAChar</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DNAChar] type.
     class DnaChar < Char
 
-      def initialize( id, label = nil )
+      def initialize( id, states, label = nil )
         super
+      end
+
+      # Add a <em>states</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::DnaStates object.
+      # *Raises*:
+      # * InvalidStatesException - if states is not of the correct type.
+      def states=( states )
+        raise InvalidStatesException, "DnaStates expected" unless states.instance_of? DnaStates
+        @states = states
       end
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>char</em> implementation of <em>RNAChar</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RNAChar] type.
     class RnaChar < Char
 
-      def initialize( id, label = nil )
+      def initialize( id, states, label = nil )
         super
+      end
+
+      # Add a <em>states</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::RnaStates object.
+      # *Raises*:
+      # * InvalidStatesException - if states is not of the correct type.
+      def states=( states )
+        raise InvalidStatesException, "RnaStates expected" unless states.instance_of? RnaStates
+        @states = states
       end
 
     end
     
+    # = DESCRIPTION
+    # Concrete <em>char</em> implementation of <em>RestrictionChar</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionChar] type.
     class RestrictionChar < Char
 
-      def initialize( id, label = nil )
+      def initialize( id, states, label = nil )
         super
+      end
+
+      # Add a <em>states</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::RestrictionStates object.
+      # *Raises*:
+      # * InvalidStatesException - if states is not of the correct type.
+      def states=( states )
+        raise InvalidStatesException, "RestrictionStates expected" unless states.instance_of? RestrictionStates
+        @states = states
       end
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>char</em> implementation of <em>ContinuousChar</em>[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousChar] type.
     class ContinuousChar < Char
 
-      def initialize( id, label = nil )
+      def initialize( id, states = nil, label = nil )
         super
       end
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>char</em> implementation of <em>StandardChar</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardChar] type.
     class StandardChar < Char
 
-      def initialize( id, label = nil )
+      def initialize( id, states, label = nil )
         super
+      end
+
+      # Add a <em>states</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::StandardStates object.
+      # *Raises*:
+      # * InvalidStatesException - if states is not of the correct type.
+      def states=( states )
+        raise InvalidStatesException, "StandardStates expected" unless states.instance_of? StandardStates
+        @states = states
       end
 
     end
