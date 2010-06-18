@@ -1612,7 +1612,6 @@ module Bio
       # *Raises*:
       # * InvalidStateException - if states is not of the correct type.
       def add_state( state )
-        p state.class
         raise InvalidStateException, "StandardState expected." unless state.instance_of? StandardState
         state_set[ state.id ] = state
       end
@@ -2261,7 +2260,7 @@ module Bio
     class DnaSeq < Seq
 
       def value=( value )
-        #raise InvalidSequenceExcetpion, "DNA sequence expected." unless value =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ\s]\*/
+        raise InvalidSequenceExcetpion, "DNA sequence expected." unless value =~ /[\-\?ABCDGHKMNRSTVWXY\s]*/
         @value = value
       end
 
@@ -2272,7 +2271,7 @@ module Bio
     class RnaSeq < Seq
 
       def value=( value )
-        #raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[\-\?ABCDGHKMNRSUVWXY\s]*/
+        raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[\-\?ABCDGHKMNRSUVWXY\s]*/
         @value = value
       end
 
@@ -2283,7 +2282,7 @@ module Bio
     class StandardSeq < Seq
 
       def value=( value )
-        #raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
+        raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
         @value = value
       end
 
@@ -2294,7 +2293,7 @@ module Bio
     class RestrictionSeq < Seq
 
       def value=( value )
-        #raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[01\s]*/
+        raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[01\s]*/
         @value = value
       end
 
@@ -2305,7 +2304,7 @@ module Bio
     class ContinuousSeq < Seq
 
       def value=( value )
-        #raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
+        raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
         @value = value
       end
 
@@ -2316,7 +2315,7 @@ module Bio
     class ProteinSeq < Seq
 
       def value=( value )
-        #raise InvalidSequenceExcetpion, "Protein sequence expected." unless value =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ\s]*/
+        raise InvalidSequenceExcetpion, "Protein sequence expected." unless value =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ\s]*/
         @value = value
       end
 
@@ -2419,7 +2418,7 @@ module Bio
       end
 
       def state=( state )
-        #raise InvalidTokenExcetpion, "ContinuousToken expected" unless state =~ //
+        raise InvalidTokenExcetpion, "ContinuousToken expected" unless state =~ /^[+-]?\d*(\.\d+)?$/
         @state = state
       end
       
