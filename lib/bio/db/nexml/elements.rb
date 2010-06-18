@@ -1454,6 +1454,9 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Abstract <em>states</em> implementation of <em>AbstractStates</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractStates] type.
+    # A concrete subtype must define <tt>add_state</tt> method to add a single <em>state</em> element.
     class States
       include IDTagged
       
@@ -1462,14 +1465,24 @@ module Bio
         @label = label
       end
 
+      # Provide a hash storage for Bio::NeXML::State object.
+      #---
+      # *Returns*: a hash of Bio::NeXML::State objects or an empty hash
+      #if none exist.
       def state_set
         @state_set ||= {}
       end
 
+      # *Returns*: an array of Bio::NeXML::State objects.
       def states
         state_set.values
       end
 
+      # Abstract method. Add <em>state</em> elements to the object.
+      # It calls <tt>add_state</tt> method of its concrete subtype to add each <em>state</em> element.
+      # ---
+      # *Arguments*:
+      # * a comman seperated list of Bio::NeXML::State objects.
       def states=( states )
         if states.instance_of? Array
           states.each do |state|
@@ -1481,14 +1494,16 @@ module Bio
       end
       alias << states=
 
-      def add_state( state )
-        state_set[ state.id ] = state
-      end
-
+      #Return an Bio::NeXML::State object with the given id or nil.
       def get_state_by_id( id )
         state_set[ id ]
       end
 
+      # Determine if a <em>state</em> element belongs to this object.
+      # ---
+      # *Arguments*:
+      # * id( required ) - id of the <em>state</em> element to be checked.
+      # *Returns*: true if the <em>state</em> element is found, false otherwise.
       def has_state?( id )
         state_set.has_key? id
       end
@@ -1496,67 +1511,107 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>states</em> implementation of <em>AAStates</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAStates] type.
     class ProteinStates < States
 
       def initialize( id, label = nil )
         super
       end
       
+      # Add a single <em>state</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::ProteinState object.
+      # *Raises*:
+      # * InvalidStateException - if states is not of the correct type.
       def add_state( state )
         raise InvalidStateException, "ProteinState expected." unless state.instance_of? ProteinState
-        super
+        state_set[ state.id ] = state
       end
 
     end #end class ProteinStates
 
+    # = DESCRIPTION
+    # Concrete <em>states</em> implementation of <em>DNAStates</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DNAStates] type.
     class DnaStates < States
 
       def initialize( id, label = nil )
         super
       end
 
+      # Add a single <em>state</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::DnaState object.
+      # *Raises*:
+      # * InvalidStateException - if states is not of the correct type.
       def add_state( state )
         raise InvalidStateException, "DnaState expected." unless state.instance_of? DnaState
-        super
+        state_set[ state.id ] = state
       end
       
     end #end class DnaStates
 
+    # = DESCRIPTION
+    # Concrete <em>states</em> implementation of <em>RNAStates</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RNAStates] type.
     class RnaStates < States
 
       def initialize( id, label = nil )
         super
       end
       
+      # Add a single <em>state</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::RnaState object.
+      # *Raises*:
+      # * InvalidStateException - if states is not of the correct type.
       def add_state( state )
         raise InvalidStateException, "RnaState expected." unless state.instance_of? RnaState
-        super
+        state_set[ state.id ] = state
       end
       
     end #end class RnaStates
 
+    # = DESCRIPTION
+    # Concrete <em>states</em> implementation of <em>RestrictionStates</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionStates] type.
     class RestrictionStates < States
 
       def initialize( id, label = nil )
         super
       end
       
+      # Add a single <em>state</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::RestrictionState object.
+      # *Raises*:
+      # * InvalidStateException - if states is not of the correct type.
       def add_state( state )
         raise InvalidStateException, "RestrictionState expected." unless state.instance_of? RestrictionState
-        super
+        state_set[ state.id ] = state
       end
       
     end #end class RestrictionStates
 
+    # = DESCRIPTION
+    # Concrete <em>states</em> implementation of <em>StandardStates</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard./#StandardStates] type.
     class StandardStates < States
 
       def initialize( id, label = nil )
         super
       end
       
+      # Add a single <em>state</em> element to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * states( required ) - a Bio::NeXML::StandardState object.
+      # *Raises*:
+      # * InvalidStateException - if states is not of the correct type.
       def add_state( state )
         raise InvalidStateException, "StandardState expected." unless state.instance_of? StandardState
-        super
+        state_set[ state.id ] = state
       end
       
     end #end class StandardStates
