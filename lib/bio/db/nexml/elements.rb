@@ -13,6 +13,7 @@ module Bio
     class InvalidStatesException < Exception; end
     class InvalidFormatExcetpion < Exception; end
     class InvalidFormatExcetpion < Exception; end
+    class InvalidTokenExcetpion < Exception; end
 
     module Base
       def xml_base
@@ -1640,6 +1641,7 @@ module Bio
       end
 
       def symbol=( symbol )
+        raise InvalidTokenExcetpion, "Not a valid Protein token." unless symbol =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ]/
         @symbol = symbol
       end
 
@@ -1654,6 +1656,7 @@ module Bio
       end
 
       def symbol=( symbol )
+        raise InvalidTokenExcetpion, "Not a valid DNA token." unless symbol =~ /[ABCDGHKMNRSTVWXY\-\?]/
         @symbol = symbol
       end
 
@@ -1668,6 +1671,7 @@ module Bio
       end
 
       def symbol=( symbol )
+        raise InvalidTokenExcetpion, "Not a valid RNA token." unless symbol =~ /[\-\?ABCDGHKMNRSUVWXY]/
         @symbol = symbol
       end
 
@@ -1682,7 +1686,8 @@ module Bio
       end
 
       def symbol=( symbol )
-        @symbol = symbol
+        raise InvalidTokenExcetpion, "Not a valid Restriction token." unless symbol =~ /0|1/
+        @symbol = symbol.to_i
       end
 
     end
@@ -1696,7 +1701,8 @@ module Bio
       end
 
       def symbol=( symbol )
-        @symbol = symbol
+        raise InvalidTokenExcetpion, "Not a valid Standard token." unless symbol =~ /^\d$/
+        @symbol = symbol.to_i
       end
 
     end
