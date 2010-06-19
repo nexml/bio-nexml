@@ -1687,11 +1687,15 @@ module Bio
       end
 
       def uncertain?
-        @polymorphic
+        @uncertain
       end
 
       def ambiguity
         polymorphic? ? "polymorphic" : "uncertain"
+      end
+
+      def ambiguous?
+        polymorphic? or uncertain?
       end
 
       def members
