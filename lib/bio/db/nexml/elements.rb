@@ -1552,6 +1552,7 @@ module Bio
       def get_state_by_id( id )
         state_set[ id ]
       end
+      alias [] get_state_by_id
 
       # Determine if a <em>state</em> element belongs to <tt>self</tt>.
       # ---
@@ -1562,6 +1563,7 @@ module Bio
         state_set.has_key? id
       end
       alias :include? :has_state?
+      alias :has? :has_state?
 
       # Call the block for each <em>state</em> element in <tt>self</tt> passing that object as
       # a parameter to the block.
