@@ -1568,6 +1568,7 @@ module Bio
       def each
         state_set.each_value{ |state| yield state }
       end
+      alias each_state each
 
     end #end class States
 
