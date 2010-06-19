@@ -11,8 +11,7 @@ module Bio
     class InvalidCharException < Exception; end
     class InvalidStateException < Exception; end
     class InvalidStatesException < Exception; end
-    class InvalidFormatExcetpion < Exception; end
-    class InvalidFormatExcetpion < Exception; end
+    class InvalidFormatException < Exception; end
     class InvalidTokenExcetpion < Exception; end
     class InvalidSequenceExcetpion < Exception; end
 
@@ -666,7 +665,10 @@ module Bio
 
     # = DESCRIPTION
     # Abstract <em>characters</em> implementation of <em>AbstractBlock</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractBlock] type.
-    # A concrete subclass must define a <tt>format=</tt> method.
+    # This class defines <tt>format</tt> attribute accessor but not writer. A concrete subclass must define a <tt>format=</tt> attribute writer.
+    # Following are the subclasses of Bio::NeXML::Characters:
+    # * Bio::NeXML::Seqs
+    # * Bio::NeXML::Cells
     class Characters
 
       include TaxaLinked
@@ -678,8 +680,8 @@ module Bio
         @label = label
       end
 
-      # Abstract method. Adds a <em>format</em> element to the object.
-      # It calls the <tt>format=</tt> method of the concrete subtype to do so.
+      # Abstract method. Adds a <em>format</em> element to <tt>self</tt>.
+      # It calls the <tt>format=</tt> method of its concrete subtype to do so.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::Format object
@@ -691,7 +693,15 @@ module Bio
 
     # = DESCRIPTION
     # Abstract <em>characters</em> implementation of <em>AbstractSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractSeqs] type.
-    # A concrete subclass must define a <tt>format=</tt> and <tt>matrix=</tt> method.
+    # This class defines <tt>matrix</tt> attribute accessor but not writer. A concrete subclass must define a <tt>matrix=</tt> attribute writer. Since this class 
+    # inherits from Bio::NeXML::Characters a <tt>format=</tt> method must also be defined by a concrete subclass.
+    # Following classes extend Bio::NeXML::Seqs:
+    # * Bio::NeXML::ProteinSeqs
+    # * Bio::NeXML::DnaSeqs
+    # * Bio::NeXML::RnaSeqs
+    # * Bio::NeXML::RestrictionSeqs
+    # * Bio::NeXML::ContinuousSeqs
+    # * Bio::NeXML::StandardSeqs
     class Seqs < Characters
 
       attr_reader :matrix
@@ -700,7 +710,7 @@ module Bio
         super
       end
 
-      # Abstract method. Add a <em>format</em> or a <em>matrix</em> element to the object.
+      # Abstract method. Adds a <em>format</em> or a <em>matrix</em> element to <tt>self</tt>.
       # It calls the <tt>format=</tt> or <tt>matrix=</tt> method of its concrete subtype
       # to do so.
       # ---
@@ -720,14 +730,24 @@ module Bio
 
     # = DESCRIPTION
     # Abstract <em>characters</em> implementation of <em>AbstractCells</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractCells] type.
-    # A concrete subclass must define a <tt>format=</tt> and <tt>matrix=</tt> method.
+    # This class defines <tt>matrix</tt> attribute accessor but not writer. A concrete subclass must define a <tt>matrix=</tt> attribute accessor. Since this class 
+    # inherits from Bio::NeXML::Characters a <tt>format=</tt> method must also be defined by a concrete subclass.
+    # Following classes extend Bio::NeXML::Cells:
+    # * Bio::NeXML::ProteinCells
+    # * Bio::NeXML::DnaCells
+    # * Bio::NeXML::RnaCells
+    # * Bio::NeXML::RestrictionCells
+    # * Bio::NeXML::ContinuousCells
+    # * Bio::NeXML::StandardCells
     class Cells < Characters
+
+      attr_reader :matrix
 
       def initialize( id, otus, label = nil )
         super
       end
 
-      # Abstract method. Add a <em>format</em> or a <em>matrix</em> element to the object.
+      # Abstract method. Add a <em>format</em> or a <em>matrix</em> element to <tt>self</tt>.
       # It calls the <tt>format=</tt> or <tt>matrix=</tt> method of its concrete subtype
       # to do so.
       # ---
@@ -746,30 +766,30 @@ module Bio
     end #end class Cells
 
     # = DESCRIPTION
-    # Concrete <em>characters</em> implementation of ( <em>DnaSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DnaSeqs] ) type.
+    # Concrete <em>characters</em> implementation of <em>DnaSeqs</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DnaSeqs] type.
     class DnaSeqs < Seqs
 
       def initialize( id, otus, label = nil )
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::DnaFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "DnaFormat expected." unless format.instance_of? DnaFormat
+        raise InvalidFormatException, "DnaFormat expected." unless format.instance_of? DnaFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::DnaSeqMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "DnaSeqMatrix expected." unless matrix.instance_of? DnaSeqMatrix
         @matrix = matrix
@@ -785,23 +805,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::RnaFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "RnaFormat expected" unless format.instance_of? RnaFormat
+        raise InvalidFormatException, "RnaFormat expected" unless format.instance_of? RnaFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::RnaSeqMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "RnaSeqMatrix expected." unless matrix.instance_of? RnaSeqMatrix
         @matrix = matrix
@@ -817,23 +837,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::RestrictionFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "RestrictionFormat expected" unless format.instance_of? RestrictionFormat
+        raise InvalidFormatException, "RestrictionFormat expected" unless format.instance_of? RestrictionFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::RestrictionSeqMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "RestrictionSeqMatrix expected." unless matrix.instance_of? RestrictionSeqMatrix
         @matrix = matrix
@@ -849,23 +869,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::ProteinFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "ProteinFormat expected" unless format.instance_of? ProteinFormat
+        raise InvalidFormatException, "ProteinFormat expected" unless format.instance_of? ProteinFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::ProteinSeqMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "ProteinSeqMatrix expected." unless matrix.instance_of? ProteinSeqMatrix
         @matrix = matrix
@@ -881,23 +901,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::StandardFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "StandardFormat expected" unless format.instance_of? StandardFormat
+        raise InvalidFormatException, "StandardFormat expected" unless format.instance_of? StandardFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::StandardSeqMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "StandardSeqMatrix expected." unless matrix.instance_of? StandardSeqMatrix
         @matrix = matrix
@@ -913,23 +933,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::ContinuousFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "ProteinFormat expected" unless format.instance_of? ContinuousFormat
+        raise InvalidFormatException, "ProteinFormat expected" unless format.instance_of? ContinuousFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::ContinuousSeqMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "ContinuousSeqMatrix expected." unless matrix.instance_of? ContinuousSeqMatrix
         @matrix = matrix
@@ -945,23 +965,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::DnaFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "DnaFormat expected" unless format.instance_of? DnaFormat
+        raise InvalidFormatException, "DnaFormat expected" unless format.instance_of? DnaFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::DnaCellMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "DnaCellMatrix expected." unless matrix.instance_of? DnaCellMatrix
         @matrix = matrix
@@ -977,23 +997,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::RnaFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "RnaFormat expected." unless format.instance_of? RnaFormat
+        raise InvalidFormatException, "RnaFormat expected." unless format.instance_of? RnaFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::RnaCellMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "RnaCellMatrix expected." unless matrix.instance_of? RnaCellMatrix
         @matrix = matrix
@@ -1009,23 +1029,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::RestrictionFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "RestrictionFormat expected" unless format.instance_of? RestrictionFormat
+        raise InvalidFormatException, "RestrictionFormat expected" unless format.instance_of? RestrictionFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::RestrictionCellMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "RestrictionCellMatrix expected." unless matrix.instance_of? RestrictionCellMatrix
         @matrix = matrix
@@ -1041,23 +1061,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::ProteinFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "ProteinFormat expected" unless format.instance_of? ProteinFormat
+        raise InvalidFormatException, "ProteinFormat expected" unless format.instance_of? ProteinFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::ProteinCellMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "ProteinCellMatrix expected." unless matrix.instance_of? ProteinCellMatrix
         @matrix = matrix
@@ -1073,23 +1093,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::StandardFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "StandardFormat expected" unless format.instance_of? StandardFormat
+        raise InvalidFormatException, "StandardFormat expected" unless format.instance_of? StandardFormat
         @format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::StandardCellMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "StandardCellMatrix expected." unless matrix.instance_of? StandardCellMatrix
         @matrix = matrix
@@ -1105,23 +1125,23 @@ module Bio
         super
       end
 
-      # Add a <em>format</em> element to the object.
+      # Add a <em>format</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * format( required ) - a Bio::NeXML::ContinuousFormat object.
       # *Raises*
-      # * InvalidFormatException - if format is not of the correct type.
+      # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
-        raise InvalidFormatExcetpion, "ProteinFormat expected" unless format.instance_of? ContinuousFormat
+        raise InvalidFormatException, "ProteinFormat expected" unless format.instance_of? ContinuousFormat
         @Format = format
       end
 
-      # Add a <em>matrix</em> element to the object.
+      # Add a <em>matrix</em> element to <tt>self</tt>.
       # ---
       # *Arguments*
       # * matrix( required ) - a Bio::NeXML::ContinuousCellMatrix object.
       # *Raises*
-      # * InvalidMatrixException - if matrix is not of the correct type.
+      # * Bio::NeXML::InvalidMatrixException - if matrix is not of the correct type.
       def matrix=( matrix )
         raise InvalidMatrixException, "ContinuousCellMatrix expected." unless matrix.instance_of? ContinuousCellMatrix
         @matrix = matrix
@@ -1131,10 +1151,23 @@ module Bio
 
     # = DESCRIPTION
     # Abstract <em>format</em> implementation of <em>AbstractFormat</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractFormat] type.
-    # A concrete subtype must define <tt>add_states</tt> and <tt>add_char</tt> method to add a single <em>states</em> or <em>char</em> element.
-    # This class defines several convinence methods for its concrete subtypes. 
+    # This class defines methods for storage and retreival of <em>states</em> or <em>char</em> elements. However, at the lowest level it calls
+    # <tt>add_states</tt> and <tt>add_char</tt> method of its concrete subtype to do so. Naturally, a concrete subtype must define these methods.
+    # Bio::NeXML::Format has the following subclasses:
+    # * Bio::NeXML::ProteinFormat
+    # * Bio::NeXML::DnaFormat
+    # * Bio::NeXML::RnaFormat
+    # * Bio::NeXML::ContinuousFormat
+    # * Bio::NeXML::RestrictionFormat
+    # * Bio::NeXML::StandardFormat
     class Format
+      include Enumerable
 
+      # Abstract method. Add one or more <em>states</em> or <em>char</em> elements to <tt>self</tt>.
+      # Detects the type of argument and delegates the addition to <tt>states=</tt> or <tt>chars=</tt> methods.
+      # ---
+      # *Argument*:
+      # * elements( required ) - one or more( comma seperated ) Bio::NeXML::States or Bio::NeXML::Char objects.
       def <<( elements )
         test = elements.instance_of?( Array ) ? elements.first : elements
         case test
@@ -1145,18 +1178,18 @@ module Bio
         end
       end
 
-      # Provide a hash storage for Bio::NeXML::States object.
-      #---
+      # Provide a hash storage for <em>states</em> element.
+      # ---
       # *Returns*: a hash of Bio::NeXML::States objects or an empty hash
-      #if none exist.
+      # if none exist.
       def states_set
         @states_set ||= {}
       end
 
       # Provide a hash storage for Bio::NeXML::Char object.
-      #---
+      # ---
       # *Returns*: a hash of Bio::NeXML::Char objects or an empty hash
-      #if none exist.
+      # if none exist.
       def char_set
         @char_set ||= {}
       end
@@ -1171,11 +1204,11 @@ module Bio
         char_set.values
       end
 
-      # Abstract method. Add <em>states</em> elements to the object.
-      # It calls <tt>add_states</tt> method of its concrete subtype to add each <em>states</em> element.
+      # Abstract method. Add <em>states</em> elements to <tt>self</tt>.
+      # Internally it calls the <tt>add_states</tt> method of its concrete subtype to add an idividual <em>states</em> element.
       # ---
       # *Arguments*:
-      # * a comman seperated list of Bio::NeXML::States objects.
+      # * states( required ) - one or more( comma seperated ) Bio::NeXML::States objects.
       def states=( states )
         if states.instance_of?( Array )
           states.each { |ss| add_states( ss ) }
@@ -1184,11 +1217,11 @@ module Bio
         end
       end
 
-      # Abstract method. Add <em>char</em> elements to the object.
-      # It calls <tt>add_char</tt> method of its concrete subtype to add each <em>char</em> element.
+      # Abstract method. Add <em>char</em> elements to <tt>self</tt>.
+      # Internally it calls the <tt>add_char</tt> method of its concrete subtype to add an idividual <em>char</em> element.
       # ---
       # *Arguments*:
-      # * a comman seperated list of Bio::NeXML::Char objects.
+      # * chars( required ) - one or more( comma seperated ) Bio::NeXML::Char objects.
       def chars=( chars )
         if chars.instance_of? Array
           chars.each { |char| add_char( char ) }
@@ -1252,17 +1285,28 @@ module Bio
       end
       alias include? has?
 
-      # Call the block for each <em>states</em> element in self passing that object as
-      # a parameter
+      # Call the block for each <em>states</em> element in <tt>self</tt> passing that object as
+      # a parameter.
       def each_states
         states_set.each_value do |states|
           yield states
         end
       end
 
-      # Call the block for each <em>char</em> element in self passing that object as
-      # a parameter
+      # Call the block for each <em>char</em> element in <tt>self</tt> passing that object as
+      # a parameter.
       def each_char
+        char_set.each_value do |char|
+          yield char
+        end
+      end
+
+      # Call the block for each <em>states</em> and <em>char</em> element in <tt>self</tt> passing that object as
+      # a parameter.
+      def each
+        states_set.each_value do |states|
+          yield states
+        end
         char_set.each_value do |char|
           yield char
         end
@@ -1284,7 +1328,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::ProteinStates object.
       # *Raises*:
-      # * InvalidStatesException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStatesException - if states is not of the correct type.
       def add_states( states )
         raise InvalidStatesException, "ProteinStates expected" unless states.instance_of? ProteinStates
         states_set[ states.id ] = states
@@ -1295,7 +1339,7 @@ module Bio
       # *Arguments*:
       # * char( required ) - a Bio::NeXML::ProteinChar object.
       # *Raises*:
-      # * InvalidCharException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "ProteinChar expected" unless states.instance_of? ProteinChar
         char_set[ char.id ] = char
@@ -1316,7 +1360,7 @@ module Bio
       # *Arguments*:
       # * char( required ) - a Bio::NeXML::ContinuousChar object.
       # *Raises*:
-      # * InvalidCharException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "ContinuousChar expected" unless char.instance_of? ContinuousChar
         char_set[ char.id ] = char
@@ -1338,7 +1382,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::DnaStates object.
       # *Raises*:
-      # * InvalidStatesException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStatesException - if states is not of the correct type.
       def add_states( states )
         raise InvalidStatesException, "DnaStates expected" unless states.instance_of? DnaStates
         states_set[ states.id ] = states
@@ -1349,7 +1393,7 @@ module Bio
       # *Arguments*:
       # * char( required ) - a Bio::NeXML::DnaChar object.
       # *Raises*:
-      # * InvalidCharException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "DnaChar expected" unless char.instance_of? DnaChar
         char_set[ char.id ] = char
@@ -1371,7 +1415,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::RnaStates object.
       # *Raises*:
-      # * InvalidStatesException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStatesException - if states is not of the correct type.
       def add_states( states )
         raise InvalidStatesException, "RnaStates expected" unless states.instance_of? RnaStates
         states_set[ states.id ] = states
@@ -1382,7 +1426,7 @@ module Bio
       # *Arguments*:
       # * char( required ) - a Bio::NeXML::RnaChar object.
       # *Raises*:
-      # * InvalidCharException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "RnaChar expected" unless char.instance_of? RnaChar
         char_set[ char.id ] = char
@@ -1404,7 +1448,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::RestrictionStates object.
       # *Raises*:
-      # * InvalidStatesException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStatesException - if states is not of the correct type.
       def add_states( states )
         raise InvalidStatesException, "RestrictionStates expected" unless states.instance_of? RestrictionStates
         states_set[ states.id ] = states
@@ -1415,7 +1459,7 @@ module Bio
       # *Arguments*:
       # * char( required ) - a Bio::NeXML::RestrictionChar object.
       # *Raises*:
-      # * InvalidCharException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "RestrictionChar expected" unless char.instance_of? RestrictionChar
         char_set[ char.id ] = char
@@ -1437,7 +1481,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::StandardStates object.
       # *Raises*:
-      # * InvalidStatesException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStatesException - if states is not of the correct type.
       def add_states( states )
         raise InvalidStatesException, "StandardStates expected" unless states.instance_of? StandardStates
         states_set[ states.id ] = states
@@ -1448,7 +1492,7 @@ module Bio
       # *Arguments*:
       # * char( required ) - a Bio::NeXML::StandardChar object.
       # *Raises*:
-      # * InvalidCharException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidCharException - if states is not of the correct type.
       def add_char( char )
         raise InvalidCharException, "StandardChar expected" unless char.instance_of? StandardChar
         char_set[ char.id ] = char
@@ -1458,9 +1502,17 @@ module Bio
 
     # = DESCRIPTION
     # Abstract <em>states</em> implementation of <em>AbstractStates</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractStates] type.
-    # A concrete subtype must define <tt>add_state</tt> method to add a single <em>state</em> element.
+    # This class defines methods for storage and retreival of <em>state</em> elements. However, at the lowest level it calls <tt>add_state</tt> method of its concrete subtype to do so.
+    # Naturally, a concrete subtype must define <tt>add_state</tt> method.
+    # Following classes inherit from Bio::NeXML::States:
+    # * Bio::NeXML::ProteinStates
+    # * Bio::NeXML::RnaStates
+    # * Bio::NeXML::DnaStates
+    # * Bio::NeXML::RestrictionStates
+    # * Bio::NeXML::StandardStates
     class States
       include IDTagged
+      include Enumerable
       
       def initialize( id, label = nil )
         @id = id
@@ -1468,9 +1520,9 @@ module Bio
       end
 
       # Provide a hash storage for Bio::NeXML::State object.
-      #---
+      # ---
       # *Returns*: a hash of Bio::NeXML::State objects or an empty hash
-      #if none exist.
+      # if none exist.
       def state_set
         @state_set ||= {}
       end
@@ -1480,7 +1532,7 @@ module Bio
         state_set.values
       end
 
-      # Abstract method. Add <em>state</em> elements to the object.
+      # Abstract method. Add <em>state</em> elements to <tt>self</tt>.
       # It calls <tt>add_state</tt> method of its concrete subtype to add each <em>state</em> element.
       # ---
       # *Arguments*:
@@ -1501,7 +1553,7 @@ module Bio
         state_set[ id ]
       end
 
-      # Determine if a <em>state</em> element belongs to this object.
+      # Determine if a <em>state</em> element belongs to <tt>self</tt>.
       # ---
       # *Arguments*:
       # * id( required ) - id of the <em>state</em> element to be checked.
@@ -1511,7 +1563,13 @@ module Bio
       end
       alias :include? :has_state?
 
-    end
+      # Call the block for each <em>state</em> element in <tt>self</tt> passing that object as
+      # a parameter to the block.
+      def each
+        state_set.each_value{ |state| yield state }
+      end
+
+    end #end class States
 
     # = DESCRIPTION
     # Concrete <em>states</em> implementation of <em>AAStates</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAStates] type.
@@ -1526,7 +1584,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::ProteinState object.
       # *Raises*:
-      # * InvalidStateException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStateException - if states is not of the correct type.
       def add_state( state )
         raise InvalidStateException, "ProteinState expected." unless state.instance_of? ProteinState
         state_set[ state.id ] = state
@@ -1547,7 +1605,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::DnaState object.
       # *Raises*:
-      # * InvalidStateException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStateException - if states is not of the correct type.
       def add_state( state )
         raise InvalidStateException, "DnaState expected." unless state.instance_of? DnaState
         state_set[ state.id ] = state
@@ -1568,7 +1626,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::RnaState object.
       # *Raises*:
-      # * InvalidStateException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStateException - if states is not of the correct type.
       def add_state( state )
         raise InvalidStateException, "RnaState expected." unless state.instance_of? RnaState
         state_set[ state.id ] = state
@@ -1589,7 +1647,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::RestrictionState object.
       # *Raises*:
-      # * InvalidStateException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStateException - if states is not of the correct type.
       def add_state( state )
         raise InvalidStateException, "RestrictionState expected." unless state.instance_of? RestrictionState
         state_set[ state.id ] = state
@@ -1610,7 +1668,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::StandardState object.
       # *Raises*:
-      # * InvalidStateException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStateException - if states is not of the correct type.
       def add_state( state )
         raise InvalidStateException, "StandardState expected." unless state.instance_of? StandardState
         state_set[ state.id ] = state
@@ -2355,9 +2413,9 @@ module Bio
       # Add a <em>cell</em> to <tt>self</tt>.
       # ---
       # *Arguments*:
-      # * cell( requried ) - a Bio::NeXML:: object.
+      # * cell( requried ) - a Bio::NeXML::DnaCell object.
       # *Raises*:
-      # InvalidCellException - if seq is of incorrect type.
+      # InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "DnaCell expected" unless cell.instance_of? DnaCell
         cells << cell
@@ -2371,6 +2429,12 @@ module Bio
         super
       end
 
+      # Add a <em>cell</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * cell( requried ) - a Bio::NeXML::RnaCell object.
+      # *Raises*:
+      # InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "RnaCell expected" unless cell.instance_of? RnaCell
         cells << cell
@@ -2384,6 +2448,12 @@ module Bio
         super
       end
 
+      # Add a <em>cell</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * cell( requried ) - a Bio::NeXML::ProteinCell object.
+      # *Raises*:
+      # InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "ProteinCell expected" unless cell.instance_of? ProteinCell
         cells << cell
@@ -2397,6 +2467,12 @@ module Bio
         super
       end
 
+      # Add a <em>cell</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * cell( requried ) - a Bio::NeXML::ContinuousCell object.
+      # *Raises*:
+      # InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "ContinuousCell expected" unless cell.instance_of? ContinuousCell
         cells << cell
@@ -2410,6 +2486,12 @@ module Bio
         super
       end
 
+      # Add a <em>cell</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * cell( requried ) - a Bio::NeXML::RestrictionCell object.
+      # *Raises*:
+      # InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "RestrictionCell expected" unless cell.instance_of? RestrictionCell
         cells << cell
@@ -2423,6 +2505,12 @@ module Bio
         super
       end
 
+      # Add a <em>cell</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * cell( requried ) - a Bio::NeXML::StandardCell object.
+      # *Raises*:
+      # InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "StandardCell expected" unless cell.instance_of? StandardCell
         cells << cell
