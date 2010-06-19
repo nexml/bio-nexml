@@ -2179,6 +2179,7 @@ module Bio
         super
       end
 
+      # *Returns*: the actual value of the sequence instead of a Bio::NeXML::Seq object.
       def seq_value
         seq.value
       end
@@ -2193,6 +2194,12 @@ module Bio
         super
       end
 
+      # Add a <em>seq</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * seq( requried ) - a Bio::NeXML::DnaSeq object.
+      # *Raises*:
+      # InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "DnaSeq expected." unless seq.instance_of? DnaSeq
         @seq = seq
@@ -2208,6 +2215,12 @@ module Bio
         super
       end
 
+      # Add a <em>seq</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * seq( requried ) - a Bio::NeXML::RnaSeq object.
+      # *Raises*:
+      # InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "RnaSeq expected." unless seq.instance_of? RnaSeq
         @seq = seq
@@ -2223,6 +2236,12 @@ module Bio
         super
       end
 
+      # Add a <em>seq</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * seq( requried ) - a Bio::NeXML::ProteinSeq object.
+      # *Raises*:
+      # InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "ProteinSeq expected." unless seq.instance_of? ProteinSeq
         @seq = seq
@@ -2238,6 +2257,12 @@ module Bio
         super
       end
 
+      # Add a <em>seq</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * seq( requried ) - a Bio::NeXML::StandardSeq object.
+      # *Raises*:
+      # InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "StandardSeq expected." unless seq.instance_of? StandardSeq
         @seq = seq
@@ -2253,6 +2278,12 @@ module Bio
         super
       end
 
+      # Add a <em>seq</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * seq( requried ) - a Bio::NeXML::RestrictionSeq object.
+      # *Raises*:
+      # InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "RestrictionSeq expected." unless seq.instance_of? RestrictionSeq
         @seq = seq
@@ -2268,6 +2299,12 @@ module Bio
         super
       end
 
+      # Add a <em>seq</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * seq( requried ) - a Bio::NeXML::ContinuousSeq object.
+      # *Raises*:
+      # InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "ContinuousSeq expected." unless seq.instance_of? ContinuousSeq
         @seq = seq
@@ -2315,6 +2352,12 @@ module Bio
         super
       end
 
+      # Add a <em>cell</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * cell( requried ) - a Bio::NeXML:: object.
+      # *Raises*:
+      # InvalidCellException - if seq is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "DnaCell expected" unless cell.instance_of? DnaCell
         cells << cell
