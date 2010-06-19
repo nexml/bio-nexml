@@ -14,6 +14,8 @@ module Bio
     class InvalidFormatException < Exception; end
     class InvalidTokenException < Exception; end
     class InvalidSequenceException < Exception; end
+    class InvalidSeqException < Exception; end
+    class InvalidCellException < Exception; end
 
     module Base
       def xml_base
@@ -1166,7 +1168,7 @@ module Bio
       # Abstract method. Add one or more <em>states</em> or <em>char</em> elements to <tt>self</tt>.
       # Detects the type of argument and delegates the addition to <tt>states=</tt> or <tt>chars=</tt> methods.
       # ---
-      # *Argument*:
+      # *Arguments*:
       # * elements( required ) - one or more( comma seperated ) Bio::NeXML::States or Bio::NeXML::Char objects.
       def <<( elements )
         test = elements.instance_of?( Array ) ? elements.first : elements
@@ -2213,7 +2215,10 @@ module Bio
 
     end
 
-    # Abstract <em>row</em> implementation. This class defines convinence methods for its concrete subtypes.
+    # Abstract <em>row</em> implementation. This class does not directly represent any class from the schema. 
+    # Rather, it lays out the structure of a <em>row</em> object. Follwing classes inherit from Bio::NeXML::Row:
+    # * Bio::NeXML::SeqRow
+    # * Bio::NeXML::CellRow
     class Row
       include TaxonLinked
 
@@ -2223,20 +2228,17 @@ module Bio
         @label = label
       end
 
-      def <<( elements )
-        test = elements.instance_of?( Array ) ? elements.first : elements
-        case test
-        when Seq
-          self.seq = elements
-        when Cell
-          self.cells = elements
-        end
-      end
-
     end #end class Row
 
     # Abstract <em>row</em> implementation of <em>AbstractSeqRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractSeqRow] type.
-    # A concrete subtype must define <tt>seq=</tt> method.
+    # This class defines <tt>seq</tt> attribute accessor but no attribute writer. A concrete subtype must define <tt>seq=</tt> attribute writer.
+    # Bio::NeXML::SeqRow has the following subclasses:
+    # * Bio::NeXML::DnaSeqRow
+    # * Bio::NeXML::RnaSeqRow
+    # * Bio::NeXML::ContinuousSeqRow
+    # * Bio::NeXML::RestrictionSeqRow
+    # * Bio::NeXML::StandardSeqRow
+    # * Bio::NeXML::ProteinSeqRow
     class SeqRow < Row
       attr_reader :seq
 
@@ -2244,7 +2246,15 @@ module Bio
         super
       end
 
-      # *Returns*: the actual value of the sequence instead of a Bio::NeXML::Seq object.
+      # Abstract method. Add a <em>seq</em> to <tt>self</tt>. Internally it calls <tt>seq=</tt> method of its subclass.
+      # ---
+      # *Arguments*:
+      # * seq( required ) - a Bio::NeXML::Seq object.
+      def <<( seq )
+        self.seq = seq
+      end
+
+      # *Returns*: the raw value of the sequence it holds.
       def seq_value
         seq.value
       end
@@ -2264,7 +2274,7 @@ module Bio
       # *Arguments*:
       # * seq( requried ) - a Bio::NeXML::DnaSeq object.
       # *Raises*:
-      # InvalidSeqException - if seq is of incorrect type.
+      # * Bio::NeXML::InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "DnaSeq expected." unless seq.instance_of? DnaSeq
         @seq = seq
@@ -2285,7 +2295,7 @@ module Bio
       # *Arguments*:
       # * seq( requried ) - a Bio::NeXML::RnaSeq object.
       # *Raises*:
-      # InvalidSeqException - if seq is of incorrect type.
+      # * Bio::NeXML::InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "RnaSeq expected." unless seq.instance_of? RnaSeq
         @seq = seq
@@ -2306,7 +2316,7 @@ module Bio
       # *Arguments*:
       # * seq( requried ) - a Bio::NeXML::ProteinSeq object.
       # *Raises*:
-      # InvalidSeqException - if seq is of incorrect type.
+      # * Bio::NeXML::InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "ProteinSeq expected." unless seq.instance_of? ProteinSeq
         @seq = seq
@@ -2327,7 +2337,7 @@ module Bio
       # *Arguments*:
       # * seq( requried ) - a Bio::NeXML::StandardSeq object.
       # *Raises*:
-      # InvalidSeqException - if seq is of incorrect type.
+      # * Bio::NeXML::InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "StandardSeq expected." unless seq.instance_of? StandardSeq
         @seq = seq
@@ -2348,7 +2358,7 @@ module Bio
       # *Arguments*:
       # * seq( requried ) - a Bio::NeXML::RestrictionSeq object.
       # *Raises*:
-      # InvalidSeqException - if seq is of incorrect type.
+      # * Bio::NeXML::InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "RestrictionSeq expected." unless seq.instance_of? RestrictionSeq
         @seq = seq
@@ -2357,7 +2367,7 @@ module Bio
     end #end class RestrictionSeqRow
 
     # = DESCRIPTION
-    # Concrete <em>row</em> implementation of <em>RestrictionMatrixSeqRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionMatrixSeqRow] type.
+    # Concrete <em>matrix</em> implementation of <em>ContinuousMatrixSeqRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousMatrixSeqRow] type.
     class ContinuousSeqRow < SeqRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2369,7 +2379,7 @@ module Bio
       # *Arguments*:
       # * seq( requried ) - a Bio::NeXML::ContinuousSeq object.
       # *Raises*:
-      # InvalidSeqException - if seq is of incorrect type.
+      # * Bio::NeXML::InvalidSeqException - if seq is of incorrect type.
       def seq=( seq )
         raise InvalidSeqException, "ContinuousSeq expected." unless seq.instance_of? ContinuousSeq
         @seq = seq
@@ -2379,7 +2389,15 @@ module Bio
 
     # = DESCRIPTION
     # Abstract <em>row</em> implementation of <em>AbstractObsRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractObsRow] type.
-    # A concrete subtype must define <tt>add_cell</tt> method to assign a single <em>cell</em> element to <tt>self</tt>.
+    # This class defines methods for storage and retreival of <em>cell</em> elements within a <em>row</em>. However, at the lowest level <tt>add_cell</tt> method is called.
+    # Naturally, a concrete subtype must define <tt>add_cell</tt> method to assign a single <em>cell</em> element to <tt>self</tt>.
+    # Follwing are the subclass of Bio::NeXML::CellRow:
+    # * Bio::NeXML::DnaCellRow
+    # * Bio::NeXML::ProteinCellRow
+    # * Bio::NeXML::RnaCellRow
+    # * Bio::NeXML::StandardCellRow
+    # * Bio::NeXML::RestrictionCellRow
+    # * Bio::NeXML::ContinuousCellRow
     class CellRow < Row
 
       def initialize( id, otu = nil, label = nil )
@@ -2387,18 +2405,18 @@ module Bio
       end
 
       # Provide an array storage for Bio::NeXML::Cell object.
-      #---
+      # ---
       # *Returns*: an array of Bio::NeXML::Cell objects or an empty array
-      #if none exist.
+      # if none exist.
       def cells
         @cells ||= []
       end
 
       # Abstract method. Add <em>cell</em> elements to <tt>self</tt>.
-      # It calls <tt>add_cell</tt> method of its concrete subtype to add each <em>cell</em> element.
+      # Internally it calls the <tt>add_cell</tt> method of its concrete subtype to add an individual <em>cell</em> element.
       # ---
       # *Arguments*:
-      # * a comman seperated list of Bio::NeXML::Cell objects.
+      # * cells( required ) - one or more( comma seperated ) Bio::NeXML::Cell objects.
       def cells=( cells )
         if cells.instance_of? Array
           cells.each do |cell|
@@ -2408,9 +2426,12 @@ module Bio
           add_cell( cells )
         end
       end
+      alias << cells=
 
     end #enc class CellRow
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>DNAMatrixObsRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DNAMatrixObsRow] type.
     class DnaCellRow < CellRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2422,7 +2443,7 @@ module Bio
       # *Arguments*:
       # * cell( requried ) - a Bio::NeXML::DnaCell object.
       # *Raises*:
-      # InvalidCellException - if cell is of incorrect type.
+      # * Bio::NeXML::InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "DnaCell expected" unless cell.instance_of? DnaCell
         cells << cell
@@ -2430,6 +2451,8 @@ module Bio
 
     end #end class DnaCellRow
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>RNAMatrixObsRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RNAMatrixObsRow] type.
     class RnaCellRow < CellRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2441,7 +2464,7 @@ module Bio
       # *Arguments*:
       # * cell( requried ) - a Bio::NeXML::RnaCell object.
       # *Raises*:
-      # InvalidCellException - if cell is of incorrect type.
+      # * Bio::NeXML::InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "RnaCell expected" unless cell.instance_of? RnaCell
         cells << cell
@@ -2449,6 +2472,8 @@ module Bio
 
     end #end class RnaCellRow
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>AAMatrixObsRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAMatrixObsRow] type.
     class ProteinCellRow < CellRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2460,7 +2485,7 @@ module Bio
       # *Arguments*:
       # * cell( requried ) - a Bio::NeXML::ProteinCell object.
       # *Raises*:
-      # InvalidCellException - if cell is of incorrect type.
+      # * Bio::NeXML::InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "ProteinCell expected" unless cell.instance_of? ProteinCell
         cells << cell
@@ -2468,6 +2493,8 @@ module Bio
 
     end #end class ProteinCellRow
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>ContinuousMatrixObsRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousMatrixObsRow] type.
     class ContinuousCellRow < CellRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2479,7 +2506,7 @@ module Bio
       # *Arguments*:
       # * cell( requried ) - a Bio::NeXML::ContinuousCell object.
       # *Raises*:
-      # InvalidCellException - if cell is of incorrect type.
+      # * Bio::NeXML::InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "ContinuousCell expected" unless cell.instance_of? ContinuousCell
         cells << cell
@@ -2487,6 +2514,8 @@ module Bio
 
     end #end class ContinuousCellRow
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>RestrictionMatrixObsRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionMatrixObsRow] type.
     class RestrictionCellRow < CellRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2498,7 +2527,7 @@ module Bio
       # *Arguments*:
       # * cell( requried ) - a Bio::NeXML::RestrictionCell object.
       # *Raises*:
-      # InvalidCellException - if cell is of incorrect type.
+      # * Bio::NeXML::InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "RestrictionCell expected" unless cell.instance_of? RestrictionCell
         cells << cell
@@ -2506,6 +2535,8 @@ module Bio
 
     end #end class RestrictionCellRow
     
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>StandardMatrixObsRow</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardMatrixObsRow] type.
     class StandardCellRow < CellRow
 
       def initialize( id, otu = nil, label = nil )
@@ -2517,7 +2548,7 @@ module Bio
       # *Arguments*:
       # * cell( requried ) - a Bio::NeXML::StandardCell object.
       # *Raises*:
-      # InvalidCellException - if cell is of incorrect type.
+      # * Bio::NeXML::InvalidCellException - if cell is of incorrect type.
       def add_cell( cell )
         raise InvalidCellException, "StandardCell expected" unless cell.instance_of? StandardCell
         cells << cell
