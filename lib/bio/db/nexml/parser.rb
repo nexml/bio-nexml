@@ -440,7 +440,7 @@ module Bio
 
         while next_node
           case local_name
-          when 'state', 'polymorphic_state_set', 'uncertain_state_set'
+          when 'state'
             states << parse_state( type )
           when 'polymorphic_state_set'
             state = parse_state( type )
