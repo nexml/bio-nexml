@@ -1904,14 +1904,24 @@ module Bio
     # A concrete subtype must define a <tt>add_row</tt> method to add a single <em>row</em> element.
     class Matrix
 
+      # Provide a hash storage for Bio::NeXML::Row object.
+      #---
+      # *Returns*: a hash of Bio::NeXML::Row objects or an empty hash
+      # if none exist.
       def row_set
         @row_set ||= {}
       end
 
+      # *Returns*: an array of Bio::NeXML::Row objects.
       def rows
         row_set.values
       end
 
+      # Abstract method. Add <em>row</em> elements to <tt>self</tt>.
+      # It calls <tt>add_row</tt> method of its concrete subtype to add each <em>row</em> element.
+      # ---
+      # *Arguments*:
+      # * a comman seperated list of Bio::NeXML::Row objects.
       def rows=( rows )
         if rows.instance_of? Array
           rows.each do |row|
@@ -1923,12 +1933,23 @@ module Bio
       end
       alias << rows=
 
-    end
+    end #end class Matrix
 
+    # = DESCRIPTION
+    # Absctract <em>matrix</em> implementation of <em>AbstractSeqMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractSeqMatrix] type.
+    # A concrete subtype must define a <tt>add_row</tt> method to add a single <em>row</em> element.
     class SeqMatrix < Matrix; end
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>AASeqMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AASeqMatrix] type.
     class ProteinSeqMatrix < SeqMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::ProteinSeqRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "ProteinSeqRow expected." unless row.instance_of? ProteinSeqRow
         row_set[ row.id ] = row
@@ -1936,8 +1957,16 @@ module Bio
 
     end
   
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>ContinuousSeqMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousSeqMatrix] type.
     class ContinuousSeqMatrix < SeqMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::ContinuousSeqRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "ContinuousSeqRow expected." unless row.instance_of? ContinuousSeqRow
         row_set[ row.id ] = row
@@ -1945,8 +1974,16 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>DNASeqMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DNASeqMatrix] type.
     class DnaSeqMatrix < SeqMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::DnaSeqRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "DnaSeqRow expected." unless row.instance_of? DnaSeqRow
         row_set[ row.id ] = row
@@ -1954,8 +1991,16 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>RNASeqMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RNASeqMatrix] type.
     class RnaSeqMatrix < SeqMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::RnaSeqRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "RnaSeqRow expected." unless row.instance_of? RnaSeqRow
         row_set[ row.id ] = row
@@ -1963,8 +2008,16 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>RestrictionSeqMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionSeqMatrix] type.
     class RestrictionSeqMatrix < SeqMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::RestrictionSeqRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "RestrictionSeqRow expected." unless row.instance_of? RestrictionSeqRow
         row_set[ row.id ] = row
@@ -1972,8 +2025,16 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>StandardSeqMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardSeqMatrix] type.
     class StandardSeqMatrix < SeqMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::StandardSeqRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "StandardSeqRow expected." unless row.instance_of? StandardSeqRow
         row_set[ row.id ] = row
@@ -1981,10 +2042,20 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Abstract <em>matrix</em> implementation of <em>AbstractObsMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractObsMatrix] type.
     class CellMatrix < Matrix; end
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>AAObsMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAObsMatrix] type.
     class ProteinCellMatrix < CellMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::ProteinCellRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "ProteinCellRow expected." unless row.instance_of? ProteinCellRow
         row_set[ row.id ] = row
@@ -1992,8 +2063,16 @@ module Bio
 
     end
     
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>DNAObsMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DNAObsMatrix] type.
     class DnaCellMatrix < CellMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::DnaCellRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "DnaCellRow expected." unless row.instance_of? DnaCellRow
         row_set[ row.id ] = row
@@ -2001,8 +2080,16 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>RNAObsMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RNAObsMatrix] type.
     class RnaCellMatrix < CellMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::RnaCellRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "RnaCellRow expected." unless row.instance_of? RnaCellRow
         row_set[ row.id ] = row
@@ -2010,8 +2097,16 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>StandardObsMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/standard/#StandardObsMatrix] type.
     class StandardCellMatrix < CellMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::StandardCellRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "StandardCellRow expected." unless row.instance_of? StandardCellRow
         row_set[ row.id ] = row
@@ -2019,8 +2114,16 @@ module Bio
 
     end
     
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>ContinuousObsMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/continuous/#ContinuousObsMatrix] type.
     class ContinuousCellMatrix < CellMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::ContinuousCellRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "ContinuousCellRow expected." unless row.instance_of? ContinuousCellRow
         row_set[ row.id ] = row
@@ -2028,8 +2131,16 @@ module Bio
 
     end
 
+    # = DESCRIPTION
+    # Concrete <em>matrix</em> implementation of <em>RestrictionObsMatrix</em>[http://nexml.org/nexml/html/doc/schema-1/characters/restriction/#RestrictionObsMatrix] type.
     class RestrictionCellMatrix < CellMatrix
 
+      # Add a <em>row</em> to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * row( requried ) - a Bio::NeXML::RestrictionCellRow object.
+      # *Raises*:
+      # InvalidRowException - if row is of incorrect type.
       def add_row( row )
         raise InvalidRowException, "RestrictionCellRow expected." unless row.instance_of? RestrictionCellRow
         row_set[ row.id ] = row
