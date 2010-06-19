@@ -442,6 +442,14 @@ module Bio
           case local_name
           when 'state', 'polymorphic_state_set', 'uncertain_state_set'
             states << parse_state( type )
+          when 'polymorphic_state_set'
+            state = parse_state( type )
+            state.polymorphic = true
+            states << state
+          when 'uncertain_state_set'
+            state = parse_state( type )
+            state.uncertain = true
+            states << state
           when 'states'
             break
           end
