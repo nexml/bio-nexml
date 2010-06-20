@@ -482,7 +482,7 @@ module Bio
           when 'state', 'polymorphic_state_set', 'uncertain_state_set'
             break
           when 'member'
-            state.members << parse_member
+            state << parse_member
           end
         end
 
@@ -491,9 +491,7 @@ module Bio
 
       def parse_member
         state_id = attribute( 'state' )
-        state = cache[ state_id ]
-
-        Bio::NeXML::Member.new state
+        cache[ state_id ]
       end
 
       def parse_char( type )
