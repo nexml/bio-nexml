@@ -17,6 +17,7 @@ module Bio
     class InvalidSeqException < Exception; end
     class InvalidCellException < Exception; end
     class InvalidCodonPositionException < Exception; end
+    class InvalidMemberException < Exception; end
 
     module Base
       def xml_base
@@ -1683,25 +1684,58 @@ module Bio
       
     end #end class StandardStates
 
+    # =DESCRIPTION
+    # Mixin. Allows a <em>state</em> to be amiguous.
     module Ambiguous
       attr_writer :polymorphic, :uncertain
 
+      # Add members to the state. It delegated the actual addition to <tt>add_member</tt> method.
+      # ---
+      # *Arguments*:
+      # * states( required ) - one or more( comma seperated ) objects of type <tt>self</tt>.
+      def <<( states )
+        if states.instance_of? Array
+          states.each{ |state| add_member state }
+        else
+          add_member states
+        end
+      end
+      alias members= <<
+
+      # Add a member to <tt>self</tt>
+      # ---
+      # *Arguments*:
+      # * state( required ) - an object of type <tt>self</tt>.
+      # *Raises*:
+      # * Bio::NeXML::InvalidMemberException - if state is of incorrect type.
+      def add_member( state )
+        raise InvalidMemberException, "#{self.class} expected" unless state.instance_of? self.class
+        members << state
+      end
+
+      # *Returns*: true if the state is polymorphic, false otherwise.
       def polymorphic?
-        @polymorphic
+        @polymorphic ? true : false
       end
 
+      # *Returns*: true if the state is uncertain, false otherwise.
       def uncertain?
-        @uncertain
+        @uncertain ? true : false
       end
 
+      # *Returns*: a string stating the kind of ambiguity: polymorphic or uncertain.
       def ambiguity
         polymorphic? ? "polymorphic" : "uncertain"
       end
 
+      # *Returns*: true if the state is ambiguous, false otherwise.
       def ambiguous?
         polymorphic? or uncertain?
       end
 
+      # Provide an array storage for ambiguity mapping.
+      # ---
+      # *Returns*: an array of members or empty array if none exist.
       def members
         @members ||= []
       end
@@ -1710,7 +1744,13 @@ module Bio
 
     # = DESCRIPTION
     # Abstract <em>state</em> implementation of <em>StandardState</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractState] type.
-    # A concrete subtype must define a <tt>symbol=</tt> method.
+    # This class defines <tt>symbol</tt> attribute reader but not the attribute writer, so, a concrete subtype must define a <tt>symbol=</tt> attribute writer.
+    # Following are the subclasses of Bio::NeXML::State:
+    # * Bio::NeXML::ProteinState
+    # * Bio::NeXML::DnaState
+    # * Bio::NeXML::RnaState
+    # * Bio::NeXML::StandardState
+    # * Bio::NeXML::RestrictionState
     class State
       include IDTagged
       include Ambiguous
@@ -1723,15 +1763,6 @@ module Bio
       end
 
     end #enc class State
-
-    class Member
-      attr_accessor :state
-
-      def initialize( state )
-        self.state = state
-      end
-
-    end
 
     # = DESCRIPTION
     # Concrete <em>state</em> implementation of <em>AAState</em>[http://nexml.org/nexml/html/doc/schema-1/characters/protein/#AAState] type.
@@ -1746,9 +1777,9 @@ module Bio
       # *Arguments*:
       # * symbol( required ) - a Protein( or amino acid ) token.
       # *Raises*:
-      # * InvalidTokenExcetpion - if symbol is not valid.
+      # * Bio::NeXML::InvalidTokenException - if symbol is not valid.
       def symbol=( symbol )
-        raise InvalidTokenExcetpion, "Not a valid Protein token." unless symbol =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ]/
+        raise InvalidTokenException, "Not a valid Protein token." unless symbol =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ]/
         @symbol = symbol
       end
 
@@ -1767,9 +1798,9 @@ module Bio
       # *Arguments*:
       # * symbol( required ) - a DNA token.
       # *Raises*:
-      # * InvalidTokenExcetpion - if symbol is not valid.
+      # * Bio::NeXML::InvalidTokenException - if symbol is not valid.
       def symbol=( symbol )
-        raise InvalidTokenExcetpion, "Not a valid DNA token." unless symbol =~ /[ABCDGHKMNRSTVWXY\-\?]/
+        raise InvalidTokenException, "Not a valid DNA token." unless symbol =~ /[ABCDGHKMNRSTVWXY\-\?]/
         @symbol = symbol
       end
 
@@ -1788,9 +1819,9 @@ module Bio
       # *Arguments*:
       # * symbol( required ) - a RNA token.
       # *Raises*:
-      # * InvalidTokenExcetpion - if symbol is not valid.
+      # * Bio::NeXML::InvalidTokenException - if symbol is not valid.
       def symbol=( symbol )
-        raise InvalidTokenExcetpion, "Not a valid RNA token." unless symbol =~ /[\-\?ABCDGHKMNRSUVWXY]/
+        raise InvalidTokenException, "Not a valid RNA token." unless symbol =~ /[\-\?ABCDGHKMNRSUVWXY]/
         @symbol = symbol
       end
 
@@ -1809,9 +1840,9 @@ module Bio
       # *Arguments*:
       # * symbol( required ) - a Restriction token.
       # *Raises*:
-      # * InvalidTokenExcetpion - if symbol is not valid.
+      # * Bio::NeXML::InvalidTokenException - if symbol is not valid.
       def symbol=( symbol )
-        raise InvalidTokenExcetpion, "Not a valid Restriction token." unless symbol =~ /0|1/
+        raise InvalidTokenException, "Not a valid Restriction token." unless symbol =~ /0|1/
         @symbol = symbol.to_i
       end
 
@@ -1830,9 +1861,9 @@ module Bio
       # *Arguments*:
       # * symbol( required ) - a Standard token.
       # *Raises*:
-      # * InvalidTokenExcetpion - if symbol is not valid.
+      # * Bio::NeXML::InvalidTokenException - if symbol is not valid.
       def symbol=( symbol )
-        raise InvalidTokenExcetpion, "Not a valid Standard token." unless symbol =~ /^\d$/
+        raise InvalidTokenException, "Not a valid Standard token." unless symbol =~ /^\d$/
         @symbol = symbol.to_i
       end
 
@@ -2632,7 +2663,7 @@ module Bio
       # *Raises*:
       # * Bio::NeXML::InvalidSequenceException - if value is not of the correct type.
       def value=( value )
-        raise InvalidSequenceExcetpion, "DNA sequence expected." unless value =~ /[\-\?ABCDGHKMNRSTVWXY\s]*/
+        raise InvalidSequenceException, "DNA sequence expected." unless value =~ /[\-\?ABCDGHKMNRSTVWXY\s]*/
         @value = value
       end
 
@@ -2649,7 +2680,7 @@ module Bio
       # *Raises*:
       # * Bio::NeXML::InvalidSequenceException - if value is not of the correct type.
       def value=( value )
-        raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[\-\?ABCDGHKMNRSUVWXY\s]*/
+        raise InvalidSequenceException, "RNA sequence expected." unless value =~ /[\-\?ABCDGHKMNRSUVWXY\s]*/
         @value = value
       end
 
@@ -2666,7 +2697,7 @@ module Bio
       # *Raises*:
       # * Bio::NeXML::InvalidSequenceException - if value is not of the correct type.
       def value=( value )
-        raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
+        raise InvalidSequenceException, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
         @value = value
       end
 
@@ -2683,7 +2714,7 @@ module Bio
       # *Raises*:
       # * Bio::NeXML::InvalidSequenceException - if value is not of the correct type.
       def value=( value )
-        raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[01\s]*/
+        raise InvalidSequenceException, "RNA sequence expected." unless value =~ /[01\s]*/
         @value = value
       end
 
@@ -2700,7 +2731,7 @@ module Bio
       # *Raises*:
       # * Bio::NeXML::InvalidSequenceException - if value is not of the correct type.
       def value=( value )
-        raise InvalidSequenceExcetpion, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
+        raise InvalidSequenceException, "RNA sequence expected." unless value =~ /[0-9\-\?]+(\s[0-9\-\?]+)*/
         @value = value
       end
 
@@ -2717,7 +2748,7 @@ module Bio
       # *Raises*:
       # * Bio::NeXML::InvalidSequenceException - if value is not of the correct type.
       def value=( value )
-        raise InvalidSequenceExcetpion, "Protein sequence expected." unless value =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ\s]*/
+        raise InvalidSequenceException, "Protein sequence expected." unless value =~ /[\*\-\?ABCDEFGHIKLMNPQRSTUVWXYZ\s]*/
         @value = value
       end
 
@@ -2900,7 +2931,7 @@ module Bio
       # *Raises*:
       # * Bio::NeXML::InvalidTokenException - if state if not of the correct type.
       def state=( state )
-        raise InvalidTokenExcetpion, "ContinuousToken expected" unless state =~ /^[+-]?\d*(\.\d+)?$/
+        raise InvalidTokenException, "ContinuousToken expected" unless state =~ /^[+-]?\d*(\.\d+)?$/
         @state = state
       end
       
