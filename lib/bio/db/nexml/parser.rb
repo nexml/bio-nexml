@@ -500,6 +500,10 @@ module Bio
         klass = NeXML.const_get( type )
         char = klass.new( id, states, label )
 
+        if char.respond_to?(:codon=) and c = attribute( 'codon' )
+          char.codon = c
+        end
+
         char_cache[ char.id ] = char
         return char if empty_element?
 
