@@ -308,6 +308,7 @@ module Bio
       def has_otu?( id )
         otu_set.has_key? id
       end
+      alias has? has_otu?
       alias include? has_otu?
 
       #Add an 'otu' to this 'otus'
