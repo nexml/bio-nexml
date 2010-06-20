@@ -16,6 +16,7 @@ module Bio
     class InvalidSequenceException < Exception; end
     class InvalidSeqException < Exception; end
     class InvalidCellException < Exception; end
+    class InvalidCodonPositionException < Exception; end
 
     module Base
       def xml_base
@@ -1837,8 +1838,36 @@ module Bio
     end
 
     # = DESCRIPTION
+    # This module makes <em>codon</em> attribute available to Bio::NeXML::DnaChar and Bio::NeXML::RnaChar objects.
+    module Codon
+      attr_reader :codon
+      alias codon_position codon
+
+      # Assign a codon position to <tt>self</tt>.
+      # ---
+      # *Arguments*:
+      # * cp( required ) - a valid codon position.
+      # *Raises*:
+      # * Bio::NeXML::InvalidCodonPositionException - if cp is not a valid codon postion.
+      def codon=( cp )
+        raise InvalidCodonPositionException, "Valid codon position expected." unless cp =~ /[123]/
+        cp = cp.to_i
+        @codon = cp
+      end
+      alias codon_position= codon=
+
+    end
+
+    # = DESCRIPTION
     # Abstract <em>char</em> implementation of <em>AbstractChar</em>[http://nexml.org/nexml/html/doc/schema-1/characters/abstractcharacters/#AbstractChar] type.
-    # A concrete subtype must define <tt>states=</tt> method to assigna a <em>states</em> element to <tt>self</tt>.
+    # This class defines <tt>states</tt> attribute accessor but not writer, so a concrete subtype must define it.
+    # Bio::NeXML::Char has the following subtypes:
+    # * Bio::NeXML::ProteinChar
+    # * Bio::NeXML::DnaChar
+    # * Bio::NeXML::RnaChar
+    # * Bio::NeXML::RestrictionChar
+    # * Bio::NeXML::StandardChar
+    # * Bio::NeXML::ContinuousChar
     class Char
       include IDTagged
       attr_reader :states
@@ -1864,7 +1893,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::ProteinStates object.
       # *Raises*:
-      # * InvalidStatesException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStatesException - if states is not of the correct type.
       def states=( states )
         raise InvalidStatesException, "ProteinStates expected" unless states.instance_of? ProteinStates
         @states = states
@@ -1875,6 +1904,7 @@ module Bio
     # = DESCRIPTION
     # Concrete <em>char</em> implementation of <em>DNAChar</em>[http://nexml.org/nexml/html/doc/schema-1/characters/dna/#DNAChar] type.
     class DnaChar < Char
+      include Codon
 
       def initialize( id, states, label = nil )
         super
@@ -1885,7 +1915,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::DnaStates object.
       # *Raises*:
-      # * InvalidStatesException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStatesException - if states is not of the correct type.
       def states=( states )
         raise InvalidStatesException, "DnaStates expected" unless states.instance_of? DnaStates
         @states = states
@@ -1896,6 +1926,7 @@ module Bio
     # = DESCRIPTION
     # Concrete <em>char</em> implementation of <em>RNAChar</em>[http://nexml.org/nexml/html/doc/schema-1/characters/rna/#RNAChar] type.
     class RnaChar < Char
+      include Codon
 
       def initialize( id, states, label = nil )
         super
@@ -1906,7 +1937,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::RnaStates object.
       # *Raises*:
-      # * InvalidStatesException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStatesException - if states is not of the correct type.
       def states=( states )
         raise InvalidStatesException, "RnaStates expected" unless states.instance_of? RnaStates
         @states = states
@@ -1927,7 +1958,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::RestrictionStates object.
       # *Raises*:
-      # * InvalidStatesException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStatesException - if states is not of the correct type.
       def states=( states )
         raise InvalidStatesException, "RestrictionStates expected" unless states.instance_of? RestrictionStates
         @states = states
@@ -1958,7 +1989,7 @@ module Bio
       # *Arguments*:
       # * states( required ) - a Bio::NeXML::StandardStates object.
       # *Raises*:
-      # * InvalidStatesException - if states is not of the correct type.
+      # * Bio::NeXML::InvalidStatesException - if states is not of the correct type.
       def states=( states )
         raise InvalidStatesException, "StandardStates expected" unless states.instance_of? StandardStates
         @states = states
