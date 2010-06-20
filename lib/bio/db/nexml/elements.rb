@@ -1687,6 +1687,7 @@ module Bio
     # =DESCRIPTION
     # Mixin. Allows a <em>state</em> to be amiguous.
     module Ambiguous
+      include Enumerable
       attr_writer :polymorphic, :uncertain
 
       # Add members to the state. It delegated the actual addition to <tt>add_member</tt> method.
@@ -1739,6 +1740,13 @@ module Bio
       def members
         @members ||= []
       end
+
+      # Call the block for each <em>member</em> element in <tt>self</tt> passing that object as
+      # a parameter to the block.
+      def each
+        members.each{ |member| yield member }
+      end
+      alias each_member each
 
     end
 
