@@ -9,6 +9,7 @@ require 'bio/db/nexml/elements'
 module Bio
   module NeXML
     autoload :Parser, 'bio/db/nexml/parser'
+    autoload :Writer, 'bio/db/nexml/writer'
   end
 end
 
