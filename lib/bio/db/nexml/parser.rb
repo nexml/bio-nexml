@@ -10,15 +10,11 @@ module Bio
     #end
 
     class Parser
-      def state_cache
-        @state_cache ||= {}
-      end
-
-      def char_cache
-        @char_cache ||= {}
-      end
 
       def initialize( nexml, validate = false )
+        #initialize a cache
+        @cache = {}
+
         #initialize a libxml cursor
         @reader = read( nexml )
         
@@ -69,6 +65,12 @@ module Bio
       end
 
       private
+
+      # Cache otus, otu, states, state, and char
+      def cache( object = nil )
+        return @cache unless object
+        @cache[ object.id ] = object
+      end
 
       #Determine if the 'nexml' is a file, string, or an io
       #and accordingly return a XML::Reader object.
@@ -148,6 +150,8 @@ module Bio
 
         otus = NeXML::Otus.new( id, label )
 
+        cache otus
+
         #according to the schema an 'otus' may have no child element.
         return otus if empty_element?
 
@@ -175,6 +179,8 @@ module Bio
 
         otu = NeXML::Otu.new( id, label )
 
+        cache otu
+
         #according to the schema an 'otu' may have no child element.
         return otu if empty_element?
 
@@ -193,8 +199,7 @@ module Bio
       #When this function is called the cursor is at a 'trees' element.
       #Return - a 'trees' object.
       def parse_trees
-        otus_id = attribute( 'otus' )
-        otus = @nexml.get_otus_by_id( otus_id )
+        otus = cache[ attribute( 'otu' ) ]
 
         id = attribute( 'id' )
         label = attribute( 'label' )
@@ -309,7 +314,7 @@ module Bio
 
         #is this node taxon linked
         if otu_id = attribute( 'otu' )
-          otu = @nexml.get_otu_by_id otu_id
+          otu = cache[ otu_id ]
         end
 
         node = NeXML::Node.new( id, otu, root, label )
@@ -381,10 +386,9 @@ module Bio
 
       def parse_characters
         #get the taxon linkage
-        otus_id = attribute( 'otus' )
-        otus = @nexml.get_otus_by_id( otus_id )
+        otus = cache[ attribute( 'otus' ) ]
 
-        #other attributes
+        #other attribute
         id = attribute( 'id' )
         label = attribute( 'label' )
 
@@ -421,7 +425,7 @@ module Bio
           when 'states'
             format << parse_states( type )
           when 'char'
-            format << parse_char( type, format.states_set )
+            format << parse_char( type )
           when 'format'
             break
           end #end case
@@ -455,6 +459,8 @@ module Bio
           end
         end
 
+        cache states
+
         states
       end
 
@@ -467,7 +473,7 @@ module Bio
         klass = NeXML.const_get type
         state = klass.new( id, symbol, label )
 
-        state_cache[ state.id ] = state
+        cache state
 
         return state if empty_element?
 
@@ -485,16 +491,15 @@ module Bio
 
       def parse_member
         state_id = attribute( 'state' )
-        state = state_cache[ state_id ]
+        state = cache[ state_id ]
 
         Bio::NeXML::Member.new state
       end
 
-      def parse_char( type, states )
+      def parse_char( type )
         id = attribute( 'id' )
         label = attribute( 'label' )
-        states_id = attribute( 'states' )
-        states = states[ states_id ]
+        states = cache[ attribute( 'states' ) ]
 
         type = type.sub( /Format/, "Char" )
         klass = NeXML.const_get( type )
@@ -504,7 +509,8 @@ module Bio
           char.codon = c
         end
 
-        char_cache[ char.id ] = char
+        cache char
+        
         return char if empty_element?
 
         while next_node
@@ -539,6 +545,7 @@ module Bio
       def parse_row( type )
         id = attribute( 'id' )
         label = attribute( 'label' )
+        otu = cache[ attribute( 'otu' ) ]
 
         type = type.sub( /Matrix/, "Row" )
         klass = NeXML.const_get type
@@ -588,8 +595,8 @@ module Bio
         char_id = attribute( 'char' )
         state_id = attribute( 'state' )
 
-        char = char_cache[ char_id ] 
-        state = ( klass != Bio::NeXML::ContinuousCell ? state_cache[ state_id ] : state_id )
+        char = cache[ char_id ] 
+        state = ( klass != Bio::NeXML::ContinuousCell ? cache[ state_id ] : state_id )
         
         cell.state = state
         cell.char = char
