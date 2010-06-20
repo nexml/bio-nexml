@@ -4,7 +4,9 @@ module Bio
 
     class Writer
 
-      def initialize
+      def initialize( filename = nil, indent = true )
+        @filename = filename
+        @indent = indent
         @doc = XML::Document.new
         @root = root
         @doc.root = @root
@@ -21,8 +23,10 @@ module Bio
         end
       end
 
-      def save( filename )
-        @doc.save( filename, :indent => true )
+      def save( filename = nil, indent = false )
+        filename ||= @filename
+        indent ||= @indent
+        @doc.save( filename, :indent => indent )
       end
 
       def write_otus( object )
