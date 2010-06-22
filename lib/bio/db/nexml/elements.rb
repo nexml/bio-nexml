@@ -457,6 +457,10 @@ module Bio
         edge_set.values
       end
 
+      def each_edge
+        edge_set.each_value{ |edge| yield edge }
+      end
+
       #Add an edge to the tree.
       def add_edge( edge )
         edge_set[ edge.id ] = edge
