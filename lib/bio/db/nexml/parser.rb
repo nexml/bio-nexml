@@ -66,7 +66,7 @@ module Bio
 
       private
 
-      # Cache otus, otu, states, state, and char
+      # Cache otus, otu, states, state, char, node
       def cache( object = nil )
         return @cache unless object
         @cache[ object.id ] = object
@@ -199,7 +199,7 @@ module Bio
       #When this function is called the cursor is at a 'trees' element.
       #Return - a 'trees' object.
       def parse_trees
-        otus = cache[ attribute( 'otu' ) ]
+        otus = cache[ attribute( 'otus' ) ]
 
         id = attribute( 'id' )
         label = attribute( 'label' )
@@ -318,6 +318,7 @@ module Bio
         end
 
         node = NeXML::Node.new( id, otu, root, label )
+        cache node
 
         #according to the schema a 'node' may have no child element.
         return node if empty_element?
@@ -339,8 +340,8 @@ module Bio
       #Return - a 'edge' object.
       def parse_edge( type )
         id = attribute( 'id' )
-        source = attribute( 'source' )
-        target = attribute( 'target' )
+        source = cache[ attribute( 'source' ) ]
+        target = cache[ attribute( 'target' ) ]
         length = attribute( 'length' )
         
         type.sub!(/Tree|Network/, "Edge")
