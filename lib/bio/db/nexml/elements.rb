@@ -394,7 +394,7 @@ module Bio
     class IntEdge < Edge
 
       def initialize( id, source, target, length = nil, label = nil )
-        length = length.to_i
+        length = length.to_i if length
         super
       end
 
@@ -464,8 +464,8 @@ module Bio
       #Add an edge to the tree.
       def add_edge( edge )
         edge_set[ edge.id ] = edge
-        source = get_node_by_name( edge.source )
-        target = get_node_by_name( edge.target )
+        source = edge.source
+        target = edge.target
         super source, target, edge
       end
 
@@ -488,7 +488,7 @@ module Bio
       end
 
       def add_edge( edge )
-        target = get_node_by_name( edge.target )
+        target = edge.target
         raise "Target exists." if target_cache.include? target
         target_cache << target
         super
@@ -1165,7 +1165,7 @@ module Bio
       # * Bio::NeXML::InvalidFormatException - if format is not of the correct type.
       def format=( format )
         raise InvalidFormatException, "ProteinFormat expected" unless format.instance_of? ContinuousFormat
-        @Format = format
+        @format = format
       end
 
       # Add a <em>matrix</em> element to <tt>self</tt>.
@@ -1753,7 +1753,8 @@ module Bio
 
       # *Returns*: a string stating the kind of ambiguity: polymorphic or uncertain.
       def ambiguity
-        polymorphic? ? "polymorphic" : "uncertain"
+        return :polymorphic if polymorphic?
+        return :uncertain if uncertain?
       end
 
       # *Returns*: true if the state is ambiguous, false otherwise.
@@ -2101,6 +2102,10 @@ module Bio
         end
       end
       alias << rows=
+
+      def each_row
+        row_set.each_value{ |row| yield row }
+      end
 
     end #end class Matrix
 
@@ -2544,6 +2549,10 @@ module Bio
         end
       end
       alias << cells=
+
+      def each_cell
+        cells.each { |cell| yield cell }
+      end
 
     end #enc class CellRow
 
