@@ -1,26 +1,121 @@
+require 'bio/db/nexml/writer'
+
 module Bio
   module NeXML
 
-    module TestWriterData
+    module TestWriterHelper
+      # This module defines test helpers.
+      # TEST_FILE_PATH points to a very small nexml file that defines all the nexml elements.
+      # The idea is to initialize two XML::Node objects: first, by parsing the test file, and
+      # the second by calling serialize_* methods on NeXML::Writer object and assert their equality.
+      # If they are equal, the NeXML::Writer#serialize_* methods pass the test. This equality is
+      # asserted by the match? helper method defined in this module.
+
       TEST_FILE_PATH = File.join File.dirname(__FILE__), ['..'] * 4, 'data', 'nexml', 'test.xml'
 
+      # Parse the test file.
       def parse
         @doc = XML::Document.file TEST_FILE_PATH, :options => XML::Parser::Options::NOBLANKS
       end
 
+      # Return the first occurence of a tag by name in the test file.
       def element( name )
         @doc.find_first( "//nex:#{name}", 'nex:http://www.nexml.org/1.0' )
       end
       alias method_missing element
 
+      # If an attribte is associated with a namespace, say: 'xsi:type', the XML::Attr#name function
+      # returns the name without the namespace prefix. The redefined XML::Attr#name returns the 
+      # qualified name( with the prefix ) of the node.
+      XML::Attr.class_eval do
+        alias old_name name
+        def name
+          return old_name unless self.ns?
+          "#{self.ns.prefix}:#{old_name}"
+        end
+      end
+
+      # Compare two XML::Nodes for equality based on the following criteria:
+      # * same name,
+      # * same attributes( irrespective of the order )
+      # * same children( irrespective of the order )
+      def match?( node1, node2 )
+        # not equal if their names do not match
+        return false unless node1.name == node2.name
+
+        attributes1 = node1.attributes.map( &:to_s )
+        attributes2 = node2.attributes.map( &:to_s )
+
+        # not equal if both do not have the same number of attributes
+        return false unless attributes1.length == attributes2.length
+
+        # if the nodes have same number of attributes, compare them
+        unless attributes1.empty? and attributes2.empty?
+          attributes1.each do |attr1|
+            # not equal if attr1 can not be found in attributes2
+            return false unless attributes2.find{ |attr2| attr1 == attr2 }
+          end 
+        end
+
+        children1 = node1.children
+        children2 = node2.children
+
+        # not equal if number of child nodes do not match
+        return false unless children1.length == children2.length
+
+        # if the nodes have same number of children, compare them
+        unless children1.empty? and children2.empty?
+          children1.each do |child1|
+            #not equal if child1 can't be found in children2
+            return false unless children2.find{ |child2| match?( child1, child2 ) }
+          end
+        end
+
+        true
+      end
+
+    end
+
+    class TestTestWriterHelper < Test::Unit::TestCase
+      include TestWriterHelper
+
+      # should pass the criteria( see the definition of match? ) of a node's equality.
+      def test_match
+        # two nodes with same name
+        node1 = XML::Node.new( 'nexml' )
+        node2 = XML::Node.new( 'nexml' )
+
+        # same attributes
+        node1.attributes = { :version => '0.9', :generator => 'bioruby' }
+        node2.attributes = { :generator => 'bioruby', :version => '0.9' }
+
+        # childe nodes for node1
+        child11 = XML::Node.new( 'otus' )
+        child12 = XML::Node.new( 'otus' )
+        child11.attributes = { :id => 'taxa1', :label => 'Taxa 1' }
+        child12.attributes = { :id => 'taxa2', :label => 'Taxa 2' }
+
+        # childe nodes for node2
+        child21 = XML::Node.new( 'otus' )
+        child22 = XML::Node.new( 'otus' )
+        child21.attributes = { :id => 'taxa1', :label => 'Taxa 1' }
+        child22.attributes = { :id => 'taxa2', :label => 'Taxa 2' }
+
+        # same children
+        node1 << child11
+        node1 << child12
+        node2 << child22
+        node2 << child21
+
+        assert match?( node1, node2 )
+      end
     end
 
     class TestWriter < Test::Unit::TestCase
-      include TestWriterData
+      include TestWriterHelper
 
       def setup
-        @writer = Bio::NeXML::Writer.new
-        parse
+        @writer = Bio::NeXML::Writer.new; parse
       end
 
       # should respond properly to :id, and :label
@@ -232,42 +327,7 @@ module Bio
         tree1.add_edge e1
         nexml = @writer.serialize_tree( tree1 )
 
-        assert_equal tree[ 'id' ], nexml[ 'id' ]
-        assert_equal tree[ 'label' ], nexml[ 'label' ]
-        #practically this is correct. theoritically i should have
-        #attached xsi:type to the xsi namespace.
-        assert_equal tree[ 'type' ], nexml[ 'xsi:type' ]
-
-        en1 = tree.children.find{ |n| n[ 'id' ] == 'n1' }
-        en2 = tree.children.find{ |n| n[ 'id' ] == 'n2' }
-        an1 = nexml.children.find{ |n| n[ 'id' ] == 'n1' }
-        an2 = nexml.children.find{ |n| n[ 'id' ] == 'n2' }
-
-        assert_equal en1[ 'id' ], an1[ 'id' ]
-        assert_equal en1[ 'otu' ], an1[ 'otu' ]
-        assert_equal en1[ 'root' ], an1[ 'root' ]
-        assert_equal en1[ 'label' ], an1[ 'label' ]
-        assert_equal en2[ 'id' ], an2[ 'id' ]
-        assert_equal en2[ 'otu' ], an2[ 'otu' ]
-        assert_equal en2[ 'root' ], an2[ 'root' ]
-        assert_equal en2[ 'label' ], an2[ 'label' ]
-
-        ere1 = tree.children.find{ |n| n[ 'id' ] == 're1' }
-        are1 = nexml.children.find{ |n| n[ 'id' ] == 're1' }
-
-        assert_equal ere1[ 'id' ], are1[ 'id' ]
-        assert_equal ere1[ 'target' ], are1[ 'target' ]
-        assert_equal ere1[ 'length' ], are1[ 'length' ]
-        assert_equal ere1[ 'label' ], are1[ 'label' ]
-
-        ee1 = tree.children.find{ |n| n[ 'id' ] == 'e1' }
-        ae1 = nexml.children.find{ |n| n[ 'id' ] == 'e1' }
-
-        assert_equal ee1[ 'id' ], ae1[ 'id' ]
-        assert_equal ee1[ 'source' ], ae1[ 'source' ]
-        assert_equal ee1[ 'target' ], ae1[ 'target' ]
-        assert_equal ee1[ 'length' ], ae1[ 'length' ]
-        assert_equal ee1[ 'label' ], ae1[ 'label' ]
+        assert match?( tree, nexml )
       end
 
       def test_serialize_network
@@ -283,40 +343,7 @@ module Bio
         network1.add_edge e2
         nexml = @writer.serialize_network( network1 )
 
-
-        assert_equal network[ 'id' ], nexml[ 'id' ]
-        assert_equal network[ 'label' ], nexml[ 'label' ]
-        assert_equal network[ 'type' ], nexml[ 'xsi:type' ]
-
-        en1 = network.children.find{ |n| n[ 'id' ] == 'n1n1' }
-        en2 = network.children.find{ |n| n[ 'id' ] == 'n1n2' }
-        an1 = nexml.children.find{ |n| n[ 'id' ] == 'n1n1' }
-        an2 = nexml.children.find{ |n| n[ 'id' ] == 'n1n2' }
-
-        assert_equal en1[ 'id' ], an1[ 'id' ]
-        assert_equal en1[ 'otu' ], an1[ 'otu' ]
-        assert_equal en1[ 'root' ], an1[ 'root' ]
-        assert_equal en1[ 'label' ], an1[ 'label' ]
-        assert_equal en2[ 'id' ], an2[ 'id' ]
-        assert_equal en2[ 'otu' ], an2[ 'otu' ]
-        assert_equal en2[ 'root' ], an2[ 'root' ]
-        assert_equal en2[ 'label' ], an2[ 'label' ]
-
-        ee1 = network.children.find{ |n| n[ 'id' ] == 'n1e1' }
-        ee2 = network.children.find{ |n| n[ 'id' ] == 'n1e2' }
-        ae1 = nexml.children.find{ |n| n[ 'id' ] == 'n1e1' }
-        ae2 = nexml.children.find{ |n| n[ 'id' ] == 'n1e2' }
-
-        assert_equal ee1[ 'id' ], ae1[ 'id' ]
-        assert_equal ee1[ 'source' ], ae1[ 'source' ]
-        assert_equal ee1[ 'target' ], ae1[ 'target' ]
-        assert_equal ee1[ 'length' ], ae1[ 'length' ]
-        assert_equal ee1[ 'label' ], ae1[ 'label' ]
-        assert_equal ee2[ 'id' ], ae2[ 'id' ]
-        assert_equal ee2[ 'source' ], ae2[ 'source' ]
-        assert_equal ee2[ 'target' ], ae2[ 'target' ]
-        assert_equal ee2[ 'length' ], ae2[ 'length' ]
-        assert_equal ee2[ 'label' ], ae2[ 'label' ]
+        assert match?( network, nexml )
       end
 
       def test_serialize_member
@@ -334,16 +361,7 @@ module Bio
         uss1 << [ss1, ss2]
         nexml = @writer.serialize_uncertain_state_set( uss1 )
 
-        assert_equal uncertain_state_set[ 'id' ], nexml[ 'id' ]
-        assert_equal uncertain_state_set[ 'label' ], nexml[ 'label' ]
-
-        es1 = uncertain_state_set.children.find{ |n| n[ 'state' ] == 'ss1' }
-        es2 = uncertain_state_set.children.find{ |n| n[ 'state' ] == 'ss2' }
-        as1 = nexml.children.find{ |n| n[ 'state' ] == 'ss1' }
-        as2 = nexml.children.find{ |n| n[ 'state' ] == 'ss2' }
-
-        assert_equal es1, as1
-        assert_equal es2, as2
+        assert match?( uncertain_state_set, nexml )
       end
 
       def test_serialize_polymorphic_state_set
@@ -354,25 +372,14 @@ module Bio
         pss1 << [ss1, ss2]
         nexml = @writer.serialize_polymorphic_state_set( pss1 )
 
-        assert_equal polymorphic_state_set[ 'id' ], nexml[ 'id' ]
-        assert_equal polymorphic_state_set[ 'label' ], nexml[ 'label' ]
-
-        es1 = polymorphic_state_set.children.find{ |n| n[ 'state' ] == 'ss1' }
-        es2 = polymorphic_state_set.children.find{ |n| n[ 'state' ] == 'ss2' }
-        as1 = nexml.children.find{ |n| n[ 'state' ] == 'ss1' }
-        as2 = nexml.children.find{ |n| n[ 'state' ] == 'ss2' }
-
-        assert_equal es1, as1
-        assert_equal es2, as2
+        assert match?( polymorphic_state_set, nexml )
       end
 
       def test_state
         ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
         nexml = @writer.serialize_state( ss1 )
 
-        assert_equal state[ 'id' ], nexml[ 'id' ]
-        assert_equal state[ 'label' ], nexml[ 'label' ]
-        assert_equal state[ 'symbol' ], nexml[ 'symbol' ]
+        assert match?( state, nexml )
       end
 
     end # end class TestWriter
