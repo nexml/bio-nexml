@@ -52,4 +52,18 @@
             </row>
         </matrix>
     </characters>
+    <characters otus="taxa1" id="m2" xsi:type="nex:StandardCells" label="Categorical characters">
+        <format>
+            <states id="sss2">
+                <state id="ss6" symbol="1"/>                                
+            </states>
+            <char states="sss2" id="sc3"/>
+        </format>
+
+        <matrix>
+            <row id="sr3" otu="o1">
+                <cell char="sc3" state="ss6"/>
+            </row>
+        </matrix>
+    </characters>
 </nex:nexml>

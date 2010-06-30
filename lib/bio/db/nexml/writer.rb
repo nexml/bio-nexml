@@ -1,6 +1,3 @@
-$:.unshift "/home/yeban/src/bioruby/lib"
-require 'bio'
-
 module Bio
   module NeXML
     include LibXML
@@ -90,7 +87,14 @@ module Bio
     end
 
     class Writer
-
+      # = DESCRIPTION
+      # Bio::NeXML::Writer class provides a wrapper over libxml-ruby to create any NeXML document.
+      # This class defines a set of serialize_* instance methods which can be called on the appropriate
+      # object to get its NeXML representation. The method returns a XML::Node object.
+      # To get the raw NeXML representation to_s method should be called on the return value.
+      # = EXAMPLES
+      # A lot of examples of creating nexml objects and then serializing them
+      # can be found in the tests "test/unit/bio/db/nexml/tc_writer.rb"
       def initialize( filename = nil, indent = true )
         @filename = filename
         @indent = indent
@@ -99,46 +103,115 @@ module Bio
         @doc.root = @root
       end
 
-      # Write an otus to 
+      # Add one or more <em>otus</em>, <em>trees</em>, or <em>characters</em> objects to <tt>self</tt>.
+      # This function delegates the actual addition to the <tt>otus=</tt>, <tt>trees=</tt>, or
+      # <tt>otus=</tt> methods.
+      # >> doc1 = Bio::NeXML::Parser.new 'test.xml'
+      # >> nexml = doc1.parse
+      # >> doc1.close
+      # >> writer = Bio::NeXML::Writer.new
+      # >> writer << nexml.otus
+      # >> writer << nexml.trees
+      # >> writer << nexml.characters
       def <<( object )
-        case object
+        test = object.instance_of?( Array ) ? object.first : object
+        case test
         when Otus
-          write_otus( object )
+          self.otus = object
         when Trees
-          write_trees( object )
+          self.trees = object
         when Characters
-          write_characters( object )
+          self.characters = object
         end
       end
-
+      
+      # Write to file.
+      # >> writer.save( 'sample.xml', true )
+      # ---
+      # Arguments:
+      # * filename( optional ) - the filename to write to. This need not be given if
+      # a filename was provided while initializing Writer.
+      # * indent( optional ) - wether to indent the output NeXML. This options assumes
+      # <tt>true</tt> by default.
       def save( filename = nil, indent = false )
         filename ||= @filename
         indent ||= @indent
         @doc.save( filename, :indent => indent )
       end
 
-      def write_otus( otus )
+      # Add one or more <em>otus</em> objects to <tt>self</tt>.
+      # This function delegates the actual addition to <tt>add_otus</tt> method.
+      # >> writer = Bio::NeXML::Writer.new
+      # >> writer << nexml.otus
+      def otus=( otus )
+        if otus.instance_of? Array
+          otus.each{ |o| add_otus( o ) }
+        else
+          add_otus( otus )
+        end
+      end
+
+      # Add one or more <em>trees</em> objects to <tt>self</tt>.
+      # This function delegates the actual addition to <tt>add_trees</tt> method.
+      # >> writer = Bio::NeXML::Writer.new
+      # >> writer << nexml.trees
+      def trees=( trees )
+        if trees.instance_of? Array
+          trees.each{ |t| add_trees( t ) }
+        else
+          add_trees( trees )
+        end
+      end
+
+      # Add one or more <em>characters</em> objects to <tt>self</tt>.
+      # This function delegates the actual addition to <tt>add_characters</tt> method.
+      # >> writer = Bio::NeXML::Writer.new
+      # >> writer << nexml.characters
+      def characters=( characters )
+        if characters.instance_of? Array
+          characters.each{ |c| add_characters( c ) }
+        else
+          add_characters( characters )
+        end
+      end
+      
+      # Add a single <em>otus</em> object to <tt>self</tt>.
+      # >> writer = Bio::NeXML::Writer.new
+      # >> writer.add_otus( nexml.otus.first )
+      def add_otus( otus )
         @root << serialize_otus( otus )
       end
 
-      def write_trees( trees )
+      # Add a single <em>trees</em> object to <tt>self</tt>
+      # >> writer = Bio::NeXML::Writer.new
+      # >> writer.add_trees( nexml.trees.first )
+      def add_trees( trees )
         @root << serialize_trees( trees )
       end
 
-      def write_characters( characters )
+      # Add a single <em>characters</em> object to <tt>self</tt>
+      # >> writer = Bio::NeXML::Writer.new
+      # >> writer.add_characters( nexml.characters.first )
+      def add_characters( characters )
         @root << serialize_characters( characters )
       end
 
+      # Create the root <em>nexml</em> node.
+      # >> writer = Bio::NeXML::Writer.new
+      # >> writer.root
       def root
-        root = nexml( :"xsi:schemaLocation" => "http://www.nexml.org/1.0 ../xsd/nexml.xsd", :generator => "bioruby", :version => "0.9" )
+        root = create_node( "nexml", :"xsi:schemaLocation" => "http://www.nexml.org/1.0 ../xsd/nexml.xsd", :generator => "bioruby", :version => "0.9" )
 
         root.namespaces = { nil => "http://www.nexml.org/1.0", :xsi => "http://www.w3.org/2001/XMLSchema-instance", :xlink => "http://www.w3.org/1999/xlink", :nex => "http://www.nexml.org/1.0" }
         root
       end
 
+      def serialize_otu( otu )
+        create_node( "otu", attributes( otu, :id, :label ) )
+      end
+
       def serialize_otus( otus )
-        attributes = attributes( otus, :id, :label )
-        node = otus( attributes )
+        node = create_node( "otus", attributes( otus, :id, :label ) )
 
         otus.each do |otu|
           node << serialize_otu( otu )
@@ -148,7 +221,7 @@ module Bio
       end
 
       def serialize_trees( trees )
-        node = trees attributes( trees, :id, :label, :otus )
+        node = create_node( "trees", attributes( trees, :id, :label, :otus ) )
 
         trees.each_tree do |tree|
           node << serialize_tree( tree )
@@ -162,7 +235,7 @@ module Bio
       end
 
       def serialize_characters( characters )
-        node = characters attributes( characters, :id, :"xsi:type", :otus, :label )
+        node = create_node( "characters", attributes( characters, :id, :"xsi:type", :otus, :label ) )
 
         node << serialize_format( characters.format )
         node << serialize_matrix( characters.matrix )
@@ -170,12 +243,8 @@ module Bio
         node
       end
 
-      def serialize_otu( otu )
-        otu attributes( otu, :id, :label )
-      end
-
       def serialize_tree( tree )
-        node = tree attributes( tree, :id, :'xsi:type', :label )
+        node = create_node( "tree", attributes( tree, :id, :'xsi:type', :label ) )
 
         tree.each_node do |n|
           node << serialize_node( n )
@@ -192,7 +261,7 @@ module Bio
       end
 
       def serialize_network( network )
-        node = network attributes( network, :id, :'xsi:type', :label )
+        node = create_node( "network", attributes( network, :id, :'xsi:type', :label ) )
 
         network.each_node do |n|
           node << serialize_node( n )
@@ -206,19 +275,19 @@ module Bio
       end
 
       def serialize_node( node )
-        node attributes( node, :id, :otu, :root, :label )
+        create_node( "node", attributes( node, :id, :otu, :root, :label ) )
       end
 
       def serialize_edge( edge )
-        edge attributes( edge, :id, :source, :target, :length, :label )
+        create_node( "edge", attributes( edge, :id, :source, :target, :length, :label ) )
       end
 
       def serialize_rootedge( rootedge )
-        rootedge attributes( rootedge, :id, :target, :length, :label )
+        create_node( "rootedge", attributes( rootedge, :id, :target, :length, :label ) )
       end
 
       def serialize_format( format )
-        node = self.format
+        node = create_node( "format" )
 
         format.each_states do |states|
           node << serialize_states( states )
@@ -232,7 +301,7 @@ module Bio
       end
 
       def serialize_matrix( matrix )
-        node = matrix()
+        node = create_node( "matrix" )
 
         matrix.each_row do |row|
           case row
@@ -247,19 +316,19 @@ module Bio
       end
 
       def serialize_seq_row( row )
-        node = row attributes( row, :id, :otu, :label )
+        node = create_node( "row", attributes( row, :id, :otu, :label ) )
         node << serialize_seq( row.seq )
         node
       end
 
       def serialize_seq( seq )
-        node = seq()
+        node = create_node( "seq" )
         node << seq.value
         node
       end
 
       def serialize_cell_row( row )
-        node = row attributes( row, :id, :otu, :label )
+        node = create_node( "row", attributes( row, :id, :otu, :label ) )
 
         row.each_cell do |cell|
           node << serialize_cell( cell )
@@ -269,11 +338,11 @@ module Bio
       end
 
       def serialize_cell( cell )
-        cell attributes( cell, :state, :char )
+        create_node( "cell", attributes( cell, :state, :char ) )
       end
 
       def serialize_states( states )
-        node = states attributes( states, :id, :label )
+        node = create_node( "states", attributes( states, :id, :label ) )
 
         s = states.select{ |state| not state.ambiguous? }
         ps = states.select{ |state| state.ambiguity == :polymorphic }
@@ -320,15 +389,15 @@ module Bio
       end
 
       def serialize_char( char )
-        char attributes( char, :id, :states, :label, :codon )
+        create_node( "char", attributes( char, :id, :states, :label, :codon ) )
       end
 
       def serialize_state( state )
-        state attributes( state, :id, :label, :symbol )
+        create_node( "state", attributes( state, :id, :label, :symbol ) )
       end
 
       def serialize_uncertain_state_set( state )
-        node = uncertain_state_set attributes( state, :id, :label, :symbol )
+        node = create_node( "uncertain_state_set", attributes( state, :id, :label, :symbol ) )
 
         state.each do |member|
           node << serialize_member( member )
@@ -338,7 +407,7 @@ module Bio
       end
 
       def serialize_polymorphic_state_set( state )
-        node = polymorphic_state_set attributes( state, :id, :label, :symbol )
+        node = create_node( "polymorphic_state_set", attributes( state, :id, :label, :symbol ) )
 
         state.each do |member|
           node << serialize_member( member )
@@ -348,11 +417,13 @@ module Bio
       end
 
       def serialize_member( member )
-        member( :state => member.id )
+        create_node( "member", :state => member.id )
       end
 
       private
 
+      # Returns a hash of attributes for the given object.
+      # See example in unit tests.
       def attributes( object, *names )
         attributes = {}
 
@@ -392,12 +463,16 @@ module Bio
         attributes
       end
 
-      def tag( name, attributes = {} )
+      # Create a XML::Node object with the given name and the attributes.
+      # >> writer = Bio::NeXML::Writer.new
+      # >> node = writer.send( :create_node, 'nexml', :version => '0.9' )
+      # >> node.to_s
+      # => "<nexml version=\"0.9\"/>"
+      def create_node( name, attributes = {} )
         node = XML::Node.new( name )
         node.attributes = attributes unless attributes.empty?
         node
       end
-      alias method_missing tag
 
     end #end class Parser
 

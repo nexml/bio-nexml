@@ -365,7 +365,7 @@ module Bio
 
       def parse_rootedge
         id = attribute( 'id' )
-        target = attribute( 'target' )
+        target = cache[ attribute( 'target' ) ]
         length = attribute( 'length' )
         
         rootedge = RootEdge.new( id, target, length )
