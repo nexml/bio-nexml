@@ -20,9 +20,8 @@ module Bio
 
       # Return the first occurence of a tag by name in the test file.
       def element( name )
-        @doc.find_first( "//nex:#{name}", 'nex:http://www.nexml.org/1.0' )
+        @doc.find( "//nex:#{name}", 'nex:http://www.nexml.org/1.0' )
       end
-      alias method_missing element
 
       # If an attribte is associated with a namespace, say: 'xsi:type', the XML::Attr#name function
       # returns the name without the namespace prefix. The redefined XML::Attr#name returns the 
@@ -258,58 +257,56 @@ module Bio
 
       def test_serialize_otu
         o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
-        nexml = @writer.serialize_otu( o1 )
+        output = @writer.serialize_otu( o1 )
+        parsed = element( 'otu' ).first
 
-        assert_equal otu[ 'id' ], nexml[ 'id' ]
-        assert_equal otu[ 'label' ], nexml[ 'label' ]
+        assert match?( parsed, output )
       end
 
       def test_serialize_otus
         taxa1 = Bio::NeXML::Otus.new 'taxa1', 'A taxa block'
         o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
-        taxa1 << o1
-        nexml = @writer.serialize_otus( taxa1 )
+        o2 = Bio::NeXML::Otu.new 'o2', 'A taxon'
+        taxa1 << [ o1, o2 ]
 
-        assert_equal otus[ 'id' ], nexml[ 'id' ]
-        assert_equal otus[ 'label' ], nexml[ 'label' ]
+        output = @writer.serialize_otus( taxa1 )
+        parsed = element( 'otus' ).first
 
-        assert_equal otus.child[ 'id' ], nexml.child[ 'id' ]
-        assert_equal otus.child[ 'label' ], nexml.child[ 'label' ]
+        assert match?( parsed, output )
       end
 
       def test_serialize_node
         o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
         n1 = Bio::NeXML::Node.new 'n1', o1, true, 'A node'
-        nexml = @writer.serialize_node( n1 )
 
-        assert_equal node[ 'id' ], nexml[ 'id' ]
-        assert_equal node[ 'otu' ], nexml[ 'otu' ]
-        assert_equal node[ 'root' ], nexml[ 'root' ]
-        assert_equal node[ 'label' ], nexml[ 'label' ]
+        output = @writer.serialize_node( n1 )
+        parsed = element( 'node' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_edge
+        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
+        o2 = Bio::NeXML::Otu.new 'o2', 'A taxon'
         n1 = Bio::NeXML::Node.new 'n1', o1, true, 'A node'
         n2 = Bio::NeXML::Node.new 'n2', o2, false, 'A node'
         e1 = Bio::NeXML::Edge.new 'e1', n1, n2, 0.4353, 'An edge'
-        nexml = @writer.serialize_edge( e1 )
 
-        assert_equal edge[ 'id' ], nexml[ 'id' ]
-        assert_equal edge[ 'source' ], nexml[ 'source' ]
-        assert_equal edge[ 'target' ], nexml[ 'target' ]
-        assert_equal edge[ 'length' ], nexml[ 'length' ]
-        assert_equal edge[ 'label' ], nexml[ 'label' ]
+        output = @writer.serialize_edge( e1 )
+        parsed = element( 'edge' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serailize_rootedge
+        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
         n1 = Bio::NeXML::Node.new 'n1', o1, true, 'A node'
         re1 = Bio::NeXML::RootEdge.new 're1', n1, 0.5, 'A rootedge'
-        nexml = @writer.serialize_edge( re1 )
 
-        assert_equal rootedge[ 'id' ], nexml[ 'id' ]
-        assert_equal rootedge[ 'target' ], nexml[ 'target' ]
-        assert_equal rootedge[ 'length' ], nexml[ 'length' ]
-        assert_equal rootedge[ 'label' ], nexml[ 'label' ]
+        output = @writer.serialize_rootedge( re1 )
+        parsed = element( 'rootedge' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_tree
@@ -323,9 +320,11 @@ module Bio
         tree1.add_node n2
         tree1.add_rootedge re1
         tree1.add_edge e1
-        nexml = @writer.serialize_tree( tree1 )
 
-        assert match?( tree, nexml )
+        output = @writer.serialize_tree( tree1 )
+        parsed = element( 'tree' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_network
@@ -339,16 +338,56 @@ module Bio
         network1.add_node n2
         network1.add_edge e1
         network1.add_edge e2
-        nexml = @writer.serialize_network( network1 )
 
-        assert match?( network, nexml )
+        output = @writer.serialize_network( network1 )
+        parsed = element( 'network' ).first
+
+        assert match?( parsed, output )
+      end
+
+      def test_serialize_trees
+        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
+
+        n1 = Bio::NeXML::Node.new 'n1', o1, true, 'A node'
+        n2 = Bio::NeXML::Node.new 'n2', nil, false, 'A node'
+        re1 = Bio::NeXML::RootEdge.new 're1', n1, 0.5, 'A rootedge'
+        e1 = Bio::NeXML::Edge.new 'e1', n1, n2, 0.4353, 'An edge'
+        tree1 = Bio::NeXML::FloatTree.new 'tree1', 'A float tree'
+
+        tree1.add_node n1
+        tree1.add_node n2
+        tree1.add_rootedge re1
+        tree1.add_edge e1
+
+        n1 = Bio::NeXML::Node.new 'n1n1', o1, true, 'A node'
+        n2 = Bio::NeXML::Node.new 'n1n2', nil, false, 'A node'
+        e1 = Bio::NeXML::Edge.new 'n1e1', n1, n2, 1, 'An edge'
+        e2 = Bio::NeXML::Edge.new 'n1e2', n2, n2, 0, 'An edge'
+        network1 = Bio::NeXML::IntNetwork.new 'network1', 'An int network'
+
+        network1.add_node n1
+        network1.add_node n2
+        network1.add_edge e1
+        network1.add_edge e2
+
+        taxa1 = Bio::NeXML::Otus.new 'taxa1'
+        trees1 = Bio::NeXML::Trees.new 'trees1', taxa1, 'A tree container'
+        trees1 << tree1
+        trees1 << network1
+
+        output = @writer.serialize_trees( trees1 )
+        parsed = element( 'trees' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_member
         ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
-        nexml = @writer.serialize_member( ss1 )
 
-        assert_equal member[ 'state' ], nexml[ 'state' ]
+        output = @writer.serialize_member( ss1 )
+        parsed = element( 'member' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_uncertain_state_set
@@ -357,9 +396,11 @@ module Bio
         uss1 = Bio::NeXML::StandardState.new 'ss5', '5'
         uss1.uncertain = true
         uss1 << [ss1, ss2]
-        nexml = @writer.serialize_uncertain_state_set( uss1 )
 
-        assert match?( uncertain_state_set, nexml )
+        output = @writer.serialize_uncertain_state_set( uss1 )
+        parsed = element( 'uncertain_state_set' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_polymorphic_state_set
@@ -368,16 +409,20 @@ module Bio
         pss1 = Bio::NeXML::StandardState.new 'ss4', '4'
         pss1.polymorphic = true
         pss1 << [ss1, ss2]
-        nexml = @writer.serialize_polymorphic_state_set( pss1 )
 
-        assert match?( polymorphic_state_set, nexml )
+        output = @writer.serialize_polymorphic_state_set( pss1 )
+        parsed = element( 'polymorphic_state_set' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_state
         ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
-        nexml = @writer.serialize_state( ss1 )
 
-        assert match?( state, nexml )
+        output = @writer.serialize_state( ss1 )
+        parsed = element( 'state' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_states
@@ -397,16 +442,20 @@ module Bio
         sss1 << uss1
         sss1 << pss1
 
-        nexml = @writer.serialize_states( sss1 )
-        assert match?( states, nexml )
+        output = @writer.serialize_states( sss1 )
+        parsed = element( 'states' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_char
         sss1 = Bio::NeXML::StandardStates.new 'sss1'
         sc1 = Bio::NeXML::StandardChar.new 'sc1', sss1
-        nexml = @writer.serialize_char( sc1 )
 
-        assert match?( char, nexml )
+        output = @writer.serialize_char( sc1 )
+        parsed = element( 'char' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_format
@@ -432,17 +481,21 @@ module Bio
         sf1 = Bio::NeXML::StandardFormat.new
         sf1 << sss1
         sf1 << [ sc1, sc2 ]
-        nexml = @writer.serialize_format( sf1 )
 
-        assert match?( element( "format" ), nexml )
+        output = @writer.serialize_format( sf1 )
+        parsed = element( 'format' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_seq
         sseq1 = Bio::NeXML::StandardSeq.new
         sseq1.value = "1 2"
-        nexml = @writer.serialize_seq( sseq1 )
 
-        assert match?( seq, nexml )
+        output = @writer.serialize_seq( sseq1 )
+        parsed = element( 'seq' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_cell
@@ -454,8 +507,10 @@ module Bio
         scell1.char = sc3
         scell1.state = ss6
 
-        nexml = @writer.serialize_cell( scell1 )
-        assert match?( cell, nexml )
+        output = @writer.serialize_cell( scell1 )
+        parsed = element( 'cell' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_sereialize_seq_row
@@ -464,9 +519,11 @@ module Bio
         sseq1.value = "1 2"
         sr1 = Bio::NeXML::StandardSeqRow.new 'sr1', o1
         sr1 << sseq1
-        nexml = @writer.serialize_seq_row( sr1 )
 
-        assert match?( row, nexml )
+        output = @writer.serialize_seq_row( sr1 )
+        parsed = element( 'row' ).first
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_cell_row
@@ -481,10 +538,11 @@ module Bio
 
         sr3 = Bio::NeXML::StandardCellRow.new 'sr3', o1
         sr3 << scell1
-        nexml = @writer.serialize_cell_row( sr3 )
-        actual = @doc.find( "//nex:row", 'nex:http://www.nexml.org/1.0' ).last
 
-        assert match?( nexml, actual )
+        output = @writer.serialize_cell_row( sr3 )
+        parsed = element( 'row' ).last
+
+        assert match?( parsed, output )
       end
 
       def test_serialize_matrix
@@ -507,9 +565,65 @@ module Bio
         m << sr1
         m << sr2
 
-        nexml = @writer.serialize_matrix( m )
+        output = @writer.serialize_matrix( m )
+        parsed = element( 'matrix' ).first
 
-        assert match?( nexml, matrix )
+        assert match?( parsed, output )
+      end
+
+      def test_serialize_characters
+        ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
+        ss2 = Bio::NeXML::StandardState.new 'ss2', '2'
+        sss1 = Bio::NeXML::StandardStates.new 'sss1'
+
+        pss1 = Bio::NeXML::StandardState.new 'ss4', '4'
+        pss1.polymorphic = true
+        pss1 << [ss1, ss2]
+
+        uss1 = Bio::NeXML::StandardState.new 'ss5', '5'
+        uss1.uncertain = true
+        uss1 << [ss1, ss2]
+
+        sss1 << [ ss1, ss2 ]
+        sss1 << uss1
+        sss1 << pss1
+
+        sc1 = Bio::NeXML::StandardChar.new 'sc1', sss1
+        sc2 = Bio::NeXML::StandardChar.new 'sc2', sss1
+
+        sf1 = Bio::NeXML::StandardFormat.new
+        sf1 << sss1
+        sf1 << [ sc1, sc2 ]
+
+        o1 = Bio::NeXML::Otu.new 'o1'
+        o2 = Bio::NeXML::Otu.new 'o2'
+
+        sseq1 = Bio::NeXML::StandardSeq.new
+        sseq1.value = "1 2"
+
+        sseq2 = Bio::NeXML::StandardSeq.new
+        sseq2.value = "2 2"
+
+        sr1 = Bio::NeXML::StandardSeqRow.new 'sr1', o1
+        sr2 = Bio::NeXML::StandardSeqRow.new 'sr2', o2
+
+        sr1 << sseq1
+        sr2 << sseq2
+
+        m = Bio::NeXML::StandardSeqMatrix.new
+        m << sr1
+        m << sr2
+
+        taxa1 = Bio::NeXML::Otus.new 'taxa1'
+
+        c1 = Bio::NeXML::StandardSeqs.new 'standardchars6', taxa1, 'Standard sequences'
+        c1.format = sf1
+        c1.matrix = m
+
+        output = @writer.serialize_characters( c1 )
+        parsed = element( 'characters' ).first
+
+        assert match?( parsed, output )
       end
 
     end # end class TestWriter
