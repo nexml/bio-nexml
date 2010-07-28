@@ -141,3 +141,18 @@ task :retutorial2html do
   end
 end
 
+desc "Download latest NeXML schema."
+task :nexml_schema_update do
+  nexml_lib = File.join( File.dirname( __FILE__ ), *%w|lib bio db nexml| )  
+  Dir.chdir( nexml_lib )
+
+  puts "Downloading ... "
+  fail unless system( 'svn co https://nexml.svn.sourceforge.net/svnroot/nexml/trunk/nexml/xsd schema_new' )
+
+  system( 'rm -rf schema' )
+  system( 'mv schema_new schema' )
+  system( 'rm -rf schema/.svn' )
+  system( 'rm -f schema/.htaccess' )
+
+  puts "Updated schema is in #{nexml_lib}/schema"
+end
