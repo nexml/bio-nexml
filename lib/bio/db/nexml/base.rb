@@ -1,5 +1,5 @@
 module Bio
-  class NeXML
+  module NeXML
 
     module Base
       attr_accessor :xml_base
