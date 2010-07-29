@@ -2,12 +2,13 @@
 require 'xml'
 
 #load required class and module definitions
-require "bio/tree"
-require 'bio/db/nexml/elements'
+require "base"
 
 #Autoload definition
 module Bio
   module NeXML
+    autoload :Otu,    'bio/db/nexml/taxa.rb'
+    autoload :Otus,   'bio/db/nexml/taxa.rb'
     autoload :Parser, 'bio/db/nexml/parser'
     autoload :Writer, 'bio/db/nexml/writer'
 
