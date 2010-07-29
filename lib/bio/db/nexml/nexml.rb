@@ -2,7 +2,7 @@
 require 'xml'
 
 #load required class and module definitions
-require "base"
+require "bio/db/nexml/base"
 
 #Autoload definition
 module Bio
