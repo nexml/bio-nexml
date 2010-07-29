@@ -797,6 +797,10 @@ module Bio
 
     #end
 
+    class TestRow
+
+    end
+
   end #end module NeXML
 
 end #end module Bio

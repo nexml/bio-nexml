@@ -19,5 +19,5 @@ end
 
 #run the tests
 require File.join(File.dirname(__FILE__), 'tc_parser' )
-require File.join(File.dirname(__FILE__), 'tc_elements' )
 require File.join(File.dirname(__FILE__), 'tc_writer' )
+require File.join(File.dirname(__FILE__), 'tc_taxon' )
