@@ -3,6 +3,7 @@ require 'xml'
 
 #load required class and module definitions
 require "bio/db/nexml/base"
+require "bio/db/nexml/mapper"
 
 #Autoload definition
 module Bio
@@ -13,7 +14,6 @@ module Bio
     autoload :Writer, 'bio/db/nexml/writer'
 
     class Nexml
-      include Annotated
       include Enumerable
       attr_accessor :version, :generator
       
