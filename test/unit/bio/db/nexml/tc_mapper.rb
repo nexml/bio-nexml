@@ -5,15 +5,15 @@ module Bio
       class Target
         include Bio::NeXML::Mapper
 
-        property   :id
-        belongs_to :source
+        attr_accessor   :id
+        belongs_to      :source
       end
 
       class Source
         include Bio::NeXML::Mapper
 
-        property  :id
-        has_n     :target
+        attr_accessor  :id
+        has_n          :targets
       end
 
       def setup
@@ -23,16 +23,6 @@ module Bio
         @t2 = Target.new
         @t2.id = 't2'
         @s.add_target( @t1 )
-      end
-
-      def test_property_reader
-        assert_nil @s.id
-        assert_equal 't1', @t1.id
-      end
-
-      def test_property_writer
-        @s.id = 's'
-        assert_equal 's', @s.id
       end
 
       def test_has_target
@@ -57,13 +47,13 @@ module Bio
       end
 
       def test_target
-        assert_equal( [ @t1 ], @s.target )
+        assert_equal( [ @t1 ], @s.targets )
       end
 
       def test_target=
         t2 = Target.new
-        @s.target = [ t2 ]
-        assert_equal( [ t2 ], @s.target )
+        @s.targets = [ t2 ]
+        assert_equal( [ t2 ], @s.targets )
         assert_equal( @s, t2.source )
       end
 

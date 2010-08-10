@@ -9,7 +9,7 @@ load Pathname.new(File.join(File.dirname(__FILE__), ['..'] * 4,
 require 'test/unit'
 
 require 'rubygems'
-require 'bio/db/nexml/nexml'
+require 'bio/db/nexml'
 
 module Bio
   module NeXML
@@ -18,6 +18,8 @@ module Bio
 end
 
 #run the tests
-require File.join(File.dirname(__FILE__), 'tc_parser' )
-require File.join(File.dirname(__FILE__), 'tc_writer' )
-require File.join(File.dirname(__FILE__), 'tc_taxon' )
+#require File.join(File.dirname(__FILE__), 'tc_parser' )
+#require File.join(File.dirname(__FILE__), 'tc_writer' )
+#require File.join(File.dirname(__FILE__), 'tc_taxon' )
+#require File.join(File.dirname(__FILE__), 'tc_mapper' )
+require File.join(File.dirname(__FILE__), 'tc_trees' )

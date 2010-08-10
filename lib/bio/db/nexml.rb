@@ -2,14 +2,28 @@
 require 'xml'
 
 #load required class and module definitions
-require "bio/db/nexml/base"
 require "bio/db/nexml/mapper"
 
 #Autoload definition
 module Bio
   module NeXML
+
+    module Base
+      attr_accessor :xml_base
+      attr_accessor :xml_id
+      attr_accessor :xml_lang
+      attr_accessor :xml_space
+    end #end module Base
+
     autoload :Otu,    'bio/db/nexml/taxa.rb'
     autoload :Otus,   'bio/db/nexml/taxa.rb'
+
+    autoload :Node,   'bio/db/nexml/trees.rb'
+    autoload :Edge,   'bio/db/nexml/trees.rb'
+    autoload :Tree,   'bio/db/nexml/trees.rb'
+    autoload :Network,'bio/db/nexml/trees.rb'
+    autoload :Trees,  'bio/db/nexml/trees.rb'
+
     autoload :Parser, 'bio/db/nexml/parser'
     autoload :Writer, 'bio/db/nexml/writer'
 
