@@ -408,9 +408,13 @@ module Bio
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end
 
-      def add_tree; end if false
-      def add_network; end if false
+      # Add a tree to self.
+      def add_tree; end if false # dummy for rdoc
 
+      # Add a networ to self.
+      def add_network; end if false # dummy for rdoc
+
+      # Add a tree or a network to self.
       def <<( object )
         case object
         when Network
@@ -421,36 +425,63 @@ module Bio
         self
       end
 
-      def delete_tree; end if false
-      def delete_network; end if false
+      # Delete a tree from self.
+      def delete_tree; end if false # dummy for rdoc
 
-      def get_tree_by_id; end if false
-      def get_network_by_id; end if false
+      # Delete a network from self.
+      def delete_network; end if false # dummy for rdoc
+
+      # Fetch a tree by id.
+      def get_tree_by_id; end if false # dummy for rdoc
+
+      # Fetch a network by id.
+      def get_network_by_id; end if false # dummy for rdoc
+
+      # Fetch a tree or a network by id.
       def []( id )
         get_tree_by_id( id ) ||
           get_network_by_id( id )
       end
 
-      def has_tree?( tree ); end if false
-      def has_netowrk?( tree ); end if false
+      # Returns true if tree is containes in self.
+      def has_tree?( tree ); end if false # dummy for rdoc
+
+      # Returns true if the given network is containes in self; false otherwise.
+      def has_netowrk?( tree ); end if false # dummy for rdoc
+
       def include?( object )
         has_tree?( object ) ||
           has_network?( object )
       end
       alias has? include?
 
-      def number_of_trees; end if false
-      def number_of_networks; end if false
+      # Returns the number of trees contained in self.
+      def number_of_trees; end if false # dummy for rdoc
+
+      # Returns the number of networks contained in self.
+      def number_of_networks; end if false # dummy for rdoc
+
+      # Returns total number of trees and networks.
       def count
         number_of_trees + number_of_networks
       end
       alias length count
 
-      def each_tree( &block ); end if false
-      def each_tree_with_id( &block ); end if false
+      # Iterate over each tree. Returns an Enumerator if no block is given.
+      def each_tree( &block ); end if false # dummy for rdoc
 
-      def each_netowrk( &block ); end if false
-      def each_netowrk_with_id( &block ); end if false
+      # Iterate over each tree passing the id and the tree itself to the block.
+      # Returns an Enumerator if no block is given.
+      def each_tree_with_id( &block ); end if false # dummy for rdoc
+
+      # Iterate over each network. Returns an Enumerator if no block is given.
+      def each_netowrk( &block ); end if false # dummy for rdoc
+
+      # Iterate over each network passing the id and the tree itself to the block.
+      # Returns an Enumerator if no block is given.
+      def each_netowrk_with_id( &block ); end if false # dummy for rdoc
+
+      # Iterate over each element. Returns an Enumerator if no block is given.
       def each( &block )
         @trees.merge( @networks ).each( &block )
       end
