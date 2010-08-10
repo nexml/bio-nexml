@@ -2,7 +2,7 @@ module Bio
   module NeXML
     class TestOtu < Test::Unit::TestCase
       def setup
-        @otu = Bio::NeXML::Otu.new( 'taxon1', 'A label for taxon1' )
+        @otu = Bio::NeXML::Otu.new( 'taxon1', :label => 'A label for taxon1' )
       end
 
       def test_id
@@ -26,10 +26,10 @@ module Bio
 
     class TestOtus < Test::Unit::TestCase
       def setup
-        @otu1 = Bio::NeXML::Otu.new( 'taxon1', 'A label for taxon1' )
-        @otu2 = Bio::NeXML::Otu.new( 'taxon2', 'A label for taxon2' )
-        @otu3 = Bio::NeXML::Otu.new( 'taxon3', 'A label for taxon3' )
-        @otus = Bio::NeXML::Otus.new( 'taxa1', 'A label for taxa1' )
+        @otu1 = Bio::NeXML::Otu.new( 'taxon1', :label => 'A label for taxon1' )
+        @otu2 = Bio::NeXML::Otu.new( 'taxon2', :label => 'A label for taxon2' )
+        @otu3 = Bio::NeXML::Otu.new( 'taxon3', :label => 'A label for taxon3' )
+        @otus = Bio::NeXML::Otus.new( 'taxa1', :label => 'A label for taxa1' )
         @otus << @otu1 << @otu2
       end
 

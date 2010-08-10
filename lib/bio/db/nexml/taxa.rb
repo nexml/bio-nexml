@@ -10,11 +10,19 @@ module Bio
     #    >> taxon1.label
     #    => 'Label for taxon1'
     class Otu
-      include IDTagged
+      include Mapper
 
-      def initialize( id, label = nil )
+      property  :id
+      property  :label
+
+      belongs_to :otus
+
+      has_n     :nodes
+
+      def initialize( id, options = {}, &block )
         @id = id
-        @label = label
+        properties( options ) unless options.empty?
+        block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end
 
     end #end class Otu
@@ -44,71 +52,65 @@ module Bio
     #    >> taxa1.include?( taxon2 )
     #    => false
     class Otus
-      include IDTagged
       include Enumerable
+      include Mapper
 
-      def initialize( id = nil, label = nil, &block )
+      property :id
+      property :label
+
+      has_n :otus
+      has_n :trees, :singularize => false
+      has_n :matrices
+
+      def initialize( id, options = {}, &block )
         @id = id
-        @label = label
+        properties( options ) unless options.empty?
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end
 
-      def data
-        @data ||= {}
-      end
-      private :data
-
-      # Returns the otu object with the given id; <tt>nil</tt> if an otu with the given id is not
-      # contained in <tt>self</tt>.
-      def []( id )
-        data[ id ]
-      end
-
+      # Returns an array of otu contained in <tt>self</tt>.
+      def otus;  end if false   # dummy for rdoc
+      # Taken an array of otu and adds it to <tt>self</tt>.
+      def otus=; end if false   # dummy for rdoc
+      
       # Takes an otu object and appends it to <tt>self</tt>.
       def <<( otu )
-        data[ otu.id ] = otu
+        add_otu( otu )
         self
       end
 
       # Takes an otu or its id and deletes it. Returns the object deleted or <tt>nil</tt>.
-      def delete( obj )
-        id = obj.is_a?( Otu ) ? obj.id : obj
-        data.delete( id )
+      def delete( otu )
+        delete_otu( otu )
       end
 
-      # Returns an array of otu contained in <tt>self</tt>.
-      def otus
-        data.values
+      # Takes an otu or its id and returns <tt>true</tt> if it is contained in <tt>self</tt>.
+      def include?( object )
+        has_otu?( object )
       end
 
-      # Taken an array of otu and adds it to <tt>self</tt>.
-      def otus=( otus )
-        otus.each { |otu| self << otu }
+      # Returns the otu object with the given id; <tt>nil</tt> if an otu with the given id is not
+      # contained in <tt>self</tt>.
+      def []( id )
+        get_otu_by_id( id )
       end
 
       # Iterate over each otu in <tt>self</tt> passing it to the block given. If no block is provided,
       # it returns an Enumerator.
-      def each( &block ) # :yield: otu
-        data.each_value( &block )
+      def each( &block )
+        @otus.each( &block )
       end
 
       # Iterate over each otu in <tt>self</tt> passing the otu and its id to the block given. If no
       # block is provided, it returns an Enumerator.
-      def each_with_id( &block ) # :yield: id, otu
-        data.each( &block )
+      def each_with_id( &block )
+        @otus.each_with_id( &block )
       end
 
-      # Return the number of otu contained in <tt>self</tt>.
+      # Return the number of otu in <tt>self</tt>.
       def length
-        data.length
+        number_of_otus
       end
-      alias count length
-
-      # Takes an otu or its id and returns <tt>true</tt> if it is contained in <tt>self</tt>.
-      def include?( obj )
-        obj.is_a?( Otu ) ? data[ obj.id ] == obj : data.has_key?( obj )
-      end
-      alias has? include?
 
     end #end class Otus
   end
