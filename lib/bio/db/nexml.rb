@@ -15,14 +15,19 @@ module Bio
       attr_accessor :xml_space
     end #end module Base
 
-    autoload :Otu,    'bio/db/nexml/taxa.rb'
-    autoload :Otus,   'bio/db/nexml/taxa.rb'
-
     autoload :Node,   'bio/db/nexml/trees.rb'
     autoload :Edge,   'bio/db/nexml/trees.rb'
     autoload :Tree,   'bio/db/nexml/trees.rb'
     autoload :Network,'bio/db/nexml/trees.rb'
     autoload :Trees,  'bio/db/nexml/trees.rb'
+    # Autoload multiple modules that reside in the same file.
+    def self.mautoload( modules, file )
+      modules.each do |m|
+        autoload m, file
+      end
+    end
+
+    mautoload %w|Otu Otus|,                                'bio/db/nexml/taxa.rb'
 
     autoload :Parser, 'bio/db/nexml/parser'
     autoload :Writer, 'bio/db/nexml/writer'
