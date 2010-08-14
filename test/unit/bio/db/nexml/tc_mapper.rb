@@ -1,6 +1,6 @@
 module Bio
   module NeXML
-    class TestOtu < Test::Unit::TestCase
+    class TestMapper < Test::Unit::TestCase
 
       class Target
         include Bio::NeXML::Mapper
@@ -42,7 +42,6 @@ module Bio
         @s.add_target( t2 )
 
         assert @s.has_target?( t2 )
-        assert @s.has_target?( 't2' )
         assert_equal( @s, t2.source )
       end
 
