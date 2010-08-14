@@ -81,15 +81,28 @@ module Bio
       end
       alias properties= properties
 
-      def propogator
-        self.class.name.key
-      end
-
       private
 
-      def ivar( var )
-        instance_variable_get( var ) ||
-          instance_variable_set( var, Repository.new )
+      # Fetches an instance variable corresponding to name. If the instance variable
+      # is nil, set it to defaul value and return it.
+      def repository( name, type = HashRepository )
+        ivget( name ) || ivset( name, type.new )
+      end
+
+      # Return an instance variable corresponding to the given name.
+      # '@' is automatically prepended to the name.
+      #    object.ivget( 'name' ) #=> returns value of @name
+      #    object.ivget( :name )  #=> returns value of @name
+      def ivget( name )
+        instance_variable_get( "@#{name}" )
+      end
+
+      # Set an instance variable corresponding to the given name.
+      # '@' is automatically prepended to the name.
+      #    object.ivset( 'name', value ) #=> sets @name to value
+      #    object.ivget( :name, value )  #=> sets @name to value
+      def ivset( name, value = nil )
+        instance_variable_set( "@#{name}", value )
       end
 
       def self.included( klass )
