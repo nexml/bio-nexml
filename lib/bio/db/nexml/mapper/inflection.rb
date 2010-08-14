@@ -6,6 +6,7 @@ module Bio
       #
       #    "targets".singular     #=> "target"
       #    "target".plural        #=> "targets"
+      #    "Bio::NeXML::Otu".key  #=> "otu"
       module Inflections
         PLURALS =
           [
@@ -57,31 +58,36 @@ module Bio
             [ /(database)s$/i, '\1' ]
         ]
 
-        def singular()
+        # Return the singular form of string.
+        def singular
+          result = self.dup
           SINGULARS.reverse.each do |match, replace|
             rule = Regexp.compile( match )
             unless match( rule ).nil?
-              return gsub( rule, replace) 
+              result = gsub( rule, replace) 
             end
           end
+          return result
         end
 
-        def plural()
+        # Return the plural form of a string.
+        def plural
+          result = self.dup
           PLURALS.reverse.each do |match_exp, replacement_exp|
             unless match(Regexp.compile(match_exp)).nil?
-              return gsub(Regexp.compile(match_exp), replacement_exp)
+              result =  gsub(Regexp.compile(match_exp), replacement_exp)
             end
           end
+          return result
         end
 
-        def demodulize
-          if i = rindex( ':' )
-            self[ i + 1 .. -1 ]
-          end
-        end
-
+        # For a module name as "Bio::NeXML" return "nexml".
         def key
-          demodulize.downcase
+          result = self.dup
+          if i = rindex( ':' )
+            result = self[ i + 1 .. -1 ]
+          end
+          result.downcase
         end
       end # end module Inflections
 
