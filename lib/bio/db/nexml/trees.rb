@@ -34,18 +34,11 @@ module Bio
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end
 
-      # :stopdoc:
-      alias __otu__= otu=
-      # :startdoc:
-
       # Return the otu to which the node links to.
       def otu; end if false # dummy for rdoc
 
       # Link the node to the given otu.
-      def otu=( otu )
-        self.__otu__ = otu
-        self.taxonomy_id = otu.id
-      end
+      def otu=( otu ); end if false # dummy for rdoc
 
       # Returns true if the node is a root node; false otherwise.
       def root?
@@ -199,6 +192,7 @@ module Bio
       # Remove a node from the tree. Returns the deleted node. It automatically removes all edges
       # connected to that node. Raises IndexError if the node is not found in the tree.
       def remove_node( node )
+        return unless include?( node )
         super( node )
         __delete_node__( node )
       end
@@ -212,6 +206,7 @@ module Bio
       # the source and the target, both of them will be removed. Raises IndexError if the edge is 
       # not found in the tree.
       def remove_edge( edge )
+        return unless include?( edge )
         super( edge.source, edge.target )
         __delete_edge__( edge )
       end
@@ -361,6 +356,7 @@ module Bio
     end
 
     class Network < Tree
+      belongs_to :trees
       def initialize( id, options = {}, &block )
         super
       end
