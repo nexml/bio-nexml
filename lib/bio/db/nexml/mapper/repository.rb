@@ -3,18 +3,23 @@ module Bio
     module Mapper # :nodoc:
 
       # Repository is a hash based store for NeXML objects.
-      class Repository < Hash
+      class HashRepository < Hash
 
         # Append a method to the Repository.
         def <<( object )
           self[ object.id ] = object
           self
         end
+        alias append <<
 
         # Reset the object in the repository to use the ones passed.
         def objects=( objects )
           self.clear
           objects.each { |o| self << o }
+        end
+
+        def objects
+          self.values
         end
 
         alias __delete__ delete
@@ -37,9 +42,17 @@ module Bio
           __each__( &block )
         end
 
-        def has?( object )
+        def include?( object )
           self[ object.id ] == object
         end
+      end
+
+      class ArrayRepository < Array
+        def objects
+          self
+        end
+
+        alias append <<
       end
     end
   end
