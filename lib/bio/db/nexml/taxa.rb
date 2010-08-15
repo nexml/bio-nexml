@@ -23,6 +23,8 @@ module Bio
       # An otu is referred to by several tree nodes.
       has_n     :nodes
 
+      has_n     :sequences
+
       # Create a new otu.
       #    otu = Bio::NeXML::Otu.id( 'o1' )
       #    otu = Bio::NeXML::Otu.id( 'o1', :label => 'A label' )
