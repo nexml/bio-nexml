@@ -397,6 +397,8 @@ module Bio
       has_n        :trees
       has_n        :networks
 
+      belongs_to   :nexml
+
       # Create a trees object.
       def initialize( id = nil, options = {}, &block )
         @id = id

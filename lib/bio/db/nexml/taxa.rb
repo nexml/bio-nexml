@@ -65,6 +65,8 @@ module Bio
       # A human readable description.
       attr_accessor :label
 
+      belongs_to    :nexml
+
       has_n :otus
       has_n :trees, :singularize => false
       has_n :matrices
