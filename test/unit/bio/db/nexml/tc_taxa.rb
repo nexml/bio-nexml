@@ -111,10 +111,6 @@ module Bio
         # it should respond for an otu object
         assert @otus.include?( @otu1 )
 
-        # it should respond for an otu id
-        assert @otus.include?( "taxon1" )
-        assert @otus.include?( @otu1.id )
-
         assert !@otus.include?( @otu3 )
       end
     end

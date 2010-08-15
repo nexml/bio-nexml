@@ -29,7 +29,6 @@ class TestNode < Test::Unit::TestCase
     @node.otu = otu
 
     assert_equal( otu, @node.otu )
-    assert_equal( otu.id, @node.taxonomy_id )
     assert_equal( otu.nodes, [ @node ] )
   end
 
@@ -141,8 +140,9 @@ class TestTree < Test::Unit::TestCase
   end
 
   def test_delete_node
-    @tree.delete_node( @nodes[ 2 ] )
-    assert !@tree.include?( @nodes[ 2 ] )
+    n = @nodes[ 2 ]
+    @tree.delete_node( n )
+    assert !@tree.include?( n )
   end
 
   def test_delete_edge
@@ -175,13 +175,13 @@ class TestTree < Test::Unit::TestCase
   end
 
   def test_has_node
-    assert @tree.has_node?( 'n2' )
-    assert !@tree.has_node?( 'foo' )
+    assert @tree.has_node?( @nodes[ 0 ] )
+    assert !@tree.has_node?( Bio::NeXML::Node.new( 'foo' ) )
   end
 
   def test_has_edge
-    assert @tree.has_edge?( 'e12' )
-    assert !@tree.has_edge?( 'foo' )
+    assert @tree.has_edge?( @edges[ 0 ] )
+    assert !@tree.has_edge?( Bio::NeXML::Edge.new( 'foo' ) )
   end
 
   def test_include
@@ -233,7 +233,7 @@ class TestTrees < Test::Unit::TestCase
   def setup
     @otus = Bio::NeXML::Otus.new( 'o1' )
     @tree = Bio::NeXML::Tree.new( 't1' )
-    @network = Bio::NeXML::Tree.new( 'n1' )
+    @network = Bio::NeXML::Network.new( 'n1' )
     @trees = Bio::NeXML::Trees.new( 'trees1', :label => 'Tree container' )
     @trees.add_tree( @tree )
     @trees.add_network( @network )
@@ -291,19 +291,17 @@ class TestTrees < Test::Unit::TestCase
   end
 
   def test_has_tree?
-    assert( @trees.has_tree?( @t1 ) )
-    assert( @trees.has_tree?( 't1' ) )
+    assert( @trees.has_tree?( @tree ) )
   end
 
   def test_has_network?
-    assert( @trees.has_network?( @n1 ) )
-    assert( @trees.has_network?( 'n1' ) )
+    assert( @trees.has_network?( @network ) )
   end
 
   def test_include?
-    assert( @trees.include?( 't1' ) )
-    assert( @trees.include?( 'n1' ) )
-    assert( !@trees.include?( 'foo' ) )
+    assert( @trees.include?( @tree ) )
+    assert( @trees.include?( @network ) )
+    assert( !@trees.include?( Bio::NeXML::Tree.new( 'foo' ) ) )
   end
 
   def test_number_of_trees
