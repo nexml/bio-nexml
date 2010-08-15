@@ -61,7 +61,7 @@ module Bio
         # Return the singular form of string.
         def singular
           result = self.dup
-          SINGULARS.reverse.each do |match, replace|
+          SINGULARS.each do |match, replace|
             rule = Regexp.compile( match )
             unless match( rule ).nil?
               result = gsub( rule, replace) 
@@ -73,7 +73,7 @@ module Bio
         # Return the plural form of a string.
         def plural
           result = self.dup
-          PLURALS.reverse.each do |match_exp, replacement_exp|
+          PLURALS.each do |match_exp, replacement_exp|
             unless match(Regexp.compile(match_exp)).nil?
               result =  gsub(Regexp.compile(match_exp), replacement_exp)
             end

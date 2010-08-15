@@ -11,7 +11,7 @@ module Bio
           update = ( options[ :update ] || self.name.key ).to_sym
 
           # create attribute reader for source
-          attr_reader name                                        # def source; @source; end
+          attr_reader name
 
           # Add this target to a source.
           #    def add_to_source( source )
@@ -35,7 +35,7 @@ module Bio
           #      return remove_from_source if source.nil?
           #      return add_to_source( self )
           #    end
-          define_method( "#{name}=" ) do |source,|                # def source=( source )
+          define_method( "#{name}=" ) do |source,|
             return send( "remove_from_#{name}" ) if source.nil?
             return send( "add_to_#{name}", source )
           end
@@ -97,6 +97,7 @@ module Bio
             return if repository.include?( object )
             repository.append( object )
             object.send( "#{update}=", self )
+            self
           end
 
           # Delete a target.
@@ -134,8 +135,7 @@ module Bio
           #    end
           class_eval <<_END_OF_EVAL_
             def each_#{name}( &block )
-              p #{target}
-              repository( #{target}, #{type} ).each( &block )
+              repository( "#{target}", #{type} ).each( &block )
             end
 _END_OF_EVAL_
 
