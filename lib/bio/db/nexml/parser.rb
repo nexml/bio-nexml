@@ -148,7 +148,7 @@ module Bio
         id = attribute( 'id' )
         label = attribute( 'label' )
 
-        otus = NeXML::Otus.new( id, label )
+        otus = NeXML::Otus.new( id, :label => label )
 
         cache otus
 
@@ -177,7 +177,7 @@ module Bio
         id = attribute( 'id' )
         label = attribute( 'label' )
 
-        otu = NeXML::Otu.new( id, label )
+        otu = NeXML::Otu.new( id, :label => label )
 
         cache otu
 
@@ -204,7 +204,7 @@ module Bio
         id = attribute( 'id' )
         label = attribute( 'label' )
 
-        trees = NeXML::Trees.new( id, otus, label )
+        trees = NeXML::Trees.new( id, :otus => otus, :label => label )
 
         #a 'trees' element *will* have child nodes.
         while next_node
@@ -232,7 +232,7 @@ module Bio
 
         type = attribute( 'xsi:type' )[4..-1]
         klass = NeXML.const_get( type )
-        tree = klass.new( id, label )
+        tree = klass.new( id, :label => label )
 
         #a 'tree' element *will* have child nodes.
         while next_node
@@ -245,13 +245,14 @@ module Bio
             tree.add_node node
 
             #root?
-            tree.root << node if node.root?
+            tree.roots << node if node.root?
           when "rootedge"
             #parse child 'edge' element
             rootedge = parse_rootedge
 
             #and add it to the 'tree'
-            tree.add_rootedge rootedge
+            # tree.add_rootedge rootedge # XXX it looks like the super class(es)
+            # can only deal with edges that have source and target
           when "edge"
             #parse child 'edge' element
             edge = parse_edge( type )
@@ -274,7 +275,7 @@ module Bio
 
         type = attribute( 'xsi:type' )[4..-1]
         klass = NeXML.const_get type
-        network = klass.new( id, label )
+        network = klass.new( id, :label => label )
 
         #a 'network' element *will* have child nodes.
         while next_node
@@ -317,7 +318,7 @@ module Bio
           otu = cache[ otu_id ]
         end
 
-        node = NeXML::Node.new( id, otu, root, label )
+        node = NeXML::Node.new( id, :otu => otu, :root => root, :label => label )
         cache node
 
         #according to the schema a 'node' may have no child element.
@@ -345,8 +346,8 @@ module Bio
         length = attribute( 'length' )
         
         type.sub!(/Tree|Network/, "Edge")
-        klass = NeXML.const_get type
-        edge = klass.new( id, source, target, length )
+        klass = NeXML.const_get( type )
+        edge = klass.new( id, :source => source, :target => target, :length => length )
 
         #according to the schema an 'edge' may have no child element.
         return edge if empty_element?
@@ -368,7 +369,7 @@ module Bio
         target = cache[ attribute( 'target' ) ]
         length = attribute( 'length' )
         
-        rootedge = RootEdge.new( id, target, length )
+        rootedge = RootEdge.new( id, :target => target, :length => length )
 
         #according to the schema an 'edge' may have no child element.
         return rootedge if empty_element?
@@ -395,9 +396,10 @@ module Bio
 
         #determine the type
         type = attribute( 'xsi:type' )[ 4..-1 ]
-        klass = NeXML.const_get( type )
+        #klass = NeXML.const_get( type )
 
-        characters = klass.new( id, otus, label )
+        #characters = klass.new( id, otus, label )
+        characters = Matrix.new( id, :otus => otus, :label => label, :type => type )
 
         #according to the schema a 'characters' will have a child
         while next_node
