@@ -1,6 +1,27 @@
 = bio-nexml
 
-Description goes here.
+NeXML is a file format for phylogenetic data. It is inspired by the modular
+architecture of the commonly-used NEXUS file format (hence the name) in that
+a NeXML instance document can contain sets of Operational Taxonomic Units
+(OTUs, the tips in phylogenetic trees, and that which comparative observations
+are made on. Often these are species, i.e. "taxa"), sets of phylogenetic trees
+(or reticular trees, i.e. networks), and sets of comparative data (molecular
+sequences, morphological categorical data, continuous data, and other types).
+
+The elements in a NeXML document can be annotated using RDFa
+(http://en.wikipedia.org/wiki/RDFa), which means that every object that can
+be parsed out of a NeXML document must be an object that, in turn, can be
+annotated with predicates (and their namespaces) and other objects (with,
+perhaps, their own namespaces). The advantage over previous file formats is
+that we can retain all metadata for all objects within one file, regardless
+where the metadata come from.
+
+NeXML can be transformed to RDF using an XSL stylesheet. As such, NeXML forms
+an intermediate format between traditional flat file formats (with predictable
+structure but no semantics) and RDF (with loose structure, but lots of
+semantics) that is both easy to work with, yet ready for the Semantic Web.
+
+To learn more, visit http://www.nexml.org
 
 == Contributing to bio-nexml
  
