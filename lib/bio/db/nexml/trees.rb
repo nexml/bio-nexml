@@ -97,6 +97,27 @@ module Bio
         super
       end
     end
+    
+    # A float edge is an edge whose length is defined using a floating point
+    # number.
+    class FloatEdge < Edge
+      def initialize( id, options = {} )
+        super
+      end
+      def length
+        distance.to_f
+      end
+    end
+    
+    # An int edge is an edge whose length is defined using an integer
+    class IntEdge < Edge
+      def initialize( id, options = {} )
+        super
+      end
+      def length
+        distance.to_i
+      end
+    end
 
     # An NeXML tree. A tree must have a unique 'id'. It may optionally take a 'label' and a 'rootedge'.
     # This class inherits from Bio::Tree; naturally its functionality is leveraged here.
