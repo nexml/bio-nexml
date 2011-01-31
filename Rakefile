@@ -19,6 +19,8 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{This plugin reads, writes and generates NeXML}
   gem.email = "rutgeraldo@gmail.com"
   gem.authors = ["rvosa"]
+  gem.add_runtime_dependency 'libxml-ruby', '1.1.4'
+  gem.add_development_dependency 'libxml-ruby', '1.1.4'
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
