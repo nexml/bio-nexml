@@ -1,7 +1,16 @@
-require 'helper'
+require 'test/unit'
+require 'bio/db/nexml'
 
-class TestBioNexml < Test::Unit::TestCase
-  should "probably rename this file and start testing for real" do
-    flunk "hey buddy, you should probably rename this file and start testing for real"
+module Bio
+  module NeXML
+    TEST_FILE = File.join(File.dirname(__FILE__), "data", "nexml", "test.xml" )
   end
 end
+
+require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_mapper' )
+require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_matrix' )
+require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_parser' )
+require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_taxa' )
+require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_trees' )
+require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_writer' )
+
