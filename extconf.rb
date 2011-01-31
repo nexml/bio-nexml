@@ -1,2 +1,2 @@
 require 'mkmf'
-create_makefile("bioruby")
+create_makefile("bio-nexml")
