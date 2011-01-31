@@ -11,4 +11,5 @@ group :development do
   gem "jeweler", "~> 1.5.2"
   gem "rcov", ">= 0"
   gem "bio", ">= 1.4.1"
+  gem "libxml-ruby", ">= 1.1.4"
 end
