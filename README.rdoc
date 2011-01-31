@@ -4,8 +4,8 @@ NeXML is a file format for phylogenetic data. It is inspired by the modular
 architecture of the commonly-used NEXUS file format (hence the name) in that
 a NeXML instance document can contain:
 * sets of Operational Taxonomic Units (OTUs), i.e. the tips in phylogenetic
- trees, and that which comparative observations are made on.
- Often these are species ("taxa").
+  trees, and that which comparative observations are made on. Often these are
+  species ("taxa").
 * sets of phylogenetic trees (or reticulate trees, i.e. networks)
 * sets of comparative data, i.e. molecular sequences, morphological categorical
   data, continuous data, and other types.
