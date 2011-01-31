@@ -32,6 +32,7 @@ major biological database formats and provides many ways for accessing
 them through flatfile indexing, SQL, web services etc.  Various web
 services including KEGG API can be easily utilized by BioRuby.
 
+This branch will become a bioruby plugin for nexml support.
 
 == FOR MORE INFORMATION
 
