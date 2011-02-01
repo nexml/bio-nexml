@@ -11,6 +11,14 @@ module Bio
     #    state.ambiguity     #=> :polymorphic
     class State
       include Mapper
+      
+      @@types = [ :DnaSeqs,            :DnaCells,
+                  :RnaSeqs,            :RnaCells,
+                  :ProteinSeqs,        :ProteinCells,
+                  :StandardSeqs,       :StandardCells,
+                  :ContinuousSeqs,     :ContinuousCells,
+                  :RestrictionSeqs,    :RestrictionCells
+                ]      
 
       # A file level unique identifier.
       attr_accessor :id
@@ -34,6 +42,21 @@ module Bio
       has_n :members, :index => false, :update => :state_set
 
       has_n :cells, :index => false
+      
+      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
+      # This attribute, though optional, must be set to generate valid NeXML.
+      attr_reader        :type
+      
+      # Set the type of the matrix.
+      # * Arguments :
+      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
+      # * Raises :
+      # "RuntimeError: Unkown type", if an unknown type is given.
+      def type=( type )
+        type = type.to_sym
+        raise "Unknown type" unless @@types.include?( type )
+        @type = type
+      end       
 
       def initialize( id, symbol = nil, options = {}, &block )
         @id = id
@@ -54,11 +77,11 @@ module Bio
         !!ambiguity
       end
 
-      def polymorphic?
+      def polymorphic( polymorphic )
         ambiguity == :polymorphic
       end
 
-      def uncertain?
+      def uncertain( uncertain )
         ambiguity == :uncertain
       end
 
@@ -94,6 +117,14 @@ module Bio
     # A char specifies which states apply to matrix columns.
     class Char
       include Mapper
+      
+      @@types = [ :DnaSeqs,            :DnaCells,
+                  :RnaSeqs,            :RnaCells,
+                  :ProteinSeqs,        :ProteinCells,
+                  :StandardSeqs,       :StandardCells,
+                  :ContinuousSeqs,     :ContinuousCells,
+                  :RestrictionSeqs,    :RestrictionState
+                ]      
 
       # A file level unique identifier.
       attr_accessor :id
@@ -103,10 +134,25 @@ module Bio
 
       # Each char links to a states as a means of describing possible observations for that
       # particular column.
-      belongs_to :matrix
+      belongs_to :format
       belongs_to :states
 
       has_n :cells, :index => false
+      
+      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
+      # This attribute, though optional, must be set to generate valid NeXML.
+      attr_reader        :type
+      
+      # Set the type of the matrix.
+      # * Arguments :
+      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
+      # * Raises :
+      # "RuntimeError: Unkown type", if an unknown type is given.
+      def type=( type )
+        type = type.to_sym
+        raise "Unknown type" unless @@types.include?( type )
+        @type = type
+      end       
       
       def initialize( id, states = nil, options = {} )
         @id = id
@@ -120,6 +166,14 @@ module Bio
 
     class States
       include Mapper
+      
+      @@types = [ :DnaSeqs,            :DnaCells,
+                  :RnaSeqs,            :RnaCells,
+                  :ProteinSeqs,        :ProteinCells,
+                  :StandardSeqs,       :StandardCells,
+                  :ContinuousSeqs,     :ContinuousCells,
+                  :RestrictionSeqs,    :RestrictionState
+                ]      
 
       # A file level unique identifier.
       attr_accessor    :id
@@ -127,13 +181,28 @@ module Bio
       # A human readable description of the state.
       attr_accessor    :label
 
-      belongs_to :matrix
+      belongs_to :format
 
       # Possible observation states.
       has_n       :states
 
       # Matrix columns linked to this states.
       has_n       :chars
+      
+      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
+      # This attribute, though optional, must be set to generate valid NeXML.
+      attr_reader        :type
+      
+      # Set the type of the matrix.
+      # * Arguments :
+      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
+      # * Raises :
+      # "RuntimeError: Unkown type", if an unknown type is given.
+      def type=( type )
+        type = type.to_sym
+        raise "Unknown type" unless @@types.include?( type )
+        @type = type
+      end       
 
       def initialize( id, options = {} )
         @id = id
@@ -157,6 +226,178 @@ module Bio
         has_state?( state )
       end
     end
+    
+    class Format
+      include Mapper
+      
+      @@types = [ :DnaSeqs,            :DnaCells,
+                  :RnaSeqs,            :RnaCells,
+                  :ProteinSeqs,        :ProteinCells,
+                  :StandardSeqs,       :StandardCells,
+                  :ContinuousSeqs,     :ContinuousCells,
+                  :RestrictionSeqs,    :RestrictionState
+                ]      
+      
+      # A format block must define set(s) of possible observation states.
+      has_n :states, :singularize => false
+      
+      # A format will have one or more columns( chars => columns ),
+      has_n :chars
+      
+      # Because format elements don't have id attributes, we will use
+      # object_id in this case
+      attr_accessor :id
+      
+      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
+      # This attribute, though optional, must be set to generate valid NeXML.
+      attr_reader        :type
+      
+      # Set the type of the matrix.
+      # * Arguments :
+      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
+      # * Raises :
+      # "RuntimeError: Unkown type", if an unknown type is given.
+      def type=( type )
+        type = type.to_sym
+        raise "Unknown type" unless @@types.include?( type )
+        @type = type
+      end       
+      
+      def initialize()
+        @id = self.object_id
+      end      
+      
+      def add_states( states )
+        # dummy for rdoc
+      end if false
+      
+      # Returns true if the given state set( Bio::NeXML::States object ) is
+      # defined for the format block.
+      def has_states?( states )
+        # dummy for rdoc
+      end if false
+      
+      # Remove a state set from the format.
+      # * Arguments :
+      # states( required ) - a Bio::NeXML::State object.
+      # * Returns : the deleted object.
+      #    format.delete_states( states )
+      #    format.states                #=> [ .. .. ]
+      #    states.format                #=> nil
+      def delete_states( states )
+        # dummy for rdoc
+      end if false
+      
+      # Fetch a state set( Bio::NeXML::States object ) by id. Returns <tt>nil</tt> if none found.
+      def get_states_by_id( id )
+        # dummy for rdoc
+      end if false
+      
+      # Returns the number of state sets defined for the matrix.
+      def number_of_states
+        # dummy for rdoc
+      end if false
+      
+      # Add a column definition to the format.
+      # * Arguments :
+      # char( required ) - a Bio::NeXML::Char object.
+      # * Returns : <tt>self</tt>.
+      #    format.add_char( char )
+      #    format.chars               #=> [ .. char .. ]
+      #    char.format                #=> format
+      def add_char( char )
+        # dummy for rdoc
+      end if false
+      
+      # Remove a column definition from the matrix.
+      # * Arguments :
+      # char( required ) - a Bio::NeXML::Char object.
+      # * Returns : the deleted object.
+      #    matrix.delete_char( char )
+      #    matrix.chars               #=> [ .. .. ]
+      #    char.matrix                #=> nil
+      def delete_char( char )
+        # dummy for rdoc
+      end if false
+      
+      # Returns an array of state sets( Bio::NeXML::States objects ) for the matrix.
+      #    matrix.states  #=> [ .. .. ]
+      def states
+        # dummy for rdoc
+      end if false
+      
+      # Returns an array of column definitions( Bio::NeXML::Char objects ) for the matrix.
+      #    matrix.chars  #=> [ .. .. ]
+      def chars
+        # dummy for rdoc
+      end if false
+      
+      # Add state sets to the matrix. This function will overwrite previous state set definitions
+      # for the matrix if any.
+      # * Arguments :
+      # states( required ) - an array of Bio::NeXML::States object.
+      #    matrix.states = [ states ]
+      #    matrix.states    #=> [ states ]
+      #    states.matrix    #=> matrix
+      def states=( states )
+        # dummy for rdoc
+      end if false
+      
+      # Add column definitions to the matrix. This function will override the previous column
+      # definitions if any.
+      # * Arguments :
+      # chars( required ) - an array of Bio::NeXML::Char object.
+      #    matrix.chars = [ char ]
+      #    matrix.chars    #=> [ char ]
+      #    char.matrix     #=> matrix
+      def chars=( chars )
+        # dummy for rdoc
+      end if false
+      
+      # Fetch a state set( Bio::NeXML::States object ) by id. Returns <tt>nil</tt> if none found.
+      def get_states_by_id( id )
+        # dummy for rdoc
+      end if false
+      
+      # Fetch a column definition( Bio::NeXML::Char object ) by id. Returns <tt>nil</tt> if none
+      # found.
+      def get_char_by_id( id )
+        # dummy for rdoc
+      end if false      
+      
+      # Returns true if the given state set( Bio::NeXML::States object ) is defined for the matrix.
+      def has_states?( states )
+        # dummy for rdoc
+      end if false
+      
+      # Returns true if the given column definition( Bio::NeXML::Char object ) is defined for the matrix.
+      def has_char?( char )
+        # dummy for rdoc
+      end if false      
+      
+      # Iterate over each state sets( Bio::NeXML::States object ) defined for the matrix. Returns an
+      # Enumerator if no block is provided.
+      def each_states
+        # dummy for rdoc
+      end if false
+      
+      # Iterate over each column definitions( Bio::NeXML::Char object ) defined for the matrix. Returns
+      # an Enumerator if no block is provided.
+      def each_char
+        # dummy for rdoc
+      end if false      
+      
+      # Returns the number of state sets defined for the matrix.
+      def number_of_states
+        # dummy for rdoc
+      end if false
+      
+      # Returns the number of column definitions defined for the matrix.
+      def number_of_chars
+        # dummy for rdoc
+      end if false      
+      
+    end # end of format
 
     # Cell is the smallest unit of a character state matrix or of a sequence. A cell maybe bound or
     # unbound. If a cell points to a char and has a state, it is a bound cell. Bound cells correspond
@@ -184,14 +425,37 @@ module Bio
     #    cell.value            #=> 'B'
     class Cell
       include Mapper
+      
+      @@types = [ :DnaSeqs,            :DnaCells,
+                  :RnaSeqs,            :RnaCells,
+                  :ProteinSeqs,        :ProteinCells,
+                  :StandardSeqs,       :StandardCells,
+                  :ContinuousSeqs,     :ContinuousCells,
+                  :RestrictionSeqs,    :RestrictionState
+                ]      
 
       attr_accessor :char
       attr_accessor :state
       attr_accessor :label
 
-      belongs_to :sequence
+      belongs_to :row
       belongs_to :state
       belongs_to :char
+      
+      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
+      # This attribute, though optional, must be set to generate valid NeXML.
+      attr_reader        :type
+      
+      # Set the type of the matrix.
+      # * Arguments :
+      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
+      # * Raises :
+      # "RuntimeError: Unkown type", if an unknown type is given.
+      def type=( type )
+        type = type.to_sym
+        raise "Unknown type" unless @@types.include?( type )
+        @type = type
+      end       
 
       def initialize( char = nil, state = nil, options = {} )
         case char
@@ -237,31 +501,42 @@ module Bio
     class Sequence
       include Mapper
 
-      # A file level unique identifier.
+      @@types = [ :DnaSeqs,            :DnaCells,
+                  :RnaSeqs,            :RnaCells,
+                  :ProteinSeqs,        :ProteinCells,
+                  :StandardSeqs,       :StandardCells,
+                  :ContinuousSeqs,     :ContinuousCells,
+                  :RestrictionSeqs,    :RestrictionState
+                ]
+
+      # Every sequence belongs to a row
+      belongs_to :row
+
+      attr_accessor :value
+      
+      # Because matrix elements don't have id attributes, we will use
+      # object_id in this case
       attr_accessor :id
+      
+      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
+      # This attribute, though optional, must be set to generate valid NeXML.
+      attr_reader        :type
+      
+      # Set the type of the matrix.
+      # * Arguments :
+      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
+      # * Raises :
+      # "RuntimeError: Unkown type", if an unknown type is given.
+      def type=( type )
+        type = type.to_sym
+        raise "Unknown type" unless @@types.include?( type )
+        @type = type
+      end       
 
-      # A human readable description.
-      attr_accessor :label
-
-      # Every row refers to a taxon.
-      belongs_to :otu
-      belongs_to :matrix
-
-      has_n :cells, :index => false
-
-      def initialize( id, options = {} )
-        @id = id
+      def initialize( options = {} )
         properties( options ) unless options.empty?
+        @id = self.object_id
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
-      end
-
-      def raw
-        cells.join
-      end
-
-      def raw=( value )
-        cells = value.each_char.map { |c| Cell.new( c ) }
-        self.cells = cells
       end
 
       def type
@@ -277,50 +552,32 @@ module Bio
         end
       end
     end
-
-    # A character state matrix. This class is analogous to the characters element of NeXML.
+    
     class Matrix
       include Mapper
-
+      has_n :rows
+      belongs_to :characters
+      
       @@types = [ :DnaSeqs,            :DnaCells,
                   :RnaSeqs,            :RnaCells,
                   :ProteinSeqs,        :ProteinCells,
                   :StandardSeqs,       :StandardCells,
                   :ContinuousSeqs,     :ContinuousCells,
                   :RestrictionSeqs,    :RestrictionState
-                ]
-
-      # An id should be uniquely scoped in an NeXML file. It need not be unique globally. It is a
-      # compulsory attribute.
-      attr_accessor      :id
-
-      # A human readable description. Its usage is optional.
-      attr_accessor      :label
-
+                ]      
+      
+      # Because matrix elements don't have id attributes, we will use
+      # object_id in this case
+      attr_accessor :id
+      
+      def initialize()
+        @id = self.object_id
+      end        
+      
       # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
       # This attribute, though optional, must be set to generate valid NeXML.
       attr_reader        :type
-
-      belongs_to         :nexml
-
-      # Every matrix compulsorily links to a taxa block( otus ).
-      belongs_to         :otus
-
-      # A matrix must define set(s) of possible observation states.
-      has_n              :states, :singularize => false
-
-      # Obviously, a matrix will have one or more columns( chars => columns ),
-      has_n              :chars
-
-      # and, one or more rows( sequences => rows ).
-      has_n              :sequences
-
-      def initialize( id, options = {} )
-        @id = id
-        properties( options ) unless options.empty?
-        block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
-      end
-
+      
       # Set the type of the matrix.
       # * Arguments :
       # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
@@ -330,31 +587,123 @@ module Bio
         type = type.to_sym
         raise "Unknown type" unless @@types.include?( type )
         @type = type
-      end
-
-      # Below are methods stubs to be picked up by rdoc, as these methods are generated dynamically.
+      end       
       
-      # Add a set of states to the matrix. 
-      # * Arguments :
-      # states( required ) - a Bio::NeXML::State object.
-      # * Returns : <tt>self</tt>.
-      #    matrix.add_states( states )
-      #    matrix.states                #=> [ .. states .. ]
-      #    states.matrix                #=> matrix
-      def add_states( states )
+      def add_row( row )
         # dummy for rdoc
       end if false
+      
+      # Returns true if the given row ( Bio::NeXML::Row object ) is
+      # defined for the matrix block.
+      def has_rows?( rows )
+        # dummy for rdoc
+      end if false
+      
+      # Remove a row from the matrix.
+      # * Arguments :
+      # row( required ) - a Bio::NeXML::Row object.
+      # * Returns : the deleted object.
+      #    matrix.delete_row( row )
+      #    matrix.rows                #=> [ .. .. ]
+      #    row.matrix                #=> nil
+      def delete_row( row )
+        # dummy for rdoc
+      end if false
+      
+      # Fetch a row ( Bio::NeXML::Row object ) by id. Returns <tt>nil</tt> if none found.
+      def get_row_by_id( id )
+        # dummy for rdoc
+      end if false
+      
+      # Returns the number of rows defined for the matrix.
+      def number_of_rows
+        # dummy for rdoc
+      end if false
+      
+      
+      # Returns an array of rows( Bio::NeXML::Rows objects ) for the matrix.
+      #    matrix.rows  #=> [ .. .. ]
+      def rows
+        # dummy for rdoc
+      end if false
+      
+      # Add rowsthe matrix. This function will overwrite previous rows
+      # for the matrix if any.
+      # * Arguments :
+      # rows( required ) - an array of Bio::NeXML::Row object.
+      #    matrix.rows = [ rows ]
+      #    matrix.rows    #=> [ rows ]
+      #    rows.matrix    #=> matrix
+      def rows=( rows )
+        # dummy for rdoc
+      end if false     
+      
+      # Returns true if the given row( Bio::NeXML::Row object ) is defined for the matrix.
+      def has_row?( rows )
+        # dummy for rdoc
+      end if false     
+      
+      # Iterate over each row ( Bio::NeXML::Row object ) defined for the matrix. Returns an
+      # Enumerator if no block is provided.
+      def each_row
+        # dummy for rdoc
+      end if false    
+      
+      # Returns the number of rows defined for the matrix.
+      def number_of_rows
+        # dummy for rdoc
+      end if false
+         
+    end
+    
+    class Row
+      include Mapper
+      
+      @@types = [ :DnaSeqs,            :DnaCells,
+                  :RnaSeqs,            :RnaCells,
+                  :ProteinSeqs,        :ProteinCells,
+                  :StandardSeqs,       :StandardCells,
+                  :ContinuousSeqs,     :ContinuousCells,
+                  :RestrictionSeqs,    :RestrictionState
+                ]      
+      
+      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
+      # This attribute, though optional, must be set to generate valid NeXML.
+      attr_reader        :type
+      
+      # Set the type of the matrix.
+      # * Arguments :
+      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
+      # * Raises :
+      # "RuntimeError: Unkown type", if an unknown type is given.
+      def type=( type )
+        type = type.to_sym
+        raise "Unknown type" unless @@types.include?( type )
+        @type = type
+      end       
 
-      # Add a column definition to the matrix.
-      # * Arguments :
-      # char( required ) - a Bio::NeXML::Char object.
-      # * Returns : <tt>self</tt>.
-      #    matrix.add_char( char )
-      #    matrix.chars               #=> [ .. char .. ]
-      #    char.matrix                #=> matrix
-      def add_char( char )
-        # dummy for rdoc
-      end if false
+      # A file level unique identifier.
+      attr_accessor :id
+
+      # A human readable description.
+      attr_accessor :label
+      
+      # actually, probably only one <seq/> element
+      has_n :sequences
+
+      # Every row refers to a taxon.
+      belongs_to :otu
+      belongs_to :matrix
+
+      has_n :cells, :index => false
+
+      def initialize( id, options = {} )
+        @id = id
+        properties( options ) unless options.empty?
+        block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
+      end
+      
+      # Below are methods stubs to be picked up by rdoc, as these methods are generated dynamically.
 
       # Add a sequence( row ) to the matrix.
       # * Arguments :
@@ -364,28 +713,6 @@ module Bio
       #    matrix.sequences               #=> [ .. sequence .. ]
       #    sequence.matrix                #=> matrix
       def add_sequence( sequence )
-        # dummy for rdoc
-      end if false
-
-      # Remove a state set from the matrix.
-      # * Arguments :
-      # states( required ) - a Bio::NeXML::State object.
-      # * Returns : the deleted object.
-      #    matrix.delete_states( states )
-      #    matrix.states                #=> [ .. .. ]
-      #    states.matrix                #=> nil
-      def delete_states( states )
-        # dummy for rdoc
-      end if false
-
-      # Remove a column definition from the matrix.
-      # * Arguments :
-      # char( required ) - a Bio::NeXML::Char object.
-      # * Returns : the deleted object.
-      #    matrix.delete_char( char )
-      #    matrix.chars               #=> [ .. .. ]
-      #    char.matrix                #=> nil
-      def delete_char( char )
         # dummy for rdoc
       end if false
 
@@ -400,43 +727,9 @@ module Bio
         # dummy for rdoc
       end if false
 
-      # Returns an array of state sets( Bio::NeXML::States objects ) for the matrix.
-      #    matrix.states  #=> [ .. .. ]
-      def states
-        # dummy for rdoc
-      end if false
-
-      # Returns an array of column definitions( Bio::NeXML::Char objects ) for the matrix.
-      #    matrix.chars  #=> [ .. .. ]
-      def chars
-        # dummy for rdoc
-      end if false
-
       # Returns an array of sequences ( Bio::NeXML::Sequence objects ) for the matrix.
       #    matrix.sequences  #=> [ .. .. ]
       def sequences
-        # dummy for rdoc
-      end if false
-
-      # Add state sets to the matrix. This function will overwrite previous state set definitions
-      # for the matrix if any.
-      # * Arguments :
-      # states( required ) - an array of Bio::NeXML::States object.
-      #    matrix.states = [ states ]
-      #    matrix.states    #=> [ states ]
-      #    states.matrix    #=> matrix
-      def states=( states )
-        # dummy for rdoc
-      end if false
-
-      # Add column definitions to the matrix. This function will override the previous column
-      # definitions if any.
-      # * Arguments :
-      # chars( required ) - an array of Bio::NeXML::Char object.
-      #    matrix.chars = [ char ]
-      #    matrix.chars    #=> [ char ]
-      #    char.matrix     #=> matrix
-      def chars=( chars )
         # dummy for rdoc
       end if false
 
@@ -450,46 +743,8 @@ module Bio
         # dummy for rdoc
       end if false
 
-      # Fetch a state set( Bio::NeXML::States object ) by id. Returns <tt>nil</tt> if none found.
-      def get_states_by_id( id )
-        # dummy for rdoc
-      end if false
-
-      # Fetch a column definition( Bio::NeXML::Char object ) by id. Returns <tt>nil</tt> if none
-      # found.
-      def get_char_by_id( id )
-        # dummy for rdoc
-      end if false
-
-      # Fetch a sequence( Bio::NeXML::Sequence object ) by id. Returns <tt>nil</tt> if none found.
-      def get_sequence_by_id( id )
-        # dummy for rdoc
-      end if false
-
-      # Returns true if the given state set( Bio::NeXML::States object ) is defined for the matrix.
-      def has_states?( states )
-        # dummy for rdoc
-      end if false
-
-      # Returns true if the given column definition( Bio::NeXML::Char object ) is defined for the matrix.
-      def has_char?( char )
-        # dummy for rdoc
-      end if false
-
       # Returns true if the given sequence( Bio::NeXML::Sequence object ) is defined for the matrix.
       def has_sequence?( sequence )
-        # dummy for rdoc
-      end if false
-
-      # Iterate over each state sets( Bio::NeXML::States object ) defined for the matrix. Returns an
-      # Enumerator if no block is provided.
-      def each_states
-        # dummy for rdoc
-      end if false
-
-      # Iterate over each column definitions( Bio::NeXML::Char object ) defined for the matrix. Returns
-      # an Enumerator if no block is provided.
-      def each_char
         # dummy for rdoc
       end if false
 
@@ -499,20 +754,71 @@ module Bio
         # dummy for rdoc
       end if false
 
-      # Returns the number of state sets defined for the matrix.
-      def number_of_states
-        # dummy for rdoc
-      end if false
-
-      # Returns the number of column definitions defined for the matrix.
-      def number_of_chars
-        # dummy for rdoc
-      end if false
-
       # Returns the number of sequences defined for the matrix.
       def number_of_sequences
         # dummy for rdoc
-      end if false
-    end #end class Matrix
+      end if false      
+    end # end of row class
+
+    # A character state matrix. This class is analogous to the characters element of NeXML.
+    class Characters
+      include Mapper
+
+      @@types = [ :DnaSeqs,            :DnaCells,
+                  :RnaSeqs,            :RnaCells,
+                  :ProteinSeqs,        :ProteinCells,
+                  :StandardSeqs,       :StandardCells,
+                  :ContinuousSeqs,     :ContinuousCells,
+                  :RestrictionSeqs,    :RestrictionState
+                ]
+
+      # An id should be uniquely scoped in an NeXML file. It need not be unique globally. It is a
+      # compulsory attribute.
+      attr_accessor      :id
+      
+      # A characters block holds a single format definition
+      attr_accessor      :format
+      
+      # A characters block holds a single matrix definition
+      attr_accessor      :matrix
+
+      # A human readable description. Its usage is optional.
+      attr_accessor      :label
+
+      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
+      # This attribute, though optional, must be set to generate valid NeXML.
+      attr_reader        :type
+      
+      # Set the type of the matrix.
+      # * Arguments :
+      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
+      # * Raises :
+      # "RuntimeError: Unkown type", if an unknown type is given.
+      def type=( type )
+        type = type.to_sym
+        raise "Unknown type" unless @@types.include?( type )
+        @type = type
+      end      
+
+      belongs_to         :nexml
+
+      # Every characters block compulsorily links to a taxa block( otus ).
+      belongs_to         :otus
+
+      def initialize( id, options = {} )
+        @id = id
+        properties( options ) unless options.empty?
+        block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
+      end
+      
+      def add_format( format )
+        format = format
+      end
+      
+      def add_matrix( matrix )
+        matrix = matrix
+      end
+
+    end #end class Characters
   end
 end

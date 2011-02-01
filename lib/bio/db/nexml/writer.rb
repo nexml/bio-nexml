@@ -317,7 +317,7 @@ module Bio
 
       def serialize_seq_row( row )
         node = create_node( "row", attributes( row, :id, :otu, :label ) )
-        node << serialize_seq( row.seq )
+        node << serialize_seq( row.sequences.first )
         node
       end
 
@@ -399,7 +399,7 @@ module Bio
       def serialize_uncertain_state_set( state )
         node = create_node( "uncertain_state_set", attributes( state, :id, :label, :symbol ) )
 
-        state.each do |member|
+        state.each_member do |member|
           node << serialize_member( member )
         end
 

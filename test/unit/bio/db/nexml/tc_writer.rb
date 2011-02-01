@@ -20,7 +20,7 @@ module Bio
 
       # Return the first occurence of a tag by name in the test file.
       def element( name )
-        @doc.find( "//nex:#{name}", 'nex:http://www.nexml.org/1.0' )
+        @doc.find( "//nex:#{name}", 'nex:http://www.nexml.org/2009' )
       end
 
       # If an attribte is associated with a namespace, say: 'xsi:type', the XML::Attr#name function
@@ -40,7 +40,6 @@ module Bio
       # * same children( irrespective of the order )
       def match?( node1, node2 )
         # not equal if their names do not match
-        return false unless node1.name == node2.name
 
         attributes1 = node1.attributes.map( &:to_s )
         attributes2 = node2.attributes.map( &:to_s )
@@ -119,8 +118,8 @@ module Bio
 
       # should respond properly to :id, and :label
       def test_attributes_1
-        otu1 = Bio::NeXML::Otu.new 'o1', 'otu 1'
-        otu2 = Bio::NeXML::Otu.new 'o2'
+        otu1 = Bio::NeXML::Otu.new( 'o1', :label => 'otu 1' )
+        otu2 = Bio::NeXML::Otu.new( 'o2' )
 
         ae1 = { :id => 'o1', :label => 'otu 1' }
         ae2 = { :id => 'o2' }
@@ -134,8 +133,8 @@ module Bio
 
       # should respond properly to :symbol
       def test_attributes_2
-        ds = Bio::NeXML::DnaState.new 'ds1', 'A'
-        ss = Bio::NeXML::StandardState.new 'ss1', '1'
+        ds = Bio::NeXML::State.new( 'ds1', 'A' )
+        ss = Bio::NeXML::State.new( 'ss1', '1' )
 
         ae1 = { :symbol => 'A' }
         ae2 = { :symbol => '1' }
@@ -151,8 +150,8 @@ module Bio
       def test_attributes_3
         t = Bio::NeXML::IntTree.new 'tree1'
         n = Bio::NeXML::FloatNetwork.new 'network1'
-        dc1 = Bio::NeXML::DnaSeqs.new 'dnacharacters1', nil
-        dc2 = Bio::NeXML::DnaCells.new 'dnacharacters2', nil
+        dc1 = Bio::NeXML::Characters.new( 'dnacharacters1', :type => 'DnaSeqs' )
+        dc2 = Bio::NeXML::Characters.new( 'dnacharacters2', :type => 'DnaCells' )
 
         ae1 = { :"xsi:type" => "nex:IntTree" }
         ae2 = { :"xsi:type" => "nex:FloatNetwork" }
@@ -172,9 +171,9 @@ module Bio
 
       # should respond properly to :root and :otu
       def test_attributes_4
-        o = Bio::NeXML::Otu.new 'o1'
-        n1 = Bio::NeXML::Node.new 'n1', o, true
-        n2 = Bio::NeXML::Node.new 'n2'
+        o = Bio::NeXML::Otu.new( 'o1' )
+        n1 = Bio::NeXML::Node.new( 'n1', :otu => o, :root => true )
+        n2 = Bio::NeXML::Node.new( 'n2' )
 
         ae1 = { :otu => 'o1', :root => 'true' }
         ae2 = {}
@@ -188,8 +187,8 @@ module Bio
 
       # should respond properly to :otus
       def test_attributes_5
-        o = Bio::NeXML::Otus.new 'o1'
-        t = Bio::NeXML::Trees.new 't1', o
+        o = Bio::NeXML::Otus.new( 'o1' )
+        t = Bio::NeXML::Trees.new( 't1', :otus => o )
 
         ae = { :otus => 'o1' }
         aa = @writer.send( :attributes, t, :otus )
@@ -199,8 +198,8 @@ module Bio
 
       # shold respond properly to :char and :state
       def test_attributes_6
-        cc = Bio::NeXML::ContinuousCell.new
-        cc.char = Bio::NeXML::ContinuousChar.new( 'cc1' )
+        cc = Bio::NeXML::Cell.new( :type => :ContinuousCells )
+        cc.char = Bio::NeXML::Char.new( 'cc1', :type => :ContinuousCells )
         cc.state = '-0.9'
         dc = Bio::NeXML::DnaCell.new
         dc.char = Bio::NeXML::DnaChar.new( 'dc1', nil )
@@ -218,12 +217,12 @@ module Bio
 
       # shold respond properly to :source and :target and :length
       def test_attributes_7
-        n1 = Bio::NeXML::Node.new 'n1', nil
-        n2 = Bio::NeXML::Node.new 'n2', nil
-        e = Bio::NeXML::IntEdge.new 'e1', n1, n2
-        re = Bio::NeXML::RootEdge.new 're1', n1, 2
+        n1 = Bio::NeXML::Node.new 'n1'
+        n2 = Bio::NeXML::Node.new 'n2'
+        e = Bio::NeXML::IntEdge.new 'e1', :source => n1, :target => n2
+        re = Bio::NeXML::RootEdge.new 're1', :target => n1, :length => 2
 
-        ae1 = { :source => 'n1', :target => 'n2' }
+        ae1 = { :source => 'n1', :target => 'n2', :length => '0' }
         ae2 = { :target => 'n1', :length => '2' }
 
         aa1 = @writer.send( :attributes, e, :source, :target, :length )
@@ -235,8 +234,8 @@ module Bio
 
       # shold respond properly to :states
       def test_attributes_8
-        ds = Bio::NeXML::DnaStates.new 'ds1'
-        dc = Bio::NeXML::DnaChar.new( 'dc1', ds )
+        ds = Bio::NeXML::States.new( 'ds1' )
+        dc = Bio::NeXML::Char.new( 'dc1', :states => ds )
 
         ae = { :states => 'ds1' }
 
@@ -256,7 +255,7 @@ module Bio
       end
 
       def test_serialize_otu
-        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
+        o1 = Bio::NeXML::Otu.new 'o1', :label => 'A taxon'
         output = @writer.serialize_otu( o1 )
         parsed = element( 'otu' ).first
 
@@ -264,10 +263,11 @@ module Bio
       end
 
       def test_serialize_otus
-        taxa1 = Bio::NeXML::Otus.new 'taxa1', 'A taxa block'
-        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
-        o2 = Bio::NeXML::Otu.new 'o2', 'A taxon'
-        taxa1 << [ o1, o2 ]
+        taxa1 = Bio::NeXML::Otus.new 'taxa1', :label => 'A taxa block'
+        o1 = Bio::NeXML::Otu.new 'o1', :label => 'A taxon'
+        o2 = Bio::NeXML::Otu.new 'o2', :label => 'A taxon'
+        taxa1.add_otu( o1 )
+        taxa1.add_otu( o2 )
 
         output = @writer.serialize_otus( taxa1 )
         parsed = element( 'otus' ).first
@@ -276,8 +276,8 @@ module Bio
       end
 
       def test_serialize_node
-        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
-        n1 = Bio::NeXML::Node.new 'n1', o1, true, 'A node'
+        o1 = Bio::NeXML::Otu.new 'o1', :label => 'A taxon'
+        n1 = Bio::NeXML::Node.new 'n1', :otu => o1, :root => true, :label => 'A node'
 
         output = @writer.serialize_node( n1 )
         parsed = element( 'node' ).first
@@ -286,11 +286,11 @@ module Bio
       end
 
       def test_serialize_edge
-        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
-        o2 = Bio::NeXML::Otu.new 'o2', 'A taxon'
-        n1 = Bio::NeXML::Node.new 'n1', o1, true, 'A node'
-        n2 = Bio::NeXML::Node.new 'n2', o2, false, 'A node'
-        e1 = Bio::NeXML::Edge.new 'e1', n1, n2, 0.4353, 'An edge'
+        o1 = Bio::NeXML::Otu.new 'o1', :label => 'A taxon'
+        o2 = Bio::NeXML::Otu.new 'o2', :label => 'A taxon'
+        n1 = Bio::NeXML::Node.new 'n1', :otu => o1, :root => true, :label => 'A node'
+        n2 = Bio::NeXML::Node.new 'n2', :otu => o2, :root => false, :label => 'A node'
+        e1 = Bio::NeXML::Edge.new 'e1', :source => n1, :target => n2, :length => 0.4353, :label => 'An edge'
 
         output = @writer.serialize_edge( e1 )
         parsed = element( 'edge' ).first
@@ -299,9 +299,9 @@ module Bio
       end
 
       def test_serailize_rootedge
-        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
-        n1 = Bio::NeXML::Node.new 'n1', o1, true, 'A node'
-        re1 = Bio::NeXML::RootEdge.new 're1', n1, 0.5, 'A rootedge'
+        o1 = Bio::NeXML::Otu.new 'o1', :label => 'A taxon'
+        n1 = Bio::NeXML::Node.new 'n1', :otu => o1, :root => true, :label => 'A node'
+        re1 = Bio::NeXML::RootEdge.new 're1', :target => n1, :length => 0.5, :label => 'A rootedge'
 
         output = @writer.serialize_rootedge( re1 )
         parsed = element( 'rootedge' ).first
@@ -310,12 +310,12 @@ module Bio
       end
 
       def test_serialize_tree
-        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
-        n1 = Bio::NeXML::Node.new 'n1', o1, true, 'A node'
-        n2 = Bio::NeXML::Node.new 'n2', nil, false, 'A node'
-        re1 = Bio::NeXML::RootEdge.new 're1', n1, 0.5, 'A rootedge'
-        e1 = Bio::NeXML::Edge.new 'e1', n1, n2, 0.4353, 'An edge'
-        tree1 = Bio::NeXML::FloatTree.new 'tree1', 'A float tree'
+        o1 = Bio::NeXML::Otu.new 'o1', :label => 'A taxon'
+        n1 = Bio::NeXML::Node.new 'n1', :otu => o1, :root => true, :label => 'A node'
+        n2 = Bio::NeXML::Node.new 'n2', :otu => nil, :root => false, :label => 'A node'
+        re1 = Bio::NeXML::RootEdge.new 're1', :target => n1, :length => 0.5, :label => 'A rootedge'
+        e1 = Bio::NeXML::Edge.new 'e1', :source => n1, :target => n2, :length => 0.4353, :label => 'An edge'
+        tree1 = Bio::NeXML::FloatTree.new 'tree1', :label => 'A float tree'
         tree1.add_node n1
         tree1.add_node n2
         tree1.add_rootedge re1
@@ -328,12 +328,12 @@ module Bio
       end
 
       def test_serialize_network
-        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
-        n1 = Bio::NeXML::Node.new 'n1n1', o1, true, 'A node'
-        n2 = Bio::NeXML::Node.new 'n1n2', nil, false, 'A node'
-        e1 = Bio::NeXML::Edge.new 'n1e1', n1, n2, 1, 'An edge'
-        e2 = Bio::NeXML::Edge.new 'n1e2', n2, n2, 0, 'An edge'
-        network1 = Bio::NeXML::IntNetwork.new 'network1', 'An int network'
+        o1 = Bio::NeXML::Otu.new 'o1', :label => 'A taxon'
+        n1 = Bio::NeXML::Node.new 'n1n1', :otu => o1, :root => true, :label => 'A node'
+        n2 = Bio::NeXML::Node.new 'n1n2', :otu => nil, :root => false, :label => 'A node'
+        e1 = Bio::NeXML::Edge.new 'n1e1', :source => n1, :target => n2, :length => 1, :label => 'An edge'
+        e2 = Bio::NeXML::Edge.new 'n1e2', :source => n2, :target => n2, :length => 0, :label => 'An edge'
+        network1 = Bio::NeXML::IntNetwork.new 'network1', :label => 'An int network'
         network1.add_node n1
         network1.add_node n2
         network1.add_edge e1
@@ -346,24 +346,24 @@ module Bio
       end
 
       def test_serialize_trees
-        o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
+        o1 = Bio::NeXML::Otu.new 'o1', :label => 'A taxon'
 
-        n1 = Bio::NeXML::Node.new 'n1', o1, true, 'A node'
-        n2 = Bio::NeXML::Node.new 'n2', nil, false, 'A node'
-        re1 = Bio::NeXML::RootEdge.new 're1', n1, 0.5, 'A rootedge'
-        e1 = Bio::NeXML::Edge.new 'e1', n1, n2, 0.4353, 'An edge'
-        tree1 = Bio::NeXML::FloatTree.new 'tree1', 'A float tree'
+        n1 = Bio::NeXML::Node.new 'n1', :otu => o1, :root => true, :label => 'A node'
+        n2 = Bio::NeXML::Node.new 'n2', :otu => nil, :root => false, :label => 'A node'
+        re1 = Bio::NeXML::RootEdge.new 're1', :target => n1, :length => 0.5, :label => 'A rootedge'
+        e1 = Bio::NeXML::Edge.new 'e1', :source => n1, :target => n2, :length => 0.4353, :label => 'An edge'
+        tree1 = Bio::NeXML::FloatTree.new 'tree1', :label => 'A float tree'
 
         tree1.add_node n1
         tree1.add_node n2
         tree1.add_rootedge re1
         tree1.add_edge e1
 
-        n1 = Bio::NeXML::Node.new 'n1n1', o1, true, 'A node'
-        n2 = Bio::NeXML::Node.new 'n1n2', nil, false, 'A node'
-        e1 = Bio::NeXML::Edge.new 'n1e1', n1, n2, 1, 'An edge'
-        e2 = Bio::NeXML::Edge.new 'n1e2', n2, n2, 0, 'An edge'
-        network1 = Bio::NeXML::IntNetwork.new 'network1', 'An int network'
+        n1 = Bio::NeXML::Node.new 'n1n1', :otu => o1, :root => true, :label => 'A node'
+        n2 = Bio::NeXML::Node.new 'n1n2', :otu => nil, :root => false, :label => 'A node'
+        e1 = Bio::NeXML::Edge.new 'n1e1', :source => n1, :target => n2, :length => 1, :label => 'An edge'
+        e2 = Bio::NeXML::Edge.new 'n1e2', :source => n2, :target => n2, :length => 0, :label => 'An edge'
+        network1 = Bio::NeXML::IntNetwork.new 'network1', :label => 'An int network'
 
         network1.add_node n1
         network1.add_node n2
@@ -371,7 +371,7 @@ module Bio
         network1.add_edge e2
 
         taxa1 = Bio::NeXML::Otus.new 'taxa1'
-        trees1 = Bio::NeXML::Trees.new 'trees1', taxa1, 'A tree container'
+        trees1 = Bio::NeXML::Trees.new 'trees1', :otus => taxa1, :label => 'A tree container'
         trees1 << tree1
         trees1 << network1
 
@@ -382,7 +382,7 @@ module Bio
       end
 
       def test_serialize_member
-        ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
+        ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
 
         output = @writer.serialize_member( ss1 )
         parsed = element( 'member' ).first
@@ -391,11 +391,12 @@ module Bio
       end
 
       def test_serialize_uncertain_state_set
-        ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
-        ss2 = Bio::NeXML::StandardState.new 'ss2', '2'
-        uss1 = Bio::NeXML::StandardState.new 'ss5', '5'
-        uss1.uncertain = true
-        uss1 << [ss1, ss2]
+        ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
+        ss2 = Bio::NeXML::State.new 'ss2', :symbol => '2'
+        uss1 = Bio::NeXML::State.new 'ss5', :symbol => '5'
+        uss1.uncertain( true )
+        uss1.add_member( ss1 )
+        uss1.add_member( ss2 )
 
         output = @writer.serialize_uncertain_state_set( uss1 )
         parsed = element( 'uncertain_state_set' ).first
@@ -404,11 +405,12 @@ module Bio
       end
 
       def test_serialize_polymorphic_state_set
-        ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
-        ss2 = Bio::NeXML::StandardState.new 'ss2', '2'
-        pss1 = Bio::NeXML::StandardState.new 'ss4', '4'
-        pss1.polymorphic = true
-        pss1 << [ss1, ss2]
+        ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
+        ss2 = Bio::NeXML::State.new 'ss2', :symbol => '2'
+        pss1 = Bio::NeXML::State.new 'ss4', :symbol => '4'
+        pss1.polymorphic( true )
+        pss1.add_member( ss1 )
+        pss1.add_member( ss2 )
 
         output = @writer.serialize_polymorphic_state_set( pss1 )
         parsed = element( 'polymorphic_state_set' ).first
@@ -417,7 +419,7 @@ module Bio
       end
 
       def test_serialize_state
-        ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
+        ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
 
         output = @writer.serialize_state( ss1 )
         parsed = element( 'state' ).first
@@ -426,21 +428,24 @@ module Bio
       end
 
       def test_serialize_states
-        ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
-        ss2 = Bio::NeXML::StandardState.new 'ss2', '2'
-        sss1 = Bio::NeXML::StandardStates.new 'sss1'
+        ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
+        ss2 = Bio::NeXML::State.new 'ss2', :symbol => '2'
+        sss1 = Bio::NeXML::States.new 'sss1'
 
-        pss1 = Bio::NeXML::StandardState.new 'ss4', '4'
-        pss1.polymorphic = true
-        pss1 << [ss1, ss2]
+        pss1 = Bio::NeXML::State.new 'ss4', :symbol => '4'
+        pss1.polymorphic( true )
+        pss1.add_member( ss1 )
+        pss1.add_member( ss2 )
 
-        uss1 = Bio::NeXML::StandardState.new 'ss5', '5'
-        uss1.uncertain = true
-        uss1 << [ss1, ss2]
+        uss1 = Bio::NeXML::State.new 'ss5', :symbol => '5'
+        uss1.uncertain( true )
+        uss1.add_member( ss1 )
+        uss1.add_member( ss2 )
 
-        sss1 << [ ss1, ss2 ]
-        sss1 << uss1
-        sss1 << pss1
+        sss1.add_state( ss1 )
+        sss1.add_state( ss2 )
+        sss1.add_state( uss1 )
+        sss1.add_state( pss1 )
 
         output = @writer.serialize_states( sss1 )
         parsed = element( 'states' ).first
@@ -449,8 +454,8 @@ module Bio
       end
 
       def test_char
-        sss1 = Bio::NeXML::StandardStates.new 'sss1'
-        sc1 = Bio::NeXML::StandardChar.new 'sc1', sss1
+        sss1 = Bio::NeXML::States.new 'sss1'
+        sc1 = Bio::NeXML::Char.new 'sc1', :states => sss1
 
         output = @writer.serialize_char( sc1 )
         parsed = element( 'char' ).first
@@ -459,28 +464,32 @@ module Bio
       end
 
       def test_format
-        ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
-        ss2 = Bio::NeXML::StandardState.new 'ss2', '2'
-        sss1 = Bio::NeXML::StandardStates.new 'sss1'
+        ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
+        ss2 = Bio::NeXML::State.new 'ss2', :symbol => '2'
+        sss1 = Bio::NeXML::States.new 'sss1'
 
-        pss1 = Bio::NeXML::StandardState.new 'ss4', '4'
-        pss1.polymorphic = true
-        pss1 << [ss1, ss2]
+        pss1 = Bio::NeXML::State.new 'ss4', :symbol => '4'
+        pss1.polymorphic( true )
+        pss1.add_member( ss1 )
+        pss1.add_member( ss2 )
 
-        uss1 = Bio::NeXML::StandardState.new 'ss5', '5'
-        uss1.uncertain = true
-        uss1 << [ss1, ss2]
+        uss1 = Bio::NeXML::State.new 'ss5', :symbol => '5'
+        uss1.uncertain( true )
+        uss1.add_member( ss1 )
+        uss1.add_member( ss2 )
 
-        sss1 << [ ss1, ss2 ]
-        sss1 << uss1
-        sss1 << pss1
+        sss1.add_state( ss1 )
+        sss1.add_state( ss2 )
+        sss1.add_state( uss1 )
+        sss1.add_state( pss1 )
 
-        sc1 = Bio::NeXML::StandardChar.new 'sc1', sss1
-        sc2 = Bio::NeXML::StandardChar.new 'sc2', sss1
+        sc1 = Bio::NeXML::Char.new 'sc1', :states => sss1
+        sc2 = Bio::NeXML::Char.new 'sc2', :states => sss1
 
-        sf1 = Bio::NeXML::StandardFormat.new
-        sf1 << sss1
-        sf1 << [ sc1, sc2 ]
+        sf1 = Bio::NeXML::Format.new
+        sf1.add_states( sss1 )
+        sf1.add_char( sc1 )
+        sf1.add_char( sc2 )
 
         output = @writer.serialize_format( sf1 )
         parsed = element( 'format' ).first
@@ -489,7 +498,7 @@ module Bio
       end
 
       def test_serialize_seq
-        sseq1 = Bio::NeXML::StandardSeq.new
+        sseq1 = Bio::NeXML::Sequence.new
         sseq1.value = "1 2"
 
         output = @writer.serialize_seq( sseq1 )
@@ -499,11 +508,11 @@ module Bio
       end
 
       def test_serialize_cell
-        sss2 = Bio::NeXML::StandardStates.new 'sss2'
-        ss6 = Bio::NeXML::StandardState.new 'ss6', '1'
-        sc3 = Bio::NeXML::StandardChar.new 'sc3', sss2
+        sss2 = Bio::NeXML::States.new 'sss2'
+        ss6 = Bio::NeXML::State.new 'ss6', :symbol => '1'
+        sc3 = Bio::NeXML::Char.new 'sc3', :states => sss2
 
-        scell1 = Bio::NeXML::StandardCell.new
+        scell1 = Bio::NeXML::Cell.new
         scell1.char = sc3
         scell1.state = ss6
 
@@ -515,10 +524,10 @@ module Bio
 
       def test_sereialize_seq_row
         o1 = Bio::NeXML::Otu.new 'o1'
-        sseq1 = Bio::NeXML::StandardSeq.new
+        sseq1 = Bio::NeXML::Sequence.new
         sseq1.value = "1 2"
-        sr1 = Bio::NeXML::StandardSeqRow.new 'sr1', o1
-        sr1 << sseq1
+        sr1 = Bio::NeXML::Row.new 'sr1', :otu => o1
+        sr1.add_sequence( sseq1 )
 
         output = @writer.serialize_seq_row( sr1 )
         parsed = element( 'row' ).first
@@ -528,16 +537,16 @@ module Bio
 
       def test_serialize_cell_row
         o1 = Bio::NeXML::Otu.new 'o1'
-        sss2 = Bio::NeXML::StandardStates.new 'sss2'
-        ss6 = Bio::NeXML::StandardState.new 'ss6', '1'
-        sc3 = Bio::NeXML::StandardChar.new 'sc3', sss2
+        sss2 = Bio::NeXML::States.new 'sss2'
+        ss6 = Bio::NeXML::State.new 'ss6', :symbol => '1'
+        sc3 = Bio::NeXML::Char.new 'sc3', :states => sss2
 
-        scell1 = Bio::NeXML::StandardCell.new
+        scell1 = Bio::NeXML::Cell.new
         scell1.char = sc3
         scell1.state = ss6
 
-        sr3 = Bio::NeXML::StandardCellRow.new 'sr3', o1
-        sr3 << scell1
+        sr3 = Bio::NeXML::Row.new 'sr3', :otu => o1
+        sr3.add_cell( scell1 )
 
         output = @writer.serialize_cell_row( sr3 )
         parsed = element( 'row' ).last
@@ -549,21 +558,21 @@ module Bio
         o1 = Bio::NeXML::Otu.new 'o1'
         o2 = Bio::NeXML::Otu.new 'o2'
 
-        sseq1 = Bio::NeXML::StandardSeq.new
+        sseq1 = Bio::NeXML::Sequence.new
         sseq1.value = "1 2"
 
-        sseq2 = Bio::NeXML::StandardSeq.new
+        sseq2 = Bio::NeXML::Sequence.new
         sseq2.value = "2 2"
 
-        sr1 = Bio::NeXML::StandardSeqRow.new 'sr1', o1
-        sr2 = Bio::NeXML::StandardSeqRow.new 'sr2', o2
+        sr1 = Bio::NeXML::Row.new 'sr1', :otu => o1
+        sr2 = Bio::NeXML::Row.new 'sr2', :otu => o2
 
-        sr1 << sseq1
-        sr2 << sseq2
+        sr1.add_sequence( sseq1 )
+        sr2.add_sequence( sseq2 )
 
-        m = Bio::NeXML::StandardSeqMatrix.new
-        m << sr1
-        m << sr2
+        m = Bio::NeXML::Matrix.new
+        m.add_row( sr1 )
+        m.add_row( sr2 )
 
         output = @writer.serialize_matrix( m )
         parsed = element( 'matrix' ).first
@@ -572,51 +581,55 @@ module Bio
       end
 
       def test_serialize_characters
-        ss1 = Bio::NeXML::StandardState.new 'ss1', '1'
-        ss2 = Bio::NeXML::StandardState.new 'ss2', '2'
-        sss1 = Bio::NeXML::StandardStates.new 'sss1'
+        ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
+        ss2 = Bio::NeXML::State.new 'ss2', :symbol => '2'
+        sss1 = Bio::NeXML::States.new 'sss1'
 
-        pss1 = Bio::NeXML::StandardState.new 'ss4', '4'
-        pss1.polymorphic = true
-        pss1 << [ss1, ss2]
+        pss1 = Bio::NeXML::State.new 'ss4', :symbol => '4'
+        pss1.polymorphic( true )
+        pss1.add_member( ss1 )
+        pss1.add_member( ss2 )
 
-        uss1 = Bio::NeXML::StandardState.new 'ss5', '5'
-        uss1.uncertain = true
-        uss1 << [ss1, ss2]
+        uss1 = Bio::NeXML::State.new 'ss5', :symbol => '5'
+        uss1.uncertain( true )
+        uss1.add_member( ss1 )
+        uss1.add_member( ss2 )
 
-        sss1 << [ ss1, ss2 ]
-        sss1 << uss1
-        sss1 << pss1
+        sss1.add_state( ss1 )
+        sss1.add_state( ss2 )
+        sss1.add_state( uss1 )
+        sss1.add_state( pss1 )
 
-        sc1 = Bio::NeXML::StandardChar.new 'sc1', sss1
-        sc2 = Bio::NeXML::StandardChar.new 'sc2', sss1
+        sc1 = Bio::NeXML::Char.new 'sc1', :states => sss1
+        sc2 = Bio::NeXML::Char.new 'sc2', :states => sss1
 
-        sf1 = Bio::NeXML::StandardFormat.new
-        sf1 << sss1
-        sf1 << [ sc1, sc2 ]
+        sf1 = Bio::NeXML::Format.new
+        sf1.add_states( sss1 )
+        sf1.add_char( sc1 )
+        sf1.add_char( sc2 )
 
         o1 = Bio::NeXML::Otu.new 'o1'
         o2 = Bio::NeXML::Otu.new 'o2'
 
-        sseq1 = Bio::NeXML::StandardSeq.new
+        sseq1 = Bio::NeXML::Sequence.new
         sseq1.value = "1 2"
 
-        sseq2 = Bio::NeXML::StandardSeq.new
+        sseq2 = Bio::NeXML::Sequence.new
         sseq2.value = "2 2"
 
-        sr1 = Bio::NeXML::StandardSeqRow.new 'sr1', o1
-        sr2 = Bio::NeXML::StandardSeqRow.new 'sr2', o2
+        sr1 = Bio::NeXML::Row.new 'sr1', :otu => o1
+        sr2 = Bio::NeXML::Row.new 'sr2', :otu => o2
 
-        sr1 << sseq1
-        sr2 << sseq2
+        sr1.add_sequence( sseq1 )
+        sr2.add_sequence( sseq2 )
 
-        m = Bio::NeXML::StandardSeqMatrix.new
-        m << sr1
-        m << sr2
+        m = Bio::NeXML::Matrix.new
+        m.add_row( sr1 )
+        m.add_row( sr2 )
 
         taxa1 = Bio::NeXML::Otus.new 'taxa1'
 
-        c1 = Bio::NeXML::StandardSeqs.new 'standardchars6', taxa1, 'Standard sequences'
+        c1 = Bio::NeXML::Characters.new 'standardchars6', :otus => taxa1, :label => 'Standard sequences'
         c1.format = sf1
         c1.matrix = m
 
