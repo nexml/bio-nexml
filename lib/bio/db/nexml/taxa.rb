@@ -23,7 +23,7 @@ module Bio
       # An otu is referred to by several tree nodes.
       has_n     :nodes
 
-      has_n     :sequences
+      has_n     :rows
 
       # Create a new otu.
       #    otu = Bio::NeXML::Otu.id( 'o1' )
@@ -69,7 +69,7 @@ module Bio
 
       has_n :otus
       has_n :trees, :singularize => false
-      has_n :matrices
+      has_n :characters, :singularize => false
 
       def initialize( id, options = {}, &block )
         @id = id

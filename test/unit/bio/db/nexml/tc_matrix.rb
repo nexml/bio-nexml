@@ -375,26 +375,26 @@ module Bio
       end
     end
 
-    class TestSequence < Test::Unit::TestCase
+    class TestRow < Test::Unit::TestCase
       def setup
-        @seq = Bio::NeXML::Sequence.new( 'seq' )
+        @row = Bio::NeXML::Row.new( 'seq' )
       end
 
       def test_id
-        @seq.id = 'seq1'
-        assert_equal 'seq1', @seq.id
+        @row.id = 'seq1'
+        assert_equal 'seq1', @row.id
       end
 
       def test_label
-        @seq.label = 'a sequence'
-        assert_equal 'a sequence', @seq.label
+        @row.label = 'a sequence'
+        assert_equal 'a sequence', @row.label
       end
 
       def test_otu
         otu = Bio::NeXML::Otu.new( 'otu' )
-        @seq.otu = otu
-        assert_equal otu, @seq.otu
-        assert_equal [ @seq ], otu.sequences
+        @row.otu = otu
+        assert_equal otu, @row.otu
+        assert_equal [ @row ], otu.rows
       end
     end
 
@@ -412,12 +412,13 @@ module Bio
         @char1 = Bio::NeXML::Char.new( 'char1', :states => @states )
         @char2 = Bio::NeXML::Char.new( 'char2', :states => @states )
 
-        @sequence = Bio::NeXML::Sequence.new( 'seq1', :raw => 'ABCDE' )
-
-        @matrix = Bio::NeXML::Matrix.new( 'matrix1' )
-        @matrix.add_states( @states )
-        @matrix.chars = [ @char1, @char2 ]
-        @matrix.add_sequence( @sequence )
+        @sequence = Bio::NeXML::Sequence.new( :value => 'ABCDE' )
+        @row = Bio::NeXML::Row.new( 'row1' )
+        @matrix = Bio::NeXML::Characters.new( 'matrix1' )
+        @format = Bio::NeXML::Format.new
+        @format.add_states( @states )
+        @format.chars = [ @char1, @char2 ]
+        @row.add_sequence( @sequence )
       end
 
       def test_id
@@ -442,85 +443,81 @@ module Bio
         otus = Bio::NeXML::Otus.new( 'otus' )
         @matrix.otus = otus
         assert_equal otus, @matrix.otus
-        assert_equal [ @matrix ], otus.matrices
+        assert_equal [ @matrix ], otus.characters
       end
 
       def test_add_states
         ss = Bio::NeXML::States.new( 'ss' )
-        @matrix.add_states( ss )
-        assert @matrix.has_states?( ss )
-        assert_equal @matrix, ss.matrix
+        @format.add_states( ss )
+        assert @format.has_states?( ss )
+        assert_equal @format, ss.format
       end
 
       def test_add_char
         ch = Bio::NeXML::Char.new( 'ch' )
-        @matrix.add_char( ch )
-        assert @matrix.has_char?( ch )
-        assert_equal @matrix, ch.matrix
+        @format.add_char( ch )
+        assert @format.has_char?( ch )
+        assert_equal @format, ch.format
       end
 
       def test_add_sequence
-        seq = Bio::NeXML::Sequence.new( 'seq' )
-        @matrix.add_sequence( seq )
-        assert @matrix.has_sequence?( seq )
-        assert_equal @matrix, seq.matrix
+        seq = Bio::NeXML::Sequence.new
+        @row.add_sequence( seq )
+        assert @row.has_sequence?( seq )
+        assert_equal @row, seq.row
       end
 
       def test_delete_states
-        assert_equal @states, @matrix.delete_states( @states )
-        assert !@matrix.has_states?( @states )
-        assert_nil @states.matrix
+        assert_equal @states, @format.delete_states( @states )
+        assert !@format.has_states?( @states )
+        assert_nil @states.format
       end
 
       def test_delete_char
-        assert_equal @char1, @matrix.delete_char( @char1 )
-        assert !@matrix.has_char?( @char1 )
-        assert_nil @char1.matrix
+        assert_equal @char1, @format.delete_char( @char1 )
+        assert !@format.has_char?( @char1 )
+        assert_nil @char1.format
       end
 
       def test_delete_sequence
-        assert_equal @sequence, @matrix.delete_sequence( @sequence )
-        assert !@matrix.has_sequence?( @sequence )
-        assert_nil @sequence.matrix
+        assert_equal @sequence, @row.delete_sequence( @sequence )
+        assert !@row.has_sequence?( @sequence )
+        assert_nil @sequence.row
       end
 
       def test_states
-        assert_equal [ @states ], @matrix.states
+        assert_equal [ @states ], @format.states
         ss = Bio::NeXML::States.new( 'ss' )
-        @matrix.states = [ ss ]
-        assert_equal [ ss ], @matrix.states
+        @format.states = [ ss ]
+        assert_equal [ ss ], @format.states
       end
 
       def test_chars
-        assert_equal [ @char1, @char2 ], @matrix.chars
+        assert_equal [ @char1, @char2 ], @format.chars
         ch = Bio::NeXML::Char.new( 'ch' )
-        @matrix.chars = [ ch ]
-        assert_equal [ ch ], @matrix.chars
+        @format.chars = [ ch ]
+        assert_equal [ ch ], @format.chars
       end
 
       def test_sequences
-        assert_equal [ @sequence ], @matrix.sequences
-        seq = Bio::NeXML::Sequence.new( 'seq2' )
-        @matrix.sequences = [ seq ]
-        assert_equal [ seq ], @matrix.sequences
+        assert_equal [ @sequence ], @row.sequences
+        seq = Bio::NeXML::Sequence.new
+        @row.sequences = [ seq ]
+        assert_equal [ seq ], @row.sequences
       end
 
       def test_get_states_by_id
-        assert_equal @states, @matrix.get_states_by_id( 'states' )
+        assert_equal @states, @format.get_states_by_id( 'states' )
       end
 
       def test_get_char_by_id
-        assert_equal @char1, @matrix.get_char_by_id( 'char1' )
-      end
-
-      def test_get_sequence_by_id
-        assert_equal @sequence, @matrix.get_sequence_by_id( 'seq1' )
+        assert_equal @char1, @format.get_char_by_id( 'char1' )
       end
 
       def test_each_states
         c = 0
-        @matrix.each_states do |s|
-          assert @matrix.has_states?( s )
+        @format.each_states do |s|
+          assert @format.has_states?( s )
           c += 1
         end
         assert_equal 1, c
@@ -528,8 +525,8 @@ module Bio
       
       def test_each_char
         c = 0
-        @matrix.each_char do |ch|
-          assert @matrix.has_char?( ch )
+        @format.each_char do |ch|
+          assert @format.has_char?( ch )
           c += 1
         end
         assert_equal 2, c
@@ -537,23 +534,23 @@ module Bio
 
       def test_each_sequence
         c = 0
-        @matrix.each_sequence do |s|
-          assert @matrix.has_sequence?( s )
+        @row.each_sequence do |s|
+          assert @row.has_sequence?( s )
           c += 1
         end
         assert_equal 1, c
       end
 
       def test_number_of_states
-        assert_equal 1, @matrix.number_of_states
+        assert_equal 1, @format.number_of_states
       end
 
       def test_number_of_chars
-        assert_equal 2, @matrix.number_of_chars
+        assert_equal 2, @format.number_of_chars
       end
 
       def test_number_of_sequences
-        assert_equal 1, @matrix.number_of_sequences
+        assert_equal 1, @row.number_of_sequences
       end
     end
   end #end module NeXML

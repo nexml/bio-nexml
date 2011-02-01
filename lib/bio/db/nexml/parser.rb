@@ -399,15 +399,17 @@ module Bio
         #klass = NeXML.const_get( type )
 
         #characters = klass.new( id, otus, label )
-        characters = Matrix.new( id, :otus => otus, :label => label, :type => type )
+        characters = Characters.new( id, :otus => otus, :label => label, :type => type )
 
         #according to the schema a 'characters' will have a child
         while next_node
           case local_name
           when 'format'
-            characters << parse_format( type )
+            format = parse_format( type )
+            characters.add_format( format )
           when 'matrix'
-            characters << parse_matrix( type )
+            matrix = parse_matrix( type )
+            characters.add_matrix( matrix )
           when 'characters'
             break
           end #end case
@@ -417,18 +419,18 @@ module Bio
       end #end parse_characters
 
       def parse_format( type )
-        type = type.sub(/Seqs|Cells/, "Format")
-        klass = NeXML.const_get type
-        format = klass.new
+        format = Format.new
 
         #according to the schema a concrete characters type
         #will have a child element.
         while next_node
           case local_name
           when 'states'
-            format << parse_states( type )
+            states = parse_states( type )
+            format.add_states( states )            
           when 'char'
-            format << parse_char( type )
+            char = parse_char( type )
+            format.add_char( char )
           when 'format'
             break
           end #end case
@@ -440,23 +442,21 @@ module Bio
       def parse_states( type )
         id = attribute( 'id' )
         label = attribute( 'label' )
-
-        type = type.sub(/Format/, "States")
-        klass = NeXML.const_get type
-        states = klass.new( id, label )
+        states = States.new( id, :label => label )
 
         while next_node
           case local_name
           when 'state'
-            states << parse_state( type )
+            state = parse_state( type )
+            states.add_state( state )
           when 'polymorphic_state_set'
             state = parse_state( type )
-            state.polymorphic = true
-            states << state
+            state.polymorphic( true )
+            states.add_state( state )
           when 'uncertain_state_set'
             state = parse_state( type )
-            state.uncertain = true
-            states << state
+            state.uncertain( true )
+            states.add_state( state )
           when 'states'
             break
           end
@@ -473,8 +473,7 @@ module Bio
         label = attribute( 'label' )
 
         type = type[ 0..-2 ]
-        klass = NeXML.const_get type
-        state = klass.new( id, symbol, label )
+        state = State.new( id, symbol, :label => label )
 
         cache state
 
@@ -485,7 +484,7 @@ module Bio
           when 'state', 'polymorphic_state_set', 'uncertain_state_set'
             break
           when 'member'
-            state << parse_member
+            state.add_member( parse_member )
           end
         end
 
@@ -503,8 +502,7 @@ module Bio
         states = cache[ attribute( 'states' ) ]
 
         type = type.sub( /Format/, "Char" )
-        klass = NeXML.const_get( type )
-        char = klass.new( id, states, label )
+        char = Char.new( id, states, :label => label )
 
         if char.respond_to?(:codon=) and c = attribute( 'codon' )
           char.codon = c
@@ -527,14 +525,14 @@ module Bio
       def parse_matrix( type )
         type = type[ 0..-2 ]
         type << "Matrix"
-        klass = NeXML.const_get type
 
-        matrix = klass.new
+        matrix = Matrix.new
 
         while next_node
           case local_name
           when 'row'
-            matrix << parse_row( type )
+            row = parse_row( type )
+            matrix.add_row( row )
           when 'matrix'
             break
           end
@@ -549,16 +547,17 @@ module Bio
         otu = cache[ attribute( 'otu' ) ]
 
         type = type.sub( /Matrix/, "Row" )
-        klass = NeXML.const_get type
 
-        row = klass.new( id, label )
+        row = Row.new( id, :label => label )
 
         while next_node
           case local_name
           when 'seq'
-            row << parse_seq( type )
+            seq = parse_seq( type )
+            row.add_sequence( seq )
           when 'cell'
-            row << parse_cell( type )
+            cell = parse_cell( type )
+            row.add_cell( cell )
           when 'row'
             break
           end
@@ -569,9 +568,9 @@ module Bio
 
       def parse_seq( type )
         type = type[ 0..-4 ]
-        klass = NeXML.const_get type
+        #klass = NeXML.const_get type
 
-        seq = klass.new
+        seq = Sequence.new
 
         return seq if empty_element?
 
@@ -589,15 +588,14 @@ module Bio
 
       def parse_cell( type )
         type = type[ 0..-4 ]
-        klass = NeXML.const_get type
 
-        cell = klass.new
+        cell = Cell.new
 
         char_id = attribute( 'char' )
         state_id = attribute( 'state' )
 
         char = cache[ char_id ] 
-        state = ( klass != Bio::NeXML::ContinuousCell ? cache[ state_id ] : state_id )
+        state = ( type !~ /Continuous/ ? cache[ state_id ] : state_id )
         
         cell.state = state
         cell.char = char

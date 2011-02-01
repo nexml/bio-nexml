@@ -24,7 +24,7 @@ module Bio
 
     mautoload %w|Otu Otus|,                                'bio/db/nexml/taxa.rb'
     mautoload %w|Node Edge Tree Network Trees|,            'bio/db/nexml/trees.rb'
-    mautoload %w|State Char States Cell Sequence Matrix|,  'bio/db/nexml/matrix.rb'
+    mautoload %w|State Char States Cell Sequence Format Characters|,  'bio/db/nexml/matrix.rb'
 
     autoload :Parser, 'bio/db/nexml/parser'
     autoload :Writer, 'bio/db/nexml/writer'
@@ -35,9 +35,9 @@ module Bio
       attr_accessor :version
       attr_accessor :generator
 
-      has_n :otus,  :singularize => false
-      has_n :trees, :singularize => false
-      has_n :matrices
+      has_n :otus,       :singularize => false
+      has_n :trees,      :singularize => false
+      has_n :characters, :singularize => false
       
       def initialize( version, generator = 'bioruby' )
         @version = version
@@ -53,7 +53,7 @@ module Bio
         when Trees
           add_trees element
         when Characters
-          add_matrix element
+          add_characters element
         end
       end
     end #end class Nexml

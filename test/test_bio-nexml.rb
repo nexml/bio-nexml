@@ -12,5 +12,5 @@ require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_matr
 require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_parser' )
 require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_taxa' )
 require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_trees' )
-#require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_writer' )
+require File.join(File.dirname(__FILE__), "unit", "bio", "db", "nexml", 'tc_writer' )
 
