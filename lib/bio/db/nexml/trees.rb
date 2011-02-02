@@ -2,10 +2,16 @@ require 'bio/tree'
 
 module Bio
   module NeXML
+
     # Node represents a node of a Tree or a Network. A node must have a unique id. It may optionally
     # have a human readable 'label' and may link to an 'otu'.
     class Node < Bio::Tree::Node
       include Mapper
+      @@writer = Bio::NeXML::Writer.new
+      
+      def to_xml
+        @@writer.create_node( "node", @@writer.attributes( self, :id, :otu, :root, :label ) )
+      end
 
       # A file level unique identifier.
       attr_accessor :id
@@ -50,6 +56,11 @@ module Bio
     # a 'source' and a 'target' node and optionally a 'length' may be assigned to it.
     class Edge < Bio::Tree::Edge
       include Mapper
+      @@writer = Bio::NeXML::Writer.new
+      
+      def to_xml
+        @@writer.create_node( "edge", @@writer.attributes( self, :id, :source, :target, :length, :label ) )
+      end
 
       # A file level unique identifier.
       attr_accessor :id
@@ -91,6 +102,11 @@ module Bio
     # A rootedge is an edge without a source. It is used in context of coalescent trees. RootEdge
     # inherits from Edge so the same functionality is available in rootedge too.
     class RootEdge < Edge
+      @@writer = Bio::NeXML::Writer.new
+      def to_xml
+        @@writer.create_node( "rootedge", @@writer.attributes( self, :id, :target, :length, :label ) )
+      end      
+      
       private :source=
 
       def initialize( id, options = {} )
@@ -123,6 +139,24 @@ module Bio
     # This class inherits from Bio::Tree; naturally its functionality is leveraged here.
     class Tree < Bio::Tree
       include Mapper
+      @@writer = Bio::NeXML::Writer.new
+      
+      def to_xml
+        node = @@writer.create_node( "tree", @@writer.attributes( self, :id, :'xsi:type', :label ) )
+
+        self.each_node do |n|
+          node << n.to_xml
+        end
+
+        rootedge = self.rootedge
+        node << rootedge.to_xml if rootedge
+
+        self.each_edge do |edge|
+          node << edge.to_xml
+        end
+
+        node
+      end      
 
       # A file level unique identifier.
       attr_accessor :id
@@ -381,10 +415,25 @@ module Bio
     end
 
     class Network < Tree
+      @@writer = Bio::NeXML::Writer.new
       belongs_to :trees
       def initialize( id, options = {}, &block )
         super
       end
+      
+      def to_xml
+        node = @@writer.create_node( "network", @@writer.attributes( self, :id, :'xsi:type', :label ) )
+
+        self.each_node do |n|
+          node << n.to_xml
+        end
+
+        self.each_edge do |edge|
+          node << edge.to_xml
+        end
+
+        node
+      end      
     end
 
     class IntNetwork < Network
@@ -411,6 +460,21 @@ module Bio
 
     class Trees
       include Mapper
+      @@writer = Bio::NeXML::Writer.new
+      
+      def to_xml
+        node = @@writer.create_node( "trees", @@writer.attributes( self, :id, :label, :otus ) )
+
+        self.each_tree do |tree|
+          node << tree.to_xml
+        end
+
+        self.each_network do |network|
+          node << network.to_xml
+        end
+
+        node
+      end
 
       attr_accessor     :id
       attr_accessor     :label
