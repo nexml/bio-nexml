@@ -1,6 +1,6 @@
-* parser.parse_tree wants to add a rootedge, i.e. an edge that has a target
-  (the root), but not a source. In the commented-out implementation, it does
-  this by calling add_rootedge, a method that doesn't exist. Some hackery needs
-  to make this possible, because as it stands, no edges that don't have a source
-  node associated with them seem to be allowed by the superclasses Bio::Tree and
-  upwards.
+* it would be good if objects could only be instantiated in the right nesting
+  order, e.g. you wouldn't do cell = Cell.new, but you'd do
+  cell = Row.create_cell and the nesting is automatically handled for you.
+  I think the way to do this is to require the containing object to be passed
+  (recursively) to the constructors, while create_foo internally does this,
+  passing self to the constructor.
