@@ -413,8 +413,8 @@ module Bio
         @char2 = Bio::NeXML::Char.new( 'char2', :states => @states )
 
         @sequence = Bio::NeXML::Sequence.new( :value => 'ABCDE' )
-        @row = Bio::NeXML::Row.new( 'row1' )
-        @matrix = Bio::NeXML::Characters.new( 'matrix1' )
+        @row = Bio::NeXML::SeqRow.new( 'row1' )
+        @matrix = Bio::NeXML::Protein.new( 'matrix1' )
         @format = Bio::NeXML::Format.new
         @format.add_states( @states )
         @format.chars = [ @char1, @char2 ]
@@ -429,12 +429,6 @@ module Bio
       def test_label
         @matrix.label = 'label'
         assert_equal 'label', @matrix.label
-      end
-
-      def test_type
-        @matrix.type = :DnaSeqs
-        assert_raise( RuntimeError ) { @matrix.type = :foo }
-        assert_equal :DnaSeqs, @matrix.type
       end
 
       def test_nexml; end
@@ -464,7 +458,7 @@ module Bio
         seq = Bio::NeXML::Sequence.new
         @row.add_sequence( seq )
         assert @row.has_sequence?( seq )
-        assert_equal @row, seq.row
+        assert_equal @row, seq.seqrow
       end
 
       def test_delete_states
