@@ -179,14 +179,14 @@ module Bio
       # >> writer = Bio::NeXML::Writer.new
       # >> writer.add_otus( nexml.otus.first )
       def add_otus( otus )
-        @root << serialize_otus( otus )
+        @root << otus.to_xml
       end
 
       # Add a single <em>trees</em> object to <tt>self</tt>
       # >> writer = Bio::NeXML::Writer.new
       # >> writer.add_trees( nexml.trees.first )
       def add_trees( trees )
-        @root << serialize_trees( trees )
+        @root << trees.to_xml
       end
 
       # Add a single <em>characters</em> object to <tt>self</tt>
@@ -206,20 +206,6 @@ module Bio
         root
       end
 
-      def serialize_trees( trees )
-        node = create_node( "trees", attributes( trees, :id, :label, :otus ) )
-
-        trees.each_tree do |tree|
-          node << serialize_tree( tree )
-        end
-
-        trees.each_network do |network|
-          node << serialize_network( network )
-        end
-
-        node
-      end
-
       def serialize_characters( characters )
         node = create_node( "characters", attributes( characters, :id, :"xsi:type", :otus, :label ) )
 
@@ -227,49 +213,6 @@ module Bio
         node << serialize_matrix( characters.matrix )
 
         node
-      end
-
-      def serialize_tree( tree )
-        node = create_node( "tree", attributes( tree, :id, :'xsi:type', :label ) )
-
-        tree.each_node do |n|
-          node << serialize_node( n )
-        end
-
-        rootedge = tree.rootedge
-        node << serialize_rootedge( rootedge ) if rootedge
-
-        tree.each_edge do |edge|
-          node << serialize_edge( edge )
-        end
-
-        node
-      end
-
-      def serialize_network( network )
-        node = create_node( "network", attributes( network, :id, :'xsi:type', :label ) )
-
-        network.each_node do |n|
-          node << serialize_node( n )
-        end
-
-        network.each_edge do |edge|
-          node << serialize_edge( edge )
-        end
-
-        node
-      end
-
-      def serialize_node( node )
-        create_node( "node", attributes( node, :id, :otu, :root, :label ) )
-      end
-
-      def serialize_edge( edge )
-        create_node( "edge", attributes( edge, :id, :source, :target, :length, :label ) )
-      end
-
-      def serialize_rootedge( rootedge )
-        create_node( "rootedge", attributes( rootedge, :id, :target, :length, :label ) )
       end
 
       def serialize_format( format )
@@ -406,7 +349,7 @@ module Bio
         create_node( "member", :state => member.id )
       end
 
-      private
+      #private
 
       # Returns a hash of attributes for the given object.
       # See example in unit tests.

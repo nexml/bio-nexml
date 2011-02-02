@@ -278,7 +278,7 @@ module Bio
         o1 = Bio::NeXML::Otu.new 'o1', :label => 'A taxon'
         n1 = Bio::NeXML::Node.new 'n1', :otu => o1, :root => true, :label => 'A node'
 
-        output = @writer.serialize_node( n1 )
+        output = n1.to_xml
         parsed = element( 'node' ).first
 
         assert match?( parsed, output )
@@ -291,7 +291,7 @@ module Bio
         n2 = Bio::NeXML::Node.new 'n2', :otu => o2, :root => false, :label => 'A node'
         e1 = Bio::NeXML::Edge.new 'e1', :source => n1, :target => n2, :length => 0.4353, :label => 'An edge'
 
-        output = @writer.serialize_edge( e1 )
+        output = e1.to_xml
         parsed = element( 'edge' ).first
 
         assert match?( parsed, output )
@@ -302,7 +302,7 @@ module Bio
         n1 = Bio::NeXML::Node.new 'n1', :otu => o1, :root => true, :label => 'A node'
         re1 = Bio::NeXML::RootEdge.new 're1', :target => n1, :length => 0.5, :label => 'A rootedge'
 
-        output = @writer.serialize_rootedge( re1 )
+        output = re1.to_xml
         parsed = element( 'rootedge' ).first
 
         assert match?( parsed, output )
@@ -320,7 +320,7 @@ module Bio
         tree1.add_rootedge re1
         tree1.add_edge e1
 
-        output = @writer.serialize_tree( tree1 )
+        output = tree1.to_xml
         parsed = element( 'tree' ).first
         assert match?( parsed, output )
       end
@@ -337,7 +337,7 @@ module Bio
         network1.add_edge e1
         network1.add_edge e2
 
-        output = @writer.serialize_network( network1 )
+        output = network1.to_xml
         parsed = element( 'network' ).first
 
         assert match?( parsed, output )
@@ -373,7 +373,7 @@ module Bio
         trees1 << tree1
         trees1 << network1
 
-        output = @writer.serialize_trees( trees1 )
+        output = trees1.to_xml
         parsed = element( 'trees' ).first
         assert match?( parsed, output )
       end
