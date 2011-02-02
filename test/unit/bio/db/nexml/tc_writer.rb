@@ -256,9 +256,8 @@ module Bio
 
       def test_serialize_otu
         o1 = Bio::NeXML::Otu.new 'o1', :label => 'A taxon'
-        output = @writer.serialize_otu( o1 )
+        output = o1.to_xml
         parsed = element( 'otu' ).first
-
         assert match?( parsed, output )
       end
 
@@ -269,7 +268,7 @@ module Bio
         taxa1.add_otu( o1 )
         taxa1.add_otu( o2 )
 
-        output = @writer.serialize_otus( taxa1 )
+        output = taxa1.to_xml
         parsed = element( 'otus' ).first
 
         assert match?( parsed, output )

@@ -206,20 +206,6 @@ module Bio
         root
       end
 
-      def serialize_otu( otu )
-        create_node( "otu", attributes( otu, :id, :label ) )
-      end
-
-      def serialize_otus( otus )
-        node = create_node( "otus", attributes( otus, :id, :label ) )
-
-        otus.each do |otu|
-          node << serialize_otu( otu )
-        end
-
-        node
-      end
-
       def serialize_trees( trees )
         node = create_node( "trees", attributes( trees, :id, :label, :otus ) )
 
