@@ -198,7 +198,7 @@ module Bio
 
       # shold respond properly to :char and :state
       def test_attributes_6
-        cc = Bio::NeXML::Cell.new
+        cc = Bio::NeXML::ContinuousCell.new
         cc.char = Bio::NeXML::Char.new( 'cc1' )
         cc.state = '-0.9'
         dc = Bio::NeXML::Cell.new

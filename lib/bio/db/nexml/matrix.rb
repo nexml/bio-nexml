@@ -172,8 +172,10 @@ module Bio
       # object_id in this case
       attr_accessor :id
       
-      def initialize()
+      def initialize( options = {} )
         @id = self.object_id
+        properties( options ) unless options.empty?
+        block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end      
       
       def add_states( states )
@@ -384,6 +386,20 @@ module Bio
         value.to_s
       end
       alias to_s to_str
+    end
+    
+    class ContinuousCell < Cell
+      def value
+        @value
+      end
+      def value=( value )
+        @value = value
+      end
+      def state=( value )
+        @value = value
+      end
+      alias symbol value
+      alias state value
     end
 
     class Sequence

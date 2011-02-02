@@ -207,7 +207,7 @@ module Bio
       end
       
       def add_rootedge( edge )
-        self.rootedge = edge
+        @rootedge = edge
       end
 
       # :stopdoc:
