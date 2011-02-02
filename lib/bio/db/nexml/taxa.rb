@@ -8,7 +8,7 @@ module Bio
     #    taxon1.id    #=> 'taxon1'
     #    taxon1.label #=> 'Label for taxon1'
     #    taxon1.otus  #=> otus object they belong to; see docs for Otus
-    class Otu
+    class Otu < NexmlWritable
       include Mapper
 
       # A file level unique identifier.
@@ -33,6 +33,10 @@ module Bio
         properties( options ) unless options.empty?
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end
+      
+      def to_xml
+        create_node( "otu", attributes( self, :id, :label ) )
+      end
 
     end #end class Otu
 
@@ -55,7 +59,7 @@ module Bio
     #    taxon2.otus                      #=> taxa1
     #    taxa1.include?( taxon1 )         #=> true
     #    taxa1.delete( taxon2 )           #=> taxon2
-    class Otus
+    class Otus < NexmlWritable
       include Enumerable
       include Mapper
 
@@ -119,6 +123,14 @@ module Bio
       # Return the number of otu in <tt>self</tt>.
       def length
         number_of_otus
+      end
+      
+      def to_xml
+        node = create_node( "otus", attributes( self, :id, :label ) )
+        self.each do |otu|
+          node << otu.to_xml
+        end
+        node        
       end
 
     end #end class Otus

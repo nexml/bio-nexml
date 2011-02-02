@@ -70,6 +70,12 @@ module Bio
         number_of_members
       end
       alias length count
+      
+      # Iterate over each member in <tt>self</tt> passing it to the block given. If no block is provided,
+      # it returns an Enumerator.
+      def each( &block )
+        @members.each( &block )
+      end        
 
       def to_str
         symbol.to_s
@@ -119,6 +125,7 @@ module Bio
     end
 
     class States
+      include Enumerable
       include Mapper     
 
       # A file level unique identifier.
@@ -156,6 +163,12 @@ module Bio
       def include?( state )
         has_state?( state )
       end
+      
+      # Iterate over each state set in <tt>self</tt> passing it to the block given. If no block is provided,
+      # it returns an Enumerator.
+      def each( &block )
+        @states.each( &block )
+      end      
       
     end
     
