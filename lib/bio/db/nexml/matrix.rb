@@ -10,15 +10,7 @@ module Bio
     #    state.ambiguous?    #=> true
     #    state.ambiguity     #=> :polymorphic
     class State
-      include Mapper
-      
-      @@types = [ :DnaSeqs,            :DnaCells,
-                  :RnaSeqs,            :RnaCells,
-                  :ProteinSeqs,        :ProteinCells,
-                  :StandardSeqs,       :StandardCells,
-                  :ContinuousSeqs,     :ContinuousCells,
-                  :RestrictionSeqs,    :RestrictionCells
-                ]      
+      include Mapper    
 
       # A file level unique identifier.
       attr_accessor :id
@@ -42,21 +34,6 @@ module Bio
       has_n :members, :index => false, :update => :state_set
 
       has_n :cells, :index => false
-      
-      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
-      # This attribute, though optional, must be set to generate valid NeXML.
-      attr_reader        :type
-      
-      # Set the type of the matrix.
-      # * Arguments :
-      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
-      # * Raises :
-      # "RuntimeError: Unkown type", if an unknown type is given.
-      def type=( type )
-        type = type.to_sym
-        raise "Unknown type" unless @@types.include?( type )
-        @type = type
-      end       
 
       def initialize( id, symbol = nil, options = {}, &block )
         @id = id
@@ -116,15 +93,7 @@ module Bio
 
     # A char specifies which states apply to matrix columns.
     class Char
-      include Mapper
-      
-      @@types = [ :DnaSeqs,            :DnaCells,
-                  :RnaSeqs,            :RnaCells,
-                  :ProteinSeqs,        :ProteinCells,
-                  :StandardSeqs,       :StandardCells,
-                  :ContinuousSeqs,     :ContinuousCells,
-                  :RestrictionSeqs,    :RestrictionState
-                ]      
+      include Mapper     
 
       # A file level unique identifier.
       attr_accessor :id
@@ -139,21 +108,6 @@ module Bio
 
       has_n :cells, :index => false
       
-      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
-      # This attribute, though optional, must be set to generate valid NeXML.
-      attr_reader        :type
-      
-      # Set the type of the matrix.
-      # * Arguments :
-      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
-      # * Raises :
-      # "RuntimeError: Unkown type", if an unknown type is given.
-      def type=( type )
-        type = type.to_sym
-        raise "Unknown type" unless @@types.include?( type )
-        @type = type
-      end       
-      
       def initialize( id, states = nil, options = {} )
         @id = id
         unless states.nil?
@@ -165,15 +119,7 @@ module Bio
     end
 
     class States
-      include Mapper
-      
-      @@types = [ :DnaSeqs,            :DnaCells,
-                  :RnaSeqs,            :RnaCells,
-                  :ProteinSeqs,        :ProteinCells,
-                  :StandardSeqs,       :StandardCells,
-                  :ContinuousSeqs,     :ContinuousCells,
-                  :RestrictionSeqs,    :RestrictionState
-                ]      
+      include Mapper     
 
       # A file level unique identifier.
       attr_accessor    :id
@@ -188,30 +134,15 @@ module Bio
 
       # Matrix columns linked to this states.
       has_n       :chars
-      
-      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
-      # This attribute, though optional, must be set to generate valid NeXML.
-      attr_reader        :type
-      
-      # Set the type of the matrix.
-      # * Arguments :
-      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
-      # * Raises :
-      # "RuntimeError: Unkown type", if an unknown type is given.
-      def type=( type )
-        type = type.to_sym
-        raise "Unknown type" unless @@types.include?( type )
-        @type = type
-      end       
 
       def initialize( id, options = {} )
         @id = id
         properties( options ) unless options.empty?
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end
-
+      
       def add_state( state ); end if false # dummy for rdoc
-
+      
       def delete_state( state ); end if false # dummy for rdoc
 
       def has_state?( state ); end if false # dummy for rdoc
@@ -225,18 +156,11 @@ module Bio
       def include?( state )
         has_state?( state )
       end
+      
     end
     
     class Format
-      include Mapper
-      
-      @@types = [ :DnaSeqs,            :DnaCells,
-                  :RnaSeqs,            :RnaCells,
-                  :ProteinSeqs,        :ProteinCells,
-                  :StandardSeqs,       :StandardCells,
-                  :ContinuousSeqs,     :ContinuousCells,
-                  :RestrictionSeqs,    :RestrictionState
-                ]      
+      include Mapper     
       
       # A format block must define set(s) of possible observation states.
       has_n :states, :singularize => false
@@ -247,21 +171,6 @@ module Bio
       # Because format elements don't have id attributes, we will use
       # object_id in this case
       attr_accessor :id
-      
-      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
-      # This attribute, though optional, must be set to generate valid NeXML.
-      attr_reader        :type
-      
-      # Set the type of the matrix.
-      # * Arguments :
-      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
-      # * Raises :
-      # "RuntimeError: Unkown type", if an unknown type is given.
-      def type=( type )
-        type = type.to_sym
-        raise "Unknown type" unless @@types.include?( type )
-        @type = type
-      end       
       
       def initialize()
         @id = self.object_id
@@ -424,38 +333,17 @@ module Bio
     #    cell.state = stateB
     #    cell.value            #=> 'B'
     class Cell
-      include Mapper
-      
-      @@types = [ :DnaSeqs,            :DnaCells,
-                  :RnaSeqs,            :RnaCells,
-                  :ProteinSeqs,        :ProteinCells,
-                  :StandardSeqs,       :StandardCells,
-                  :ContinuousSeqs,     :ContinuousCells,
-                  :RestrictionSeqs,    :RestrictionState
-                ]      
+      include Mapper     
 
       attr_accessor :char
       attr_accessor :state
       attr_accessor :label
 
-      belongs_to :row
       belongs_to :state
       belongs_to :char
-      
-      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
-      # This attribute, though optional, must be set to generate valid NeXML.
-      attr_reader        :type
-      
-      # Set the type of the matrix.
-      # * Arguments :
-      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
-      # * Raises :
-      # "RuntimeError: Unkown type", if an unknown type is given.
-      def type=( type )
-        type = type.to_sym
-        raise "Unknown type" unless @@types.include?( type )
-        @type = type
-      end       
+            
+      belongs_to :cellrow
+      alias row cellrow
 
       def initialize( char = nil, state = nil, options = {} )
         case char
@@ -501,37 +389,15 @@ module Bio
     class Sequence
       include Mapper
 
-      @@types = [ :DnaSeqs,            :DnaCells,
-                  :RnaSeqs,            :RnaCells,
-                  :ProteinSeqs,        :ProteinCells,
-                  :StandardSeqs,       :StandardCells,
-                  :ContinuousSeqs,     :ContinuousCells,
-                  :RestrictionSeqs,    :RestrictionState
-                ]
-
       # Every sequence belongs to a row
-      belongs_to :row
+      belongs_to :seqrow
+      alias row seqrow
 
       attr_accessor :value
       
-      # Because matrix elements don't have id attributes, we will use
+      # Because seq elements don't have id attributes, we will use
       # object_id in this case
       attr_accessor :id
-      
-      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
-      # This attribute, though optional, must be set to generate valid NeXML.
-      attr_reader        :type
-      
-      # Set the type of the matrix.
-      # * Arguments :
-      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
-      # * Raises :
-      # "RuntimeError: Unkown type", if an unknown type is given.
-      def type=( type )
-        type = type.to_sym
-        raise "Unknown type" unless @@types.include?( type )
-        @type = type
-      end       
 
       def initialize( options = {} )
         properties( options ) unless options.empty?
@@ -551,20 +417,13 @@ module Bio
           enum_for( :each_value )
         end
       end
+      
     end
     
     class Matrix
       include Mapper
       has_n :rows
-      belongs_to :characters
-      
-      @@types = [ :DnaSeqs,            :DnaCells,
-                  :RnaSeqs,            :RnaCells,
-                  :ProteinSeqs,        :ProteinCells,
-                  :StandardSeqs,       :StandardCells,
-                  :ContinuousSeqs,     :ContinuousCells,
-                  :RestrictionSeqs,    :RestrictionState
-                ]      
+      belongs_to :characters     
       
       # Because matrix elements don't have id attributes, we will use
       # object_id in this case
@@ -572,22 +431,7 @@ module Bio
       
       def initialize()
         @id = self.object_id
-      end        
-      
-      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
-      # This attribute, though optional, must be set to generate valid NeXML.
-      attr_reader        :type
-      
-      # Set the type of the matrix.
-      # * Arguments :
-      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
-      # * Raises :
-      # "RuntimeError: Unkown type", if an unknown type is given.
-      def type=( type )
-        type = type.to_sym
-        raise "Unknown type" unless @@types.include?( type )
-        @type = type
-      end       
+      end
       
       def add_row( row )
         # dummy for rdoc
@@ -656,53 +500,33 @@ module Bio
          
     end
     
+    class SeqMatrix < Matrix
+    end
+    class CellMatrix < Matrix
+    end
     class Row
-      include Mapper
-      
-      @@types = [ :DnaSeqs,            :DnaCells,
-                  :RnaSeqs,            :RnaCells,
-                  :ProteinSeqs,        :ProteinCells,
-                  :StandardSeqs,       :StandardCells,
-                  :ContinuousSeqs,     :ContinuousCells,
-                  :RestrictionSeqs,    :RestrictionState
-                ]      
-      
-      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
-      # This attribute, though optional, must be set to generate valid NeXML.
-      attr_reader        :type
-      
-      # Set the type of the matrix.
-      # * Arguments :
-      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
-      # * Raises :
-      # "RuntimeError: Unkown type", if an unknown type is given.
-      def type=( type )
-        type = type.to_sym
-        raise "Unknown type" unless @@types.include?( type )
-        @type = type
-      end       
+      include Mapper     
 
       # A file level unique identifier.
       attr_accessor :id
 
       # A human readable description.
       attr_accessor :label
-      
-      # actually, probably only one <seq/> element
-      has_n :sequences
 
       # Every row refers to a taxon.
       belongs_to :otu
-      belongs_to :matrix
-
-      has_n :cells, :index => false
+      belongs_to :matrix      
 
       def initialize( id, options = {} )
         @id = id
         properties( options ) unless options.empty?
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end
-      
+           
+    end # end of row class
+    class SeqRow < Row
+      # actually, probably only one <seq/> element
+      has_n :sequences
       # Below are methods stubs to be picked up by rdoc, as these methods are generated dynamically.
 
       # Add a sequence( row ) to the matrix.
@@ -757,20 +581,68 @@ module Bio
       # Returns the number of sequences defined for the matrix.
       def number_of_sequences
         # dummy for rdoc
-      end if false      
-    end # end of row class
+      end if false       
+    end
+    class CellRow < Row
+      has_n :cells, :index => false
+      # Add a cell to the row
+      # * Arguments :
+      # cell( required ) - a Bio::NeXML::Cell object.
+      # * Returns : <tt>self</tt>.
+      #    row.add_cell( cell )
+      #    row.cells               #=> [ .. cell .. ]
+      #    cell.row                #=> row
+      def add_cell( cell )
+        # dummy for rdoc
+      end if false
+
+      # Remove a cell from the row
+      # * Arguments :
+      # cell( required ) - a Bio::NeXML::Cell object.
+      # * Returns : the deleted object.
+      #    row.delete_cell( cell )
+      #    row.cells               #=> [ .. .. ]
+      #    cell.row                #=> nil
+      def delete_cell( cell )
+        # dummy for rdoc
+      end if false
+
+      # Returns an array of cells ( Bio::NeXML::Cell objects ) for the row.
+      #    matrix.cells  #=> [ .. .. ]
+      def cells
+        # dummy for rdoc
+      end if false
+
+      # Add cells to the row. This function will override previous cells if any.
+      # * Arguments :
+      # cells( required ) - an array of Bio::NeXML::Cell object.
+      #    row.cells = [ cells ]
+      #    row.cells    #=> [ cells ]
+      #    cell.row     #=> row
+      def cells=( cells )
+        # dummy for rdoc
+      end if false
+
+      # Returns true if the given cell( Bio::NeXML::Cell object ) is defined for the row.
+      def has_cell?( cell )
+        # dummy for rdoc
+      end if false
+
+      # Iterate over each cell ( Bio::NeXML::Cell object ) defined for the row. Returns
+      # an Enumerator if no block is provided.
+      def each_cell
+        # dummy for rdoc
+      end if false
+
+      # Returns the number of cells defined for the row.
+      def number_of_cells
+        # dummy for rdoc
+      end if false       
+    end
 
     # A character state matrix. This class is analogous to the characters element of NeXML.
     class Characters
       include Mapper
-
-      @@types = [ :DnaSeqs,            :DnaCells,
-                  :RnaSeqs,            :RnaCells,
-                  :ProteinSeqs,        :ProteinCells,
-                  :StandardSeqs,       :StandardCells,
-                  :ContinuousSeqs,     :ContinuousCells,
-                  :RestrictionSeqs,    :RestrictionState
-                ]
 
       # An id should be uniquely scoped in an NeXML file. It need not be unique globally. It is a
       # compulsory attribute.
@@ -784,21 +656,6 @@ module Bio
 
       # A human readable description. Its usage is optional.
       attr_accessor      :label
-
-      # Type of the matrix. Used only when dealing with 'xsi:type' attribute of the characters element.
-      # This attribute, though optional, must be set to generate valid NeXML.
-      attr_reader        :type
-      
-      # Set the type of the matrix.
-      # * Arguments :
-      # type( required ) - one of the following :dna, :rna, :aa, :standard, :continuous, :restriction
-      # * Raises :
-      # "RuntimeError: Unkown type", if an unknown type is given.
-      def type=( type )
-        type = type.to_sym
-        raise "Unknown type" unless @@types.include?( type )
-        @type = type
-      end      
 
       belongs_to         :nexml
 
@@ -820,5 +677,41 @@ module Bio
       end
 
     end #end class Characters
+    class Dna < Characters
+    end
+    class DnaSeqs < Dna
+    end
+    class DnaCells < Dna
+    end
+    class Rna < Characters
+    end
+    class RnaSeqs < Rna
+    end
+    class RnaCells < Rna
+    end
+    class Protein < Characters
+    end
+    class ProteinSeqs < Protein
+    end
+    class ProteinCells < Protein
+    end
+    class Standard < Characters
+    end
+    class StandardSeqs < Standard
+    end
+    class StandardCells < Standard
+    end
+    class Restriction < Characters
+    end
+    class RestrictionSeqs < Restriction
+    end
+    class RestrictionCells < Restriction
+    end
+    class Continuous < Characters
+    end
+    class ContinuousSeqs < Continuous
+    end
+    class ContinuousCells < Continuous
+    end
   end
 end

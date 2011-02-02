@@ -150,8 +150,8 @@ module Bio
       def test_attributes_3
         t = Bio::NeXML::IntTree.new 'tree1'
         n = Bio::NeXML::FloatNetwork.new 'network1'
-        dc1 = Bio::NeXML::Characters.new( 'dnacharacters1', :type => 'DnaSeqs' )
-        dc2 = Bio::NeXML::Characters.new( 'dnacharacters2', :type => 'DnaCells' )
+        dc1 = Bio::NeXML::DnaSeqs.new( 'dnacharacters1' )
+        dc2 = Bio::NeXML::DnaCells.new( 'dnacharacters2' )
 
         ae1 = { :"xsi:type" => "nex:IntTree" }
         ae2 = { :"xsi:type" => "nex:FloatNetwork" }
@@ -198,12 +198,12 @@ module Bio
 
       # shold respond properly to :char and :state
       def test_attributes_6
-        cc = Bio::NeXML::Cell.new( :type => :ContinuousCells )
-        cc.char = Bio::NeXML::Char.new( 'cc1', :type => :ContinuousCells )
+        cc = Bio::NeXML::Cell.new
+        cc.char = Bio::NeXML::Char.new( 'cc1' )
         cc.state = '-0.9'
-        dc = Bio::NeXML::DnaCell.new
-        dc.char = Bio::NeXML::DnaChar.new( 'dc1', nil )
-        dc.state = Bio::NeXML::DnaState.new 'ds1', 'A'
+        dc = Bio::NeXML::Cell.new
+        dc.char = Bio::NeXML::Char.new( 'dc1', nil )
+        dc.state = Bio::NeXML::State.new 'ds1', 'A'
 
         ae1 = { :char => 'cc1', :state => '-0.9' }
         ae2 = { :char => 'dc1', :state => 'ds1' }
@@ -323,7 +323,6 @@ module Bio
 
         output = @writer.serialize_tree( tree1 )
         parsed = element( 'tree' ).first
-
         assert match?( parsed, output )
       end
 
@@ -377,7 +376,6 @@ module Bio
 
         output = @writer.serialize_trees( trees1 )
         parsed = element( 'trees' ).first
-
         assert match?( parsed, output )
       end
 
@@ -444,6 +442,7 @@ module Bio
 
         sss1.add_state( ss1 )
         sss1.add_state( ss2 )
+        
         sss1.add_state( uss1 )
         sss1.add_state( pss1 )
 
@@ -526,7 +525,7 @@ module Bio
         o1 = Bio::NeXML::Otu.new 'o1'
         sseq1 = Bio::NeXML::Sequence.new
         sseq1.value = "1 2"
-        sr1 = Bio::NeXML::Row.new 'sr1', :otu => o1
+        sr1 = Bio::NeXML::SeqRow.new 'sr1', :otu => o1
         sr1.add_sequence( sseq1 )
 
         output = @writer.serialize_seq_row( sr1 )
@@ -545,7 +544,7 @@ module Bio
         scell1.char = sc3
         scell1.state = ss6
 
-        sr3 = Bio::NeXML::Row.new 'sr3', :otu => o1
+        sr3 = Bio::NeXML::CellRow.new 'sr3', :otu => o1
         sr3.add_cell( scell1 )
 
         output = @writer.serialize_cell_row( sr3 )
@@ -564,8 +563,8 @@ module Bio
         sseq2 = Bio::NeXML::Sequence.new
         sseq2.value = "2 2"
 
-        sr1 = Bio::NeXML::Row.new 'sr1', :otu => o1
-        sr2 = Bio::NeXML::Row.new 'sr2', :otu => o2
+        sr1 = Bio::NeXML::SeqRow.new 'sr1', :otu => o1
+        sr2 = Bio::NeXML::SeqRow.new 'sr2', :otu => o2
 
         sr1.add_sequence( sseq1 )
         sr2.add_sequence( sseq2 )
@@ -617,8 +616,8 @@ module Bio
         sseq2 = Bio::NeXML::Sequence.new
         sseq2.value = "2 2"
 
-        sr1 = Bio::NeXML::Row.new 'sr1', :otu => o1
-        sr2 = Bio::NeXML::Row.new 'sr2', :otu => o2
+        sr1 = Bio::NeXML::SeqRow.new 'sr1', :otu => o1
+        sr2 = Bio::NeXML::SeqRow.new 'sr2', :otu => o2
 
         sr1.add_sequence( sseq1 )
         sr2.add_sequence( sseq2 )

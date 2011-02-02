@@ -205,6 +205,10 @@ module Bio
         super( edge.source, edge.target, edge )
         __add_edge__( edge )
       end
+      
+      def add_rootedge( edge )
+        self.rootedge = edge
+      end
 
       # :stopdoc:
       alias __delete_node__ delete_node
@@ -466,7 +470,7 @@ module Bio
       def has_tree?( tree ); end if false # dummy for rdoc
 
       # Returns true if the given network is containes in self; false otherwise.
-      def has_netowrk?( tree ); end if false # dummy for rdoc
+      def has_network?( tree ); end if false # dummy for rdoc
 
       def include?( object )
         has_tree?( object ) ||
@@ -494,11 +498,11 @@ module Bio
       def each_tree_with_id( &block ); end if false # dummy for rdoc
 
       # Iterate over each network. Returns an Enumerator if no block is given.
-      def each_netowrk( &block ); end if false # dummy for rdoc
+      def each_network( &block ); end if false # dummy for rdoc
 
       # Iterate over each network passing the id and the tree itself to the block.
       # Returns an Enumerator if no block is given.
-      def each_netowrk_with_id( &block ); end if false # dummy for rdoc
+      def each_network_with_id( &block ); end if false # dummy for rdoc
 
       # Iterate over each element. Returns an Enumerator if no block is given.
       def each( &block )

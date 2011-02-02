@@ -396,10 +396,10 @@ module Bio
 
         #determine the type
         type = attribute( 'xsi:type' )[ 4..-1 ]
-        #klass = NeXML.const_get( type )
+        klass = NeXML.const_get( type )
+        verbose = type =~ /Cells/ ? true : false;
 
-        #characters = klass.new( id, otus, label )
-        characters = Characters.new( id, :otus => otus, :label => label, :type => type )
+        characters = klass.new( id, :otus => otus, :label => label )
 
         #according to the schema a 'characters' will have a child
         while next_node
@@ -408,7 +408,7 @@ module Bio
             format = parse_format( type )
             characters.add_format( format )
           when 'matrix'
-            matrix = parse_matrix( type )
+            matrix = parse_matrix( type, verbose )
             characters.add_matrix( matrix )
           when 'characters'
             break
@@ -522,7 +522,7 @@ module Bio
         char
       end #end method parse_char
 
-      def parse_matrix( type )
+      def parse_matrix( type, verbose )
         type = type[ 0..-2 ]
         type << "Matrix"
 
@@ -531,7 +531,7 @@ module Bio
         while next_node
           case local_name
           when 'row'
-            row = parse_row( type )
+            row = parse_row( type, verbose )
             matrix.add_row( row )
           when 'matrix'
             break
@@ -541,14 +541,14 @@ module Bio
         matrix
       end #end method parse_matrix
       
-      def parse_row( type )
+      def parse_row( type, verbose )
         id = attribute( 'id' )
         label = attribute( 'label' )
         otu = cache[ attribute( 'otu' ) ]
 
         type = type.sub( /Matrix/, "Row" )
-
-        row = Row.new( id, :label => label )
+        klass = verbose ? CellRow : SeqRow
+        row = klass.new( id, :label => label )
 
         while next_node
           case local_name
