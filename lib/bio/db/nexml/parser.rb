@@ -451,11 +451,11 @@ module Bio
             states.add_state( state )
           when 'polymorphic_state_set'
             state = parse_state( type )
-            state.polymorphic( true )
+            state.ambiguity = :polymorphic
             states.add_state( state )
           when 'uncertain_state_set'
             state = parse_state( type )
-            state.uncertain( true )
+            state.ambiguity = :uncertain
             states.add_state( state )
           when 'states'
             break
