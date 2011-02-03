@@ -10,7 +10,9 @@ module Bio
     #    state.ambiguous?    #=> true
     #    state.ambiguity     #=> :polymorphic
     class State
-      include Mapper    
+      include Enumerable
+      include Mapper
+      @@writer = Bio::NeXML::Writer.new
 
       # A file level unique identifier.
       attr_accessor :id
@@ -53,12 +55,12 @@ module Bio
       def ambiguous?
         !!ambiguity
       end
-
-      def polymorphic( polymorphic )
+      
+      def polymorphic?
         ambiguity == :polymorphic
       end
-
-      def uncertain( uncertain )
+      
+      def uncertain?
         ambiguity == :uncertain
       end
 
@@ -81,6 +83,24 @@ module Bio
         symbol.to_s
       end
       alias to_s to_str
+      
+      def to_xml
+        tagname = nil
+        if ambiguity == :polymorphic
+          tagname = "polymorphic_state_set"
+        elsif ambiguity == :uncertain
+          tagname = "uncertain_state_set"
+        else
+          tagname = "state"
+        end
+        node = @@writer.create_node( tagname, @@writer.attributes( self, :id, :label, :symbol ) )
+        if count > 0
+          self.each_member do |member|
+            node << @@writer.create_node( "member", :state => member.id )
+          end
+        end
+        node
+      end              
 
       class << self
         def polymorphic( id, symbol = nil, options = {}, &block )
@@ -99,7 +119,8 @@ module Bio
 
     # A char specifies which states apply to matrix columns.
     class Char
-      include Mapper     
+      include Mapper
+      @@writer = Bio::NeXML::Writer.new
 
       # A file level unique identifier.
       attr_accessor :id
@@ -122,11 +143,16 @@ module Bio
         properties( options ) unless options.empty?
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end
+      
+      def to_xml
+        @@writer.create_node( "char", @@writer.attributes( self, :id, :states, :label, :codon ) )
+      end      
     end
 
     class States
       include Enumerable
-      include Mapper     
+      include Mapper
+      @@writer = Bio::NeXML::Writer.new
 
       # A file level unique identifier.
       attr_accessor    :id
@@ -168,11 +194,19 @@ module Bio
       # it returns an Enumerator.
       def each( &block )
         @states.each( &block )
-      end      
+      end
       
+      def to_xml
+        node = @@writer.create_node( "states", @@writer.attributes( self, :id, :label ) )
+        self.each_state do |state|
+          node << state.to_xml
+        end
+        node
+      end      
     end
     
     class Format
+      @@writer = Bio::NeXML::Writer.new
       include Mapper     
       
       # A format block must define set(s) of possible observation states.
@@ -321,6 +355,20 @@ module Bio
         # dummy for rdoc
       end if false      
       
+      def to_xml
+        node = @@writer.create_node( "format" )
+
+        self.each_states do |states|
+          node << states.to_xml
+        end
+
+        self.each_char do |char|
+          node << char.to_xml
+        end
+
+        node
+      end
+      
     end # end of format
 
     # Cell is the smallest unit of a character state matrix or of a sequence. A cell maybe bound or
@@ -348,7 +396,8 @@ module Bio
     #    cell.state = stateB
     #    cell.value            #=> 'B'
     class Cell
-      include Mapper     
+      include Mapper
+      @@writer = Bio::NeXML::Writer.new
 
       attr_accessor :char
       attr_accessor :state
@@ -399,6 +448,11 @@ module Bio
         value.to_s
       end
       alias to_s to_str
+      
+      def to_xml
+        @@writer.create_node( "cell", @@writer.attributes( self, :state, :char ) )
+      end
+      
     end
     
     class ContinuousCell < Cell
@@ -417,6 +471,7 @@ module Bio
 
     class Sequence
       include Mapper
+      @@writer = Bio::NeXML::Writer.new
 
       # Every sequence belongs to a row
       belongs_to :seqrow
@@ -447,9 +502,16 @@ module Bio
         end
       end
       
+      def to_xml
+        node = @@writer.create_node( "seq" )
+        node << self.value
+        node
+      end
+      
     end
     
     class Matrix
+      @@writer = Bio::NeXML::Writer.new
       include Mapper
       has_n :rows
       belongs_to :characters     
@@ -526,7 +588,17 @@ module Bio
       def number_of_rows
         # dummy for rdoc
       end if false
-         
+      
+      def to_xml
+        node = @@writer.create_node( "matrix" )
+
+        self.each_row do |row|
+          node << row.to_xml
+        end
+
+        node
+      end      
+      
     end
     
     class SeqMatrix < Matrix
@@ -554,6 +626,7 @@ module Bio
            
     end # end of row class
     class SeqRow < Row
+      @@writer = Bio::NeXML::Writer.new
       # actually, probably only one <seq/> element
       has_n :sequences
       # Below are methods stubs to be picked up by rdoc, as these methods are generated dynamically.
@@ -610,9 +683,17 @@ module Bio
       # Returns the number of sequences defined for the matrix.
       def number_of_sequences
         # dummy for rdoc
-      end if false       
+      end if false
+
+      def to_xml
+        node = @@writer.create_node( "row", @@writer.attributes( self, :id, :otu, :label ) )
+        node << self.sequences.first.to_xml
+        node
+      end      
+      
     end
     class CellRow < Row
+      @@writer = Bio::NeXML::Writer.new
       has_n :cells, :index => false
       # Add a cell to the row
       # * Arguments :
@@ -666,12 +747,24 @@ module Bio
       # Returns the number of cells defined for the row.
       def number_of_cells
         # dummy for rdoc
-      end if false       
+      end if false
+      
+      def to_xml
+        node = @@writer.create_node( "row", @@writer.attributes( self, :id, :otu, :label ) )
+
+        self.each_cell do |cell|
+          node << cell.to_xml
+        end
+
+        node
+      end      
+      
     end
 
     # A character state matrix. This class is analogous to the characters element of NeXML.
     class Characters
       include Mapper
+      @@writer = Bio::NeXML::Writer.new
 
       # An id should be uniquely scoped in an NeXML file. It need not be unique globally. It is a
       # compulsory attribute.
@@ -704,6 +797,15 @@ module Bio
       def add_matrix( matrix )
         matrix = matrix
       end
+      
+      def to_xml
+        node = @@writer.create_node( "characters", @@writer.attributes( self, :id, :"xsi:type", :otus, :label ) )
+
+        node << self.format.to_xml
+        node << self.matrix.to_xml
+
+        node
+      end      
 
     end #end class Characters
     class Dna < Characters
