@@ -89,8 +89,8 @@ module Bio
     class Writer
       # = DESCRIPTION
       # Bio::NeXML::Writer class provides a wrapper over libxml-ruby to create any NeXML document.
-      # This class defines a set of serialize_* instance methods which can be called on the appropriate
-      # object to get its NeXML representation. The method returns a XML::Node object.
+      # The document is populated with Bio::NeXML::* objects serialized to xml
+      # using their respective to_xml methods.
       # To get the raw NeXML representation to_s method should be called on the return value.
       # = EXAMPLES
       # A lot of examples of creating nexml objects and then serializing them
@@ -193,163 +193,18 @@ module Bio
       # >> writer = Bio::NeXML::Writer.new
       # >> writer.add_characters( nexml.characters.first )
       def add_characters( characters )
-        @root << serialize_characters( characters )
+        @root << characters.to_xml
       end
 
       # Create the root <em>nexml</em> node.
       # >> writer = Bio::NeXML::Writer.new
       # >> writer.root
       def root
-        root = create_node( "nexml", :"xsi:schemaLocation" => "http://www.nexml.org/1.0 ../xsd/nexml.xsd", :generator => "bioruby", :version => "0.9" )
+        root = create_node( "nexml", :"xsi:schemaLocation" => "http://www.nexml.org/2009 http://www.nexml.org/2009/xsd/nexml.xsd", :generator => "bioruby", :version => "0.9" )
 
-        root.namespaces = { nil => "http://www.nexml.org/1.0", :xsi => "http://www.w3.org/2001/XMLSchema-instance", :xlink => "http://www.w3.org/1999/xlink", :nex => "http://www.nexml.org/1.0" }
+        root.namespaces = { nil => "http://www.nexml.org/2009", :xsi => "http://www.w3.org/2001/XMLSchema-instance", :xlink => "http://www.w3.org/1999/xlink", :nex => "http://www.nexml.org/2009" }
         root
       end
-
-      def serialize_characters( characters )
-        node = create_node( "characters", attributes( characters, :id, :"xsi:type", :otus, :label ) )
-
-        node << serialize_format( characters.format )
-        node << serialize_matrix( characters.matrix )
-
-        node
-      end
-
-      def serialize_format( format )
-        node = create_node( "format" )
-
-        format.each_states do |states|
-          node << serialize_states( states )
-        end
-
-        format.each_char do |char|
-          node << serialize_char( char )
-        end
-
-        node
-      end
-
-      def serialize_matrix( matrix )
-        node = create_node( "matrix" )
-
-        matrix.each_row do |row|
-          case row
-          when SeqRow
-            node << serialize_seq_row( row )
-          when CellRow
-            node << serialize_cell_row( row )
-          end
-        end
-
-        node
-      end
-
-      def serialize_seq_row( row )
-        node = create_node( "row", attributes( row, :id, :otu, :label ) )
-        node << serialize_seq( row.sequences.first )
-        node
-      end
-
-      def serialize_seq( seq )
-        node = create_node( "seq" )
-        node << seq.value
-        node
-      end
-
-      def serialize_cell_row( row )
-        node = create_node( "row", attributes( row, :id, :otu, :label ) )
-
-        row.each_cell do |cell|
-          node << serialize_cell( cell )
-        end
-
-        node
-      end
-
-      def serialize_cell( cell )
-        create_node( "cell", attributes( cell, :state, :char ) )
-      end
-
-      def serialize_states( states )
-        node = create_node( "states", attributes( states, :id, :label ) )
-
-        s = states.select{ |state| not state.ambiguous? }
-        ps = states.select{ |state| state.ambiguity == :polymorphic }
-        us = states.select{ |state| state.ambiguity == :uncertain }
-
-        states_added = []
-        s.each do |state|
-          states_added << state.id
-          node << serialize_state( state )
-        end
-
-        temp = []
-        ps.each do |state|
-          mids = state.collect( &:id )
-          if states_added.has?( mids )
-            states_added << state.id
-            node << serialize_polymorphic_state_set( state )
-          else
-            temp << state
-          end
-        end
-
-        temp.each do |state|
-          node << serialize_polymorphic_state_set( state )
-        end
-        temp.clear
-
-        us.each do |state| 
-          mids = state.collect( &:id )
-          if states_added.has?( mids )
-            states_added << state.id
-            node << serialize_uncertain_state_set( state )
-          else
-            temp << state
-          end
-        end
-
-        temp.each do |state|
-            node << serialize_uncertain_state_set( state )
-        end
-        temp.clear
-
-        node
-      end
-
-      def serialize_char( char )
-        create_node( "char", attributes( char, :id, :states, :label, :codon ) )
-      end
-
-      def serialize_state( state )
-        create_node( "state", attributes( state, :id, :label, :symbol ) )
-      end
-
-      def serialize_uncertain_state_set( state )
-        node = create_node( "uncertain_state_set", attributes( state, :id, :label, :symbol ) )
-
-        state.each_member do |member|
-          node << serialize_member( member )
-        end
-
-        node
-      end
-
-      def serialize_polymorphic_state_set( state )
-        node = create_node( "polymorphic_state_set", attributes( state, :id, :label, :symbol ) )
-
-        state.each do |member|
-          node << serialize_member( member )
-        end
-
-        node
-      end
-
-      def serialize_member( member )
-        create_node( "member", :state => member.id )
-      end
-
-      #private
 
       # Returns a hash of attributes for the given object.
       # See example in unit tests.
