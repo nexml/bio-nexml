@@ -8,8 +8,9 @@ module Bio
     #    taxon1.id    #=> 'taxon1'
     #    taxon1.label #=> 'Label for taxon1'
     #    taxon1.otus  #=> otus object they belong to; see docs for Otus
-    class Otu < NexmlWritable
+    class Otu
       include Mapper
+      @@writer = Bio::NeXML::Writer.new
 
       # A file level unique identifier.
       attr_accessor  :id
@@ -35,7 +36,7 @@ module Bio
       end
       
       def to_xml
-        create_node( "otu", attributes( self, :id, :label ) )
+        @@writer.create_node( "otu", @@writer.attributes( self, :id, :label ) )
       end
 
     end #end class Otu
@@ -59,9 +60,10 @@ module Bio
     #    taxon2.otus                      #=> taxa1
     #    taxa1.include?( taxon1 )         #=> true
     #    taxa1.delete( taxon2 )           #=> taxon2
-    class Otus < NexmlWritable
+    class Otus
       include Enumerable
       include Mapper
+      @@writer = Bio::NeXML::Writer.new
 
       # A file level unique identifier.
       attr_accessor :id
@@ -126,7 +128,7 @@ module Bio
       end
       
       def to_xml
-        node = create_node( "otus", attributes( self, :id, :label ) )
+        node = @@writer.create_node( "otus", @@writer.attributes( self, :id, :label ) )
         self.each do |otu|
           node << otu.to_xml
         end
