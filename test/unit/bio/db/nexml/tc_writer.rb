@@ -378,24 +378,15 @@ module Bio
         assert match?( parsed, output )
       end
 
-      def test_serialize_member
-        ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
-
-        output = @writer.serialize_member( ss1 )
-        parsed = element( 'member' ).first
-
-        assert match?( parsed, output )
-      end
-
       def test_serialize_uncertain_state_set
         ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
         ss2 = Bio::NeXML::State.new 'ss2', :symbol => '2'
         uss1 = Bio::NeXML::State.new 'ss5', :symbol => '5'
-        uss1.uncertain( true )
+        uss1.ambiguity = :uncertain
         uss1.add_member( ss1 )
         uss1.add_member( ss2 )
 
-        output = @writer.serialize_uncertain_state_set( uss1 )
+        output = uss1.to_xml
         parsed = element( 'uncertain_state_set' ).first
 
         assert match?( parsed, output )
@@ -405,11 +396,11 @@ module Bio
         ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
         ss2 = Bio::NeXML::State.new 'ss2', :symbol => '2'
         pss1 = Bio::NeXML::State.new 'ss4', :symbol => '4'
-        pss1.polymorphic( true )
+        pss1.ambiguity = :polymorphic
         pss1.add_member( ss1 )
         pss1.add_member( ss2 )
 
-        output = @writer.serialize_polymorphic_state_set( pss1 )
+        output = pss1.to_xml
         parsed = element( 'polymorphic_state_set' ).first
 
         assert match?( parsed, output )
@@ -418,7 +409,7 @@ module Bio
       def test_serialize_state
         ss1 = Bio::NeXML::State.new 'ss1', :symbol => '1'
 
-        output = @writer.serialize_state( ss1 )
+        output = ss1.to_xml
         parsed = element( 'state' ).first
 
         assert match?( parsed, output )
@@ -430,12 +421,12 @@ module Bio
         sss1 = Bio::NeXML::States.new 'sss1'
 
         pss1 = Bio::NeXML::State.new 'ss4', :symbol => '4'
-        pss1.polymorphic( true )
+        pss1.ambiguity = :polymorphic
         pss1.add_member( ss1 )
         pss1.add_member( ss2 )
 
         uss1 = Bio::NeXML::State.new 'ss5', :symbol => '5'
-        uss1.uncertain( true )
+        uss1.ambiguity = :uncertain
         uss1.add_member( ss1 )
         uss1.add_member( ss2 )
 
@@ -445,7 +436,7 @@ module Bio
         sss1.add_state( uss1 )
         sss1.add_state( pss1 )
 
-        output = @writer.serialize_states( sss1 )
+        output = sss1.to_xml
         parsed = element( 'states' ).first
 
         assert match?( parsed, output )
@@ -455,7 +446,7 @@ module Bio
         sss1 = Bio::NeXML::States.new 'sss1'
         sc1 = Bio::NeXML::Char.new 'sc1', :states => sss1
 
-        output = @writer.serialize_char( sc1 )
+        output = sc1.to_xml
         parsed = element( 'char' ).first
 
         assert match?( parsed, output )
@@ -467,12 +458,12 @@ module Bio
         sss1 = Bio::NeXML::States.new 'sss1'
 
         pss1 = Bio::NeXML::State.new 'ss4', :symbol => '4'
-        pss1.polymorphic( true )
+        pss1.ambiguity = :polymorphic
         pss1.add_member( ss1 )
         pss1.add_member( ss2 )
 
         uss1 = Bio::NeXML::State.new 'ss5', :symbol => '5'
-        uss1.uncertain( true )
+        uss1.ambiguity = :uncertain
         uss1.add_member( ss1 )
         uss1.add_member( ss2 )
 
@@ -489,7 +480,7 @@ module Bio
         sf1.add_char( sc1 )
         sf1.add_char( sc2 )
 
-        output = @writer.serialize_format( sf1 )
+        output = sf1.to_xml
         parsed = element( 'format' ).first
 
         assert match?( parsed, output )
@@ -499,7 +490,7 @@ module Bio
         sseq1 = Bio::NeXML::Sequence.new
         sseq1.value = "1 2"
 
-        output = @writer.serialize_seq( sseq1 )
+        output = sseq1.to_xml
         parsed = element( 'seq' ).first
 
         assert match?( parsed, output )
@@ -514,7 +505,7 @@ module Bio
         scell1.char = sc3
         scell1.state = ss6
 
-        output = @writer.serialize_cell( scell1 )
+        output = scell1.to_xml
         parsed = element( 'cell' ).first
 
         assert match?( parsed, output )
@@ -527,7 +518,7 @@ module Bio
         sr1 = Bio::NeXML::SeqRow.new 'sr1', :otu => o1
         sr1.add_sequence( sseq1 )
 
-        output = @writer.serialize_seq_row( sr1 )
+        output = sr1.to_xml
         parsed = element( 'row' ).first
 
         assert match?( parsed, output )
@@ -546,7 +537,7 @@ module Bio
         sr3 = Bio::NeXML::CellRow.new 'sr3', :otu => o1
         sr3.add_cell( scell1 )
 
-        output = @writer.serialize_cell_row( sr3 )
+        output = sr3.to_xml
         parsed = element( 'row' ).last
 
         assert match?( parsed, output )
@@ -572,7 +563,7 @@ module Bio
         m.add_row( sr1 )
         m.add_row( sr2 )
 
-        output = @writer.serialize_matrix( m )
+        output = m.to_xml
         parsed = element( 'matrix' ).first
 
         assert match?( parsed, output )
@@ -584,12 +575,12 @@ module Bio
         sss1 = Bio::NeXML::States.new 'sss1'
 
         pss1 = Bio::NeXML::State.new 'ss4', :symbol => '4'
-        pss1.polymorphic( true )
+        pss1.ambiguity = :polymorphic
         pss1.add_member( ss1 )
         pss1.add_member( ss2 )
 
         uss1 = Bio::NeXML::State.new 'ss5', :symbol => '5'
-        uss1.uncertain( true )
+        uss1.ambiguity = :uncertain
         uss1.add_member( ss1 )
         uss1.add_member( ss2 )
 
@@ -627,13 +618,12 @@ module Bio
 
         taxa1 = Bio::NeXML::Otus.new 'taxa1'
 
-        c1 = Bio::NeXML::Characters.new 'standardchars6', :otus => taxa1, :label => 'Standard sequences'
+        c1 = Bio::NeXML::StandardSeqs.new 'standardchars6', :otus => taxa1, :label => 'Standard sequences'
         c1.format = sf1
         c1.matrix = m
 
-        output = @writer.serialize_characters( c1 )
+        output = c1.to_xml
         parsed = element( 'characters' ).first
-
         assert match?( parsed, output )
       end
 
