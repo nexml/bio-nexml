@@ -4,4 +4,3 @@
   I think the way to do this is to require the containing object to be passed
   (recursively) to the constructors, while create_foo internally does this,
   passing self to the constructor.
-* port functionality from writer to to_xml methods for the appropriate classes
