@@ -174,6 +174,12 @@ module Bio
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end
       
+      def create_state( symbol = nil, options = {} )
+        state = State.new( Bio::NeXML.generate_id( State ), symbol, options )
+        add_state( state )
+        state     
+      end      
+      
       def add_state( state ); end if false # dummy for rdoc
       
       def delete_state( state ); end if false # dummy for rdoc
@@ -188,6 +194,11 @@ module Bio
 
       def include?( state )
         has_state?( state )
+      end
+      
+      def get_state_by_symbol( symbol )
+        matches = each_state.select{ |s| s.symbol == symbol }
+        matches.first
       end
       
       # Iterate over each state set in <tt>self</tt> passing it to the block given. If no block is provided,
@@ -223,7 +234,19 @@ module Bio
         @id = self.object_id
         properties( options ) unless options.empty?
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
-      end      
+      end
+      
+      def create_states( options = {} )
+        states = States.new( Bio::NeXML.generate_id( States ), options )
+        add_states( states )
+        states        
+      end
+      
+      def create_char( states = nil, options = {} )
+        char = Char.new( Bio::NeXML.generate_id( Char ), states, options )
+        add_char( char )
+        char
+      end
       
       def add_states( states )
         # dummy for rdoc
@@ -520,8 +543,10 @@ module Bio
       # object_id in this case
       attr_accessor :id
       
-      def initialize()
+      def initialize( options = {} )
         @id = self.object_id
+        properties( options ) unless options.empty?
+        block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?        
       end
       
       def add_row( row )
@@ -591,20 +616,30 @@ module Bio
       
       def to_xml
         node = @@writer.create_node( "matrix" )
-
         self.each_row do |row|
           node << row.to_xml
         end
-
         node
       end      
       
     end
     
     class SeqMatrix < Matrix
+      def create_row( options = {} )
+        row = SeqRow.new( Bio::NeXML.generate_id( SeqRow ), options )
+        add_row row
+        row        
+      end
     end
+    
     class CellMatrix < Matrix
+      def create_row( options = {} )
+        row = CellRow.new( Bio::NeXML.generate_id( CellRow ), options )
+        add_row row
+        row        
+      end      
     end
+    
     class Row
       include Mapper     
 
@@ -751,11 +786,9 @@ module Bio
       
       def to_xml
         node = @@writer.create_node( "row", @@writer.attributes( self, :id, :otu, :label ) )
-
         self.each_cell do |cell|
           node << cell.to_xml
         end
-
         node
       end      
       
@@ -791,58 +824,226 @@ module Bio
       end
       
       def add_format( format )
-        format = format
+        @format = format
       end
       
       def add_matrix( matrix )
-        matrix = matrix
+        @matrix = matrix
       end
       
       def to_xml
         node = @@writer.create_node( "characters", @@writer.attributes( self, :id, :"xsi:type", :otus, :label ) )
-
         node << self.format.to_xml
         node << self.matrix.to_xml
-
         node
-      end      
+      end
+      
+      def create_matrix( options = {} )
+        matrix = nil
+        if self.class.name =~ /Seqs$/
+          matrix = SeqMatrix.new( options )
+        else
+          matrix = CellMatrix.new( options )
+        end        
+        add_matrix matrix
+        matrix
+      end
+      
+      def create_format( options = {} )
+        format = Format.new( options )
+        states = format.create_states
+        lookup_table = self.lookup
+        state_for_symbol = {}
+        lookup_table.keys.each do |key|
+          if lookup_table[key].length == 1
+            state = states.create_state( :symbol => key )
+            state_for_symbol[key] = state
+          end
+        end
+        lookup_table.keys.each do |key|
+          if lookup_table[key].length != 1
+            state = states.create_state( :symbol => key, :ambiguity => :uncertain )
+            lookup_table[key].each do |symbol|
+              state.add_member( state_for_symbol[symbol] )
+            end
+          end
+        end        
+        add_format format
+        format
+      end
+      
+      def create_raw( string, row = nil )
+        matrix = self.matrix
+        if matrix == nil
+          matrix = self.create_matrix
+        end        
+        if row == nil
+          row = matrix.create_row
+        end
+        format = self.format
+        if format == nil
+          format = self.create_format
+        end
+        if row.kind_of? SeqRow
+          sequence = Sequence.new
+          sequence.value = join_sequence split_sequence string          
+          row.add_sequence( sequence )
+        end
+        if row.kind_of? CellRow
+          split_seq = split_sequence string
+          pos = 0
+          states = format.states.first
+          split_seq.each do |symbol|
+            char = states.chars[pos]
+            if char == nil
+              char = format.create_char( states )
+            end
+            state = states.get_state_by_symbol( symbol )
+            if state == nil
+              state = states.create_state( symbol )
+            end
+            cell = Cell.new char, state
+            row.add_cell cell
+            pos += 1
+          end
+        end
+        row
+      end
+      
+      def split_sequence( string )
+        string.split(//)
+      end
+      
+      def join_sequence( array )
+        array.join
+      end
 
     end #end class Characters
     class Dna < Characters
+      @@lookup = {
+        'A' => [ 'A'                ],
+        'C' => [ 'C'                ],
+        'G' => [ 'G'                ],
+        'T' => [ 'T'                ],
+        'M' => [ 'A', 'C'           ],
+        'R' => [ 'A', 'G'           ],
+        'W' => [ 'A', 'T'           ],
+        'S' => [ 'C', 'G'           ],
+        'Y' => [ 'C', 'T'           ],
+        'K' => [ 'G', 'T'           ],
+        'V' => [ 'A', 'C', 'G'      ],
+        'H' => [ 'A', 'C', 'T'      ],
+        'D' => [ 'A', 'G', 'T'      ],
+        'B' => [ 'C', 'G', 'T'      ],
+        'X' => [ 'G', 'A', 'T', 'C' ],
+        'N' => [ 'G', 'A', 'T', 'C' ],
+        '-' => [                    ],
+        '?' => [ 'G', 'A', 'T', 'C' ],
+      };
+      def lookup
+        @@lookup
+      end
     end
-    class DnaSeqs < Dna
-    end
-    class DnaCells < Dna
-    end
+    class DnaSeqs < Dna; end
+    class DnaCells < Dna; end
     class Rna < Characters
+      @@lookup = {
+        'A' => [ 'A'                ],
+        'C' => [ 'C'                ],
+        'G' => [ 'G'                ],
+        'U' => [ 'U'                ],
+        'M' => [ 'A', 'C'           ],
+        'R' => [ 'A', 'G'           ],
+        'W' => [ 'A', 'U'           ],
+        'S' => [ 'C', 'G'           ],
+        'Y' => [ 'C', 'U'           ],
+        'K' => [ 'G', 'U'           ],
+        'V' => [ 'A', 'C', 'G'      ],
+        'H' => [ 'A', 'C', 'U'      ],
+        'D' => [ 'A', 'G', 'U'      ],
+        'B' => [ 'C', 'G', 'U'      ],
+        'X' => [ 'G', 'A', 'U', 'C' ],
+        'N' => [ 'G', 'A', 'U', 'C' ],
+        '-' => [                    ],
+        '?' => [ 'G', 'A', 'U', 'C' ],        
+      };
+      def lookup
+        @@lookup
+      end      
     end
-    class RnaSeqs < Rna
-    end
-    class RnaCells < Rna
-    end
+    class RnaSeqs < Rna; end
+    class RnaCells < Rna; end
     class Protein < Characters
+      @@lookup = {
+        'A' => [ 'A'      ],
+        'B' => [ 'D', 'N' ],
+        'C' => [ 'C'      ],
+        'D' => [ 'D'      ],
+        'E' => [ 'E'      ],
+        'F' => [ 'F'      ],
+        'G' => [ 'G'      ],
+        'H' => [ 'H'      ],
+        'I' => [ 'I'      ],
+        'K' => [ 'K'      ],
+        'L' => [ 'L'      ],
+        'M' => [ 'M'      ],
+        'N' => [ 'N'      ],
+        'P' => [ 'P'      ],
+        'Q' => [ 'Q'      ],
+        'R' => [ 'R'      ],
+        'S' => [ 'S'      ],
+        'T' => [ 'T'      ],
+        'U' => [ 'U'      ],
+        'V' => [ 'V'      ],
+        'W' => [ 'W'      ],
+        'X' => [ 'X'      ],
+        'Y' => [ 'Y'      ],
+        'Z' => [ 'E', 'Q' ],
+        '*' => [ '*'      ],
+        '-' => [          ],
+        '?' => [ 'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', '*' ]
+      };
+      def lookup
+        @@lookup
+      end      
     end
-    class ProteinSeqs < Protein
-    end
-    class ProteinCells < Protein
-    end
+    class ProteinSeqs < Protein; end
+    class ProteinCells < Protein; end
     class Standard < Characters
+      @@lookup = {}
+      def lookup
+        @@lookup
+      end
+      def split_sequence( string )
+        string.split
+      end
+      def join_sequence( array )
+        array.join(" ")
+      end      
     end
-    class StandardSeqs < Standard
-    end
-    class StandardCells < Standard
-    end
+    class StandardSeqs < Standard; end
+    class StandardCells < Standard; end
     class Restriction < Characters
+      @@lookup = { '0' => [ '0' ], '1' => [ '1' ] }
+      def lookup
+        @@lookup
+      end      
     end
-    class RestrictionSeqs < Restriction
-    end
-    class RestrictionCells < Restriction
-    end
+    class RestrictionSeqs < Restriction; end
+    class RestrictionCells < Restriction; end
     class Continuous < Characters
+      @@lookup = {}
+      def lookup
+        @@lookup
+      end
+      def split_sequence( string )
+        string.split
+      end
+      def join_sequence( array )
+        array.join(" ")
+      end      
     end
-    class ContinuousSeqs < Continuous
-    end
-    class ContinuousCells < Continuous
-    end
+    class ContinuousSeqs < Continuous; end
+    class ContinuousCells < Continuous; end
   end
 end
