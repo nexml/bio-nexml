@@ -7,6 +7,15 @@ require "bio/db/nexml/mapper"
 #Autoload definition
 module Bio
   module NeXML
+    
+    @@id_counter = 0;
+    def self.generate_id( klass )
+      myname = klass.name
+      local = myname.gsub(/.*:/,"")
+      @@id_counter += 1
+      newid = @@id_counter
+      "#{local}#{newid}"
+    end    
 
     module Base
       attr_accessor :xml_base
@@ -30,7 +39,7 @@ module Bio
     autoload :Writer, 'bio/db/nexml/writer'
 
     class Nexml
-      @@writer = Bio::NeXML::Writer.new
+      @@writer = Bio::NeXML::Writer.new      
       include Mapper
       include Enumerable
       attr_accessor :version
@@ -58,8 +67,29 @@ module Bio
         end
       end
       
+      def create_otus( options = {} )
+        otus = Otus.new( Bio::NeXML.generate_id( Otus ), options )
+        self << otus
+        otus        
+      end
+      
+      def create_trees( options )
+        trees = Trees.new( Bio::NeXML.generate_id( Trees ), options )
+        self << trees
+        trees
+      end
+      
+      def create_characters( type = "Dna", verbose = false, options = {} )
+        subtype = verbose ? "Cells" : "Seqs"
+        klass_name = "#{type.to_s.capitalize}#{subtype}"
+        klass = NeXML.const_get( klass_name )
+        characters = klass.new( Bio::NeXML.generate_id( klass ), options )
+        self << characters
+        characters
+      end
+      
       def to_xml
-        node = @@writer.create_node( "nexml", :"xsi:schemaLocation" => "http://www.nexml.org/2009 http://www.nexml.org/2009/xsd/nexml.xsd", :generator => generator, :version => version )
+        node = @@writer.create_node( "nex:nexml", :"xsi:schemaLocation" => "http://www.nexml.org/2009 http://www.nexml.org/2009/xsd/nexml.xsd", :generator => generator, :version => version )
         node.namespaces = { nil => "http://www.nexml.org/2009", :xsi => "http://www.w3.org/2001/XMLSchema-instance", :xlink => "http://www.w3.org/1999/xlink", :nex => "http://www.nexml.org/2009" }
         self.each_otus do |otus|
             node << otus.to_xml
