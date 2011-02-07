@@ -114,6 +114,24 @@ module Bio
       end
     end
     
+    class FloatRootEdge < RootEdge
+      def initialize( id, options = {} )
+        super
+      end
+      def length
+        distance.to_f
+      end      
+    end
+    
+    class IntRootEdge < RootEdge
+      def initialize( id, options = {} )
+        super
+      end
+      def length
+        distance.to_i
+      end      
+    end    
+    
     # A float edge is an edge whose length is defined using a floating point
     # number.
     class FloatEdge < Edge
@@ -156,7 +174,21 @@ module Bio
         end
 
         node
-      end      
+      end
+      
+      def create_node( options = {} )
+        node = Node.new( Bio::NeXML.generate_id( Node ), options )
+        self << node
+        node        
+      end
+      
+      def create_edge( options = {} )
+        raise "This is supposed to be an abstract method"
+      end
+      
+      def create_rootedge( options = {} )
+        raise "This is supposed to be an abstract method"
+      end
 
       # A file level unique identifier.
       attr_accessor :id
@@ -401,6 +433,19 @@ module Bio
         edge.length = edge.length.to_i
         super
       end
+      
+      def create_edge( options = {} )
+        edge = IntEdge.new( Bio::NeXML.generate_id( IntEdge ), options )
+        self << edge
+        edge        
+      end
+      
+      def create_rootedge( options = {} )
+        rootedge = IntRootEdge.new( Bio::NeXML.generate_id( IntRootEdge ), options )
+        self << rootedge
+        rootedge
+      end
+      
     end
 
     class FloatTree < Tree
@@ -412,6 +457,19 @@ module Bio
         edge.length = edge.length.to_f
         super
       end
+      
+      def create_edge( options = {} )
+        edge = FloatEdge.new( Bio::NeXML.generate_id( FloatEdge ), options )
+        self << edge
+        edge        
+      end
+      
+      def create_rootedge( options = {} )
+        rootedge = FloatRootEdge.new( Bio::NeXML.generate_id( FloatRootEdge ), options )
+        self << rootedge
+        rootedge
+      end      
+      
     end
 
     class Network < Tree
@@ -445,6 +503,13 @@ module Bio
         edge.length = edge.length.to_i
         super
       end
+
+      def create_edge( options = {} )
+        edge = IntEdge.new( Bio::NeXML.generate_id( IntEdge ), options )
+        self << edge
+        edge        
+      end      
+      
     end
 
     class FloatNetwork < Network
@@ -456,6 +521,13 @@ module Bio
         edge.length = edge.length.to_f
         super
       end
+      
+      def create_edge( options = {} )
+        edge = FloatEdge.new( Bio::NeXML.generate_id( FloatEdge ), options )
+        self << edge
+        edge        
+      end      
+      
     end
 
     class Trees
@@ -475,6 +547,20 @@ module Bio
 
         node
       end
+      
+      def create_tree( int = false, options = {} )
+        type = int ? Bio::NeXML::IntTree : Bio::NeXML::FloatTree
+        tree = type.new( Bio::NeXML.generate_id( type ), options )
+        self << tree
+        tree
+      end
+      
+      def create_network( int = false, options = {} )
+        type = int ? Bio::NeXML::IntNetwork : Bio::NeXML::FloatNetwork
+        network = type.new( Bio::NeXML.generate_id( type ), options )
+        self << network
+        network
+      end      
 
       attr_accessor     :id
       attr_accessor     :label
