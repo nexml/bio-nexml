@@ -93,6 +93,13 @@ module Bio
         add_otu( otu )
         self
       end
+      
+      # Creates and returns an otu after appending it to self
+      def create_otu( options = {} )
+        otu = Otu.new( Bio::NeXML.generate_id( Otu ), options )
+        self << otu
+        otu
+      end
 
       # Takes an otu or its id and deletes it. Returns the object deleted or <tt>nil</tt>.
       def delete( otu )
