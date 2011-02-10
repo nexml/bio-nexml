@@ -224,7 +224,7 @@ module Bio
       has_n :states, :singularize => false
       
       # A format will have one or more columns( chars => columns ),
-      has_n :chars
+      has_n :chars, :index => false
       
       # Because format elements don't have id attributes, we will use
       # object_id in this case
@@ -238,13 +238,13 @@ module Bio
       
       def create_states( options = {} )
         states = States.new( Bio::NeXML.generate_id( States ), options )
-        add_states( states )
+        add_states states
         states        
       end
       
       def create_char( states = nil, options = {} )
         char = Char.new( Bio::NeXML.generate_id( Char ), states, options )
-        add_char( char )
+        add_char char
         char
       end
       
@@ -343,8 +343,9 @@ module Bio
       # Fetch a column definition( Bio::NeXML::Char object ) by id. Returns <tt>nil</tt> if none
       # found.
       def get_char_by_id( id )
-        # dummy for rdoc
-      end if false      
+        matches = each_char.select{ |c| c.id == id } # XXX not sure why I have to implement this?
+        matches.first        
+      end     
       
       # Returns true if the given state set( Bio::NeXML::States object ) is defined for the matrix.
       def has_states?( states )
@@ -536,7 +537,7 @@ module Bio
     class Matrix
       @@writer = Bio::NeXML::Writer.new
       include Mapper
-      has_n :rows
+      has_n :rows, :index => false
       belongs_to :characters     
       
       # Because matrix elements don't have id attributes, we will use
@@ -819,6 +820,8 @@ module Bio
 
       def initialize( id, options = {} )
         @id = id
+        self.create_format
+        self.create_matrix
         properties( options ) unless options.empty?
         block.arity < 1 ? instance_eval( &block ) : block.call( self ) if block_given?
       end
@@ -874,16 +877,10 @@ module Bio
       
       def create_raw( string, row = nil )
         matrix = self.matrix
-        if matrix == nil
-          matrix = self.create_matrix
-        end        
+        format = self.format
         if row == nil
           row = matrix.create_row
-        end
-        format = self.format
-        if format == nil
-          format = self.create_format
-        end
+        end        
         if row.kind_of? SeqRow
           sequence = Sequence.new
           sequence.value = join_sequence split_sequence string          
@@ -894,7 +891,7 @@ module Bio
           pos = 0
           states = format.states.first
           split_seq.each do |symbol|
-            char = states.chars[pos]
+            char = format.chars[pos]
             if char == nil
               char = format.create_char( states )
             end
