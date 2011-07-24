@@ -1,0 +1,1636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+<title>
+  Class: Bio::NeXML::Format
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (F)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Bio.html" title="Bio (module)">Bio</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../NeXML.html" title="Bio::NeXML (module)">NeXML</a></span></span>
+     &raquo; 
+    <span class="title">Format</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Bio::NeXML::Format
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Bio::NeXML::Format</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="Mapper.html" title="Bio::NeXML::Mapper (module)">Mapper</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/bio/db/nexml/matrix.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="writer-classvariable" class="">@@writer =
+          
+        </dt>
+        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+</pre></dd>
+      
+    </dl>
+  
+
+
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id-instance_method" title="#id (instance method)">- (Object) <strong>id</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Because format elements don&#8217;t have id attributes, we will use
+object_id in this case.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_char-instance_method" title="#add_char (instance method)">- (Object) <strong>add_char</strong>(char) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Add a column definition to the format.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_states-instance_method" title="#add_states (instance method)">- (Object) <strong>add_states</strong>(states) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#chars-instance_method" title="#chars (instance method)">- (Object) <strong>chars</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns an array of column definitions( Bio::NeXML::Char objects ) for the
+matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#chars%3D-instance_method" title="#chars= (instance method)">- (Object) <strong>chars=</strong>(chars) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Add column definitions to the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_char-instance_method" title="#create_char (instance method)">- (Object) <strong>create_char</strong>(states = nil, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_states-instance_method" title="#create_states (instance method)">- (Object) <strong>create_states</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_char-instance_method" title="#delete_char (instance method)">- (Object) <strong>delete_char</strong>(char) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Remove a column definition from the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_states-instance_method" title="#delete_states (instance method)">- (Object) <strong>delete_states</strong>(states) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Remove a state set from the format.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_char-instance_method" title="#each_char (instance method)">- (Object) <strong>each_char</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Iterate over each column definitions( Bio::NeXML::Char object ) defined for
+the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_states-instance_method" title="#each_states (instance method)">- (Object) <strong>each_states</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Iterate over each state sets( Bio::NeXML::States object ) defined for the
+matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_char_by_id-instance_method" title="#get_char_by_id (instance method)">- (Object) <strong>get_char_by_id</strong>(id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Fetch a column definition( Bio::NeXML::Char object ) by id.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_states_by_id-instance_method" title="#get_states_by_id (instance method)">- (Object) <strong>get_states_by_id</strong>(id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Fetch a state set( Bio::NeXML::States object ) by id.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_char%3F-instance_method" title="#has_char? (instance method)">- (Boolean) <strong>has_char?</strong>(char) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns true if the given column definition( Bio::NeXML::Char object ) is
+defined for the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_states%3F-instance_method" title="#has_states? (instance method)">- (Boolean) <strong>has_states?</strong>(states) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns true if the given state set( Bio::NeXML::States object ) is defined
+for the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Format) <strong>initialize</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A new instance of Format.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#number_of_chars-instance_method" title="#number_of_chars (instance method)">- (Object) <strong>number_of_chars</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the number of column definitions defined for the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#number_of_states-instance_method" title="#number_of_states (instance method)">- (Object) <strong>number_of_states</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the number of state sets defined for the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#states-instance_method" title="#states (instance method)">- (Object) <strong>states</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns an array of state sets( Bio::NeXML::States objects ) for the
+matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#states%3D-instance_method" title="#states= (instance method)">- (Object) <strong>states=</strong>(states) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Add state sets to the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (Object) <strong>to_xml</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Mapper.html" title="Bio::NeXML::Mapper (module)">Mapper</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Mapper.html#properties-instance_method" title="Bio::NeXML::Mapper#properties (method)">#properties</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Bio::NeXML::Format (class)">Format</a></span></tt>) <strong>initialize</strong>(options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A new instance of Format
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+233
+234
+235
+236
+237</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 233</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
+  <span class='@id ivar id'>@id</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='object_id identifier id'>object_id</span>
+  <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+  <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='arity identifier id'>arity</span> <span class='lt op'>&lt;</span> <span class='integer val'>1</span> <span class='question op'>?</span> <span class='instance_eval identifier id'>instance_eval</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='call identifier id'>call</span><span class='lparen token'>(</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="id=-instance_method"></span>
+      <span id="id-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="id-instance_method">
+  
+    - (<tt>Object</tt>) <strong>id</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Because format elements don&#8217;t have id attributes, we will use
+object_id in this case
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+231
+232
+233</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 231</span>
+
+<span class='def def kw'>def</span> <span class='id identifier id'>id</span>
+  <span class='@id ivar id'>@id</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_char-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_char</strong>(char) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Add a column definition to the format.
+</p>
+<ul>
+<li>Arguments :
+
+</li>
+</ul>
+<p>
+char( required ) - a Bio::NeXML::Char object.
+</p>
+<ul>
+<li>Returns : <tt>self</tt>.
+
+<pre class="code">
+ <span class='format identifier id'>format</span><span class='dot token'>.</span><span class='add_char identifier id'>add_char</span><span class='lparen token'>(</span> <span class='char identifier id'>char</span> <span class='rparen token'>)</span>
+ <span class='format identifier id'>format</span><span class='dot token'>.</span><span class='chars identifier id'>chars</span>               <span class='comment val'>#=&gt; [ .. char .. ]</span>
+ <span class='char identifier id'>char</span><span class='dot token'>.</span><span class='format identifier id'>format</span>                <span class='comment val'>#=&gt; format</span>
+</pre>
+</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+289
+290
+291</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 289</span>
+
+<span class='def def kw'>def</span> <span class='add_char identifier id'>add_char</span><span class='lparen token'>(</span> <span class='char identifier id'>char</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="add_states-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_states</strong>(states) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+251
+252
+253</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 251</span>
+
+<span class='def def kw'>def</span> <span class='add_states identifier id'>add_states</span><span class='lparen token'>(</span> <span class='states identifier id'>states</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="chars-instance_method">
+  
+    - (<tt>Object</tt>) <strong>chars</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns an array of column definitions( Bio::NeXML::Char objects ) for the
+matrix.
+</p>
+<pre class="code">
+   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='chars identifier id'>chars</span>  <span class='comment val'>#=&gt; [ .. .. ]</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+312
+313
+314</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 312</span>
+
+<span class='def def kw'>def</span> <span class='chars identifier id'>chars</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="chars=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>chars=</strong>(chars) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Add column definitions to the matrix. This function will override the
+previous column definitions if any.
+</p>
+<ul>
+<li>Arguments :
+
+</li>
+</ul>
+<p>
+chars( required ) - an array of Bio::NeXML::Char object.
+</p>
+<pre class="code">
+   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='chars identifier id'>chars</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span> <span class='char identifier id'>char</span> <span class='rbrack token'>]</span>
+   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='chars identifier id'>chars</span>    <span class='comment val'>#=&gt; [ char ]</span>
+   <span class='char identifier id'>char</span><span class='dot token'>.</span><span class='matrix identifier id'>matrix</span>     <span class='comment val'>#=&gt; matrix</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+334
+335
+336</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 334</span>
+
+<span class='def def kw'>def</span> <span class='chars= identifier id'>chars=</span><span class='lparen token'>(</span> <span class='chars identifier id'>chars</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_char-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create_char</strong>(states = nil, options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+245
+246
+247
+248
+249</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 245</span>
+
+<span class='def def kw'>def</span> <span class='create_char identifier id'>create_char</span><span class='lparen token'>(</span> <span class='states identifier id'>states</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
+  <span class='char identifier id'>char</span> <span class='assign token'>=</span> <span class='Char constant id'>Char</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='dot token'>.</span><span class='generate_id identifier id'>generate_id</span><span class='lparen token'>(</span> <span class='Char constant id'>Char</span> <span class='rparen token'>)</span><span class='comma token'>,</span> <span class='states identifier id'>states</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
+  <span class='add_char identifier id'>add_char</span> <span class='char identifier id'>char</span>
+  <span class='char identifier id'>char</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_states-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create_states</strong>(options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+239
+240
+241
+242
+243</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 239</span>
+
+<span class='def def kw'>def</span> <span class='create_states identifier id'>create_states</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
+  <span class='states identifier id'>states</span> <span class='assign token'>=</span> <span class='States constant id'>States</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='dot token'>.</span><span class='generate_id identifier id'>generate_id</span><span class='lparen token'>(</span> <span class='States constant id'>States</span> <span class='rparen token'>)</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
+  <span class='add_states identifier id'>add_states</span> <span class='states identifier id'>states</span>
+  <span class='states identifier id'>states</span>        
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="delete_char-instance_method">
+  
+    - (<tt>Object</tt>) <strong>delete_char</strong>(char) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Remove a column definition from the matrix.
+</p>
+<ul>
+<li>Arguments :
+
+</li>
+</ul>
+<p>
+char( required ) - a Bio::NeXML::Char object.
+</p>
+<ul>
+<li>Returns : the deleted object.
+
+<pre class="code">
+ <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='delete_char identifier id'>delete_char</span><span class='lparen token'>(</span> <span class='char identifier id'>char</span> <span class='rparen token'>)</span>
+ <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='chars identifier id'>chars</span>               <span class='comment val'>#=&gt; [ .. .. ]</span>
+ <span class='char identifier id'>char</span><span class='dot token'>.</span><span class='matrix identifier id'>matrix</span>                <span class='comment val'>#=&gt; nil</span>
+</pre>
+</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+300
+301
+302</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 300</span>
+
+<span class='def def kw'>def</span> <span class='delete_char identifier id'>delete_char</span><span class='lparen token'>(</span> <span class='char identifier id'>char</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="delete_states-instance_method">
+  
+    - (<tt>Object</tt>) <strong>delete_states</strong>(states) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Remove a state set from the format.
+</p>
+<ul>
+<li>Arguments :
+
+</li>
+</ul>
+<p>
+states( required ) - a Bio::NeXML::State object.
+</p>
+<ul>
+<li>Returns : the deleted object.
+
+<pre class="code">
+ <span class='format identifier id'>format</span><span class='dot token'>.</span><span class='delete_states identifier id'>delete_states</span><span class='lparen token'>(</span> <span class='states identifier id'>states</span> <span class='rparen token'>)</span>
+ <span class='format identifier id'>format</span><span class='dot token'>.</span><span class='states identifier id'>states</span>                <span class='comment val'>#=&gt; [ .. .. ]</span>
+ <span class='states identifier id'>states</span><span class='dot token'>.</span><span class='format identifier id'>format</span>                <span class='comment val'>#=&gt; nil</span>
+</pre>
+</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+268
+269
+270</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 268</span>
+
+<span class='def def kw'>def</span> <span class='delete_states identifier id'>delete_states</span><span class='lparen token'>(</span> <span class='states identifier id'>states</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_char-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_char</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Iterate over each column definitions( Bio::NeXML::Char object ) defined for
+the matrix. Returns an Enumerator if no block is provided.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+368
+369
+370</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 368</span>
+
+<span class='def def kw'>def</span> <span class='each_char identifier id'>each_char</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_states-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_states</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Iterate over each state sets( Bio::NeXML::States object ) defined for the
+matrix. Returns an Enumerator if no block is provided.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+362
+363
+364</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 362</span>
+
+<span class='def def kw'>def</span> <span class='each_states identifier id'>each_states</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_char_by_id-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_char_by_id</strong>(id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Fetch a column definition( Bio::NeXML::Char object ) by id. Returns
+<tt>nil</tt> if none found.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+345
+346
+347
+348</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 345</span>
+
+<span class='def def kw'>def</span> <span class='get_char_by_id identifier id'>get_char_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span>
+  <span class='matches identifier id'>matches</span> <span class='assign token'>=</span> <span class='each_char identifier id'>each_char</span><span class='dot token'>.</span><span class='select identifier id'>select</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='c identifier id'>c</span><span class='bitor op'>|</span> <span class='c identifier id'>c</span><span class='dot token'>.</span><span class='id identifier id'>id</span> <span class='eq op'>==</span> <span class='id identifier id'>id</span> <span class='rbrace token'>}</span> <span class='comment val'># XXX not sure why I have to implement this?</span>
+  <span class='matches identifier id'>matches</span><span class='dot token'>.</span><span class='first identifier id'>first</span>        
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_states_by_id-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_states_by_id</strong>(id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Fetch a state set( Bio::NeXML::States object ) by id. Returns <tt>nil</tt>
+if none found.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+273
+274
+275</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 273</span>
+
+<span class='def def kw'>def</span> <span class='get_states_by_id identifier id'>get_states_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_char?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_char?</strong>(char) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns true if the given column definition( Bio::NeXML::Char object ) is
+defined for the matrix.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+356
+357
+358</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 356</span>
+
+<span class='def def kw'>def</span> <span class='has_char? fid id'>has_char?</span><span class='lparen token'>(</span> <span class='char identifier id'>char</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_states?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_states?</strong>(states) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns true if the given state set( Bio::NeXML::States object ) is defined
+for the matrix.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+257
+258
+259</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 257</span>
+
+<span class='def def kw'>def</span> <span class='has_states? fid id'>has_states?</span><span class='lparen token'>(</span> <span class='states identifier id'>states</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="number_of_chars-instance_method">
+  
+    - (<tt>Object</tt>) <strong>number_of_chars</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the number of column definitions defined for the matrix.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+378
+379
+380</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 378</span>
+
+<span class='def def kw'>def</span> <span class='number_of_chars identifier id'>number_of_chars</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="number_of_states-instance_method">
+  
+    - (<tt>Object</tt>) <strong>number_of_states</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the number of state sets defined for the matrix.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+278
+279
+280</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 278</span>
+
+<span class='def def kw'>def</span> <span class='number_of_states identifier id'>number_of_states</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="states-instance_method">
+  
+    - (<tt>Object</tt>) <strong>states</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns an array of state sets( Bio::NeXML::States objects ) for the
+matrix.
+</p>
+<pre class="code">
+   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='states identifier id'>states</span>  <span class='comment val'>#=&gt; [ .. .. ]</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+306
+307
+308</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 306</span>
+
+<span class='def def kw'>def</span> <span class='states identifier id'>states</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="states=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>states=</strong>(states) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Add state sets to the matrix. This function will overwrite previous state
+set definitions for the matrix if any.
+</p>
+<ul>
+<li>Arguments :
+
+</li>
+</ul>
+<p>
+states( required ) - an array of Bio::NeXML::States object.
+</p>
+<pre class="code">
+   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='states identifier id'>states</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span> <span class='states identifier id'>states</span> <span class='rbrack token'>]</span>
+   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='states identifier id'>states</span>    <span class='comment val'>#=&gt; [ states ]</span>
+   <span class='states identifier id'>states</span><span class='dot token'>.</span><span class='matrix identifier id'>matrix</span>    <span class='comment val'>#=&gt; matrix</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+323
+324
+325</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 323</span>
+
+<span class='def def kw'>def</span> <span class='states= identifier id'>states=</span><span class='lparen token'>(</span> <span class='states identifier id'>states</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_xml-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_xml</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 382</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
+  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;format&quot;</span> <span class='rparen token'>)</span>
+
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_states identifier id'>each_states</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='states identifier id'>states</span><span class='bitor op'>|</span>
+    <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='states identifier id'>states</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
+  <span class='end end kw'>end</span>
+
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_char identifier id'>each_char</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='char identifier id'>char</span><span class='bitor op'>|</span>
+    <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='char identifier id'>char</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
+  <span class='end end kw'>end</span>
+
+  <span class='node identifier id'>node</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Jul 24 11:11:06 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

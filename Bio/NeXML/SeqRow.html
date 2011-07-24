@@ -1,0 +1,762 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+<title>
+  Class: Bio::NeXML::SeqRow
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Bio.html" title="Bio (module)">Bio</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../NeXML.html" title="Bio::NeXML (module)">NeXML</a></span></span>
+     &raquo; 
+    <span class="title">SeqRow</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Bio::NeXML::SeqRow
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="Row.html" title="Bio::NeXML::Row (class)">Row</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Row.html" title="Bio::NeXML::Row (class)">Row</a></span></li>
+          
+            <li class="next">Bio::NeXML::SeqRow</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/bio/db/nexml/matrix.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="writer-classvariable" class="">@@writer =
+          
+        </dt>
+        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+</pre></dd>
+      
+    </dl>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  <h2>Instance Attribute Summary</h2>
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Row.html" title="Bio::NeXML::Row (class)">Row</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Row.html#id-instance_method" title="Bio::NeXML::Row#id (method)">id</a></span>, <span class='object_link'><a href="Row.html#label-instance_method" title="Bio::NeXML::Row#label (method)">label</a></span></p>
+
+  
+  
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_sequence-instance_method" title="#add_sequence (instance method)">- (Object) <strong>add_sequence</strong>(sequence) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Add a sequence( row ) to the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_sequence-instance_method" title="#delete_sequence (instance method)">- (Object) <strong>delete_sequence</strong>(sequence) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Remove a sequence( row ) from the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_sequence-instance_method" title="#each_sequence (instance method)">- (Object) <strong>each_sequence</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Iterate over each sequence ( Bio::NeXML::Sequence object ) defined for the
+matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_sequence%3F-instance_method" title="#has_sequence? (instance method)">- (Boolean) <strong>has_sequence?</strong>(sequence) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns true if the given sequence( Bio::NeXML::Sequence object ) is
+defined for the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#number_of_sequences-instance_method" title="#number_of_sequences (instance method)">- (Object) <strong>number_of_sequences</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the number of sequences defined for the matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sequences-instance_method" title="#sequences (instance method)">- (Object) <strong>sequences</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns an array of sequences ( Bio::NeXML::Sequence objects ) for the
+matrix.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sequences%3D-instance_method" title="#sequences= (instance method)">- (Object) <strong>sequences=</strong>(sequences) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Add sequences to the matirx.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (Object) <strong>to_xml</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Row.html" title="Bio::NeXML::Row (class)">Row</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Row.html#initialize-instance_method" title="Bio::NeXML::Row#initialize (method)">#initialize</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Mapper.html" title="Bio::NeXML::Mapper (module)">Mapper</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Mapper.html#properties-instance_method" title="Bio::NeXML::Mapper#properties (method)">#properties</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="Row.html#initialize-instance_method" title="Bio::NeXML::Row#initialize (method)">Bio::NeXML::Row</a></span></p>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_sequence-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_sequence</strong>(sequence) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Add a sequence( row ) to the matrix.
+</p>
+<ul>
+<li>Arguments :
+
+</li>
+</ul>
+<p>
+sequence( required ) - a Bio::NeXML::Sequence object.
+</p>
+<ul>
+<li>Returns : <tt>self</tt>.
+
+<pre class="code">
+ <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='add_matrix identifier id'>add_matrix</span><span class='lparen token'>(</span> <span class='sequence identifier id'>sequence</span> <span class='rparen token'>)</span>
+ <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='sequences identifier id'>sequences</span>               <span class='comment val'>#=&gt; [ .. sequence .. ]</span>
+ <span class='sequence identifier id'>sequence</span><span class='dot token'>.</span><span class='matrix identifier id'>matrix</span>                <span class='comment val'>#=&gt; matrix</span>
+</pre>
+</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+677
+678
+679</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 677</span>
+
+<span class='def def kw'>def</span> <span class='add_sequence identifier id'>add_sequence</span><span class='lparen token'>(</span> <span class='sequence identifier id'>sequence</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="delete_sequence-instance_method">
+  
+    - (<tt>Object</tt>) <strong>delete_sequence</strong>(sequence) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Remove a sequence( row ) from the matrix.
+</p>
+<ul>
+<li>Arguments :
+
+</li>
+</ul>
+<p>
+sequence( required ) - a Bio::NeXML::Sequence object.
+</p>
+<ul>
+<li>Returns : the deleted object.
+
+<pre class="code">
+ <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='delete_sequence identifier id'>delete_sequence</span><span class='lparen token'>(</span> <span class='sequence identifier id'>sequence</span> <span class='rparen token'>)</span>
+ <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='sequences identifier id'>sequences</span>               <span class='comment val'>#=&gt; [ .. .. ]</span>
+ <span class='sequence identifier id'>sequence</span><span class='dot token'>.</span><span class='matrix identifier id'>matrix</span>                <span class='comment val'>#=&gt; nil</span>
+</pre>
+</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+688
+689
+690</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 688</span>
+
+<span class='def def kw'>def</span> <span class='delete_sequence identifier id'>delete_sequence</span><span class='lparen token'>(</span> <span class='sequence identifier id'>sequence</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_sequence-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_sequence</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Iterate over each sequence ( Bio::NeXML::Sequence object ) defined for the
+matrix. Returns an Enumerator if no block is provided.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+715
+716
+717</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 715</span>
+
+<span class='def def kw'>def</span> <span class='each_sequence identifier id'>each_sequence</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_sequence?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_sequence?</strong>(sequence) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns true if the given sequence( Bio::NeXML::Sequence object ) is
+defined for the matrix.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+709
+710
+711</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 709</span>
+
+<span class='def def kw'>def</span> <span class='has_sequence? fid id'>has_sequence?</span><span class='lparen token'>(</span> <span class='sequence identifier id'>sequence</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="number_of_sequences-instance_method">
+  
+    - (<tt>Object</tt>) <strong>number_of_sequences</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the number of sequences defined for the matrix.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+720
+721
+722</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 720</span>
+
+<span class='def def kw'>def</span> <span class='number_of_sequences identifier id'>number_of_sequences</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="sequences-instance_method">
+  
+    - (<tt>Object</tt>) <strong>sequences</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns an array of sequences ( Bio::NeXML::Sequence objects ) for the
+matrix.
+</p>
+<pre class="code">
+   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='sequences identifier id'>sequences</span>  <span class='comment val'>#=&gt; [ .. .. ]</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+694
+695
+696</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 694</span>
+
+<span class='def def kw'>def</span> <span class='sequences identifier id'>sequences</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="sequences=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>sequences=</strong>(sequences) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Add sequences to the matirx. This function will override previous sequences
+if any.
+</p>
+<ul>
+<li>Arguments :
+
+</li>
+</ul>
+<p>
+sequences( required ) - an array of Bio::NeXML::Sequence object.
+</p>
+<pre class="code">
+   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='sequences identifier id'>sequences</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span> <span class='sequence identifier id'>sequence</span> <span class='rbrack token'>]</span>
+   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='sequences identifier id'>sequences</span>    <span class='comment val'>#=&gt; [ sequence ]</span>
+   <span class='sequence identifier id'>sequence</span><span class='dot token'>.</span><span class='matrix identifier id'>matrix</span>     <span class='comment val'>#=&gt; matrix</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+704
+705
+706</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 704</span>
+
+<span class='def def kw'>def</span> <span class='sequences= identifier id'>sequences=</span><span class='lparen token'>(</span> <span class='sequences identifier id'>sequences</span> <span class='rparen token'>)</span>
+  <span class='comment val'># dummy for rdoc</span>
+<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_xml-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_xml</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+724
+725
+726
+727
+728</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 724</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
+  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;row&quot;</span><span class='comma token'>,</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lparen token'>(</span> <span class='self self kw'>self</span><span class='comma token'>,</span> <span class='symbol val'>:id</span><span class='comma token'>,</span> <span class='symbol val'>:otu</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='rparen token'>)</span> <span class='rparen token'>)</span>
+  <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='sequences identifier id'>sequences</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
+  <span class='node identifier id'>node</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Jul 24 11:11:06 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

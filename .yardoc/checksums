@@ -1,0 +1,12 @@
+lib/bio/db/nexml/mapper/framework.rb e1d44d6201bec233a3153cfd361a618ab84d461b
+lib/bio.rb bba7e04babbee60cc317704de40a012f48f96b84
+lib/bio/db/nexml/matrix.rb 97b3dd1a3edc19d0e8d1b558e8f320b095649a99
+lib/bio/db/nexml/mapper/inflection.rb 5e778d0648dbc3163d1d60368bd4730235d28126
+lib/bio/db/nexml/mapper.rb 5260656a42300d62a8e80caea8b154f16b3eeda9
+lib/bio/db/nexml/taxa.rb 198a299a55e2d40f87ac61e00b892e7374a1176c
+lib/bio/db/nexml/trees.rb 4c933816936d246e65cfa055f4a242e2fccd453b
+lib/bio-nexml.rb da39a3ee5e6b4b0d3255bfef95601890afd80709
+lib/bio/db/nexml/parser.rb 73874a57b54307001fa6abd71ede9929eb93d07d
+lib/bio/db/nexml/mapper/repository.rb 902009bbfb957944e08b0cba890115c379aea90e
+lib/bio/db/nexml/writer.rb 4076732c87ffd1ae79bda04321b01fc975625e24
+lib/bio/db/nexml.rb 7955da54c56adb20edbbe063d967e854727885e0

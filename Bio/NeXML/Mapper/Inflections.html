@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+<title>
+  Module: Bio::NeXML::Mapper::Inflections
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../../_index.html">Index (I)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../../Bio.html" title="Bio (module)">Bio</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../NeXML.html" title="Bio::NeXML (module)">NeXML</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Mapper.html" title="Bio::NeXML::Mapper (module)">Mapper</a></span></span>
+     &raquo; 
+    <span class="title">Inflections</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Bio::NeXML::Mapper::Inflections
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/bio/db/nexml/mapper/inflection.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+String inflections. This module is mixed with the String class.
+</p>
+<pre class="code">
+   <span class='string val'>&quot;targets&quot;</span><span class='dot token'>.</span><span class='singular identifier id'>singular</span>     <span class='comment val'>#=&gt; &quot;target&quot;</span>
+   <span class='string val'>&quot;target&quot;</span><span class='dot token'>.</span><span class='plural identifier id'>plural</span>        <span class='comment val'>#=&gt; &quot;targets&quot;</span>
+   <span class='string val'>&quot;Bio::NeXML::Otu&quot;</span><span class='dot token'>.</span><span class='key identifier id'>key</span>  <span class='comment val'>#=&gt; &quot;otu&quot;</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="PLURALS-constant" class="">PLURALS =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbrack token'>[</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/$/</span><span class='comma token'>,</span> <span class='string val'>'s'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/s$/i</span><span class='comma token'>,</span> <span class='string val'>'s'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(ax|test)is$/i</span><span class='comma token'>,</span> <span class='string val'>'\1es'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(octop|vir)us$/i</span><span class='comma token'>,</span> <span class='string val'>'\1i'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(alias|status)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1es'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(bu)s$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ses'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(buffal|tomat)o$/i</span><span class='comma token'>,</span> <span class='string val'>'\1oes'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/([ti])um$/i</span><span class='comma token'>,</span> <span class='string val'>'\1a'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/sis$/i</span><span class='comma token'>,</span> <span class='string val'>'ses'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(?:([^f])fe|([lr])f)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1\2ves'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(hive)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1s'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/([^aeiouy]|qu)y$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ies'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(x|ch|ss|sh)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1es'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(matr|vert|ind)(?:ix|ex)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ices'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/([m|l])ouse$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ice'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/^(ox)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1en'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(quiz)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1zes'</span> <span class='rbrack token'>]</span>
+<span class='rbrack token'>]</span>
+</pre></dd>
+      
+        <dt id="SINGULARS-constant" class="">SINGULARS =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbrack token'>[</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/s$/i</span><span class='comma token'>,</span> <span class='string val'>''</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(n)ews$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ews'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/([ti])a$/i</span><span class='comma token'>,</span> <span class='string val'>'\1um'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$/i</span><span class='comma token'>,</span> <span class='string val'>'\1\2sis'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(^analy)ses$/i</span><span class='comma token'>,</span> <span class='string val'>'\1sis'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/([^f])ves$/i</span><span class='comma token'>,</span> <span class='string val'>'\1fe'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(hive)s$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(tive)s$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/([lr])ves$/i</span><span class='comma token'>,</span> <span class='string val'>'\1f'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/([^aeiouy]|qu)ies$/i</span><span class='comma token'>,</span> <span class='string val'>'\1y'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(s)eries$/i</span><span class='comma token'>,</span> <span class='string val'>'\1eries'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(m)ovies$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ovie'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(x|ch|ss|sh)es$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/([m|l])ice$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ouse'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(bus)es$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(o)es$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(shoe)s$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(cris|ax|test)es$/i</span><span class='comma token'>,</span> <span class='string val'>'\1is'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(octop|vir)i$/i</span><span class='comma token'>,</span> <span class='string val'>'\1us'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(alias|status)es$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/^(ox)en/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(vert|ind)ices$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ex'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(matr)ices$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ix'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(quiz)zes$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
+    <span class='lbrack token'>[</span> <span class='regexp val'>/(database)s$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span>
+<span class='rbrack token'>]</span>
+</pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#key-instance_method" title="#key (instance method)">- (Object) <strong>key</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+For a module name as &quot;Bio::NeXML&quot; return &quot;nexml&quot;.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#plural-instance_method" title="#plural (instance method)">- (Object) <strong>plural</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Return the plural form of a string.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#singular-instance_method" title="#singular (instance method)">- (Object) <strong>singular</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Return the singular form of string.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="key-instance_method">
+  
+    - (<tt>Object</tt>) <strong>key</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+For a module name as &quot;Bio::NeXML&quot; return &quot;nexml&quot;.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/inflection.rb', line 85</span>
+
+<span class='def def kw'>def</span> <span class='key identifier id'>key</span>
+  <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='dup identifier id'>dup</span>
+  <span class='if if kw'>if</span> <span class='i identifier id'>i</span> <span class='assign token'>=</span> <span class='rindex identifier id'>rindex</span><span class='lparen token'>(</span> <span class='string val'>':'</span> <span class='rparen token'>)</span>
+    <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='lbrack token'>[</span> <span class='i identifier id'>i</span> <span class='plus op'>+</span> <span class='integer val'>1</span> <span class='dot2 op'>..</span> <span class='integer val'>-1</span> <span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+  <span class='result identifier id'>result</span><span class='dot token'>.</span><span class='downcase identifier id'>downcase</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="plural-instance_method">
+  
+    - (<tt>Object</tt>) <strong>plural</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Return the plural form of a string.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76
+77
+78
+79
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/inflection.rb', line 74</span>
+
+<span class='def def kw'>def</span> <span class='plural identifier id'>plural</span>
+  <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='dup identifier id'>dup</span>
+  <span class='PLURALS constant id'>PLURALS</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='match_exp identifier id'>match_exp</span><span class='comma token'>,</span> <span class='replacement_exp identifier id'>replacement_exp</span><span class='bitor op'>|</span>
+    <span class='unless unless kw'>unless</span> <span class='match identifier id'>match</span><span class='lparen token'>(</span><span class='Regexp constant id'>Regexp</span><span class='dot token'>.</span><span class='compile identifier id'>compile</span><span class='lparen token'>(</span><span class='match_exp identifier id'>match_exp</span><span class='rparen token'>)</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+      <span class='result identifier id'>result</span> <span class='assign token'>=</span>  <span class='gsub identifier id'>gsub</span><span class='lparen token'>(</span><span class='Regexp constant id'>Regexp</span><span class='dot token'>.</span><span class='compile identifier id'>compile</span><span class='lparen token'>(</span><span class='match_exp identifier id'>match_exp</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='replacement_exp identifier id'>replacement_exp</span><span class='rparen token'>)</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+  <span class='return return kw'>return</span> <span class='result identifier id'>result</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="singular-instance_method">
+  
+    - (<tt>Object</tt>) <strong>singular</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Return the singular form of string.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/inflection.rb', line 62</span>
+
+<span class='def def kw'>def</span> <span class='singular identifier id'>singular</span>
+  <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='dup identifier id'>dup</span>
+  <span class='SINGULARS constant id'>SINGULARS</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='match identifier id'>match</span><span class='comma token'>,</span> <span class='replace identifier id'>replace</span><span class='bitor op'>|</span>
+    <span class='rule identifier id'>rule</span> <span class='assign token'>=</span> <span class='Regexp constant id'>Regexp</span><span class='dot token'>.</span><span class='compile identifier id'>compile</span><span class='lparen token'>(</span> <span class='match identifier id'>match</span> <span class='rparen token'>)</span>
+    <span class='unless unless kw'>unless</span> <span class='match identifier id'>match</span><span class='lparen token'>(</span> <span class='rule identifier id'>rule</span> <span class='rparen token'>)</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+      <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='gsub identifier id'>gsub</span><span class='lparen token'>(</span> <span class='rule identifier id'>rule</span><span class='comma token'>,</span> <span class='replace identifier id'>replace</span><span class='rparen token'>)</span> 
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+  <span class='return return kw'>return</span> <span class='result identifier id'>result</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Jul 24 11:11:02 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

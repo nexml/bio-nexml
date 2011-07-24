@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+<title>
+  Class: Bio::NeXML::Parser
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (P)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Bio.html" title="Bio (module)">Bio</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../NeXML.html" title="Bio::NeXML (module)">NeXML</a></span></span>
+     &raquo; 
+    <span class="title">Parser</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Bio::NeXML::Parser
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Bio::NeXML::Parser</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/bio/db/nexml/parser.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+def self.parse( nexml, validate = false ) Parser.new( nexml, validate
+).parse end
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">- (Object) <strong>close</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Close the assosicated XML::Reader object and try to free other resources
+like @nexml.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Parser) <strong>initialize</strong>(nexml, validate = false) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A new instance of Parser.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse-instance_method" title="#parse (instance method)">- (Object) <strong>parse</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Is a factory method that returns an object of class Bio::NeXML::Nexml.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Bio::NeXML::Parser (class)">Parser</a></span></tt>) <strong>initialize</strong>(nexml, validate = false) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A new instance of Parser
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/parser.rb', line 14</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='nexml identifier id'>nexml</span><span class='comma token'>,</span> <span class='validate identifier id'>validate</span> <span class='assign token'>=</span> <span class='false false kw'>false</span> <span class='rparen token'>)</span>
+  <span class='comment val'>#initialize a cache</span>
+  <span class='@cache ivar id'>@cache</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+  <span class='comment val'>#initialize a libxml cursor</span>
+  <span class='@reader ivar id'>@reader</span> <span class='assign token'>=</span> <span class='read identifier id'>read</span><span class='lparen token'>(</span> <span class='nexml identifier id'>nexml</span> <span class='rparen token'>)</span>
+  
+  <span class='comment val'>#validate</span>
+  <span class='validate_nexml identifier id'>validate_nexml</span> <span class='if if_mod kw'>if</span> <span class='validate identifier id'>validate</span>
+
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="close-instance_method">
+  
+    - (<tt>Object</tt>) <strong>close</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Close the assosicated XML::Reader object and try to free other resources
+like @nexml
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/parser.rb', line 63</span>
+
+<span class='def def kw'>def</span> <span class='close identifier id'>close</span>
+  <span class='@reader ivar id'>@reader</span><span class='dot token'>.</span><span class='close identifier id'>close</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parse-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Is a factory method that returns an object of class Bio::NeXML::Nexml
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/parser.rb', line 28</span>
+
+<span class='def def kw'>def</span> <span class='parse identifier id'>parse</span>
+  <span class='comment val'>#return a cached version if it exists</span>
+  <span class='return return kw'>return</span> <span class='@nexml ivar id'>@nexml</span> <span class='if if_mod kw'>if</span> <span class='@nexml ivar id'>@nexml</span>
+
+  <span class='comment val'>#start at the root element</span>
+  <span class='skip_leader identifier id'>skip_leader</span>
+
+  <span class='comment val'>#start with a new Nexml object</span>
+  <span class='version identifier id'>version</span> <span class='assign token'>=</span> <span class='attribute identifier id'>attribute</span><span class='lparen token'>(</span> <span class='string val'>'version'</span> <span class='rparen token'>)</span>
+  <span class='generator identifier id'>generator</span> <span class='assign token'>=</span> <span class='attribute identifier id'>attribute</span><span class='lparen token'>(</span> <span class='string val'>'generator'</span> <span class='rparen token'>)</span>
+  <span class='@nexml ivar id'>@nexml</span> <span class='assign token'>=</span> <span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Nexml constant id'>Nexml</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='version identifier id'>version</span><span class='comma token'>,</span> <span class='generator identifier id'>generator</span> <span class='rparen token'>)</span>
+
+  <span class='comment val'>#perhaps a namespace api as well</span>
+  
+  <span class='comment val'>#start parsing other elements</span>
+  <span class='while while kw'>while</span> <span class='next_node identifier id'>next_node</span>
+    <span class='case case kw'>case</span> <span class='local_name identifier id'>local_name</span>
+    <span class='when when kw'>when</span> <span class='string val'>&quot;otus&quot;</span>
+      <span class='@nexml ivar id'>@nexml</span><span class='dot token'>.</span><span class='add_otus identifier id'>add_otus</span><span class='lparen token'>(</span> <span class='parse_otus identifier id'>parse_otus</span> <span class='rparen token'>)</span>
+    <span class='when when kw'>when</span> <span class='string val'>&quot;trees&quot;</span>
+      <span class='@nexml ivar id'>@nexml</span><span class='dot token'>.</span><span class='add_trees identifier id'>add_trees</span><span class='lparen token'>(</span> <span class='parse_trees identifier id'>parse_trees</span> <span class='rparen token'>)</span>
+    <span class='when when kw'>when</span> <span class='string val'>&quot;characters&quot;</span>
+      <span class='@nexml ivar id'>@nexml</span><span class='dot token'>.</span><span class='add_characters identifier id'>add_characters</span><span class='lparen token'>(</span> <span class='parse_characters identifier id'>parse_characters</span> <span class='rparen token'>)</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+
+  <span class='comment val'>#close the libxml parser object</span>
+  <span class='comment val'>#close</span>
+
+  <span class='comment val'>#return the Nexml object</span>
+  <span class='@nexml ivar id'>@nexml</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Jul 24 11:11:04 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

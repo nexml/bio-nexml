@@ -1,0 +1,2466 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+<title>
+  Class: Bio::NeXML::Tree
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (T)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Bio.html" title="Bio (module)">Bio</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../NeXML.html" title="Bio::NeXML (module)">NeXML</a></span></span>
+     &raquo; 
+    <span class="title">Tree</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Bio::NeXML::Tree
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Tree</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Tree</li>
+          
+            <li class="next">Bio::NeXML::Tree</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="Mapper.html" title="Bio::NeXML::Mapper (module)">Mapper</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/bio/db/nexml/trees.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+An NeXML tree. A tree must have a unique &#8216;id&#8217;. It may
+optionally take a &#8216;label&#8217; and a &#8216;rootedge&#8217;. This
+class inherits from Bio::Tree; naturally its functionality is leveraged
+here.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="FloatTree.html" title="Bio::NeXML::FloatTree (class)">FloatTree</a></span>, <span class='object_link'><a href="IntTree.html" title="Bio::NeXML::IntTree (class)">IntTree</a></span>, <span class='object_link'><a href="Network.html" title="Bio::NeXML::Network (class)">Network</a></span></p>
+</div>
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="writer-classvariable" class="">@@writer =
+          
+        </dt>
+        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+</pre></dd>
+      
+    </dl>
+  
+
+
+  
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id-instance_method" title="#id (instance method)">- (Object) <strong>id</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A file level unique identifier.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#label-instance_method" title="#label (instance method)">- (Object) <strong>label</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A human readable description.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rootedge-instance_method" title="#rootedge (instance method)">- (Object) <strong>rootedge</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A rootedge to indicate a time span leading up to the root.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%3C%3C-instance_method" title="#&lt;&lt; (instance method)">- (Object) <strong>&lt;&lt;</strong>(object) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Append a node or an edge to the tree.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%5B%5D-instance_method" title="#[] (instance method)">- (Object) <strong>[]</strong>(id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Fetch a node, or an edge by its id.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#__add_edge__-instance_method" title="#__add_edge__ (instance method)">- (Object) <strong>__add_edge__</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+:stopdoc:.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#__add_node__-instance_method" title="#__add_node__ (instance method)">- (Object) <strong>__add_node__</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+:stopdoc:.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_edge-instance_method" title="#add_edge (instance method)">- (Object) <strong>add_edge</strong>(edge) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+:startdoc: Add an edge to the tree.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_node-instance_method" title="#add_node (instance method)">- (Object) <strong>add_node</strong>(node) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+:startdoc: Add a node to the tree.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_rootedge-instance_method" title="#add_rootedge (instance method)">- (Object) <strong>add_rootedge</strong>(edge) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ancestors-instance_method" title="#ancestors (instance method)">- (Object) <strong>ancestors</strong>(node, *root) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#children-instance_method" title="#children (instance method)">- (Object) <strong>children</strong>(node, *root) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_edge-instance_method" title="#create_edge (instance method)">- (Object) <strong>create_edge</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_node-instance_method" title="#create_node (instance method)">- (Object) <strong>create_node</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_rootedge-instance_method" title="#create_rootedge (instance method)">- (Object) <strong>create_rootedge</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#descendents-instance_method" title="#descendents (instance method)">- (Object) <strong>descendents</strong>(node, *root) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_edge-instance_method" title="#each_edge (instance method)">- (Object) <strong>each_edge</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Iterate over each edge.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_edge_with_id-instance_method" title="#each_edge_with_id (instance method)">- (Object) <strong>each_edge_with_id</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Iterate over each node passing id and the node itself to the given block.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_node-instance_method" title="#each_node (instance method)">- (Object) <strong>each_node</strong>(&amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Iterate over each node.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_node_with_id-instance_method" title="#each_node_with_id (instance method)">- (Object) <strong>each_node_with_id</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Iterate over each node passing id and the node itself to the given block.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_edge_by_id-instance_method" title="#get_edge_by_id (instance method)">- (Object) <strong>get_edge_by_id</strong>(id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Fetch an edge by the given id.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_node_by_id-instance_method" title="#get_node_by_id (instance method)">- (Object) <strong>get_node_by_id</strong>(id) </a>
+    
+
+    
+      (also: #get_node_by_name)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Fetch a node by the given id.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_edge%3F-instance_method" title="#has_edge? (instance method)">- (Boolean) <strong>has_edge?</strong>(edge) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns true if the given edge is a part of <tt>self</tt>.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_node%3F-instance_method" title="#has_node? (instance method)">- (Boolean) <strong>has_node?</strong>(node) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns true if the given node is a part of <tt>self</tt>.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include%3F-instance_method" title="#include? (instance method)">- (Boolean) <strong>include?</strong>(object) </a>
+    
+
+    
+      (also: #has?)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns true if the given node or the edge object is a part of this tree;
+false otherwise.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Tree) <strong>initialize</strong>(id = nil, options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Create a new tree.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lowest_common_ancestor-instance_method" title="#lowest_common_ancestor (instance method)">- (Object) <strong>lowest_common_ancestor</strong>(node1, node2, *root) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#number_of_edges-instance_method" title="#number_of_edges (instance method)">- (Object) <strong>number_of_edges</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Return the number of edges in the tree.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#number_of_nodes-instance_method" title="#number_of_nodes (instance method)">- (Object) <strong>number_of_nodes</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Return the number of nodes in the tree.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parent-instance_method" title="#parent (instance method)">- (Object) <strong>parent</strong>(node, *roots) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the parent of the given node corresponding to each root.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_edge-instance_method" title="#remove_edge (instance method)">- (Object) <strong>remove_edge</strong>(edge) </a>
+    
+
+    
+      (also: #delete_edge)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Remove an edge from the tree.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_node-instance_method" title="#remove_node (instance method)">- (Object) <strong>remove_node</strong>(node) </a>
+    
+
+    
+      (also: #delete_node)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Remove a node from the tree.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#roots-instance_method" title="#roots (instance method)">- (Object) <strong>roots</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns an array of root nodes.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (Object) <strong>to_xml</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Mapper.html" title="Bio::NeXML::Mapper (module)">Mapper</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Mapper.html#properties-instance_method" title="Bio::NeXML::Mapper#properties (method)">#properties</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Bio::NeXML::Tree (class)">Tree</a></span></tt>) <strong>initialize</strong>(id = nil, options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Create a new tree.
+</p>
+<pre class="code">
+   <span class='tree identifier id'>tree</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Tree constant id'>Tree</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'tree1'</span> <span class='rparen token'>)</span>
+   <span class='tree identifier id'>tree</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Tree constant id'>Tree</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'tree1'</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'A tree'</span> <span class='rparen token'>)</span>
+
+   <span class='nodes identifier id'>nodes</span> <span class='assign token'>=</span> <span class='dstring node'>%w|node1 node2 node3|</span><span class='dot token'>.</span><span class='map identifier id'>map</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='n identifier id'>n</span><span class='bitor op'>|</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='n identifier id'>n</span> <span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+   <span class='edge1 identifier id'>edge1</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Edge constant id'>Edge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'edge1'</span><span class='comma token'>,</span> <span class='symbol val'>:source</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='nodes identifier id'>nodes</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:target</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='nodes identifier id'>nodes</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span> <span class='rparen token'>)</span>
+   <span class='edge2 identifier id'>edge2</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Edge constant id'>Edge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'edge2'</span><span class='comma token'>,</span> <span class='symbol val'>:source</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='nodes identifier id'>nodes</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:target</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='nodes identifier id'>nodes</span><span class='lbrack token'>[</span><span class='integer val'>2</span><span class='rbrack token'>]</span> <span class='rparen token'>)</span>
+
+   <span class='tree identifier id'>tree</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Tree constant id'>Tree</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'tree1'</span><span class='comma token'>,</span> <span class='symbol val'>:nodes</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='nodes identifier id'>nodes</span> <span class='rparen token'>)</span>
+   <span class='tree identifier id'>tree</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Tree constant id'>Tree</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='t identifier id'>t</span><span class='bitor op'>|</span>
+            <span class='t identifier id'>t</span><span class='dot token'>.</span><span class='label identifier id'>label</span> <span class='assign token'>=</span> <span class='string val'>'A tree'</span>
+            <span class='t identifier id'>t</span><span class='dot token'>.</span><span class='nodes identifier id'>nodes</span> <span class='assign token'>=</span> <span class='nodes identifier id'>nodes</span>
+            <span class='t identifier id'>t</span><span class='dot token'>.</span><span class='edges identifier id'>edges</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span> <span class='edge1 identifier id'>edge1</span><span class='comma token'>,</span> <span class='edge2 identifier id'>edge2</span> <span class='rbrack token'>]</span>
+            <span class='comment val'># or, t &lt;&lt; edge1 &lt;&lt; edge2</span>
+            <span class='comment val'># or, t.add_edge( edge1 ); t.add_edge( edge2 )</span>
+
+            <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'root1'</span><span class='comma token'>,</span> <span class='symbol val'>:root</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='true true kw'>true</span> <span class='rparen token'>)</span>
+            <span class='rootedge identifier id'>rootedge</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='RootEdge constant id'>RootEdge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'re1'</span><span class='comma token'>,</span> <span class='symbol val'>:target</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='root identifier id'>root</span> <span class='rparen token'>)</span>
+
+            <span class='t identifier id'>t</span> <span class='lshft op'>&lt;&lt;</span> <span class='root identifier id'>root</span> <span class='comment val'># or, t.add_otu( root )</span>
+            <span class='t identifier id'>t</span><span class='dot token'>.</span><span class='rootedge identifier id'>rootedge</span> <span class='assign token'>=</span> <span class='rootedge identifier id'>rootedge</span>
+          <span class='end end kw'>end</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+233
+234
+235
+236
+237
+238</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 233</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
+  <span class='@id ivar id'>@id</span> <span class='assign token'>=</span> <span class='id identifier id'>id</span>
+  <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+  <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='arity identifier id'>arity</span> <span class='lt op'>&lt;</span> <span class='integer val'>1</span> <span class='question op'>?</span> <span class='instance_eval identifier id'>instance_eval</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='call identifier id'>call</span><span class='lparen token'>(</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="id=-instance_method"></span>
+      <span id="id-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="id-instance_method">
+  
+    - (<tt>Object</tt>) <strong>id</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A file level unique identifier.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+194
+195
+196</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 194</span>
+
+<span class='def def kw'>def</span> <span class='id identifier id'>id</span>
+  <span class='@id ivar id'>@id</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="label=-instance_method"></span>
+      <span id="label-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="label-instance_method">
+  
+    - (<tt>Object</tt>) <strong>label</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A human readable description.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+197
+198
+199</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 197</span>
+
+<span class='def def kw'>def</span> <span class='label identifier id'>label</span>
+  <span class='@label ivar id'>@label</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="rootedge=-instance_method"></span>
+      <span id="rootedge-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="rootedge-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rootedge</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A rootedge to indicate a time span leading up to the root.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+200
+201
+202</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 200</span>
+
+<span class='def def kw'>def</span> <span class='rootedge identifier id'>rootedge</span>
+  <span class='@rootedge ivar id'>@rootedge</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="<<-instance_method">
+  
+    - (<tt>Object</tt>) <strong>&lt;&lt;</strong>(object) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Append a node or an edge to the tree. The method delegates the actuall
+addition to <tt>add_node</tt>, <tt>add_edge</tt> methods.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+247
+248
+249
+250
+251
+252
+253
+254
+255</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 247</span>
+
+<span class='def def kw'>def</span> <span class='lshft op'>&lt;&lt;</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
+  <span class='case case kw'>case</span> <span class='object identifier id'>object</span>
+  <span class='when when kw'>when</span> <span class='Node constant id'>Node</span>
+    <span class='add_node identifier id'>add_node</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
+  <span class='when when kw'>when</span> <span class='Edge constant id'>Edge</span>
+    <span class='add_edge identifier id'>add_edge</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='self self kw'>self</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="[]-instance_method">
+  
+    - (<tt>Object</tt>) <strong>[]</strong>(id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Fetch a node, or an edge by its id.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+317
+318
+319
+320</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 317</span>
+
+<span class='def def kw'>def</span> <span class='aref op'>[]</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span>
+  <span class='get_node_by_id identifier id'>get_node_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span> <span class='orop op'>||</span>
+    <span class='get_edge_by_id identifier id'>get_edge_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="__add_edge__-instance_method">
+  
+    - (<tt>Object</tt>) <strong>__add_edge__</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+:stopdoc:
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+267</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 267</span>
+
+<span class='alias alias kw'>alias</span> <span class='__add_edge__ identifier id'>__add_edge__</span> <span class='add_edge identifier id'>add_edge</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="__add_node__-instance_method">
+  
+    - (<tt>Object</tt>) <strong>__add_node__</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+:stopdoc:
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+258</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 258</span>
+
+<span class='alias alias kw'>alias</span> <span class='__add_node__ identifier id'>__add_node__</span> <span class='add_node identifier id'>add_node</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="add_edge-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_edge</strong>(edge) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+:startdoc: Add an edge to the tree.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+270
+271
+272
+273</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 270</span>
+
+<span class='def def kw'>def</span> <span class='add_edge identifier id'>add_edge</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span><span class='dot token'>.</span><span class='source identifier id'>source</span><span class='comma token'>,</span> <span class='edge identifier id'>edge</span><span class='dot token'>.</span><span class='target identifier id'>target</span><span class='comma token'>,</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
+  <span class='__add_edge__ identifier id'>__add_edge__</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="add_node-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_node</strong>(node) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+:startdoc: Add a node to the tree.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+261
+262
+263
+264</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 261</span>
+
+<span class='def def kw'>def</span> <span class='add_node identifier id'>add_node</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
+  <span class='__add_node__ identifier id'>__add_node__</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="add_rootedge-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_rootedge</strong>(edge) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+275
+276
+277</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 275</span>
+
+<span class='def def kw'>def</span> <span class='add_rootedge identifier id'>add_rootedge</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
+  <span class='@rootedge ivar id'>@rootedge</span> <span class='assign token'>=</span> <span class='edge identifier id'>edge</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="ancestors-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ancestors</strong>(node, *root) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 414</span>
+
+<span class='def def kw'>def</span> <span class='ancestors identifier id'>ancestors</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='root identifier id'>root</span> <span class='rparen token'>)</span>
+  <span class='if if kw'>if</span> <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='raise identifier id'>raise</span> <span class='IndexError constant id'>IndexError</span><span class='comma token'>,</span> <span class='string val'>'can not get parent for unrooted tree'</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span>
+  <span class='end end kw'>end</span>
+  <span class='ancestor identifier id'>ancestor</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+  <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
+    <span class='ancestor identifier id'>ancestor</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='r identifier id'>r</span> <span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='ancestor identifier id'>ancestor</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="children-instance_method">
+  
+    - (<tt>Object</tt>) <strong>children</strong>(node, *root) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 375</span>
+
+<span class='def def kw'>def</span> <span class='children identifier id'>children</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='root identifier id'>root</span> <span class='rparen token'>)</span>
+  <span class='if if kw'>if</span> <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='raise identifier id'>raise</span> <span class='IndexError constant id'>IndexError</span><span class='comma token'>,</span> <span class='string val'>'can not get parent for unrooted tree'</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span>
+  <span class='end end kw'>end</span>
+  <span class='childrens identifier id'>childrens</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+  <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
+    <span class='c identifier id'>c</span> <span class='assign token'>=</span> <span class='adjacent_nodes identifier id'>adjacent_nodes</span><span class='lparen token'>(</span><span class='node identifier id'>node</span><span class='rparen token'>)</span>
+    <span class='c identifier id'>c</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='parent identifier id'>parent</span><span class='lparen token'>(</span><span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='r identifier id'>r</span><span class='rparen token'>)</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span><span class='rparen token'>)</span>
+    <span class='childrens identifier id'>childrens</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='c identifier id'>c</span>
+  <span class='end end kw'>end</span>
+
+  <span class='childrens identifier id'>childrens</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_edge-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create_edge</strong>(options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185
+186
+187</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 185</span>
+
+<span class='def def kw'>def</span> <span class='create_edge identifier id'>create_edge</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
+  <span class='raise identifier id'>raise</span> <span class='string val'>&quot;This is supposed to be an abstract method&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_node-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create_node</strong>(options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+179
+180
+181
+182
+183</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 179</span>
+
+<span class='def def kw'>def</span> <span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
+  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='Node constant id'>Node</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='dot token'>.</span><span class='generate_id identifier id'>generate_id</span><span class='lparen token'>(</span> <span class='Node constant id'>Node</span> <span class='rparen token'>)</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
+  <span class='self self kw'>self</span> <span class='lshft op'>&lt;&lt;</span> <span class='node identifier id'>node</span>
+  <span class='node identifier id'>node</span>        
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_rootedge-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create_rootedge</strong>(options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+189
+190
+191</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 189</span>
+
+<span class='def def kw'>def</span> <span class='create_rootedge identifier id'>create_rootedge</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
+  <span class='raise identifier id'>raise</span> <span class='string val'>&quot;This is supposed to be an abstract method&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="descendents-instance_method">
+  
+    - (<tt>Object</tt>) <strong>descendents</strong>(node, *root) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 390</span>
+
+<span class='def def kw'>def</span> <span class='descendents identifier id'>descendents</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='root identifier id'>root</span> <span class='rparen token'>)</span>
+  <span class='if if kw'>if</span> <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='raise identifier id'>raise</span> <span class='IndexError constant id'>IndexError</span><span class='comma token'>,</span> <span class='string val'>'can not get parent for unrooted tree'</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span>
+  <span class='end end kw'>end</span>
+  <span class='descendent identifier id'>descendent</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+  <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
+    <span class='descendent identifier id'>descendent</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='r identifier id'>r</span> <span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='descendent identifier id'>descendent</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_edge-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_edge</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Iterate over each edge. Return an Enumerator if no block is given.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+343</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 343</span>
+
+<span class='def def kw'>def</span> <span class='each_edge identifier id'>each_edge</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_edge_with_id-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_edge_with_id</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Iterate over each node passing id and the node itself to the given block.
+Returns an Enumerator if no block is given.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+347</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 347</span>
+
+<span class='def def kw'>def</span> <span class='each_edge_with_id identifier id'>each_edge_with_id</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_node-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_node</strong>(&amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Iterate over each node. Return an Enumerator if no block is given.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+336</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 336</span>
+
+<span class='def def kw'>def</span> <span class='each_node identifier id'>each_node</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_node_with_id-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_node_with_id</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Iterate over each node passing id and the node itself to the given block.
+Returns an Enumerator if no block is given.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+340</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 340</span>
+
+<span class='def def kw'>def</span> <span class='each_node_with_id identifier id'>each_node_with_id</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_edge_by_id-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_edge_by_id</strong>(id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Fetch an edge by the given id.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+314</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 314</span>
+
+<span class='def def kw'>def</span> <span class='get_edge_by_id identifier id'>get_edge_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_node_by_id-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_node_by_id</strong>(id) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='get_node_by_name-instance_method'>get_node_by_name</span></span>
+    </span>
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Fetch a node by the given id.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+307</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 307</span>
+
+<span class='def def kw'>def</span> <span class='get_node_by_id identifier id'>get_node_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_edge?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_edge?</strong>(edge) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns true if the given edge is a part of <tt>self</tt>.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 326</span>
+
+<span class='def def kw'>def</span> <span class='has_edge? fid id'>has_edge?</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_node?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_node?</strong>(node) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns true if the given node is a part of <tt>self</tt>.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+323</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 323</span>
+
+<span class='def def kw'>def</span> <span class='has_node? fid id'>has_node?</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="include?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>include?</strong>(object) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='has?-instance_method'>has?</span></span>
+    </span>
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns true if the given node or the edge object is a part of this tree;
+false otherwise.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+329
+330
+331
+332</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 329</span>
+
+<span class='def def kw'>def</span> <span class='include? fid id'>include?</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
+  <span class='has_node? fid id'>has_node?</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span> <span class='orop op'>||</span>
+    <span class='has_edge? fid id'>has_edge?</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="lowest_common_ancestor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>lowest_common_ancestor</strong>(node1, node2, *root) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 402</span>
+
+<span class='def def kw'>def</span> <span class='lowest_common_ancestor identifier id'>lowest_common_ancestor</span><span class='lparen token'>(</span> <span class='node1 identifier id'>node1</span><span class='comma token'>,</span> <span class='node2 identifier id'>node2</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='root identifier id'>root</span> <span class='rparen token'>)</span>
+  <span class='if if kw'>if</span> <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='raise identifier id'>raise</span> <span class='IndexError constant id'>IndexError</span><span class='comma token'>,</span> <span class='string val'>'can not get parent for unrooted tree'</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span>
+  <span class='end end kw'>end</span>
+  <span class='lca identifier id'>lca</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+  <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
+    <span class='lca identifier id'>lca</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node1 identifier id'>node1</span><span class='comma token'>,</span> <span class='node2 identifier id'>node2</span><span class='comma token'>,</span> <span class='r identifier id'>r</span> <span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='lca identifier id'>lca</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="number_of_edges-instance_method">
+  
+    - (<tt>Object</tt>) <strong>number_of_edges</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Return the number of edges in the tree.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+353</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 353</span>
+
+<span class='def def kw'>def</span> <span class='number_of_edges identifier id'>number_of_edges</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="number_of_nodes-instance_method">
+  
+    - (<tt>Object</tt>) <strong>number_of_nodes</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Return the number of nodes in the tree.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+350</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 350</span>
+
+<span class='def def kw'>def</span> <span class='number_of_nodes identifier id'>number_of_nodes</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parent-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parent</strong>(node, *roots) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the parent of the given node corresponding to each root.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 363</span>
+
+<span class='def def kw'>def</span> <span class='parent identifier id'>parent</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='roots identifier id'>roots</span> <span class='rparen token'>)</span>
+  <span class='if if kw'>if</span> <span class='roots identifier id'>roots</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='raise identifier id'>raise</span> <span class='IndexError constant id'>IndexError</span><span class='comma token'>,</span> <span class='string val'>'can not get parent for unrooted tree'</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='roots identifier id'>roots</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='roots identifier id'>roots</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='roots identifier id'>roots</span>
+  <span class='end end kw'>end</span>
+  <span class='parents identifier id'>parents</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+  <span class='roots identifier id'>roots</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
+    <span class='parents identifier id'>parents</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='r identifier id'>r</span> <span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='parents identifier id'>parents</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="remove_edge-instance_method">
+  
+    - (<tt>Object</tt>) <strong>remove_edge</strong>(edge) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='delete_edge-instance_method'>delete_edge</span></span>
+    </span>
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Remove an edge from the tree. Returns the edge deleted. If more than one
+edge exists between the source and the target, both of them will be
+removed. Raises IndexError if the edge is not found in the tree.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+299
+300
+301
+302
+303</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 299</span>
+
+<span class='def def kw'>def</span> <span class='remove_edge identifier id'>remove_edge</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
+  <span class='return return kw'>return</span> <span class='unless unless_mod kw'>unless</span> <span class='include? fid id'>include?</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span><span class='dot token'>.</span><span class='source identifier id'>source</span><span class='comma token'>,</span> <span class='edge identifier id'>edge</span><span class='dot token'>.</span><span class='target identifier id'>target</span> <span class='rparen token'>)</span>
+  <span class='__delete_edge__ identifier id'>__delete_edge__</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="remove_node-instance_method">
+  
+    - (<tt>Object</tt>) <strong>remove_node</strong>(node) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='delete_node-instance_method'>delete_node</span></span>
+    </span>
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Remove a node from the tree. Returns the deleted node. It automatically
+removes all edges connected to that node. Raises IndexError if the node is
+not found in the tree.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+285
+286
+287
+288
+289</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 285</span>
+
+<span class='def def kw'>def</span> <span class='remove_node identifier id'>remove_node</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
+  <span class='return return kw'>return</span> <span class='unless unless_mod kw'>unless</span> <span class='include? fid id'>include?</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
+  <span class='__delete_node__ identifier id'>__delete_node__</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="roots-instance_method">
+  
+    - (<tt>Object</tt>) <strong>roots</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns an array of root nodes.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+241
+242
+243</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 241</span>
+
+<span class='def def kw'>def</span> <span class='roots identifier id'>roots</span>
+  <span class='nodes identifier id'>nodes</span><span class='dot token'>.</span><span class='select identifier id'>select</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='n identifier id'>n</span><span class='bitor op'>|</span> <span class='n identifier id'>n</span><span class='dot token'>.</span><span class='root? fid id'>root?</span> <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_xml-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_xml</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 162</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
+  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;tree&quot;</span><span class='comma token'>,</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lparen token'>(</span> <span class='self self kw'>self</span><span class='comma token'>,</span> <span class='symbol val'>:id</span><span class='comma token'>,</span> <span class='symbol val'>:'xsi:type'</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='rparen token'>)</span> <span class='rparen token'>)</span>
+
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_node identifier id'>each_node</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='n identifier id'>n</span><span class='bitor op'>|</span>
+    <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='n identifier id'>n</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
+  <span class='end end kw'>end</span>
+
+  <span class='rootedge identifier id'>rootedge</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='rootedge identifier id'>rootedge</span>
+  <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='rootedge identifier id'>rootedge</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span> <span class='if if_mod kw'>if</span> <span class='rootedge identifier id'>rootedge</span>
+
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_edge identifier id'>each_edge</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='edge identifier id'>edge</span><span class='bitor op'>|</span>
+    <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='edge identifier id'>edge</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
+  <span class='end end kw'>end</span>
+
+  <span class='node identifier id'>node</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Jul 24 11:11:04 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>
