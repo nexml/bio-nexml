@@ -72,8 +72,8 @@
   
   
     <dt class="r1 last">Defined in:</dt>
-    <dd class="r1 last">lib/bio.rb<span class="defines">,<br />
-  lib/bio/db/nexml.rb,<br /> lib/bio/db/nexml/taxa.rb,<br /> lib/bio/db/nexml/trees.rb,<br /> lib/bio/db/nexml/mapper.rb,<br /> lib/bio/db/nexml/writer.rb,<br /> lib/bio/db/nexml/parser.rb,<br /> lib/bio/db/nexml/matrix.rb,<br /> lib/bio/db/nexml/mapper/framework.rb,<br /> lib/bio/db/nexml/mapper/repository.rb,<br /> lib/bio/db/nexml/mapper/inflection.rb</span>
+    <dd class="r1 last">lib/bio/db/nexml.rb<span class="defines">,<br />
+  lib/bio/db/nexml/taxa.rb,<br /> lib/bio/db/nexml/trees.rb,<br /> lib/bio/db/nexml/writer.rb,<br /> lib/bio/db/nexml/parser.rb,<br /> lib/bio/db/nexml/matrix.rb,<br /> lib/bio/db/nexml/mapper.rb,<br /> lib/bio/db/nexml/mapper/framework.rb,<br /> lib/bio/db/nexml/mapper/repository.rb,<br /> lib/bio/db/nexml/mapper/inflection.rb</span>
 </dd>
   
 </dl>
@@ -94,12 +94,10 @@ require &quot;ruby-debug&quot; Debugger.start
 <p class="children">
    
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Bio/GCG.html" title="Bio::GCG (module)">GCG</a></span>, <span class='object_link'><a href="Bio/NeXML.html" title="Bio::NeXML (module)">NeXML</a></span>, <span class='object_link'><a href="Bio/Phylip.html" title="Bio::Phylip (module)">Phylip</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Bio/NeXML.html" title="Bio::NeXML (module)">NeXML</a></span>
     
    
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Bio/EBI.html" title="Bio::EBI (class)">EBI</a></span>, <span class='object_link'><a href="Bio/HGC.html" title="Bio::HGC (class)">HGC</a></span>, <span class='object_link'><a href="Bio/KEGG.html" title="Bio::KEGG (class)">KEGG</a></span>
-    
   
 </p>
 
@@ -107,109 +105,12 @@ require &quot;ruby-debug&quot; Debugger.start
 
 
 
-  
-    <h2>
-      Class Method Summary
-      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
-    </h2>
 
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#method_missing-class_method" title="method_missing (class method)">+ (Object) <strong>method_missing</strong>(*args) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>
-Provide BioRuby shell &#8216;command&#8217; also as
-&#8216;Bio.command&#8217; (like ChemRuby).
-</p>
-</div></span>
-  
-</li>
-
-      
-    </ul>
-  
-
-
-
-  <div id="class_method_details" class="method_details_list">
-    <h2>Class Method Details</h2>
-    
-    
-      <div class="method_details first">
-  <p class="signature first" id="method_missing-class_method">
-  
-    + (<tt>Object</tt>) <strong>method_missing</strong>(*args) 
-  
-
-  
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Provide BioRuby shell &#8216;command&#8217; also as
-&#8216;Bio.command&#8217; (like ChemRuby)
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/bio.rb', line 309</span>
-
-<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='method_missing identifier id'>method_missing</span><span class='lparen token'>(</span><span class='mult op'>*</span><span class='args identifier id'>args</span><span class='rparen token'>)</span>
-  <span class='require identifier id'>require</span> <span class='string val'>'bio/shell'</span>
-  <span class='extend identifier id'>extend</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='Shell constant id'>Shell</span>
-  <span class='public_class_method identifier id'>public_class_method</span><span class='lparen token'>(</span><span class='mult op'>*</span><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='Shell constant id'>Shell</span><span class='dot token'>.</span><span class='private_instance_methods identifier id'>private_instance_methods</span><span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='Bio constant id'>Bio</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span><span class='lparen token'>(</span><span class='args identifier id'>args</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='rparen token'>)</span>
-    <span class='Bio constant id'>Bio</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='mult op'>*</span><span class='args identifier id'>args</span><span class='rparen token'>)</span>
-  <span class='else else kw'>else</span>
-    <span class='raise identifier id'>raise</span> <span class='NameError constant id'>NameError</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 </div>
     
     <div id="footer">
-  Generated on Sun Jul 24 11:11:06 2011 by 
+  Generated on Sun Aug  7 15:32:00 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.2 (ruby-1.8.7).
 </div>
