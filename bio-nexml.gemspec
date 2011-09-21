@@ -4,70 +4,24 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{bio-nexml}
-  s.version = "0.0.1"
+  # meta
+  s.name        = 'bio-nexml'
+  s.version     = '0.1.0'
+  s.authors     = ['Rutger Vos', 'Anurag Priyam']
+  s.email       = ['rutgeraldo@gmail.com', 'anurag08priyam@gmail.com']
+  s.homepage    = 'http://rvosa.github.com/bio-nexml/'
+  s.license     = 'MIT'
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["rvosa"]
-  s.date = %q{2011-08-08}
+  s.summary     = %q{BioRuby plugin for reading and writing NeXML (http://nexml.org)}
   s.description = %q{This plugin reads, writes and generates NeXML}
-  s.email = %q{rutgeraldo@gmail.com}
-  s.extra_rdoc_files = [
-    "README.rdoc"
-  ]
-  s.files = [
-    "README.rdoc",
-    "Rakefile",
-    "bio-nexml.gemspec",
-    "extconf.rb",
-    "lib/bio.rb",
-    "lib/bio/db/nexml/parser.rb",
-    "lib/bio/db/nexml/writer.rb",
-    "test/data/nexml/test.xml",
-    "test/unit/bio/db/nexml/tc_parser.rb",
-    "test/unit/bio/db/nexml/tc_writer.rb"
-  ]
-  s.homepage = %q{http://github.com/rvosa/bioruby-nexml}
-  s.licenses = ["MIT"]
+
+  # dependencies
+  s.add_dependency('bio', '>= 1.4.1')
+  s.add_dependency('libxml-ruby', '>= 1.1.4')
+
+  # gem
+  s.files         = Dir['lib/**/*'] + ['LICENSE.txt', 'README.rdoc']
+  s.test_file     = "test/test_bio-nexml.rb"
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.4.2}
-  s.summary = %q{BioRuby plugin for reading and writing NeXML (http://nexml.org)}
-  s.test_files = [
-    "test/unit/bio/db/nexml/tc_parser.rb",
-    "test/unit/bio/db/nexml/tc_writer.rb"
-  ]
-
-  if s.respond_to? :specification_version then
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<shoulda>, [">= 0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
-      s.add_development_dependency(%q<bio>, [">= 1.4.1"])
-      s.add_development_dependency(%q<libxml-ruby>, [">= 1.1.4"])
-      s.add_runtime_dependency(%q<libxml-ruby>, ["= 1.1.4"])
-      s.add_development_dependency(%q<libxml-ruby>, ["= 1.1.4"])
-    else
-      s.add_dependency(%q<shoulda>, [">= 0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
-      s.add_dependency(%q<rcov>, [">= 0"])
-      s.add_dependency(%q<bio>, [">= 1.4.1"])
-      s.add_dependency(%q<libxml-ruby>, [">= 1.1.4"])
-      s.add_dependency(%q<libxml-ruby>, ["= 1.1.4"])
-      s.add_dependency(%q<libxml-ruby>, ["= 1.1.4"])
-    end
-  else
-    s.add_dependency(%q<shoulda>, [">= 0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
-    s.add_dependency(%q<rcov>, [">= 0"])
-    s.add_dependency(%q<bio>, [">= 1.4.1"])
-    s.add_dependency(%q<libxml-ruby>, [">= 1.1.4"])
-    s.add_dependency(%q<libxml-ruby>, ["= 1.1.4"])
-    s.add_dependency(%q<libxml-ruby>, ["= 1.1.4"])
-  end
 end
 
