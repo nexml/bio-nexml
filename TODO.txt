@@ -1,0 +1,6 @@
+* it would be good if objects could only be instantiated in the right nesting
+  order, e.g. you wouldn't do cell = Cell.new, but you'd do
+  cell = Row.create_cell and the nesting is automatically handled for you.
+  I think the way to do this is to require the containing object to be passed
+  (recursively) to the constructors, while create_foo internally does this,
+  passing self to the constructor.

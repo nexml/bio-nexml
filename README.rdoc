@@ -1,260 +1,53 @@
---
-= README.rdoc - README for BioRuby
-Copyright:: Copyright (C) 2001-2007 Toshiaki Katayama <k@bioruby.org>,
-            Copyright (C) 2008      Jan Aerts <jandot@bioruby.org>
-License::   The Ruby License
-* The above statement is limited to this file. See below about BioRuby's
-  copyright and license.
-++
-
-= BioRuby
-
-Copyright (C) 2001-2009 Toshiaki Katayama <k@bioruby.org>
-
-BioRuby is an open source Ruby library for developing bioinformatics
-software.  Object oriented scripting language Ruby has many features
-suitable for bioinformatics research, for example, clear syntax to
-express complex objects, regular expressions for text handling as
-powerful as Perl's, a wide variety of libraries including web service
-etc.  As the syntax of the Ruby language is simple and very clean, we
-believe that it is easy to learn for beginners, easy to use for
-biologists, and also powerful enough for the software developers.
-
-In BioRuby, you can retrieve biological database entries from flat
-files, internet web servers and local relational databases.  These
-database entries can be parsed to extract information you need.
-Biological sequences can be treated with the fulfilling methods of the
-Ruby's String class and with regular expressions.  Daily tools like
-Blast, Fasta, Hmmer and many other software packages for biological
-analysis can be executed within the BioRuby script, and the results
-can be fully parsed to extract the portion you need.  BioRuby supports
-major biological database formats and provides many ways for accessing
-them through flatfile indexing, SQL, web services etc.  Various web
-services including KEGG API can be easily utilized by BioRuby.
-
-
-== FOR MORE INFORMATION
-
-=== Documents in this distribution
-
-==== General information
-
-README.rdoc:: This file. General information and installation procedure.
-RELEASE_NOTES.rdoc:: News and important changes in this release.
-KNOWN_ISSUES.rdoc:: Known issues and bugs in BioRuby.
-doc/Changes-1.3.rdoc:: News and incompatible changes from 1.2.1 to 1.3.0.
-doc/Changes-0.7.rd:: News and incompatible changes from 0.6.4 to 1.2.1.
-
-==== Tutorials and other useful information
-
-doc/Tutorial.rd:: BioRuby Tutorial.
-doc/Tutorial.rd.html:: HTML version of Tutorial.rd.
-doc/KEGG_API.rd:: Documents about KEGG API, including usage of Bio::KEGG::API.
-
-==== BioRuby development
-
-ChangeLog:: History of changes.
-README_DEV.rdoc:: Describes ways to contribute to the BioRuby project, including coding styles and documentation guidelines.
-
-==== Documents written in Japanese
-
-doc/Tutorial.rd.ja:: BioRuby Tutorial written in Japanese.
-doc/Tutorial.rd.ja.html:: HTML version of Tutorial.rd.ja.
-doc/KEGG_API.rd.ja:: Japanese translation of KEGG_API.rd.
-
-
-=== WWW
-
-BioRuby's official website is at http://bioruby.org/.
-You will find links to related resources including downloads,
-mailing lists, Wiki documentation etc. in the top page.
-
-* http://bioruby.org/
-
-
-== WHERE TO OBTAIN
-
-=== WWW
-
-The stable release is freely available from the BioRuby website.
-
-* http://bioruby.org/archive/
-
-=== RubyGems
-
-RubyGems[URL:http://rubyforge.org/projects/rubygems/] version of
-the BioRuby package is also available for easy installation.
-
-* http://rubyforge.org/projects/bioruby/
-
-=== git
-
-If you need the latest development version, this is provided at
-
-* http://github.com/bioruby/bioruby
-
-and can be obtained by the following procedure:
-
-  % git clone git://github.com/bioruby/bioruby.git
-
-==== CVS
-
-CVS is now deprecated as source control has moved to github. Please use git 
-instead of CVS. For historical purposes: the anonymous CVS was provided at 
-
-* http://cvs.bioruby.org/
-
-and could be obtained by the following procedure.
-
-  % cvs -d :pserver:cvs@code.open-bio.org:/home/repository/bioruby login
-  CVS password: cvs (login with a password 'cvs' for the first time)
-  % cvs -d :pserver:cvs@code.open-bio.org:/home/repository/bioruby co bioruby
-
-
-== REQUIREMENTS
-
-* Ruby 1.8.2 or later (except Ruby 1.9.0) -- http://www.ruby-lang.org/
-  * Ruby 1.8.7-p174 or later, or Ruby 1.8.6-p383 or later is recommended.
-  * Not yet fully ready with Ruby 1.9, although many components can now work
-    in Ruby 1.9.1.
-
-== OPTIONAL REQUIREMENTS
-
-Some optional libraries can be utilized to extend BioRuby's functionality.
-If your needs meets the following conditions, install them from the "Ruby
-Application Archive" at http://raa.ruby-lang.org/, RubyForge at
-http://rubyforge.org/, or the following web sites.
-
-For faster parsing of the BLAST XML output format:
-
-* {RAA:xmlparser}[http://raa.ruby-lang.org/project/xmlparser/]
-
-Creating faster flatfile index using Berkley DB:
-
-* {RAA:bdb}[http://raa.ruby-lang.org/project/bdb/]
-
-Accessing BioSQL database created by other Open Bio* libraries:
-
-* {RubyForge:ActiveRecord}[http://rubyforge.org/projects/activerecord/]
-  and at least one driver (or adapter) from
-  {RubyForge:MySQL/Ruby}[http://rubyforge.org/projects/mysql-ruby/],
-  {RubyForge:postgres-pr}[http://rubyforge.org/projects/postgres-pr], or
-  {RubyForge:ActiveRecord Oracle enhanced adapter}[http://rubyforge.org/projects/oracle-enhanced/].
-* For BioRuby 1.2.1 or older version,
-  {RubyForge:Ruby/DBI}[http://rubyforge.org/projects/ruby-dbi] and
-  at least one driver from MySQL/Ruby, postgres-pr, or
-  {RubyForge:ruby-oci8}[http://ruby-oci8.rubyforge.org/]
-  (note that ruby-oci8 can only work with ruby-dbi 0.2.2).
-
-For parsing PhyloXML format files:
-
-* {RubyForge:libxml-ruby}[http://libxml.rubyforge.org/] (Ruby language
-  bindings for the {GNOME Libxml2 XML toolkit}[http://xmlsoft.org/])
-
-
-== INSTALL
-
-In the bioruby source directory (such as bioruby-x.x.x/), run setup.rb
-as follows:
-
-  % su
-  # ruby setup.rb
-
-These simple step installs this program under the default location of
-Ruby libraries.  You can also install files into your favorite directory
-by supplying setup.rb some options. Try "ruby setup.rb --help".
-
-If your operating system supports 'sudo' command (such as Mac OS X),
-try the following procedure instead of the above.
-
-  % sudo ruby setup.rb
-
-For older version users: "install.rb" is now renamed to "setup.rb".
-The options "config", "setup", and "install" are still available.
-
-  % ruby setup.rb config
-  % ruby setup.rb setup
-  % su
-  # ruby setup.rb install
-
-You can run tests by
-
-  % ruby setup.rb test
-
-and run
-
-  % ruby setup.rb --help
-
-for more details.
-
-=== RubyGems
-
-If you are using RubyGems, just type
-
-  % gems install bio
-
-
-== SETUP
-
-If you want to use the OBDA (Open Bio Database Access) to obtain database
-entries, copy a sample configuration file in the BioRuby distribution
-
-  bioruby-x.x.x/etc/bioinformatics/seqdatabase.ini
-
-to
-
-  /etc/bioinformatics/seqdatabase.ini	(system wide configuration)
-
-or
-
-  ~/.bioinformatics/seqdatabase.ini	(personal configuration)
-
-and change the contents according to your preference.  For more
-information on the OBDA, see http://obda.open-bio.org/ .
-
-
-== USAGE
-
-You can load all BioRuby classes just by requiring 'bio.rb'.  All the
-BioRuby classes and modules are located under the module name 'Bio' to
-separate the name space.
-
-  #!/usr/bin/env ruby
-  require 'bio'
-
-You can also read other documentation in the 'doc' directory.
-
-  bioruby-x.x.x/doc/
-
-=== RubyGems
-
-With RubyGems, you need to load 'rubygems' library before using 'bio'.
-
-  #!/usr/bin/env ruby
-  require 'rubygems'
-  require 'bio'
-
-With old version of RubyGems, use 'require_gem' which was deprecated in
-RubyGems 0.9.0 and removed in RubyGems 1.0.1.
-
-  #!/usr/bin/env ruby
-  require 'rubygems'
-  require_gem 'bio'
-
-
-== LICENSE
-
-BioRuby can be freely distributed under the same terms as Ruby.
-See the file COPYING (or COPYING.ja written in Japanese).
-
-As written in the file COPYING, see the file LEGAL for files distributed
-under different license. For example, setup.rb which comes from
-{RAA:setup}[http://raa.ruby-lang.org/project/setup/] developed by Minero Aoki
-(http://i.loveruby.net/en/projects/setup/) is licensed under LGPL 2.1.
-
-
-== CONTACT
-
-Current staff of the BioRuby project can be reached by sending e-mail
-to <staff@bioruby.org>.
+= bio-nexml
+
+NeXML is a file format for phylogenetic data. It is inspired by the modular
+architecture of the commonly-used NEXUS file format (hence the name) in that
+a NeXML instance document can contain:
+* sets of Operational Taxonomic Units (OTUs), i.e. the tips in phylogenetic
+  trees, and that which comparative observations are made on. Often these are
+  species ("taxa").
+* sets of phylogenetic trees (or reticulate trees, i.e. networks)
+* sets of comparative data, i.e. molecular sequences, morphological categorical
+  data, continuous data, and other types.
+
+The elements in a NeXML document can be annotated using RDFa
+(http://en.wikipedia.org/wiki/RDFa), which means that every object that can
+be parsed out of a NeXML document must be an object that, in turn, can be
+annotated with predicates (and their namespaces) and other objects (with,
+perhaps, their own namespaces). The advantage over previous file formats is
+that we can retain all metadata for all objects within one file, regardless
+where the metadata come from.
+
+NeXML can be transformed to RDF using an XSL stylesheet. As such, NeXML forms
+an intermediate format between traditional flat file formats (with predictable
+structure but no semantics) and RDF (with loose structure, but lots of
+semantics) that is both easy to work with, yet ready for the Semantic Web.
+
+To learn more, visit http://www.nexml.org
+
+== Getting Started
+
+https://www.nescent.org/wg_phyloinformatics/NeXML_and_RDF_API_for_BioRuby
+
+It is not complete, but definitely enough to get started.
+
+== Contributing to bio-nexml
+ 
+* Check out the latest master to make sure the feature hasn't been implemented
+  or the bug hasn't been fixed yet
+* Check out the issue tracker to make sure someone already hasn't requested it
+  and/or contributed it
+* Fork the project
+* Start a feature/bugfix branch
+* Commit and push until you are happy with your contribution
+* Make sure to add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to
+  have your own version, or is otherwise necessary, that is fine, but please
+  isolate to its own commit so I can cherry-pick around it.
+
+== Copyright
+
+Copyright (c) 2011 rvosa. See LICENSE.txt for
+further details.
 
