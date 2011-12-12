@@ -46,6 +46,12 @@ It is not complete, but definitely enough to get started.
   have your own version, or is otherwise necessary, that is fine, but please
   isolate to its own commit so I can cherry-pick around it.
 
+== Acknowledgements
+
+The research leading to these results has received funding from the [European
+Community's] Seventh Framework Programme ([FP7/2007-2013] under grant agreement
+n¡ [237046].
+
 == Copyright
 
 Copyright (c) 2011 rvosa. See LICENSE.txt for
