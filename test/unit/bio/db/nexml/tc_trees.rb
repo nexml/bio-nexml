@@ -214,7 +214,7 @@ class TestTree < Test::Unit::TestCase
       assert @tree.include?( e )
       c +=1
     end
-    assert @tree.number_of_edges, c
+    assert @tree.number_of_edges, c.to_s
   end
 
   def test_each_edge_with_id
