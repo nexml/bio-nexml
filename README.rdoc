@@ -1,3 +1,9 @@
+{<img
+src="https://secure.travis-ci.org/pjotrp/bio-nexml.png"
+/>}[http://travis-ci.org/#!/pjotrp/bio-nexml]
+
+bio-nexml is listed at http://biogems.info/
+
 = bio-nexml
 
 NeXML is a file format for phylogenetic data. It is inspired by the modular
@@ -51,6 +57,12 @@ It is not complete, but definitely enough to get started.
 The research leading to these results has received funding from the [European
 Community's] Seventh Framework Programme ([FP7/2007-2013] under grant agreement
 n¡ [237046].
+
+== Citing bio-nexml
+
+  If you use this software, please cite
+
+    http://dx.doi.org/10.1093/bioinformatics/bts080
 
 == Copyright
 
