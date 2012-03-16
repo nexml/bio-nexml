@@ -7,7 +7,7 @@ module Bio
       end
 
       def teardown
-        @doc.close
+        @doc.close if @doc
       end
 
       def test_parse
