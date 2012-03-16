@@ -195,7 +195,7 @@ class TestTree < Test::Unit::TestCase
       assert @tree.include?( n )
       c +=1
     end
-    assert @tree.number_of_nodes, c
+    assert(@tree.number_of_nodes, c.to_s)
   end
 
   def test_each_node_with_id
