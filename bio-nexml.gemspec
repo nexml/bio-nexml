@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = '1.0.0'
   s.authors     = ['Rutger Vos', 'Anurag Priyam']
   s.email       = ['rutgeraldo@gmail.com', 'anurag08priyam@gmail.com']
-  s.homepage    = 'http://rvosa.github.com/bio-nexml/'
+  s.homepage    = 'https://github.com/nexml/bio-nexml'
   s.license     = 'MIT'
 
   s.summary     = %q{BioRuby plugin for reading and writing NeXML (http://nexml.org)}
