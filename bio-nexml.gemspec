@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   # dependencies
   s.add_dependency('bio', '>= 1.4.1')
-  s.add_dependency('libxml-ruby', '>= 1.1.4')
+  s.add_dependency('libxml-ruby', '= 1.1.4')
 
   # gem
   s.files         = Dir['lib/**/*'] + ['LICENSE.txt', 'README.rdoc']
