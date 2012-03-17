@@ -1,6 +1,6 @@
 {<img
-src="https://secure.travis-ci.org/pjotrp/bio-nexml.png"
-/>}[http://travis-ci.org/#!/pjotrp/bio-nexml]
+src="https://secure.travis-ci.org/nexml/bio-nexml.png"
+/>}[http://travis-ci.org/#!/nexml/bio-nexml]
 
 bio-nexml is listed at http://biogems.info/
 
