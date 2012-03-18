@@ -60,12 +60,18 @@ n¡ [237046].
 
 == Citing bio-nexml
 
-  If you use this software, please cite
+If you use this software, please cite:
 
-    http://dx.doi.org/10.1093/bioinformatics/bts080
+> [NeXML: rich, extensible, and verifiable representation of comparative data and metadata][1]
+
+and
+
+> [Biogem: an effective tool based approach for scaling up open source software development in bioinformatics][2]
 
 == Copyright
 
 Copyright (c) 2011 Rutger Vos and Anurag Priyam. See LICENSE.txt for further
 details.
 
+[1]: http://sysbio.oxfordjournals.org/content/early/2012/02/12/sysbio.sys025.short
+[2]: http://dx.doi.org/10.1093/bioinformatics/bts080
