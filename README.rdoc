@@ -33,7 +33,7 @@ To learn more, visit http://www.nexml.org
 
 == Getting Started
 
-https://www.nescent.org/wg_phyloinformatics/NeXML_and_RDF_API_for_BioRuby
+https://github.com/nexml/bio-nexml/wiki/NeXML-API-for-BioRuby
 
 It is not complete, but definitely enough to get started.
 
