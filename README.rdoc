@@ -66,6 +66,6 @@ n¡ [237046].
 
 == Copyright
 
-Copyright (c) 2011 rvosa. See LICENSE.txt for
-further details.
+Copyright (c) 2011 Rutger Vos and Anurag Priyam. See LICENSE.txt for further
+details.
 
