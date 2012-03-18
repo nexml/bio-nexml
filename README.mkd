@@ -1,10 +1,8 @@
-{<img
-src="https://secure.travis-ci.org/nexml/bio-nexml.png"
-/>}[http://travis-ci.org/#!/nexml/bio-nexml]
+[![Build status](https://secure.travis-ci.org/nexml/bio-nexml.png)](http://travis-ci.org/#!/nexml/bio-nexml)
 
 bio-nexml is listed at http://biogems.info/
 
-= bio-nexml
+# bio-nexml
 
 NeXML is a file format for phylogenetic data. It is inspired by the modular
 architecture of the commonly-used NEXUS file format (hence the name) in that
@@ -31,14 +29,14 @@ semantics) that is both easy to work with, yet ready for the Semantic Web.
 
 To learn more, visit http://www.nexml.org
 
-== Getting Started
+## Getting Started
 
 https://github.com/nexml/bio-nexml/wiki/NeXML-API-for-BioRuby
 
 It is not complete, but definitely enough to get started.
 
-== Contributing to bio-nexml
- 
+## Contributing to bio-nexml
+
 * Check out the latest master to make sure the feature hasn't been implemented
   or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it
@@ -52,13 +50,13 @@ It is not complete, but definitely enough to get started.
   have your own version, or is otherwise necessary, that is fine, but please
   isolate to its own commit so I can cherry-pick around it.
 
-== Acknowledgements
+## Acknowledgements
 
 The research leading to these results has received funding from the [European
 Community's] Seventh Framework Programme ([FP7/2007-2013] under grant agreement
 n¡ [237046].
 
-== Citing bio-nexml
+## Citing bio-nexml
 
 If you use this software, please cite:
 
@@ -68,7 +66,7 @@ and
 
 > [Biogem: an effective tool based approach for scaling up open source software development in bioinformatics][2]
 
-== Copyright
+## Copyright
 
 Copyright (c) 2011 Rutger Vos and Anurag Priyam. See LICENSE.txt for further
 details.
