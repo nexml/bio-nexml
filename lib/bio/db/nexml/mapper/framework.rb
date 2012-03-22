@@ -133,21 +133,18 @@ module Bio
           #    def each( &block )
           #      @targets.each( &block )
           #    end
-          class_eval <<_END_OF_EVAL_
-            def each_#{name}( &block )
-              repository( "#{target}", #{type} ).each( &block )
-            end
-_END_OF_EVAL_
+          define_method("each_#{name}") do |&block|
+            repository(target, type).each( &block )
+          end
 
           if type == HashRepository
             define_method( "get_#{name}_by_id" ) do |id,|
               repository( target, type )[ id ]          
             end                                        
-          class_eval <<_END_OF_EVAL_
-            def each_#{name}_with_id( &block )
-              repository( #{target }, #{type } ).each_with_id( &block )
+
+            define_method("each_#{name}_with_id") do |&block|
+              repository(target, type).each_with_id(&block)
             end
-_END_OF_EVAL_
           end
         end
 
