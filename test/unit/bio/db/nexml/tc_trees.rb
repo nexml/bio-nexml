@@ -205,7 +205,7 @@ class TestTree < Test::Unit::TestCase
       assert_equal( n.id, i )
       c +=1
     end
-    assert @tree.number_of_nodes, c
+    assert @tree.number_of_nodes, c.to_s
   end
 
   def test_each_edge
@@ -224,7 +224,7 @@ class TestTree < Test::Unit::TestCase
       assert_equal( e.id, i )
       c +=1
     end
-    assert @tree.number_of_edges, c
+    assert @tree.number_of_edges, c.to_s
   end
 end #end class TestTree
 
