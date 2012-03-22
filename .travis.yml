@@ -13,4 +13,7 @@ rvm:
 # script: bundle exec rspec spec
 
 notifications:
-  email: false
+  email:
+    recipients:
+      - anurag08priyam@gmail.com
+      - rutgeraldo@gmail.com
