@@ -6,7 +6,7 @@
 Gem::Specification.new do |s|
   # meta
   s.name        = 'bio-nexml'
-  s.version     = '1.0.0'
+  s.version     = '1.1.0'
   s.authors     = ['Rutger Vos', 'Anurag Priyam']
   s.email       = ['rutgeraldo@gmail.com', 'anurag08priyam@gmail.com']
   s.homepage    = 'https://github.com/nexml/bio-nexml'
@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency('libxml-ruby', '= 1.1.4')
 
   # gem
-  s.files         = Dir['lib/**/*'] + ['LICENSE.txt', 'README.rdoc']
+  s.files         = `git ls-files`.split("\n") rescue ''
   s.test_file     = "test/test_bio-nexml.rb"
   s.require_paths = ["lib"]
 end
