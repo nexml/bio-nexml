@@ -29,11 +29,395 @@ semantics) that is both easy to work with, yet ready for the Semantic Web.
 
 To learn more, visit http://www.nexml.org
 
-## Getting Started
+## Parsing
+Currently all the parsing is done at the start( i.e. no streaming ). This is likely to change later. Parse an NeXML file:
 
-https://github.com/nexml/bio-nexml/wiki/NeXML-API-for-BioRuby
+```ruby
+  doc = Bio::NeXML::Parser.new( "trees.xml" )
+  nexml = doc.parse
+  nexml.class #Bio::NeXML::Nexml
+```
 
-It is not complete, but definitely enough to get started.
+## Serializing
+`Bio::NeXML::Writer` class provides a wrapper over libxml-ruby to create any NeXML document. This class defines a set of `serialize_*` instance methods which can be called on the appropriate object to get its NeXML representation. The method returns a `XML::Node` object. To get the raw NeXML representation `to_s` method should be called on the return value.
+
+NeXML defines three top level containers: `otus`, `trees`, `characters` which bear parent-child relation with other NeXML elements. In effect, a valid NeXML document has only three type of immediate children. Naturally, a typical working paradigm would be to create `Bio::NeXML::Otus`, `Bio::NeXML::Trees`, and `Bio::NeXML::Characters` objects and write them to the NeXML file.
+
+```ruby
+  # Parse a test file. This will give us Bio::NeXML::Otus,
+  # Bio::NeXML::Trees, and Bio::NeXML::Characters object.
+  doc1 = Bio::NeXML::Parser.new 'test.xml'
+  nexml = doc1.parse
+  doc1.close
+
+  # Create a Writer object,
+  writer = Bio::NeXML::Writer.new
+
+  # add otus, trees and characters to it,
+  writer << nexml.otus
+  writer << nexml.trees
+  writer << nexml.characters
+
+  # save it.
+  writer.save 'sample.xml'
+```
+
+`Bio::NeXML::Writer` internally calls some `serialize_*` method at the lowest level. If need be, these `serialize_*` methods can be called to obtain raw NeXML representation of any NeXML element.
+
+``` ruby
+  # Create an otus object with a child otu element
+  taxa1 = Bio::NeXML::Otus.new 'taxa1', 'A taxa block'
+  o1 = Bio::NeXML::Otu.new 'o1', 'A taxon'
+  taxa1 << o1
+
+  # Obtain the raw NeXML representation of the otus object created
+  writer = Bio::NeXML::Writer.new
+  writer.serialize_otus( taxa1 ).to_s
+  # => "<otus label=\"A taxa block\" id=\"taxa1\">\n  <otu label=\"A taxon\" id=\"o1\"/>\n</otus>"
+```
+
+Unit tests for serializer are filled with such use cases.
+
+## Nexml
+
+``` ruby
+  #get a hash of otus objects indexed with 'id'
+  nexml.otus_set
+
+  #get an array of otus objects
+  nexml.otus
+
+  #get an otus by id
+  taxa1 = nexml.get_otus_by_id "taxa1"
+
+  #iterate over each otus object
+  nexml.each_otus do |taxa|
+    puts taxa.id
+    puts taxa.label
+  end
+
+  #characters
+  nexml.trees_set #return a hash of trees object indexed with 'id'
+  nexml.trees #return an array of trees objects.
+
+  #iterate over each trees object
+  nexml.each_trees do |trees|
+    puts trees.id
+    puts trees.label
+  end
+
+  #find a trees by id
+  trees1 = nexml.get_trees_by_id 'trees1'
+
+  # characters
+  nexml.characters_set #return a hash of characters object indexed with 'id'
+  nexml.characters #return an array of characters object
+
+  #iterate over each characters object
+  nexml.each_characters do |ch|
+    puts ch.id
+    puts ch.label
+  end
+
+  #find a characters object by id
+  characters = nexml.get_characters_by_id 'chars1'
+```
+
+## Otus
+
+Taxa blocks and taxons are stored internally as a Ruby hash for faster 'id' based lookup. 
+Consider [https://www.nescent.org/wg_phyloinformatics/NeXML_Elements#Example this] NeXML 
+snippet
+
+``` ruby
+  #get the id of otus
+  taxa1.id # "taxa1"
+
+  #get the label of otus
+  taxa1.label # "Primary taxa block"
+
+  #get a hash of child otu objects indexed with id
+  taxa1.otu_set
+
+  #get an array of child otu objects
+  taxa1.otus
+
+  #get an otu object by id
+  #get_otu_by_id is an alias of []
+  t1 = taxa1[ 't1' ]
+
+  #add an otu object to otus
+  t1.add_otu( otu_object )
+  #to add more than one otu object at a time use << or otus= method
+  t1 << [otu_object1, otu_object2]
+  t1.otus = otu_object1, otu_object2
+
+  #or iterate over each otu object
+  #each_otu is an alias for each
+  taxa1.each do |taxon|
+    puts taxon.id
+    puts taxon.label
+  end
+
+  #check if an otu with given id belongs to an otus or not
+  #include? and has? are alias for has_otu?
+  taxa1.has_otu? 't2' # => true
+  taxa1.has? 't8' # => false
+
+  #an otus object in enumerable
+  taxa1.map &:id # => array of otu ids
+  taxa1.select {|t| t.class == "Lemurs" } #maybe in future
+```
+
+### Otu
+
+``` ruby
+  #get an otu's id
+  t1.id # => "t1"
+
+  #get an otu's label
+  t1.label # => "Homo sapiens"
+```
+
+## Trees
+Trees and tree and network are stored internally as a Ruby hash for faster 'id' based lookup.
+
+``` ruby
+  trees1.class #Bio::NeXML::Trees
+
+  #get the taxa block to which the trees is linked to
+  trees1.otus #returns an otus object
+```
+
+### Tree
+
+``` ruby
+  trees1.tree_set #return a hash or tree objects indexed with 'id'
+  tress1.trees #return an arrayof trees object
+
+  #iterate over each tree object
+  trees1.each_tree do |t|
+    puts t.id
+    puts t.label
+  end
+
+  #get a tree object with its 'tree1'
+  tree1 = trees1[ 'tree1' ]
+  #or, with a conventional method call
+  tree1 = trees1.get_tree_by_id 'tree1'
+  #or, from a nexml object
+  tree1 = nexml.get_tree_by_id 'tree1'
+
+  tree1.class #Bio::NeXML::IntTree or Bio::NeXML::FloatTree
+
+  #check if a tree belongs to a trees or not
+  #pass it a tree id
+  tree1.has_tree? 'tree1' #return true or false
+
+  #get the number of treess
+  trees1.number_of_trees
+```
+
+### Network
+
+``` ruby
+  trees1.network_set #return a hash or network objects indexed with 'id'
+  tress1.networks #return an arrayof network objects
+
+  #iterate over each network object
+  trees1.each_network do |n|
+    puts n.id
+    puts n.label
+  end
+
+  #get a network object with its id
+  network1 = trees1[ 'network1' ]
+  #or, with a conventional method call
+  network1 = trees1.get_network_by_id 'network1'
+  #or, from a nexml object
+  network1 = nexml.get_tree_by_id 'network1'
+
+  network1.class #Bio::NeXML::IntTree or Bio::NeXML::FloatTree
+
+  #check if a network belongs to a trees or not
+  #pass it a network id
+  trees1.has_network? 'network1' #return true or false
+
+  #get the number of networks
+  trees1.number_of_networks
+```
+
+### Tree and Network
+
+``` ruby
+  #iterate over both trees and networks
+  trees1.each do |g|
+    puts g.class
+  end
+
+  #find if a tree or a network belongs to a trees or not
+  #include? is an alias for has?
+  trees1.has? 'tree1' #return true or false
+
+  #total number of trees and networks
+  trees1.number_of_graphs
+```
+
+All the available methods from [http://bioruby.org/rdoc/classes/Bio/Tree.html#M001688 Bio::Tree]
+class can be called on a tree object.
+
+``` ruby
+  node1 = tree.get_node_by_name "n3" #note name is same as id
+  tree1.parents node1
+```
+
+A trees object is an enumerable:
+
+``` ruby
+  trees1.map &:id
+```
+
+## Characters
+
+``` ruby
+  puts characters.class
+
+  #get the taxa block to which the characters is linked to
+  characters.otus #returns an otus object
+
+  #get the child format element
+  format = characters.format
+
+  puts format.class
+
+  #get the child matrix element
+  matrix = characters.matrix
+
+  puts matrix.class
+```
+
+### Format
+
+``` ruby
+  format.states_set #return a hash of states objects indexed with 'id'
+  format.states #return an array of states object
+
+  #iterate over each states object
+  format.each_states do |states|
+    puts states.id
+    puts states.label
+  end
+
+  #get a states object by id
+  states = format.get_states_by_id 'states1'
+
+  #check if the states object with 'id' belongs to format or not
+  format.has_states? 'states1'
+
+  format.char_set #return a hash of char objects indexed with 'id'
+  format.chars #return an array of char objects
+
+  #iterate over each char object
+  format.each_char do |char|
+    puts char.id
+    puts char.label
+  end
+
+  #get a char object by id
+  char = format.get_char_by_id 'char1'
+
+  #check if the char object with 'id' belongs to format or not
+  format.has_char? 'char1'
+
+  #get a states or a char object by id
+  state = format[ 'states1' ]
+  char = format[ 'char1' ]
+
+  #check if a states or a char object with 'id' belongs to format or not
+  format.has? 'states1'
+  format.has? 'char1'
+
+  #all objects, including char and states can be iterated over with each
+  format.each do |obj|
+    puts obj.class
+  end
+
+  #format is enumerable
+  format.map &:id
+```
+
+#### States
+
+``` ruby
+  states.state_set #return a hash of state objects indexed with 'id'
+  states.states #return an array of state objects
+
+  #iterate over each state object
+  states.each_state do |state|
+    puts state.id
+  end
+  #or, use its alias each
+
+  #get a state object by id
+  state = states.get_state_by_id 'state1'
+  #or, use hash notation
+  state = states[ 'state1' ]
+
+  #check if a state belongs to states or not
+  states.has_state? 'state1'
+  #or, use its alias has? and include?
+```
+
+##### State
+
+``` ruby
+  #get the symbol associated with the state
+  state.symbol
+
+  #find if the state is ambiguous
+  state.ambiguous?
+
+  #find the kind of ambiguity
+  state.ambiguity
+
+  #find if it is an uncertain state set
+  state.uncertain?
+
+  #find if it is a polymorphic state set
+  state.polymorphic?
+
+  #get the members of a state set as an array
+  state.members
+
+  #or iterate over each member
+  state.each do |member|
+    puts member.class #same as self
+    puts member.id
+  end
+
+  #a state is Enumerable over its members
+  state.select{ |member| member.id == "rna5" }
+```
+
+#### Char
+
+``` ruby
+  #get the id
+  char.id
+
+  #get the label
+  char.label
+
+  #get the states object the char is linked to
+  char.states
+
+  #get the codon position for DnaChar and RnaChar objects
+  char.codon
+```
+
+### Matrix
+
+...
 
 ## Contributing to bio-nexml
 
