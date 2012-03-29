@@ -1,10 +1,11 @@
-#load XML library for parser and serializer
 require 'xml'
+require 'bio/db/nexml/parser'
+require 'bio/db/nexml/writer'
+require 'bio/db/nexml/mapper'
+require 'bio/db/nexml/taxa'
+require 'bio/db/nexml/trees'
+require 'bio/db/nexml/matrix'
 
-#load required class and module definitions
-require "bio/db/nexml/mapper"
-
-#Autoload definition
 module Bio
   module NeXML
     
@@ -23,20 +24,6 @@ module Bio
       attr_accessor :xml_lang
       attr_accessor :xml_space
     end #end module Base
-
-    # Autoload multiple modules that reside in the same file.
-    def self.mautoload( modules, file )
-      modules.each do |m|
-        autoload m, file
-      end
-    end
-
-    mautoload %w|Otu Otus|,                                'bio/db/nexml/taxa.rb'
-    mautoload %w|Node Edge Tree Network Trees|,            'bio/db/nexml/trees.rb'
-    mautoload %w|State Char States Cell Sequence Format Characters|,  'bio/db/nexml/matrix.rb'
-
-    autoload :Parser, 'bio/db/nexml/parser'
-    autoload :Writer, 'bio/db/nexml/writer'
 
     class Nexml
       @@writer = Bio::NeXML::Writer.new      
