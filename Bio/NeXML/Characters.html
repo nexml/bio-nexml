@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Characters
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -108,6 +108,7 @@ of NeXML.
 </div>
 <div class="tags">
   
+
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
   <p class="children"><span class='object_link'><a href="Continuous.html" title="Bio::NeXML::Continuous (class)">Continuous</a></span>, <span class='object_link'><a href="Dna.html" title="Bio::NeXML::Dna (class)">Dna</a></span>, <span class='object_link'><a href="Protein.html" title="Bio::NeXML::Protein (class)">Protein</a></span>, <span class='object_link'><a href="Restriction.html" title="Bio::NeXML::Restriction (class)">Restriction</a></span>, <span class='object_link'><a href="Rna.html" title="Bio::NeXML::Rna (class)">Rna</a></span>, <span class='object_link'><a href="Standard.html" title="Bio::NeXML::Standard (class)">Standard</a></span></p>
@@ -120,17 +121,14 @@ of NeXML.
         <dt id="writer-classvariable" class="">@@writer =
           
         </dt>
-        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-</pre></dd>
+        <dd><pre class="code"><span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
       
     </dl>
   
 
 
-  
-  
-  
-  
+
+
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
     
@@ -246,9 +244,6 @@ A characters block holds a single matrix definition.
 
 
 
-  
-  
-  
 
   
     <h2>
@@ -486,6 +481,7 @@ A new instance of Characters
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -503,14 +499,13 @@ A new instance of Characters
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 821</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='@id ivar id'>@id</span> <span class='assign token'>=</span> <span class='id identifier id'>id</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='create_format identifier id'>create_format</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='create_matrix identifier id'>create_matrix</span>
-  <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-  <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='arity identifier id'>arity</span> <span class='lt op'>&lt;</span> <span class='integer val'>1</span> <span class='question op'>?</span> <span class='instance_eval identifier id'>instance_eval</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='call identifier id'>call</span><span class='lparen token'>(</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='ivar'>@id</span> <span class='op'>=</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_format'>create_format</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_matrix'>create_matrix</span>
+  <span class='id identifier rubyid_properties'>properties</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_arity'>arity</span> <span class='op'>&lt;</span> <span class='int'>1</span> <span class='op'>?</span> <span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span> <span class='kw'>self</span> <span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -542,6 +537,7 @@ A characters block holds a single format definition
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -555,10 +551,9 @@ A characters block holds a single format definition
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 808</span>
 
-<span class='def def kw'>def</span> <span class='format identifier id'>format</span>
-  <span class='@format ivar id'>@format</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_format'>format</span>
+  <span class='ivar'>@format</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -586,6 +581,7 @@ globally. It is a compulsory attribute.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -599,10 +595,9 @@ globally. It is a compulsory attribute.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 805</span>
 
-<span class='def def kw'>def</span> <span class='id identifier id'>id</span>
-  <span class='@id ivar id'>@id</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -629,6 +624,7 @@ A human readable description. Its usage is optional.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -642,10 +638,9 @@ A human readable description. Its usage is optional.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 814</span>
 
-<span class='def def kw'>def</span> <span class='label identifier id'>label</span>
-  <span class='@label ivar id'>@label</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
+  <span class='ivar'>@label</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -672,6 +667,7 @@ A characters block holds a single matrix definition
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -685,10 +681,9 @@ A characters block holds a single matrix definition
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 811</span>
 
-<span class='def def kw'>def</span> <span class='matrix identifier id'>matrix</span>
-  <span class='@matrix ivar id'>@matrix</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_matrix'>matrix</span>
+  <span class='ivar'>@matrix</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -721,10 +716,9 @@ A characters block holds a single matrix definition
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 829</span>
 
-<span class='def def kw'>def</span> <span class='add_format identifier id'>add_format</span><span class='lparen token'>(</span> <span class='format identifier id'>format</span> <span class='rparen token'>)</span>
-  <span class='@format ivar id'>@format</span> <span class='assign token'>=</span> <span class='format identifier id'>format</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_format'>add_format</span><span class='lparen'>(</span> <span class='id identifier rubyid_format'>format</span> <span class='rparen'>)</span>
+  <span class='ivar'>@format</span> <span class='op'>=</span> <span class='id identifier rubyid_format'>format</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -750,10 +744,9 @@ A characters block holds a single matrix definition
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 833</span>
 
-<span class='def def kw'>def</span> <span class='add_matrix identifier id'>add_matrix</span><span class='lparen token'>(</span> <span class='matrix identifier id'>matrix</span> <span class='rparen token'>)</span>
-  <span class='@matrix ivar id'>@matrix</span> <span class='assign token'>=</span> <span class='matrix identifier id'>matrix</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_matrix'>add_matrix</span><span class='lparen'>(</span> <span class='id identifier rubyid_matrix'>matrix</span> <span class='rparen'>)</span>
+  <span class='ivar'>@matrix</span> <span class='op'>=</span> <span class='id identifier rubyid_matrix'>matrix</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -798,29 +791,28 @@ A characters block holds a single matrix definition
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 855</span>
 
-<span class='def def kw'>def</span> <span class='create_format identifier id'>create_format</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='format identifier id'>format</span> <span class='assign token'>=</span> <span class='Format constant id'>Format</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
-  <span class='states identifier id'>states</span> <span class='assign token'>=</span> <span class='format identifier id'>format</span><span class='dot token'>.</span><span class='create_states identifier id'>create_states</span>
-  <span class='lookup_table identifier id'>lookup_table</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='lookup identifier id'>lookup</span>
-  <span class='state_for_symbol identifier id'>state_for_symbol</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
-  <span class='lookup_table identifier id'>lookup_table</span><span class='dot token'>.</span><span class='keys identifier id'>keys</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='key identifier id'>key</span><span class='bitor op'>|</span>
-    <span class='if if kw'>if</span> <span class='lookup_table identifier id'>lookup_table</span><span class='lbrack token'>[</span><span class='key identifier id'>key</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='length identifier id'>length</span> <span class='eq op'>==</span> <span class='integer val'>1</span>
-      <span class='state identifier id'>state</span> <span class='assign token'>=</span> <span class='states identifier id'>states</span><span class='dot token'>.</span><span class='create_state identifier id'>create_state</span><span class='lparen token'>(</span> <span class='symbol val'>:symbol</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='key identifier id'>key</span> <span class='rparen token'>)</span>
-      <span class='state_for_symbol identifier id'>state_for_symbol</span><span class='lbrack token'>[</span><span class='key identifier id'>key</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='state identifier id'>state</span>
-    <span class='end end kw'>end</span>
-  <span class='end end kw'>end</span>
-  <span class='lookup_table identifier id'>lookup_table</span><span class='dot token'>.</span><span class='keys identifier id'>keys</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='key identifier id'>key</span><span class='bitor op'>|</span>
-    <span class='if if kw'>if</span> <span class='lookup_table identifier id'>lookup_table</span><span class='lbrack token'>[</span><span class='key identifier id'>key</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='length identifier id'>length</span> <span class='neq op'>!=</span> <span class='integer val'>1</span>
-      <span class='state identifier id'>state</span> <span class='assign token'>=</span> <span class='states identifier id'>states</span><span class='dot token'>.</span><span class='create_state identifier id'>create_state</span><span class='lparen token'>(</span> <span class='symbol val'>:symbol</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='key identifier id'>key</span><span class='comma token'>,</span> <span class='symbol val'>:ambiguity</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:uncertain</span> <span class='rparen token'>)</span>
-      <span class='lookup_table identifier id'>lookup_table</span><span class='lbrack token'>[</span><span class='key identifier id'>key</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='symbol identifier id'>symbol</span><span class='bitor op'>|</span>
-        <span class='state identifier id'>state</span><span class='dot token'>.</span><span class='add_member identifier id'>add_member</span><span class='lparen token'>(</span> <span class='state_for_symbol identifier id'>state_for_symbol</span><span class='lbrack token'>[</span><span class='symbol identifier id'>symbol</span><span class='rbrack token'>]</span> <span class='rparen token'>)</span>
-      <span class='end end kw'>end</span>
-    <span class='end end kw'>end</span>
-  <span class='end end kw'>end</span>        
-  <span class='add_format identifier id'>add_format</span> <span class='format identifier id'>format</span>
-  <span class='format identifier id'>format</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_format'>create_format</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_format'>format</span> <span class='op'>=</span> <span class='const'>Format</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_states'>states</span> <span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_create_states'>create_states</span>
+  <span class='id identifier rubyid_lookup_table'>lookup_table</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_lookup'>lookup</span>
+  <span class='id identifier rubyid_state_for_symbol'>state_for_symbol</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_lookup_table'>lookup_table</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_lookup_table'>lookup_table</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>1</span>
+      <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_create_state'>create_state</span><span class='lparen'>(</span> <span class='symbol'>:symbol</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_key'>key</span> <span class='rparen'>)</span>
+      <span class='id identifier rubyid_state_for_symbol'>state_for_symbol</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_state'>state</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_lookup_table'>lookup_table</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_lookup_table'>lookup_table</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>!=</span> <span class='int'>1</span>
+      <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_create_state'>create_state</span><span class='lparen'>(</span> <span class='symbol'>:symbol</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='symbol'>:ambiguity</span> <span class='op'>=&gt;</span> <span class='symbol'>:uncertain</span> <span class='rparen'>)</span>
+      <span class='id identifier rubyid_lookup_table'>lookup_table</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_symbol'>symbol</span><span class='op'>|</span>
+        <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_add_member'>add_member</span><span class='lparen'>(</span> <span class='id identifier rubyid_state_for_symbol'>state_for_symbol</span><span class='lbracket'>[</span><span class='id identifier rubyid_symbol'>symbol</span><span class='rbracket'>]</span> <span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>        
+  <span class='id identifier rubyid_add_format'>add_format</span> <span class='id identifier rubyid_format'>format</span>
+  <span class='id identifier rubyid_format'>format</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -853,17 +845,16 @@ A characters block holds a single matrix definition
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 844</span>
 
-<span class='def def kw'>def</span> <span class='create_matrix identifier id'>create_matrix</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='matrix identifier id'>matrix</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span>
-  <span class='if if kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='name identifier id'>name</span> <span class='match op'>=~</span> <span class='regexp val'>/Seqs$/</span>
-    <span class='matrix identifier id'>matrix</span> <span class='assign token'>=</span> <span class='SeqMatrix constant id'>SeqMatrix</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
-  <span class='else else kw'>else</span>
-    <span class='matrix identifier id'>matrix</span> <span class='assign token'>=</span> <span class='CellMatrix constant id'>CellMatrix</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>        
-  <span class='add_matrix identifier id'>add_matrix</span> <span class='matrix identifier id'>matrix</span>
-  <span class='matrix identifier id'>matrix</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_matrix'>create_matrix</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_matrix'>matrix</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>Seqs$</span><span class='regexp_end'>/</span></span>
+    <span class='id identifier rubyid_matrix'>matrix</span> <span class='op'>=</span> <span class='const'>SeqMatrix</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_matrix'>matrix</span> <span class='op'>=</span> <span class='const'>CellMatrix</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>        
+  <span class='id identifier rubyid_add_matrix'>add_matrix</span> <span class='id identifier rubyid_matrix'>matrix</span>
+  <span class='id identifier rubyid_matrix'>matrix</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -917,38 +908,37 @@ A characters block holds a single matrix definition
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 878</span>
 
-<span class='def def kw'>def</span> <span class='create_raw identifier id'>create_raw</span><span class='lparen token'>(</span> <span class='string identifier id'>string</span><span class='comma token'>,</span> <span class='row identifier id'>row</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span> <span class='rparen token'>)</span>
-  <span class='matrix identifier id'>matrix</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='matrix identifier id'>matrix</span>
-  <span class='format identifier id'>format</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='format identifier id'>format</span>
-  <span class='if if kw'>if</span> <span class='row identifier id'>row</span> <span class='eq op'>==</span> <span class='nil nil kw'>nil</span>
-    <span class='row identifier id'>row</span> <span class='assign token'>=</span> <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='create_row identifier id'>create_row</span>
-  <span class='end end kw'>end</span>        
-  <span class='if if kw'>if</span> <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='kind_of? fid id'>kind_of?</span> <span class='SeqRow constant id'>SeqRow</span>
-    <span class='sequence identifier id'>sequence</span> <span class='assign token'>=</span> <span class='Sequence constant id'>Sequence</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-    <span class='sequence identifier id'>sequence</span><span class='dot token'>.</span><span class='value identifier id'>value</span> <span class='assign token'>=</span> <span class='join_sequence identifier id'>join_sequence</span> <span class='split_sequence identifier id'>split_sequence</span> <span class='string identifier id'>string</span>          
-    <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='add_sequence identifier id'>add_sequence</span><span class='lparen token'>(</span> <span class='sequence identifier id'>sequence</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
-  <span class='if if kw'>if</span> <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='kind_of? fid id'>kind_of?</span> <span class='CellRow constant id'>CellRow</span>
-    <span class='split_seq identifier id'>split_seq</span> <span class='assign token'>=</span> <span class='split_sequence identifier id'>split_sequence</span> <span class='string identifier id'>string</span>
-    <span class='pos identifier id'>pos</span> <span class='assign token'>=</span> <span class='integer val'>0</span>
-    <span class='states identifier id'>states</span> <span class='assign token'>=</span> <span class='format identifier id'>format</span><span class='dot token'>.</span><span class='states identifier id'>states</span><span class='dot token'>.</span><span class='first identifier id'>first</span>
-    <span class='split_seq identifier id'>split_seq</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='symbol identifier id'>symbol</span><span class='bitor op'>|</span>
-      <span class='char identifier id'>char</span> <span class='assign token'>=</span> <span class='format identifier id'>format</span><span class='dot token'>.</span><span class='chars identifier id'>chars</span><span class='lbrack token'>[</span><span class='pos identifier id'>pos</span><span class='rbrack token'>]</span>
-      <span class='if if kw'>if</span> <span class='char identifier id'>char</span> <span class='eq op'>==</span> <span class='nil nil kw'>nil</span>
-        <span class='char identifier id'>char</span> <span class='assign token'>=</span> <span class='format identifier id'>format</span><span class='dot token'>.</span><span class='create_char identifier id'>create_char</span><span class='lparen token'>(</span> <span class='states identifier id'>states</span> <span class='rparen token'>)</span>
-      <span class='end end kw'>end</span>
-      <span class='state identifier id'>state</span> <span class='assign token'>=</span> <span class='states identifier id'>states</span><span class='dot token'>.</span><span class='get_state_by_symbol identifier id'>get_state_by_symbol</span><span class='lparen token'>(</span> <span class='symbol identifier id'>symbol</span> <span class='rparen token'>)</span>
-      <span class='if if kw'>if</span> <span class='state identifier id'>state</span> <span class='eq op'>==</span> <span class='nil nil kw'>nil</span>
-        <span class='state identifier id'>state</span> <span class='assign token'>=</span> <span class='states identifier id'>states</span><span class='dot token'>.</span><span class='create_state identifier id'>create_state</span><span class='lparen token'>(</span> <span class='symbol identifier id'>symbol</span> <span class='rparen token'>)</span>
-      <span class='end end kw'>end</span>
-      <span class='cell identifier id'>cell</span> <span class='assign token'>=</span> <span class='Cell constant id'>Cell</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='char identifier id'>char</span><span class='comma token'>,</span> <span class='state identifier id'>state</span>
-      <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='add_cell identifier id'>add_cell</span> <span class='cell identifier id'>cell</span>
-      <span class='pos identifier id'>pos</span> <span class='opasgn op'>+=</span> <span class='integer val'>1</span>
-    <span class='end end kw'>end</span>
-  <span class='end end kw'>end</span>
-  <span class='row identifier id'>row</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_raw'>create_raw</span><span class='lparen'>(</span> <span class='id identifier rubyid_string'>string</span><span class='comma'>,</span> <span class='id identifier rubyid_row'>row</span> <span class='op'>=</span> <span class='kw'>nil</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_matrix'>matrix</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_matrix'>matrix</span>
+  <span class='id identifier rubyid_format'>format</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_row'>row</span> <span class='op'>==</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_row'>row</span> <span class='op'>=</span> <span class='id identifier rubyid_matrix'>matrix</span><span class='period'>.</span><span class='id identifier rubyid_create_row'>create_row</span>
+  <span class='kw'>end</span>        
+  <span class='kw'>if</span> <span class='id identifier rubyid_row'>row</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span> <span class='const'>SeqRow</span>
+    <span class='id identifier rubyid_sequence'>sequence</span> <span class='op'>=</span> <span class='const'>Sequence</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+    <span class='id identifier rubyid_sequence'>sequence</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_join_sequence'>join_sequence</span> <span class='id identifier rubyid_split_sequence'>split_sequence</span> <span class='id identifier rubyid_string'>string</span>          
+    <span class='id identifier rubyid_row'>row</span><span class='period'>.</span><span class='id identifier rubyid_add_sequence'>add_sequence</span><span class='lparen'>(</span> <span class='id identifier rubyid_sequence'>sequence</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_row'>row</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span> <span class='const'>CellRow</span>
+    <span class='id identifier rubyid_split_seq'>split_seq</span> <span class='op'>=</span> <span class='id identifier rubyid_split_sequence'>split_sequence</span> <span class='id identifier rubyid_string'>string</span>
+    <span class='id identifier rubyid_pos'>pos</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_states'>states</span> <span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+    <span class='id identifier rubyid_split_seq'>split_seq</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_symbol'>symbol</span><span class='op'>|</span>
+      <span class='id identifier rubyid_char'>char</span> <span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_chars'>chars</span><span class='lbracket'>[</span><span class='id identifier rubyid_pos'>pos</span><span class='rbracket'>]</span>
+      <span class='kw'>if</span> <span class='id identifier rubyid_char'>char</span> <span class='op'>==</span> <span class='kw'>nil</span>
+        <span class='id identifier rubyid_char'>char</span> <span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_create_char'>create_char</span><span class='lparen'>(</span> <span class='id identifier rubyid_states'>states</span> <span class='rparen'>)</span>
+      <span class='kw'>end</span>
+      <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_get_state_by_symbol'>get_state_by_symbol</span><span class='lparen'>(</span> <span class='id identifier rubyid_symbol'>symbol</span> <span class='rparen'>)</span>
+      <span class='kw'>if</span> <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='kw'>nil</span>
+        <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_create_state'>create_state</span><span class='lparen'>(</span> <span class='id identifier rubyid_symbol'>symbol</span> <span class='rparen'>)</span>
+      <span class='kw'>end</span>
+      <span class='id identifier rubyid_cell'>cell</span> <span class='op'>=</span> <span class='const'>Cell</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_char'>char</span><span class='comma'>,</span> <span class='id identifier rubyid_state'>state</span>
+      <span class='id identifier rubyid_row'>row</span><span class='period'>.</span><span class='id identifier rubyid_add_cell'>add_cell</span> <span class='id identifier rubyid_cell'>cell</span>
+      <span class='id identifier rubyid_pos'>pos</span> <span class='op'>+=</span> <span class='int'>1</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_row'>row</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -974,10 +964,9 @@ A characters block holds a single matrix definition
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 914</span>
 
-<span class='def def kw'>def</span> <span class='join_sequence identifier id'>join_sequence</span><span class='lparen token'>(</span> <span class='array identifier id'>array</span> <span class='rparen token'>)</span>
-  <span class='array identifier id'>array</span><span class='dot token'>.</span><span class='join identifier id'>join</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_join_sequence'>join_sequence</span><span class='lparen'>(</span> <span class='id identifier rubyid_array'>array</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_array'>array</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1003,10 +992,9 @@ A characters block holds a single matrix definition
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 910</span>
 
-<span class='def def kw'>def</span> <span class='split_sequence identifier id'>split_sequence</span><span class='lparen token'>(</span> <span class='string identifier id'>string</span> <span class='rparen token'>)</span>
-  <span class='string identifier id'>string</span><span class='dot token'>.</span><span class='split identifier id'>split</span><span class='lparen token'>(</span><span class='regexp val'>//</span><span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_split_sequence'>split_sequence</span><span class='lparen'>(</span> <span class='id identifier rubyid_string'>string</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1035,13 +1023,12 @@ A characters block holds a single matrix definition
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 837</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
-  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;characters&quot;</span><span class='comma token'>,</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lparen token'>(</span> <span class='self self kw'>self</span><span class='comma token'>,</span> <span class='symbol val'>:id</span><span class='comma token'>,</span> <span class='symbol val'>:&quot;xsi:type&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:otus</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='rparen token'>)</span> <span class='rparen token'>)</span>
-  <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='format identifier id'>format</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-  <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-  <span class='node identifier id'>node</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>characters</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lparen'>(</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:id</span><span class='comma'>,</span> <span class='symbol'>:xsi:type</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:otus</span><span class='comma'>,</span> <span class='symbol'>:label</span> <span class='rparen'>)</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_matrix'>matrix</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='id identifier rubyid_node'>node</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1052,9 +1039,9 @@ A characters block holds a single matrix definition
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:00 2011 by 
+  Generated on Thu Mar 29 12:34:02 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

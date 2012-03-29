@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Module: Bio::NeXML::Mapper::Inflections
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -82,17 +82,17 @@
     <p>
 String inflections. This module is mixed with the String class.
 </p>
-<pre class="code">
-   <span class='string val'>&quot;targets&quot;</span><span class='dot token'>.</span><span class='singular identifier id'>singular</span>     <span class='comment val'>#=&gt; &quot;target&quot;</span>
-   <span class='string val'>&quot;target&quot;</span><span class='dot token'>.</span><span class='plural identifier id'>plural</span>        <span class='comment val'>#=&gt; &quot;targets&quot;</span>
-   <span class='string val'>&quot;Bio::NeXML::Otu&quot;</span><span class='dot token'>.</span><span class='key identifier id'>key</span>  <span class='comment val'>#=&gt; &quot;otu&quot;</span>
-</pre>
+<pre class="code ruby"><code>
+   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>targets</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_singular'>singular</span>     <span class='comment'>#=&gt; &quot;target&quot;
+</span>   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>target</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span>        <span class='comment'>#=&gt; &quot;targets&quot;
+</span>   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Bio::NeXML::Otu</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span>  <span class='comment'>#=&gt; &quot;otu&quot;</span></code></pre>
 
 
   </div>
 </div>
 <div class="tags">
   
+
 </div>
   <h2>Constant Summary</h2>
   
@@ -101,61 +101,61 @@ String inflections. This module is mixed with the String class.
         <dt id="PLURALS-constant" class="">PLURALS =
           
         </dt>
-        <dd><pre class="code"><span class='lbrack token'>[</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/$/</span><span class='comma token'>,</span> <span class='string val'>'s'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/s$/i</span><span class='comma token'>,</span> <span class='string val'>'s'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(ax|test)is$/i</span><span class='comma token'>,</span> <span class='string val'>'\1es'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(octop|vir)us$/i</span><span class='comma token'>,</span> <span class='string val'>'\1i'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(alias|status)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1es'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(bu)s$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ses'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(buffal|tomat)o$/i</span><span class='comma token'>,</span> <span class='string val'>'\1oes'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/([ti])um$/i</span><span class='comma token'>,</span> <span class='string val'>'\1a'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/sis$/i</span><span class='comma token'>,</span> <span class='string val'>'ses'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(?:([^f])fe|([lr])f)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1\2ves'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(hive)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1s'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/([^aeiouy]|qu)y$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ies'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(x|ch|ss|sh)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1es'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(matr|vert|ind)(?:ix|ex)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ices'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/([m|l])ouse$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ice'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/^(ox)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1en'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(quiz)$/i</span><span class='comma token'>,</span> <span class='string val'>'\1zes'</span> <span class='rbrack token'>]</span>
-<span class='rbrack token'>]</span>
-</pre></dd>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>$</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>s</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>s$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>s</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(ax|test)is$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1es</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(octop|vir)us$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1i</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(alias|status)$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1es</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(bu)s$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1ses</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(buffal|tomat)o$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1oes</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>([ti])um$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1a</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>sis$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ses</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(?:([^f])fe|([lr])f)$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1\2ves</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(hive)$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1s</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>([^aeiouy]|qu)y$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1ies</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(x|ch|ss|sh)$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1es</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(matr|vert|ind)(?:ix|ex)$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1ices</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>([m|l])ouse$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1ice</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^(ox)$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1en</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(quiz)$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1zes</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span>
+<span class='rbracket'>]</span></pre></dd>
       
         <dt id="SINGULARS-constant" class="">SINGULARS =
           
         </dt>
-        <dd><pre class="code"><span class='lbrack token'>[</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/s$/i</span><span class='comma token'>,</span> <span class='string val'>''</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(n)ews$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ews'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/([ti])a$/i</span><span class='comma token'>,</span> <span class='string val'>'\1um'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$/i</span><span class='comma token'>,</span> <span class='string val'>'\1\2sis'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(^analy)ses$/i</span><span class='comma token'>,</span> <span class='string val'>'\1sis'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/([^f])ves$/i</span><span class='comma token'>,</span> <span class='string val'>'\1fe'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(hive)s$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(tive)s$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/([lr])ves$/i</span><span class='comma token'>,</span> <span class='string val'>'\1f'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/([^aeiouy]|qu)ies$/i</span><span class='comma token'>,</span> <span class='string val'>'\1y'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(s)eries$/i</span><span class='comma token'>,</span> <span class='string val'>'\1eries'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(m)ovies$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ovie'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(x|ch|ss|sh)es$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/([m|l])ice$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ouse'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(bus)es$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(o)es$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(shoe)s$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(cris|ax|test)es$/i</span><span class='comma token'>,</span> <span class='string val'>'\1is'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(octop|vir)i$/i</span><span class='comma token'>,</span> <span class='string val'>'\1us'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(alias|status)es$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/^(ox)en/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(vert|ind)ices$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ex'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(matr)ices$/i</span><span class='comma token'>,</span> <span class='string val'>'\1ix'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(quiz)zes$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-    <span class='lbrack token'>[</span> <span class='regexp val'>/(database)s$/i</span><span class='comma token'>,</span> <span class='string val'>'\1'</span> <span class='rbrack token'>]</span>
-<span class='rbrack token'>]</span>
-</pre></dd>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>s$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(n)ews$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1ews</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>([ti])a$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1um</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1\2sis</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(^analy)ses$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1sis</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>([^f])ves$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1fe</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(hive)s$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(tive)s$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>([lr])ves$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1f</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>([^aeiouy]|qu)ies$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1y</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(s)eries$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1eries</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(m)ovies$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1ovie</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(x|ch|ss|sh)es$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>([m|l])ice$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1ouse</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(bus)es$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(o)es$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(shoe)s$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(cris|ax|test)es$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1is</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(octop|vir)i$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1us</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(alias|status)es$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^(ox)en</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(vert|ind)ices$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1ex</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(matr)ices$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1ix</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(quiz)zes$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='lbracket'>[</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(database)s$</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span>
+<span class='rbracket'>]</span></pre></dd>
       
     </dl>
   
+
+
 
 
 
@@ -186,7 +186,7 @@ String inflections. This module is mixed with the String class.
 
   
     <span class="summary_desc"><div class='inline'><p>
-For a module name as &quot;Bio::NeXML&quot; return &quot;nexml&quot;.
+For a module name as &#8220;Bio::NeXML&#8221; return &#8220;nexml&#8221;.
 </p>
 </div></span>
   
@@ -260,7 +260,7 @@ Return the singular form of string.
 </p><div class="docstring">
   <div class="discussion">
     <p>
-For a module name as &quot;Bio::NeXML&quot; return &quot;nexml&quot;.
+For a module name as &#8220;Bio::NeXML&#8221; return &#8220;nexml&#8221;.
 </p>
 
 
@@ -268,6 +268,7 @@ For a module name as &quot;Bio::NeXML&quot; return &quot;nexml&quot;.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -285,14 +286,13 @@ For a module name as &quot;Bio::NeXML&quot; return &quot;nexml&quot;.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/inflection.rb', line 85</span>
 
-<span class='def def kw'>def</span> <span class='key identifier id'>key</span>
-  <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='dup identifier id'>dup</span>
-  <span class='if if kw'>if</span> <span class='i identifier id'>i</span> <span class='assign token'>=</span> <span class='rindex identifier id'>rindex</span><span class='lparen token'>(</span> <span class='string val'>':'</span> <span class='rparen token'>)</span>
-    <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='lbrack token'>[</span> <span class='i identifier id'>i</span> <span class='plus op'>+</span> <span class='integer val'>1</span> <span class='dot2 op'>..</span> <span class='integer val'>-1</span> <span class='rbrack token'>]</span>
-  <span class='end end kw'>end</span>
-  <span class='result identifier id'>result</span><span class='dot token'>.</span><span class='downcase identifier id'>downcase</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_i'>i</span> <span class='op'>=</span> <span class='id identifier rubyid_rindex'>rindex</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>:</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='kw'>self</span><span class='lbracket'>[</span> <span class='id identifier rubyid_i'>i</span> <span class='op'>+</span> <span class='int'>1</span> <span class='op'>..</span> <span class='op'>-</span><span class='int'>1</span> <span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -316,6 +316,7 @@ Return the plural form of a string.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -335,16 +336,15 @@ Return the plural form of a string.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/inflection.rb', line 74</span>
 
-<span class='def def kw'>def</span> <span class='plural identifier id'>plural</span>
-  <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='dup identifier id'>dup</span>
-  <span class='PLURALS constant id'>PLURALS</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='match_exp identifier id'>match_exp</span><span class='comma token'>,</span> <span class='replacement_exp identifier id'>replacement_exp</span><span class='bitor op'>|</span>
-    <span class='unless unless kw'>unless</span> <span class='match identifier id'>match</span><span class='lparen token'>(</span><span class='Regexp constant id'>Regexp</span><span class='dot token'>.</span><span class='compile identifier id'>compile</span><span class='lparen token'>(</span><span class='match_exp identifier id'>match_exp</span><span class='rparen token'>)</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-      <span class='result identifier id'>result</span> <span class='assign token'>=</span>  <span class='gsub identifier id'>gsub</span><span class='lparen token'>(</span><span class='Regexp constant id'>Regexp</span><span class='dot token'>.</span><span class='compile identifier id'>compile</span><span class='lparen token'>(</span><span class='match_exp identifier id'>match_exp</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='replacement_exp identifier id'>replacement_exp</span><span class='rparen token'>)</span>
-    <span class='end end kw'>end</span>
-  <span class='end end kw'>end</span>
-  <span class='return return kw'>return</span> <span class='result identifier id'>result</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_plural'>plural</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+  <span class='const'>PLURALS</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_match_exp'>match_exp</span><span class='comma'>,</span> <span class='id identifier rubyid_replacement_exp'>replacement_exp</span><span class='op'>|</span>
+    <span class='kw'>unless</span> <span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_compile'>compile</span><span class='lparen'>(</span><span class='id identifier rubyid_match_exp'>match_exp</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+      <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span>  <span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_compile'>compile</span><span class='lparen'>(</span><span class='id identifier rubyid_match_exp'>match_exp</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_replacement_exp'>replacement_exp</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -368,6 +368,7 @@ Return the singular form of string.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -388,17 +389,16 @@ Return the singular form of string.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/inflection.rb', line 62</span>
 
-<span class='def def kw'>def</span> <span class='singular identifier id'>singular</span>
-  <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='dup identifier id'>dup</span>
-  <span class='SINGULARS constant id'>SINGULARS</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='match identifier id'>match</span><span class='comma token'>,</span> <span class='replace identifier id'>replace</span><span class='bitor op'>|</span>
-    <span class='rule identifier id'>rule</span> <span class='assign token'>=</span> <span class='Regexp constant id'>Regexp</span><span class='dot token'>.</span><span class='compile identifier id'>compile</span><span class='lparen token'>(</span> <span class='match identifier id'>match</span> <span class='rparen token'>)</span>
-    <span class='unless unless kw'>unless</span> <span class='match identifier id'>match</span><span class='lparen token'>(</span> <span class='rule identifier id'>rule</span> <span class='rparen token'>)</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-      <span class='result identifier id'>result</span> <span class='assign token'>=</span> <span class='gsub identifier id'>gsub</span><span class='lparen token'>(</span> <span class='rule identifier id'>rule</span><span class='comma token'>,</span> <span class='replace identifier id'>replace</span><span class='rparen token'>)</span> 
-    <span class='end end kw'>end</span>
-  <span class='end end kw'>end</span>
-  <span class='return return kw'>return</span> <span class='result identifier id'>result</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_singular'>singular</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+  <span class='const'>SINGULARS</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_match'>match</span><span class='comma'>,</span> <span class='id identifier rubyid_replace'>replace</span><span class='op'>|</span>
+    <span class='id identifier rubyid_rule'>rule</span> <span class='op'>=</span> <span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_compile'>compile</span><span class='lparen'>(</span> <span class='id identifier rubyid_match'>match</span> <span class='rparen'>)</span>
+    <span class='kw'>unless</span> <span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span> <span class='id identifier rubyid_rule'>rule</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+      <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span> <span class='id identifier rubyid_rule'>rule</span><span class='comma'>,</span> <span class='id identifier rubyid_replace'>replace</span><span class='rparen'>)</span> 
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -409,9 +409,9 @@ Return the singular form of string.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:31:59 2011 by 
+  Generated on Thu Mar 29 12:34:02 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

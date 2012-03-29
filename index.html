@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ASCII-8BIT" />
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -54,91 +54,460 @@
     
     <iframe id="search_frame"></iframe>
     
-    <div id="content"><div id='filecontents'><h1>bio-nexml</h1>
-<p>
-NeXML is a file format for phylogenetic data. It is inspired by the modular
-architecture of the commonly-used NEXUS file format (hence the name) in
-that a NeXML instance document can contain:
-</p>
-<ul>
-<li>sets of Operational Taxonomic Units (OTUs), i.e. the tips in phylogenetic
-trees, and that which comparative observations are made on. Often these are
-species (&quot;taxa&quot;).
+    <div id="content"><div id='filecontents'><p><a href="http://travis-ci.org/#!/nexml/bio-nexml"><img src="https://secure.travis-ci.org/nexml/bio-nexml.png" alt="Build status"></a></p>
 
-</li>
-<li>sets of phylogenetic trees (or reticulate trees, i.e. networks)
+<p>bio-nexml is listed at <a href="http://biogems.info/">http://biogems.info/</a></p>
 
-</li>
-<li>sets of comparative data, i.e. molecular sequences, morphological
-categorical data, continuous data, and other types.
+<h1>bio-nexml</h1>
 
-</li>
-</ul>
-<p>
-The elements in a NeXML document can be annotated using RDFa
-(http://en.wikipedia.org/wiki/RDFa), which means that every object that can
+<p>NeXML is a file format for phylogenetic data. It is inspired by the modular
+architecture of the commonly-used NEXUS file format (hence the name) in that
+a NeXML instance document can contain:
+* sets of Operational Taxonomic Units (OTUs), i.e. the tips in phylogenetic
+  trees, and that which comparative observations are made on. Often these are
+  species (&quot;taxa&quot;).
+* sets of phylogenetic trees (or reticulate trees, i.e. networks)
+* sets of comparative data, i.e. molecular sequences, morphological categorical
+  data, continuous data, and other types.</p>
+
+<p>The elements in a NeXML document can be annotated using RDFa
+(<a href="http://en.wikipedia.org/wiki/RDFa">http://en.wikipedia.org/wiki/RDFa</a>), which means that every object that can
 be parsed out of a NeXML document must be an object that, in turn, can be
 annotated with predicates (and their namespaces) and other objects (with,
 perhaps, their own namespaces). The advantage over previous file formats is
 that we can retain all metadata for all objects within one file, regardless
-where the metadata come from.
-</p>
-<p>
-NeXML can be transformed to RDF using an XSL stylesheet. As such, NeXML
-forms an intermediate format between traditional flat file formats (with
-predictable structure but no semantics) and RDF (with loose structure, but
-lots of semantics) that is both easy to work with, yet ready for the
-Semantic Web.
-</p>
-<p>
-To learn more, visit http://www.nexml.org
-</p>
-<h2>Getting Started</h2>
-<p>
-https://www.nescent.org/wg_phyloinformatics/NeXML_and_RDF_API_for_BioRuby
-</p>
-<p>
-It is not complete, but definitely enough to get started.
-</p>
+where the metadata come from.</p>
+
+<p>NeXML can be transformed to RDF using an XSL stylesheet. As such, NeXML forms
+an intermediate format between traditional flat file formats (with predictable
+structure but no semantics) and RDF (with loose structure, but lots of
+semantics) that is both easy to work with, yet ready for the Semantic Web.</p>
+
+<p>To learn more, visit <a href="http://www.nexml.org">http://www.nexml.org</a></p>
+
+<h2>Parsing</h2>
+
+<p>Currently all the parsing is done at the start( i.e. no streaming ). This is likely to change later. Parse an NeXML file:</p>
+
+<pre class="code ruby"><code>  <span class='id identifier rubyid_doc'>doc</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Parser</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trees.xml</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_nexml'>nexml</span> <span class='op'>=</span> <span class='id identifier rubyid_doc'>doc</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span>
+  <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='comment'>#Bio::NeXML::Nexml
+</span></code></pre>
+
+<h2>Serializing</h2>
+
+<p><code>Bio::NeXML::Writer</code> class provides a wrapper over libxml-ruby to create any NeXML document. This class defines a set of <code>serialize_*</code> instance methods which can be called on the appropriate object to get its NeXML representation. The method returns a <code>XML::Node</code> object. To get the raw NeXML representation <code>to_s</code> method should be called on the return value.</p>
+
+<p>NeXML defines three top level containers: <code>otus</code>, <code>trees</code>, <code>characters</code> which bear parent-child relation with other NeXML elements. In effect, a valid NeXML document has only three type of immediate children. Naturally, a typical working paradigm would be to create <code>Bio::NeXML::Otus</code>, <code>Bio::NeXML::Trees</code>, and <code>Bio::NeXML::Characters</code> objects and write them to the NeXML file.</p>
+
+<pre class="code ruby"><code>  <span class='comment'># Parse a test file. This will give us Bio::NeXML::Otus,
+</span>  <span class='comment'># Bio::NeXML::Trees, and Bio::NeXML::Characters object.
+</span>  <span class='id identifier rubyid_doc1'>doc1</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Parser</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>test.xml</span><span class='tstring_end'>'</span></span>
+  <span class='id identifier rubyid_nexml'>nexml</span> <span class='op'>=</span> <span class='id identifier rubyid_doc1'>doc1</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span>
+  <span class='id identifier rubyid_doc1'>doc1</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span>
+
+  <span class='comment'># Create a Writer object,
+</span>  <span class='id identifier rubyid_writer'>writer</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+  <span class='comment'># add otus, trees and characters to it,
+</span>  <span class='id identifier rubyid_writer'>writer</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_otus'>otus</span>
+  <span class='id identifier rubyid_writer'>writer</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_trees'>trees</span>
+  <span class='id identifier rubyid_writer'>writer</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_characters'>characters</span>
+
+  <span class='comment'># save it.
+</span>  <span class='id identifier rubyid_writer'>writer</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>sample.xml</span><span class='tstring_end'>'</span></span>
+</code></pre>
+
+<p><code>Bio::NeXML::Writer</code> internally calls some <code>serialize_*</code> method at the lowest level. If need be, these <code>serialize_*</code> methods can be called to obtain raw NeXML representation of any NeXML element.</p>
+
+<pre class="code ruby"><code>  <span class='comment'># Create an otus object with a child otu element
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Otus</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>taxa1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A taxa block</span><span class='tstring_end'>'</span></span>
+  <span class='id identifier rubyid_o1'>o1</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Otu</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>o1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A taxon</span><span class='tstring_end'>'</span></span>
+  <span class='id identifier rubyid_taxa1'>taxa1</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_o1'>o1</span>
+
+  <span class='comment'># Obtain the raw NeXML representation of the otus object created
+</span>  <span class='id identifier rubyid_writer'>writer</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_writer'>writer</span><span class='period'>.</span><span class='id identifier rubyid_serialize_otus'>serialize_otus</span><span class='lparen'>(</span> <span class='id identifier rubyid_taxa1'>taxa1</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='comment'># =&gt; &quot;&lt;otus label=\&quot;A taxa block\&quot; id=\&quot;taxa1\&quot;&gt;\n  &lt;otu label=\&quot;A taxon\&quot; id=\&quot;o1\&quot;/&gt;\n&lt;/otus&gt;&quot;
+</span></code></pre>
+
+<p>Unit tests for serializer are filled with such use cases.</p>
+
+<h2>Nexml</h2>
+
+<pre class="code ruby"><code>  <span class='comment'>#get a hash of otus objects indexed with 'id'
+</span>  <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_otus_set'>otus_set</span>
+
+  <span class='comment'>#get an array of otus objects
+</span>  <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_otus'>otus</span>
+
+  <span class='comment'>#get an otus by id
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span> <span class='op'>=</span> <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_get_otus_by_id'>get_otus_by_id</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>taxa1</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'>#iterate over each otus object
+</span>  <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_each_otus'>each_otus</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_taxa'>taxa</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_taxa'>taxa</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_taxa'>taxa</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#characters
+</span>  <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_trees_set'>trees_set</span> <span class='comment'>#return a hash of trees object indexed with 'id'
+</span>  <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_trees'>trees</span> <span class='comment'>#return an array of trees objects.
+</span>
+  <span class='comment'>#iterate over each trees object
+</span>  <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_each_trees'>each_trees</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_trees'>trees</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_trees'>trees</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_trees'>trees</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#find a trees by id
+</span>  <span class='id identifier rubyid_trees1'>trees1</span> <span class='op'>=</span> <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_get_trees_by_id'>get_trees_by_id</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>trees1</span><span class='tstring_end'>'</span></span>
+
+  <span class='comment'># characters
+</span>  <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_characters_set'>characters_set</span> <span class='comment'>#return a hash of characters object indexed with 'id'
+</span>  <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_characters'>characters</span> <span class='comment'>#return an array of characters object
+</span>
+  <span class='comment'>#iterate over each characters object
+</span>  <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_each_characters'>each_characters</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ch'>ch</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ch'>ch</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ch'>ch</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#find a characters object by id
+</span>  <span class='id identifier rubyid_characters'>characters</span> <span class='op'>=</span> <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_get_characters_by_id'>get_characters_by_id</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>chars1</span><span class='tstring_end'>'</span></span>
+</code></pre>
+
+<h2>Otus</h2>
+
+<p>Taxa blocks and taxons are stored internally as a Ruby hash for faster &#39;id&#39; based lookup. 
+Consider [<a href="https://www.nescent.org/wg_phyloinformatics/NeXML_Elements#Example">https://www.nescent.org/wg_phyloinformatics/NeXML_Elements#Example</a> this] NeXML 
+snippet</p>
+
+<pre class="code ruby"><code>  <span class='comment'>#get the id of otus
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='comment'># &quot;taxa1&quot;
+</span>
+  <span class='comment'>#get the label of otus
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span> <span class='comment'># &quot;Primary taxa block&quot;
+</span>
+  <span class='comment'>#get a hash of child otu objects indexed with id
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span><span class='period'>.</span><span class='id identifier rubyid_otu_set'>otu_set</span>
+
+  <span class='comment'>#get an array of child otu objects
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span><span class='period'>.</span><span class='id identifier rubyid_otus'>otus</span>
+
+  <span class='comment'>#get an otu object by id
+</span>  <span class='comment'>#get_otu_by_id is an alias of []
+</span>  <span class='id identifier rubyid_t1'>t1</span> <span class='op'>=</span> <span class='id identifier rubyid_taxa1'>taxa1</span><span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>t1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span>
+
+  <span class='comment'>#add an otu object to otus
+</span>  <span class='id identifier rubyid_t1'>t1</span><span class='period'>.</span><span class='id identifier rubyid_add_otu'>add_otu</span><span class='lparen'>(</span> <span class='id identifier rubyid_otu_object'>otu_object</span> <span class='rparen'>)</span>
+  <span class='comment'>#to add more than one otu object at a time use &lt;&lt; or otus= method
+</span>  <span class='id identifier rubyid_t1'>t1</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_otu_object1'>otu_object1</span><span class='comma'>,</span> <span class='id identifier rubyid_otu_object2'>otu_object2</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_t1'>t1</span><span class='period'>.</span><span class='id identifier rubyid_otus'>otus</span> <span class='op'>=</span> <span class='id identifier rubyid_otu_object1'>otu_object1</span><span class='comma'>,</span> <span class='id identifier rubyid_otu_object2'>otu_object2</span>
+
+  <span class='comment'>#or iterate over each otu object
+</span>  <span class='comment'>#each_otu is an alias for each
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_taxon'>taxon</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_taxon'>taxon</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_taxon'>taxon</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#check if an otu with given id belongs to an otus or not
+</span>  <span class='comment'>#include? and has? are alias for has_otu?
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span><span class='period'>.</span><span class='id identifier rubyid_has_otu?'>has_otu?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>t2</span><span class='tstring_end'>'</span></span> <span class='comment'># =&gt; true
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span><span class='period'>.</span><span class='id identifier rubyid_has?'>has?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>t8</span><span class='tstring_end'>'</span></span> <span class='comment'># =&gt; false
+</span>
+  <span class='comment'>#an otus object in enumerable
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='op'>&amp;</span><span class='symbol'>:id</span> <span class='comment'># =&gt; array of otu ids
+</span>  <span class='id identifier rubyid_taxa1'>taxa1</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Lemurs</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span> <span class='comment'>#maybe in future
+</span></code></pre>
+
+<h3>Otu</h3>
+
+<pre class="code ruby"><code>  <span class='comment'>#get an otu's id
+</span>  <span class='id identifier rubyid_t1'>t1</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='comment'># =&gt; &quot;t1&quot;
+</span>
+  <span class='comment'>#get an otu's label
+</span>  <span class='id identifier rubyid_t1'>t1</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span> <span class='comment'># =&gt; &quot;Homo sapiens&quot;
+</span></code></pre>
+
+<h2>Trees</h2>
+
+<p>Trees and tree and network are stored internally as a Ruby hash for faster &#39;id&#39; based lookup.</p>
+
+<pre class="code ruby"><code>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='comment'>#Bio::NeXML::Trees
+</span>
+  <span class='comment'>#get the taxa block to which the trees is linked to
+</span>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_otus'>otus</span> <span class='comment'>#returns an otus object
+</span></code></pre>
+
+<h3>Tree</h3>
+
+<pre class="code ruby"><code>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_tree_set'>tree_set</span> <span class='comment'>#return a hash or tree objects indexed with 'id'
+</span>  <span class='id identifier rubyid_tress1'>tress1</span><span class='period'>.</span><span class='id identifier rubyid_trees'>trees</span> <span class='comment'>#return an arrayof trees object
+</span>
+  <span class='comment'>#iterate over each tree object
+</span>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_each_tree'>each_tree</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#get a tree object with its 'tree1'
+</span>  <span class='id identifier rubyid_tree1'>tree1</span> <span class='op'>=</span> <span class='id identifier rubyid_trees1'>trees1</span><span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tree1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span>
+  <span class='comment'>#or, with a conventional method call
+</span>  <span class='id identifier rubyid_tree1'>tree1</span> <span class='op'>=</span> <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_get_tree_by_id'>get_tree_by_id</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tree1</span><span class='tstring_end'>'</span></span>
+  <span class='comment'>#or, from a nexml object
+</span>  <span class='id identifier rubyid_tree1'>tree1</span> <span class='op'>=</span> <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_get_tree_by_id'>get_tree_by_id</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tree1</span><span class='tstring_end'>'</span></span>
+
+  <span class='id identifier rubyid_tree1'>tree1</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='comment'>#Bio::NeXML::IntTree or Bio::NeXML::FloatTree
+</span>
+  <span class='comment'>#check if a tree belongs to a trees or not
+</span>  <span class='comment'>#pass it a tree id
+</span>  <span class='id identifier rubyid_tree1'>tree1</span><span class='period'>.</span><span class='id identifier rubyid_has_tree?'>has_tree?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tree1</span><span class='tstring_end'>'</span></span> <span class='comment'>#return true or false
+</span>
+  <span class='comment'>#get the number of treess
+</span>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_number_of_trees'>number_of_trees</span>
+</code></pre>
+
+<h3>Network</h3>
+
+<pre class="code ruby"><code>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_network_set'>network_set</span> <span class='comment'>#return a hash or network objects indexed with 'id'
+</span>  <span class='id identifier rubyid_tress1'>tress1</span><span class='period'>.</span><span class='id identifier rubyid_networks'>networks</span> <span class='comment'>#return an arrayof network objects
+</span>
+  <span class='comment'>#iterate over each network object
+</span>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_each_network'>each_network</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_n'>n</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_n'>n</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_n'>n</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#get a network object with its id
+</span>  <span class='id identifier rubyid_network1'>network1</span> <span class='op'>=</span> <span class='id identifier rubyid_trees1'>trees1</span><span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>network1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span>
+  <span class='comment'>#or, with a conventional method call
+</span>  <span class='id identifier rubyid_network1'>network1</span> <span class='op'>=</span> <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_get_network_by_id'>get_network_by_id</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>network1</span><span class='tstring_end'>'</span></span>
+  <span class='comment'>#or, from a nexml object
+</span>  <span class='id identifier rubyid_network1'>network1</span> <span class='op'>=</span> <span class='id identifier rubyid_nexml'>nexml</span><span class='period'>.</span><span class='id identifier rubyid_get_tree_by_id'>get_tree_by_id</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>network1</span><span class='tstring_end'>'</span></span>
+
+  <span class='id identifier rubyid_network1'>network1</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='comment'>#Bio::NeXML::IntTree or Bio::NeXML::FloatTree
+</span>
+  <span class='comment'>#check if a network belongs to a trees or not
+</span>  <span class='comment'>#pass it a network id
+</span>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_has_network?'>has_network?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>network1</span><span class='tstring_end'>'</span></span> <span class='comment'>#return true or false
+</span>
+  <span class='comment'>#get the number of networks
+</span>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_number_of_networks'>number_of_networks</span>
+</code></pre>
+
+<h3>Tree and Network</h3>
+
+<pre class="code ruby"><code>  <span class='comment'>#iterate over both trees and networks
+</span>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_g'>g</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_g'>g</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#find if a tree or a network belongs to a trees or not
+</span>  <span class='comment'>#include? is an alias for has?
+</span>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_has?'>has?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tree1</span><span class='tstring_end'>'</span></span> <span class='comment'>#return true or false
+</span>
+  <span class='comment'>#total number of trees and networks
+</span>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_number_of_graphs'>number_of_graphs</span>
+</code></pre>
+
+<p>All the available methods from [<a href="http://bioruby.org/rdoc/classes/Bio/Tree.html#M001688">http://bioruby.org/rdoc/classes/Bio/Tree.html#M001688</a> Bio::Tree]
+class can be called on a tree object.</p>
+
+<pre class="code ruby"><code>  <span class='id identifier rubyid_node1'>node1</span> <span class='op'>=</span> <span class='id identifier rubyid_tree'>tree</span><span class='period'>.</span><span class='id identifier rubyid_get_node_by_name'>get_node_by_name</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>n3</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#note name is same as id
+</span>  <span class='id identifier rubyid_tree1'>tree1</span><span class='period'>.</span><span class='id identifier rubyid_parents'>parents</span> <span class='id identifier rubyid_node1'>node1</span>
+</code></pre>
+
+<p>A trees object is an enumerable:</p>
+
+<pre class="code ruby"><code>  <span class='id identifier rubyid_trees1'>trees1</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='op'>&amp;</span><span class='symbol'>:id</span>
+</code></pre>
+
+<h2>Characters</h2>
+
+<pre class="code ruby"><code>  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_characters'>characters</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+
+  <span class='comment'>#get the taxa block to which the characters is linked to
+</span>  <span class='id identifier rubyid_characters'>characters</span><span class='period'>.</span><span class='id identifier rubyid_otus'>otus</span> <span class='comment'>#returns an otus object
+</span>
+  <span class='comment'>#get the child format element
+</span>  <span class='id identifier rubyid_format'>format</span> <span class='op'>=</span> <span class='id identifier rubyid_characters'>characters</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span>
+
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+
+  <span class='comment'>#get the child matrix element
+</span>  <span class='id identifier rubyid_matrix'>matrix</span> <span class='op'>=</span> <span class='id identifier rubyid_characters'>characters</span><span class='period'>.</span><span class='id identifier rubyid_matrix'>matrix</span>
+
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_matrix'>matrix</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+</code></pre>
+
+<h3>Format</h3>
+
+<pre class="code ruby"><code>  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_states_set'>states_set</span> <span class='comment'>#return a hash of states objects indexed with 'id'
+</span>  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_states'>states</span> <span class='comment'>#return an array of states object
+</span>
+  <span class='comment'>#iterate over each states object
+</span>  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_each_states'>each_states</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_states'>states</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#get a states object by id
+</span>  <span class='id identifier rubyid_states'>states</span> <span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_get_states_by_id'>get_states_by_id</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>states1</span><span class='tstring_end'>'</span></span>
+
+  <span class='comment'>#check if the states object with 'id' belongs to format or not
+</span>  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_has_states?'>has_states?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>states1</span><span class='tstring_end'>'</span></span>
+
+  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_char_set'>char_set</span> <span class='comment'>#return a hash of char objects indexed with 'id'
+</span>  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_chars'>chars</span> <span class='comment'>#return an array of char objects
+</span>
+  <span class='comment'>#iterate over each char object
+</span>  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_each_char'>each_char</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_char'>char</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_char'>char</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_char'>char</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#get a char object by id
+</span>  <span class='id identifier rubyid_char'>char</span> <span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_get_char_by_id'>get_char_by_id</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>char1</span><span class='tstring_end'>'</span></span>
+
+  <span class='comment'>#check if the char object with 'id' belongs to format or not
+</span>  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_has_char?'>has_char?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>char1</span><span class='tstring_end'>'</span></span>
+
+  <span class='comment'>#get a states or a char object by id
+</span>  <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>states1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span>
+  <span class='id identifier rubyid_char'>char</span> <span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>char1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span>
+
+  <span class='comment'>#check if a states or a char object with 'id' belongs to format or not
+</span>  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_has?'>has?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>states1</span><span class='tstring_end'>'</span></span>
+  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_has?'>has?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>char1</span><span class='tstring_end'>'</span></span>
+
+  <span class='comment'>#all objects, including char and states can be iterated over with each
+</span>  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#format is enumerable
+</span>  <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='op'>&amp;</span><span class='symbol'>:id</span>
+</code></pre>
+
+<h4>States</h4>
+
+<pre class="code ruby"><code>  <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_state_set'>state_set</span> <span class='comment'>#return a hash of state objects indexed with 'id'
+</span>  <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_states'>states</span> <span class='comment'>#return an array of state objects
+</span>
+  <span class='comment'>#iterate over each state object
+</span>  <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_each_state'>each_state</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_state'>state</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#or, use its alias each
+</span>
+  <span class='comment'>#get a state object by id
+</span>  <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_get_state_by_id'>get_state_by_id</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>state1</span><span class='tstring_end'>'</span></span>
+  <span class='comment'>#or, use hash notation
+</span>  <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_states'>states</span><span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>state1</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span>
+
+  <span class='comment'>#check if a state belongs to states or not
+</span>  <span class='id identifier rubyid_states'>states</span><span class='period'>.</span><span class='id identifier rubyid_has_state?'>has_state?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>state1</span><span class='tstring_end'>'</span></span>
+  <span class='comment'>#or, use its alias has? and include?
+</span></code></pre>
+
+<h5>State</h5>
+
+<pre class="code ruby"><code>  <span class='comment'>#get the symbol associated with the state
+</span>  <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_symbol'>symbol</span>
+
+  <span class='comment'>#find if the state is ambiguous
+</span>  <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_ambiguous?'>ambiguous?</span>
+
+  <span class='comment'>#find the kind of ambiguity
+</span>  <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_ambiguity'>ambiguity</span>
+
+  <span class='comment'>#find if it is an uncertain state set
+</span>  <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_uncertain?'>uncertain?</span>
+
+  <span class='comment'>#find if it is a polymorphic state set
+</span>  <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_polymorphic?'>polymorphic?</span>
+
+  <span class='comment'>#get the members of a state set as an array
+</span>  <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span>
+
+  <span class='comment'>#or iterate over each member
+</span>  <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_member'>member</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_member'>member</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='comment'>#same as self
+</span>    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_member'>member</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#a state is Enumerable over its members
+</span>  <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_member'>member</span><span class='op'>|</span> <span class='id identifier rubyid_member'>member</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rna5</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+</code></pre>
+
+<h4>Char</h4>
+
+<pre class="code ruby"><code>  <span class='comment'>#get the id
+</span>  <span class='id identifier rubyid_char'>char</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+
+  <span class='comment'>#get the label
+</span>  <span class='id identifier rubyid_char'>char</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span>
+
+  <span class='comment'>#get the states object the char is linked to
+</span>  <span class='id identifier rubyid_char'>char</span><span class='period'>.</span><span class='id identifier rubyid_states'>states</span>
+
+  <span class='comment'>#get the codon position for DnaChar and RnaChar objects
+</span>  <span class='id identifier rubyid_char'>char</span><span class='period'>.</span><span class='id identifier rubyid_codon'>codon</span>
+</code></pre>
+
+<h3>Matrix</h3>
+
+<p>...</p>
+
 <h2>Contributing to bio-nexml</h2>
+
 <ul>
-<li>Check out the latest master to make sure the feature hasn&#8217;t been
-implemented or the bug hasn&#8217;t been fixed yet
-
-</li>
-<li>Check out the issue tracker to make sure someone already hasn&#8217;t
-requested it and/or contributed it
-
-</li>
-<li>Fork the project
-
-</li>
-<li>Start a feature/bugfix branch
-
-</li>
-<li>Commit and push until you are happy with your contribution
-
-</li>
-<li>Make sure to add tests for it. This is important so I don&#8217;t break it
-in a future version unintentionally.
-
-</li>
-<li>Please try not to mess with the Rakefile, version, or history. If you want
-to have your own version, or is otherwise necessary, that is fine, but
-please isolate to its own commit so I can cherry-pick around it.
-
-</li>
+<li>Check out the latest master to make sure the feature hasn&#39;t been implemented
+or the bug hasn&#39;t been fixed yet</li>
+<li>Check out the issue tracker to make sure someone already hasn&#39;t requested it
+and/or contributed it</li>
+<li>Fork the project</li>
+<li>Start a feature/bugfix branch</li>
+<li>Commit and push until you are happy with your contribution</li>
+<li>Make sure to add tests for it. This is important so I don&#39;t break it in a
+future version unintentionally.</li>
+<li>Please try not to mess with the Rakefile, version, or history. If you want to
+have your own version, or is otherwise necessary, that is fine, but please
+isolate to its own commit so I can cherry-pick around it.</li>
 </ul>
+
+<h2>Acknowledgements</h2>
+
+<p>The research leading to these results has received funding from the [European
+Community&#39;s] Seventh Framework Programme ([FP7/2007-2013] under grant agreement
+n? [237046].</p>
+
+<h2>Citing bio-nexml</h2>
+
+<p>If you use this software, please cite:</p>
+
+<blockquote>
+<p><a href="http://sysbio.oxfordjournals.org/content/early/2012/02/12/sysbio.sys025.short">NeXML: rich, extensible, and verifiable representation of comparative data and metadata</a></p>
+</blockquote>
+
+<p>and</p>
+
+<blockquote>
+<p><a href="http://dx.doi.org/10.1093/bioinformatics/bts080">Biogem: an effective tool based approach for scaling up open source software development in bioinformatics</a></p>
+</blockquote>
+
 <h2>Copyright</h2>
-<p>
-Copyright &#169; 2011 rvosa. See LICENSE.txt for further details.
-</p>
+
+<p>Copyright (c) 2011 Rutger Vos and Anurag Priyam. See LICENSE.txt for further
+details.</p>
 </div></div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:31:57 2011 by 
+  Generated on Thu Mar 29 12:34:00 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

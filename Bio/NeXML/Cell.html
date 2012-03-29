@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Cell
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -106,33 +106,33 @@ a bound cell is the same as the &#8216;symbol&#8217; of the state it points
 to. Value of a bound cell may be changed by assigning a different state to
 it. An unbound cell holds a raw value.
 </p>
-<pre class="code">
-   <span class='cell identifier id'>cell</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Cell constant id'>Cell</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'A'</span> <span class='rparen token'>)</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='bound? fid id'>bound?</span>           <span class='comment val'>#=&gt; false</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='value identifier id'>value</span>            <span class='comment val'>#=&gt; 'A'</span>
-
-   <span class='comment val'># Assign a new value to an unbound cell.</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='value identifier id'>value</span> <span class='assign token'>=</span> <span class='string val'>'B'</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='value identifier id'>value</span>            <span class='comment val'>#=&gt; 'B'</span>
-
-   <span class='cell identifier id'>cell</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Cell constant id'>Cell</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='symbol val'>:char</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='char1 identifier id'>char1</span><span class='comma token'>,</span> <span class='symbol val'>:state</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='stateA identifier id'>stateA</span> <span class='rparen token'>)</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='bound? fid id'>bound?</span>           <span class='comment val'>#=&gt; true</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='value identifier id'>value</span>            <span class='comment val'>#=&gt; 'A'</span>
-
-   <span class='comment val'># Can not assign a value to a bound cell directly.</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='value identifier id'>value</span> <span class='assign token'>=</span> <span class='string val'>'B'</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='value identifier id'>value</span>            <span class='comment val'>#=&gt; 'A'</span>
-
-   <span class='comment val'># Changing the state of a bound cell changes its value.</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='state identifier id'>state</span> <span class='assign token'>=</span> <span class='stateB identifier id'>stateB</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='value identifier id'>value</span>            <span class='comment val'>#=&gt; 'B'</span>
-</pre>
+<pre class="code ruby"><code>
+   <span class='id identifier rubyid_cell'>cell</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Cell</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+   <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_bound?'>bound?</span>           <span class='comment'>#=&gt; false
+</span>   <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>            <span class='comment'>#=&gt; 'A'
+</span>
+   <span class='comment'># Assign a new value to an unbound cell.
+</span>   <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>B</span><span class='tstring_end'>'</span></span>
+   <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>            <span class='comment'>#=&gt; 'B'
+</span>
+   <span class='id identifier rubyid_cell'>cell</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Cell</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='symbol'>:char</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_char1'>char1</span><span class='comma'>,</span> <span class='symbol'>:state</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_stateA'>stateA</span> <span class='rparen'>)</span>
+   <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_bound?'>bound?</span>           <span class='comment'>#=&gt; true
+</span>   <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>            <span class='comment'>#=&gt; 'A'
+</span>
+   <span class='comment'># Can not assign a value to a bound cell directly.
+</span>   <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>B</span><span class='tstring_end'>'</span></span>
+   <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>            <span class='comment'>#=&gt; 'A'
+</span>
+   <span class='comment'># Changing the state of a bound cell changes its value.
+</span>   <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_stateB'>stateB</span>
+   <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>            <span class='comment'>#=&gt; 'B'</span></code></pre>
 
 
   </div>
 </div>
 <div class="tags">
   
+
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
   <p class="children"><span class='object_link'><a href="ContinuousCell.html" title="Bio::NeXML::ContinuousCell (class)">ContinuousCell</a></span></p>
@@ -145,17 +145,14 @@ it. An unbound cell holds a raw value.
         <dt id="writer-classvariable" class="">@@writer =
           
         </dt>
-        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-</pre></dd>
+        <dd><pre class="code"><span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
       
     </dl>
   
 
 
-  
-  
-  
-  
+
+
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
     
@@ -244,9 +241,6 @@ Returns the value of attribute state.
 
 
 
-  
-  
-  
 
   
     <h2>
@@ -431,6 +425,7 @@ A new instance of Cell
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -460,26 +455,25 @@ A new instance of Cell
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 436</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='char identifier id'>char</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='state identifier id'>state</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='case case kw'>case</span> <span class='char identifier id'>char</span>
-  <span class='when when kw'>when</span> <span class='Hash constant id'>Hash</span>
-    <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='char identifier id'>char</span> <span class='rparen token'>)</span>
-  <span class='when when kw'>when</span> <span class='Char constant id'>Char</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='char identifier id'>char</span> <span class='assign token'>=</span> <span class='char identifier id'>char</span>
-  <span class='else else kw'>else</span>
-    <span class='@value ivar id'>@value</span> <span class='assign token'>=</span> <span class='char identifier id'>char</span> <span class='unless unless_mod kw'>unless</span> <span class='char identifier id'>char</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-  <span class='end end kw'>end</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_char'>char</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_char'>char</span>
+  <span class='kw'>when</span> <span class='const'>Hash</span>
+    <span class='id identifier rubyid_properties'>properties</span><span class='lparen'>(</span> <span class='id identifier rubyid_char'>char</span> <span class='rparen'>)</span>
+  <span class='kw'>when</span> <span class='const'>Char</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_char'>char</span> <span class='op'>=</span> <span class='id identifier rubyid_char'>char</span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@value</span> <span class='op'>=</span> <span class='id identifier rubyid_char'>char</span> <span class='kw'>unless</span> <span class='id identifier rubyid_char'>char</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>end</span>
 
-  <span class='case case kw'>case</span> <span class='state identifier id'>state</span>
-  <span class='when when kw'>when</span> <span class='State constant id'>State</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='state identifier id'>state</span> <span class='assign token'>=</span> <span class='state identifier id'>state</span>
-  <span class='when when kw'>when</span> <span class='Hash constant id'>Hash</span>
-    <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='state identifier id'>state</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_state'>state</span>
+  <span class='kw'>when</span> <span class='const'>State</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_state'>state</span>
+  <span class='kw'>when</span> <span class='const'>Hash</span>
+    <span class='id identifier rubyid_properties'>properties</span><span class='lparen'>(</span> <span class='id identifier rubyid_state'>state</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
 
-  <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-<span class='end end kw'>end</span>
-</pre>
+  <span class='id identifier rubyid_properties'>properties</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -511,6 +505,7 @@ Returns the value of attribute char
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -524,10 +519,9 @@ Returns the value of attribute char
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 426</span>
 
-<span class='def def kw'>def</span> <span class='char identifier id'>char</span>
-  <span class='@char ivar id'>@char</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_char'>char</span>
+  <span class='ivar'>@char</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -554,6 +548,7 @@ Returns the value of attribute label
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -567,10 +562,9 @@ Returns the value of attribute label
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 428</span>
 
-<span class='def def kw'>def</span> <span class='label identifier id'>label</span>
-  <span class='@label ivar id'>@label</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
+  <span class='ivar'>@label</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -597,6 +591,7 @@ Returns the value of attribute state
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -610,10 +605,9 @@ Returns the value of attribute state
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 427</span>
 
-<span class='def def kw'>def</span> <span class='state identifier id'>state</span>
-  <span class='@state ivar id'>@state</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_state'>state</span>
+  <span class='ivar'>@state</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -640,7 +634,8 @@ Returns the value of attribute state
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -667,10 +662,9 @@ Returns the value of attribute state
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 466</span>
 
-<span class='def def kw'>def</span> <span class='bound? fid id'>bound?</span>
-  <span class='notop op'>!</span><span class='notop op'>!</span><span class='lparen token'>(</span> <span class='char identifier id'>char</span> <span class='and and kw'>and</span> <span class='state identifier id'>state</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_bound?'>bound?</span>
+  <span class='op'>!</span><span class='op'>!</span><span class='lparen'>(</span> <span class='id identifier rubyid_char'>char</span> <span class='kw'>and</span> <span class='id identifier rubyid_state'>state</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -698,6 +692,7 @@ Allow cells to be implicitly used as a String.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -711,10 +706,9 @@ Allow cells to be implicitly used as a String.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 471</span>
 
-<span class='def def kw'>def</span> <span class='to_str identifier id'>to_str</span>
-  <span class='value identifier id'>value</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_str'>to_str</span>
+  <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -740,10 +734,9 @@ Allow cells to be implicitly used as a String.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 476</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
-  <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;cell&quot;</span><span class='comma token'>,</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lparen token'>(</span> <span class='self self kw'>self</span><span class='comma token'>,</span> <span class='symbol val'>:state</span><span class='comma token'>,</span> <span class='symbol val'>:char</span> <span class='rparen token'>)</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cell</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lparen'>(</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:state</span><span class='comma'>,</span> <span class='symbol'>:char</span> <span class='rparen'>)</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -771,6 +764,7 @@ Return the value of a cell.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -784,10 +778,9 @@ Return the value of a cell.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 457</span>
 
-<span class='def def kw'>def</span> <span class='value identifier id'>value</span>
-  <span class='bound? fid id'>bound?</span> <span class='integer val'>? </span><span class='state identifier id'>state</span><span class='dot token'>.</span><span class='symbol identifier id'>symbol</span> <span class='colon op'>:</span> <span class='@value ivar id'>@value</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='id identifier rubyid_bound?'>bound?</span> <span class='op'>?</span> <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_symbol'>symbol</span> <span class='op'>:</span> <span class='ivar'>@value</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -813,10 +806,9 @@ Return the value of a cell.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 462</span>
 
-<span class='def def kw'>def</span> <span class='value= identifier id'>value=</span><span class='lparen token'>(</span> <span class='value identifier id'>value</span> <span class='rparen token'>)</span>
-  <span class='bound? fid id'>bound?</span> <span class='integer val'>? </span><span class='nil nil kw'>nil</span> <span class='colon op'>:</span> <span class='@value ivar id'>@value</span> <span class='assign token'>=</span> <span class='value identifier id'>value</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_value='>value=</span><span class='lparen'>(</span> <span class='id identifier rubyid_value'>value</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_bound?'>bound?</span> <span class='op'>?</span> <span class='kw'>nil</span> <span class='op'>:</span> <span class='ivar'>@value</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -827,9 +819,9 @@ Return the value of a cell.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:31:59 2011 by 
+  Generated on Thu Mar 29 12:34:01 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

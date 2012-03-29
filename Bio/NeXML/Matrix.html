@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Matrix
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -108,17 +108,14 @@
         <dt id="writer-classvariable" class="">@@writer =
           
         </dt>
-        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-</pre></dd>
+        <dd><pre class="code"><span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
       
     </dl>
   
 
 
-  
-  
-  
-  
+
+
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
     
@@ -154,9 +151,6 @@ object_id in this case.
 
 
 
-  
-  
-  
 
   
     <h2>
@@ -203,10 +197,7 @@ object_id in this case.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Remove a row from the matrix.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -227,10 +218,7 @@ Remove a row from the matrix.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Iterate over each row ( Bio::NeXML::Row object ) defined for the matrix.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -251,10 +239,7 @@ Iterate over each row ( Bio::NeXML::Row object ) defined for the matrix.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Fetch a row ( Bio::NeXML::Row object ) by id.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -275,11 +260,7 @@ Fetch a row ( Bio::NeXML::Row object ) by id.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Returns true if the given row( Bio::NeXML::Row object ) is defined for the
-matrix.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -300,11 +281,7 @@ matrix.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Returns true if the given row ( Bio::NeXML::Row object ) is defined for the
-matrix block.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -351,10 +328,7 @@ A new instance of Matrix.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Returns the number of rows defined for the matrix.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -375,10 +349,7 @@ Returns the number of rows defined for the matrix.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Returns an array of rows( Bio::NeXML::Rows objects ) for the matrix.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -399,10 +370,7 @@ Returns an array of rows( Bio::NeXML::Rows objects ) for the matrix.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Add rowsthe matrix.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -462,6 +430,7 @@ A new instance of Matrix
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -477,12 +446,11 @@ A new instance of Matrix
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 547</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='@id ivar id'>@id</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='object_id identifier id'>object_id</span>
-  <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-  <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='arity identifier id'>arity</span> <span class='lt op'>&lt;</span> <span class='integer val'>1</span> <span class='question op'>?</span> <span class='instance_eval identifier id'>instance_eval</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='call identifier id'>call</span><span class='lparen token'>(</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>        
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='ivar'>@id</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_object_id'>object_id</span>
+  <span class='id identifier rubyid_properties'>properties</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_arity'>arity</span> <span class='op'>&lt;</span> <span class='int'>1</span> <span class='op'>?</span> <span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span> <span class='kw'>self</span> <span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>        
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -515,6 +483,7 @@ object_id in this case
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -528,10 +497,9 @@ object_id in this case
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 545</span>
 
-<span class='def def kw'>def</span> <span class='id identifier id'>id</span>
-  <span class='@id ivar id'>@id</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -564,10 +532,9 @@ object_id in this case
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 553</span>
 
-<span class='def def kw'>def</span> <span class='add_row identifier id'>add_row</span><span class='lparen token'>(</span> <span class='row identifier id'>row</span> <span class='rparen token'>)</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_row'>add_row</span><span class='lparen'>(</span> <span class='id identifier rubyid_row'>row</span> <span class='rparen'>)</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -580,36 +547,7 @@ object_id in this case
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Remove a row from the matrix.
-</p>
-<ul>
-<li>Arguments :
-
-</li>
-</ul>
-<p>
-row( required ) - a Bio::NeXML::Row object.
-</p>
-<ul>
-<li>Returns : the deleted object.
-
-<pre class="code">
- <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='delete_row identifier id'>delete_row</span><span class='lparen token'>(</span> <span class='row identifier id'>row</span> <span class='rparen token'>)</span>
- <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span>                <span class='comment val'>#=&gt; [ .. .. ]</span>
- <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='matrix identifier id'>matrix</span>                <span class='comment val'>#=&gt; nil</span>
-</pre>
-</li>
-</ul>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -622,10 +560,9 @@ row( required ) - a Bio::NeXML::Row object.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 570</span>
 
-<span class='def def kw'>def</span> <span class='delete_row identifier id'>delete_row</span><span class='lparen token'>(</span> <span class='row identifier id'>row</span> <span class='rparen token'>)</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_row'>delete_row</span><span class='lparen'>(</span> <span class='id identifier rubyid_row'>row</span> <span class='rparen'>)</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -638,19 +575,7 @@ row( required ) - a Bio::NeXML::Row object.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Iterate over each row ( Bio::NeXML::Row object ) defined for the matrix.
-Returns an Enumerator if no block is provided.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -663,10 +588,9 @@ Returns an Enumerator if no block is provided.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 609</span>
 
-<span class='def def kw'>def</span> <span class='each_row identifier id'>each_row</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_each_row'>each_row</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -679,19 +603,7 @@ Returns an Enumerator if no block is provided.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Fetch a row ( Bio::NeXML::Row object ) by id. Returns <tt>nil</tt> if none
-found.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -704,10 +616,9 @@ found.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 575</span>
 
-<span class='def def kw'>def</span> <span class='get_row_by_id identifier id'>get_row_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_row_by_id'>get_row_by_id</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -722,16 +633,13 @@ found.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Returns true if the given row( Bio::NeXML::Row object ) is defined for the
-matrix.
-</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -758,10 +666,9 @@ matrix.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 603</span>
 
-<span class='def def kw'>def</span> <span class='has_row? fid id'>has_row?</span><span class='lparen token'>(</span> <span class='rows identifier id'>rows</span> <span class='rparen token'>)</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_has_row?'>has_row?</span><span class='lparen'>(</span> <span class='id identifier rubyid_rows'>rows</span> <span class='rparen'>)</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -776,16 +683,13 @@ matrix.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Returns true if the given row ( Bio::NeXML::Row object ) is defined for the
-matrix block.
-</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -812,10 +716,9 @@ matrix block.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 559</span>
 
-<span class='def def kw'>def</span> <span class='has_rows? fid id'>has_rows?</span><span class='lparen token'>(</span> <span class='rows identifier id'>rows</span> <span class='rparen token'>)</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_has_rows?'>has_rows?</span><span class='lparen'>(</span> <span class='id identifier rubyid_rows'>rows</span> <span class='rparen'>)</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -828,18 +731,7 @@ matrix block.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Returns the number of rows defined for the matrix.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -852,10 +744,9 @@ Returns the number of rows defined for the matrix.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 580</span>
 
-<span class='def def kw'>def</span> <span class='number_of_rows identifier id'>number_of_rows</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_number_of_rows'>number_of_rows</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -868,21 +759,7 @@ Returns the number of rows defined for the matrix.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Returns an array of rows( Bio::NeXML::Rows objects ) for the matrix.
-</p>
-<pre class="code">
-   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span>  <span class='comment val'>#=&gt; [ .. .. ]</span>
-</pre>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -895,10 +772,9 @@ Returns an array of rows( Bio::NeXML::Rows objects ) for the matrix.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 587</span>
 
-<span class='def def kw'>def</span> <span class='rows identifier id'>rows</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_rows'>rows</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -911,32 +787,7 @@ Returns an array of rows( Bio::NeXML::Rows objects ) for the matrix.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Add rowsthe matrix. This function will overwrite previous rows for the
-matrix if any.
-</p>
-<ul>
-<li>Arguments :
-
-</li>
-</ul>
-<p>
-rows( required ) - an array of Bio::NeXML::Row object.
-</p>
-<pre class="code">
-   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span> <span class='rows identifier id'>rows</span> <span class='rbrack token'>]</span>
-   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span>    <span class='comment val'>#=&gt; [ rows ]</span>
-   <span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='matrix identifier id'>matrix</span>    <span class='comment val'>#=&gt; matrix</span>
-</pre>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -949,10 +800,9 @@ rows( required ) - an array of Bio::NeXML::Row object.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 598</span>
 
-<span class='def def kw'>def</span> <span class='rows= identifier id'>rows=</span><span class='lparen token'>(</span> <span class='rows identifier id'>rows</span> <span class='rparen token'>)</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_rows='>rows=</span><span class='lparen'>(</span> <span class='id identifier rubyid_rows'>rows</span> <span class='rparen'>)</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -982,14 +832,13 @@ rows( required ) - an array of Bio::NeXML::Row object.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 618</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
-  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;matrix&quot;</span> <span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_row identifier id'>each_row</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='row identifier id'>row</span><span class='bitor op'>|</span>
-    <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-  <span class='end end kw'>end</span>
-  <span class='node identifier id'>node</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>matrix</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_each_row'>each_row</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+    <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_row'>row</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_node'>node</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1000,9 +849,9 @@ rows( required ) - an array of Bio::NeXML::Row object.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:02 2011 by 
+  Generated on Thu Mar 29 12:34:01 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

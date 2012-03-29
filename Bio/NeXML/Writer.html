@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Writer
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -97,6 +97,8 @@
 
 
 
+
+
   
     <h2>
       Instance Method Summary
@@ -147,9 +149,8 @@ objects to <tt>self</tt>.
 
   
     <span class="summary_desc"><div class='inline'><p>
-Add a single <em>characters</em> object to <tt>self</tt> &gt;&gt; writer =
-Bio::NeXML::Writer.new &gt;&gt; writer.add_characters(
-nexml.characters.first ).
+Add a single <em>characters</em> object to <tt>self</tt> >> writer =
+Bio::NeXML::Writer.new >> writer.add_characters( nexml.characters.first ).
 </p>
 </div></span>
   
@@ -197,8 +198,8 @@ Add a single <em>otus</em> object to <tt>self</tt>.
 
   
     <span class="summary_desc"><div class='inline'><p>
-Add a single <em>trees</em> object to <tt>self</tt> &gt;&gt; writer =
-Bio::NeXML::Writer.new &gt;&gt; writer.add_trees( nexml.trees.first ).
+Add a single <em>trees</em> object to <tt>self</tt> >> writer =
+Bio::NeXML::Writer.new >> writer.add_trees( nexml.trees.first ).
 </p>
 </div></span>
   
@@ -426,7 +427,7 @@ NeXML representation to_s method should be called on the return value.
 <h1>EXAMPLES</h1>
 <p>
 A lot of examples of creating nexml objects and then serializing them can
-be found in the tests &quot;test/unit/bio/db/nexml/tc_writer.rb&quot;
+be found in the tests &#8220;test/unit/bio/db/nexml/tc_writer.rb&#8220;
 </p>
 
 
@@ -434,6 +435,7 @@ be found in the tests &quot;test/unit/bio/db/nexml/tc_writer.rb&quot;
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -451,14 +453,13 @@ be found in the tests &quot;test/unit/bio/db/nexml/tc_writer.rb&quot;
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 98</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='filename identifier id'>filename</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='indent identifier id'>indent</span> <span class='assign token'>=</span> <span class='true true kw'>true</span> <span class='rparen token'>)</span>
-  <span class='@filename ivar id'>@filename</span> <span class='assign token'>=</span> <span class='filename identifier id'>filename</span>
-  <span class='@indent ivar id'>@indent</span> <span class='assign token'>=</span> <span class='indent identifier id'>indent</span>
-  <span class='@doc ivar id'>@doc</span> <span class='assign token'>=</span> <span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Document constant id'>Document</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-  <span class='@root ivar id'>@root</span> <span class='assign token'>=</span> <span class='root identifier id'>root</span>
-  <span class='@doc ivar id'>@doc</span><span class='dot token'>.</span><span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='@root ivar id'>@root</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_filename'>filename</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_indent'>indent</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='rparen'>)</span>
+  <span class='ivar'>@filename</span> <span class='op'>=</span> <span class='id identifier rubyid_filename'>filename</span>
+  <span class='ivar'>@indent</span> <span class='op'>=</span> <span class='id identifier rubyid_indent'>indent</span>
+  <span class='ivar'>@doc</span> <span class='op'>=</span> <span class='const'>XML</span><span class='op'>::</span><span class='const'>Document</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@root</span> <span class='op'>=</span> <span class='id identifier rubyid_root'>root</span>
+  <span class='ivar'>@doc</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span> <span class='op'>=</span> <span class='ivar'>@root</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -483,11 +484,10 @@ be found in the tests &quot;test/unit/bio/db/nexml/tc_writer.rb&quot;
     <p>
 Add one or more <em>otus</em>, <em>trees</em>, or <em>characters</em>
 objects to <tt>self</tt>. This function delegates the actual addition to
-the <tt>otus=</tt>, <tt>trees=</tt>, or <tt>otus=</tt> methods. &gt;&gt;
-doc1 = Bio::NeXML::Parser.new &#8216;test.xml&#8217; &gt;&gt; nexml =
-doc1.parse &gt;&gt; doc1.close &gt;&gt; writer = Bio::NeXML::Writer.new
-&gt;&gt; writer &lt;&lt; nexml.otus &gt;&gt; writer &lt;&lt; nexml.trees
-&gt;&gt; writer &lt;&lt; nexml.characters
+the <tt>otus=</tt>, <tt>trees=</tt>, or <tt>otus=</tt> methods. >> doc1 =
+Bio::NeXML::Parser.new &#8216;test.xml&#8217; >> nexml = doc1.parse >>
+doc1.close >> writer = Bio::NeXML::Writer.new >> writer << nexml.otus >>
+writer << nexml.trees >> writer << nexml.characters
 </p>
 
 
@@ -495,6 +495,7 @@ doc1.parse &gt;&gt; doc1.close &gt;&gt; writer = Bio::NeXML::Writer.new
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -516,18 +517,17 @@ doc1.parse &gt;&gt; doc1.close &gt;&gt; writer = Bio::NeXML::Writer.new
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 116</span>
 
-<span class='def def kw'>def</span> <span class='lshft op'>&lt;&lt;</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-  <span class='test identifier id'>test</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='instance_of? fid id'>instance_of?</span><span class='lparen token'>(</span> <span class='Array constant id'>Array</span> <span class='rparen token'>)</span> <span class='question op'>?</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='first identifier id'>first</span> <span class='colon op'>:</span> <span class='object identifier id'>object</span>
-  <span class='case case kw'>case</span> <span class='test identifier id'>test</span>
-  <span class='when when kw'>when</span> <span class='Otus constant id'>Otus</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='otus identifier id'>otus</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span>
-  <span class='when when kw'>when</span> <span class='Trees constant id'>Trees</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='trees identifier id'>trees</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span>
-  <span class='when when kw'>when</span> <span class='Characters constant id'>Characters</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='characters identifier id'>characters</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_test'>test</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span> <span class='const'>Array</span> <span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span> <span class='op'>:</span> <span class='id identifier rubyid_object'>object</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_test'>test</span>
+  <span class='kw'>when</span> <span class='const'>Otus</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_otus'>otus</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span>
+  <span class='kw'>when</span> <span class='const'>Trees</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_trees'>trees</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span>
+  <span class='kw'>when</span> <span class='const'>Characters</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_characters'>characters</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -543,9 +543,8 @@ doc1.parse &gt;&gt; doc1.close &gt;&gt; writer = Bio::NeXML::Writer.new
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Add a single <em>characters</em> object to <tt>self</tt> &gt;&gt; writer =
-Bio::NeXML::Writer.new &gt;&gt; writer.add_characters(
-nexml.characters.first )
+Add a single <em>characters</em> object to <tt>self</tt> >> writer =
+Bio::NeXML::Writer.new >> writer.add_characters( nexml.characters.first )
 </p>
 
 
@@ -553,6 +552,7 @@ nexml.characters.first )
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -566,10 +566,9 @@ nexml.characters.first )
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 195</span>
 
-<span class='def def kw'>def</span> <span class='add_characters identifier id'>add_characters</span><span class='lparen token'>(</span> <span class='characters identifier id'>characters</span> <span class='rparen token'>)</span>
-  <span class='@root ivar id'>@root</span> <span class='lshft op'>&lt;&lt;</span> <span class='characters identifier id'>characters</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_characters'>add_characters</span><span class='lparen'>(</span> <span class='id identifier rubyid_characters'>characters</span> <span class='rparen'>)</span>
+  <span class='ivar'>@root</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_characters'>characters</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -585,8 +584,8 @@ nexml.characters.first )
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Add a single <em>otus</em> object to <tt>self</tt>. &gt;&gt; writer =
-Bio::NeXML::Writer.new &gt;&gt; writer.add_otus( nexml.otus.first )
+Add a single <em>otus</em> object to <tt>self</tt>. >> writer =
+Bio::NeXML::Writer.new >> writer.add_otus( nexml.otus.first )
 </p>
 
 
@@ -594,6 +593,7 @@ Bio::NeXML::Writer.new &gt;&gt; writer.add_otus( nexml.otus.first )
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -607,10 +607,9 @@ Bio::NeXML::Writer.new &gt;&gt; writer.add_otus( nexml.otus.first )
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 181</span>
 
-<span class='def def kw'>def</span> <span class='add_otus identifier id'>add_otus</span><span class='lparen token'>(</span> <span class='otus identifier id'>otus</span> <span class='rparen token'>)</span>
-  <span class='@root ivar id'>@root</span> <span class='lshft op'>&lt;&lt;</span> <span class='otus identifier id'>otus</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_otus'>add_otus</span><span class='lparen'>(</span> <span class='id identifier rubyid_otus'>otus</span> <span class='rparen'>)</span>
+  <span class='ivar'>@root</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_otus'>otus</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -626,8 +625,8 @@ Bio::NeXML::Writer.new &gt;&gt; writer.add_otus( nexml.otus.first )
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Add a single <em>trees</em> object to <tt>self</tt> &gt;&gt; writer =
-Bio::NeXML::Writer.new &gt;&gt; writer.add_trees( nexml.trees.first )
+Add a single <em>trees</em> object to <tt>self</tt> >> writer =
+Bio::NeXML::Writer.new >> writer.add_trees( nexml.trees.first )
 </p>
 
 
@@ -635,6 +634,7 @@ Bio::NeXML::Writer.new &gt;&gt; writer.add_trees( nexml.trees.first )
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -648,10 +648,9 @@ Bio::NeXML::Writer.new &gt;&gt; writer.add_trees( nexml.trees.first )
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 188</span>
 
-<span class='def def kw'>def</span> <span class='add_trees identifier id'>add_trees</span><span class='lparen token'>(</span> <span class='trees identifier id'>trees</span> <span class='rparen token'>)</span>
-  <span class='@root ivar id'>@root</span> <span class='lshft op'>&lt;&lt;</span> <span class='trees identifier id'>trees</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_trees'>add_trees</span><span class='lparen'>(</span> <span class='id identifier rubyid_trees'>trees</span> <span class='rparen'>)</span>
+  <span class='ivar'>@root</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_trees'>trees</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -676,6 +675,7 @@ tests.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -724,45 +724,44 @@ tests.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 211</span>
 
-<span class='def def kw'>def</span> <span class='attributes identifier id'>attributes</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='names identifier id'>names</span> <span class='rparen token'>)</span>
-  <span class='attributes identifier id'>attributes</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_names'>names</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-  <span class='names identifier id'>names</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='name identifier id'>name</span><span class='bitor op'>|</span>
-    <span class='case case kw'>case</span> <span class='name identifier id'>name</span>
-    <span class='when when kw'>when</span> <span class='symbol val'>:id</span>
-      <span class='attributes identifier id'>attributes</span><span class='lbrack token'>[</span> <span class='name identifier id'>name</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span> <span class='rparen token'>)</span>
-    <span class='when when kw'>when</span> <span class='symbol val'>:symbol</span>
-      <span class='comment val'># a symbol maybe an integer or a string</span>
-      <span class='comment val'># a length will always be a string</span>
-      <span class='attributes identifier id'>attributes</span><span class='lbrack token'>[</span> <span class='name identifier id'>name</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span> <span class='rparen token'>)</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span>
-    <span class='when when kw'>when</span> <span class='symbol val'>:length</span>
-      <span class='comment val'># a length will never be a string</span>
-      <span class='value identifier id'>value</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span> <span class='rparen token'>)</span>
-      <span class='attributes identifier id'>attributes</span><span class='lbrack token'>[</span> <span class='name identifier id'>name</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='value identifier id'>value</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span> <span class='if if_mod kw'>if</span> <span class='value identifier id'>value</span>
-    <span class='when when kw'>when</span> <span class='symbol val'>:label</span>
-      <span class='comment val'># a label is optional so the returned value may be nil</span>
-      <span class='value identifier id'>value</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span> <span class='rparen token'>)</span>
-      <span class='attributes identifier id'>attributes</span><span class='lbrack token'>[</span> <span class='name identifier id'>name</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='value identifier id'>value</span> <span class='if if_mod kw'>if</span> <span class='value identifier id'>value</span>
-    <span class='when when kw'>when</span> <span class='symbol val'>:&quot;xsi:type&quot;</span>
-      <span class='attributes identifier id'>attributes</span><span class='lbrack token'>[</span> <span class='name identifier id'>name</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='dot token'>.</span><span class='sub identifier id'>sub</span><span class='lparen token'>(</span> <span class='regexp val'>/Bio::NeXML::/</span><span class='comma token'>,</span> <span class='string val'>'nex:'</span> <span class='rparen token'>)</span>
-    <span class='when when kw'>when</span> <span class='symbol val'>:otu</span><span class='comma token'>,</span> <span class='symbol val'>:otus</span><span class='comma token'>,</span> <span class='symbol val'>:states</span><span class='comma token'>,</span> <span class='symbol val'>:source</span><span class='comma token'>,</span> <span class='symbol val'>:target</span><span class='comma token'>,</span> <span class='symbol val'>:char</span>
-      <span class='comment val'># an object is returned but in nexml we need the objects id</span>
-      <span class='obj identifier id'>obj</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span> <span class='rparen token'>)</span>
-      <span class='attributes identifier id'>attributes</span><span class='lbrack token'>[</span> <span class='name identifier id'>name</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='obj identifier id'>obj</span><span class='dot token'>.</span><span class='id identifier id'>id</span> <span class='if if_mod kw'>if</span> <span class='obj identifier id'>obj</span>
-    <span class='when when kw'>when</span> <span class='symbol val'>:state</span>
-      <span class='comment val'># a state can be a complex object - use id</span>
-      <span class='comment val'># or a string - use the same value</span>
-      <span class='obj identifier id'>obj</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span> <span class='rparen token'>)</span>
-      <span class='attributes identifier id'>attributes</span><span class='lbrack token'>[</span> <span class='name identifier id'>name</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='obj identifier id'>obj</span><span class='dot token'>.</span><span class='instance_of? fid id'>instance_of?</span><span class='lparen token'>(</span> <span class='String constant id'>String</span> <span class='rparen token'>)</span> <span class='question op'>?</span> <span class='obj identifier id'>obj</span> <span class='colon op'>:</span> <span class='obj identifier id'>obj</span><span class='dot token'>.</span><span class='id identifier id'>id</span>
-    <span class='when when kw'>when</span> <span class='symbol val'>:root</span>
-      <span class='value identifier id'>value</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='symbol val'>:root?</span> <span class='rparen token'>)</span>
-      <span class='attributes identifier id'>attributes</span><span class='lbrack token'>[</span> <span class='name identifier id'>name</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='value identifier id'>value</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span> <span class='if if_mod kw'>if</span> <span class='value identifier id'>value</span>
-    <span class='end end kw'>end</span>
-  <span class='end end kw'>end</span>
+  <span class='id identifier rubyid_names'>names</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='op'>|</span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_name'>name</span>
+    <span class='kw'>when</span> <span class='symbol'>:id</span>
+      <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span> <span class='id identifier rubyid_name'>name</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span> <span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='symbol'>:symbol</span>
+      <span class='comment'># a symbol maybe an integer or a string
+</span>      <span class='comment'># a length will always be a string
+</span>      <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span> <span class='id identifier rubyid_name'>name</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+    <span class='kw'>when</span> <span class='symbol'>:length</span>
+      <span class='comment'># a length will never be a string
+</span>      <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span> <span class='rparen'>)</span>
+      <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span> <span class='id identifier rubyid_name'>name</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span>
+    <span class='kw'>when</span> <span class='symbol'>:label</span>
+      <span class='comment'># a label is optional so the returned value may be nil
+</span>      <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span> <span class='rparen'>)</span>
+      <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span> <span class='id identifier rubyid_name'>name</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span>
+    <span class='kw'>when</span> <span class='symbol'>:xsi:type</span><span class='tstring_end'>&quot;</span></span>
+      <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span> <span class='id identifier rubyid_name'>name</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='lparen'>(</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>Bio::NeXML::</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>nex:</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='symbol'>:otu</span><span class='comma'>,</span> <span class='symbol'>:otus</span><span class='comma'>,</span> <span class='symbol'>:states</span><span class='comma'>,</span> <span class='symbol'>:source</span><span class='comma'>,</span> <span class='symbol'>:target</span><span class='comma'>,</span> <span class='symbol'>:char</span>
+      <span class='comment'># an object is returned but in nexml we need the objects id
+</span>      <span class='id identifier rubyid_obj'>obj</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span> <span class='rparen'>)</span>
+      <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span> <span class='id identifier rubyid_name'>name</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='kw'>if</span> <span class='id identifier rubyid_obj'>obj</span>
+    <span class='kw'>when</span> <span class='symbol'>:state</span>
+      <span class='comment'># a state can be a complex object - use id
+</span>      <span class='comment'># or a string - use the same value
+</span>      <span class='id identifier rubyid_obj'>obj</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span> <span class='rparen'>)</span>
+      <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span> <span class='id identifier rubyid_name'>name</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span> <span class='const'>String</span> <span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_obj'>obj</span> <span class='op'>:</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+    <span class='kw'>when</span> <span class='symbol'>:root</span>
+      <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='symbol'>:root?</span> <span class='rparen'>)</span>
+      <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span> <span class='id identifier rubyid_name'>name</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
 
-  <span class='attributes identifier id'>attributes</span>
-<span class='end end kw'>end</span>
-</pre>
+  <span class='id identifier rubyid_attributes'>attributes</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -779,8 +778,8 @@ tests.
   <div class="discussion">
     <p>
 Add one or more <em>characters</em> objects to <tt>self</tt>. This function
-delegates the actual addition to <tt>add_characters</tt> method. &gt;&gt;
-writer = Bio::NeXML::Writer.new &gt;&gt; writer &lt;&lt; nexml.characters
+delegates the actual addition to <tt>add_characters</tt> method. >> writer
+= Bio::NeXML::Writer.new >> writer << nexml.characters
 </p>
 
 
@@ -788,6 +787,7 @@ writer = Bio::NeXML::Writer.new &gt;&gt; writer &lt;&lt; nexml.characters
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -805,14 +805,13 @@ writer = Bio::NeXML::Writer.new &gt;&gt; writer &lt;&lt; nexml.characters
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 170</span>
 
-<span class='def def kw'>def</span> <span class='characters= identifier id'>characters=</span><span class='lparen token'>(</span> <span class='characters identifier id'>characters</span> <span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='characters identifier id'>characters</span><span class='dot token'>.</span><span class='instance_of? fid id'>instance_of?</span> <span class='Array constant id'>Array</span>
-    <span class='characters identifier id'>characters</span><span class='dot token'>.</span><span class='each identifier id'>each</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='c identifier id'>c</span><span class='bitor op'>|</span> <span class='add_characters identifier id'>add_characters</span><span class='lparen token'>(</span> <span class='c identifier id'>c</span> <span class='rparen token'>)</span> <span class='rbrace token'>}</span>
-  <span class='else else kw'>else</span>
-    <span class='add_characters identifier id'>add_characters</span><span class='lparen token'>(</span> <span class='characters identifier id'>characters</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_characters='>characters=</span><span class='lparen'>(</span> <span class='id identifier rubyid_characters'>characters</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_characters'>characters</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span> <span class='const'>Array</span>
+    <span class='id identifier rubyid_characters'>characters</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_c'>c</span><span class='op'>|</span> <span class='id identifier rubyid_add_characters'>add_characters</span><span class='lparen'>(</span> <span class='id identifier rubyid_c'>c</span> <span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_add_characters'>add_characters</span><span class='lparen'>(</span> <span class='id identifier rubyid_characters'>characters</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -828,17 +827,18 @@ writer = Bio::NeXML::Writer.new &gt;&gt; writer &lt;&lt; nexml.characters
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Create a XML::Node object with the given name and the attributes. &gt;&gt;
-writer = Bio::NeXML::Writer.new &gt;&gt; node = writer.send( :create_node,
-&#8216;nexml&#8217;, :version =&gt; &#8216;0.9&#8217; ) &gt;&gt; node.to_s
+Create a XML::Node object with the given name and the attributes. >> writer
+= Bio::NeXML::Writer.new >> node = writer.send( :create_node,
+&#8216;nexml&#8217;, :version => &#8216;0.9&#8217; ) >> node.to_s
 </p>
-<h1>&gt; &quot;&lt;nexml version=\&quot;0.9\&quot;/&gt;&quot;</h1>
+<h1>> &#8220;<nexml version=\&#8220;0.9\&#8221;/>&#8220;</h1>
 
 
   </div>
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -854,12 +854,11 @@ writer = Bio::NeXML::Writer.new &gt;&gt; node = writer.send( :create_node,
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 255</span>
 
-<span class='def def kw'>def</span> <span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='attributes identifier id'>attributes</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span> <span class='rparen token'>)</span>
-  <span class='node identifier id'>node</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span> <span class='assign token'>=</span> <span class='attributes identifier id'>attributes</span> <span class='unless unless_mod kw'>unless</span> <span class='attributes identifier id'>attributes</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-  <span class='node identifier id'>node</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='const'>XML</span><span class='op'>::</span><span class='const'>Node</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='id identifier rubyid_attributes'>attributes</span> <span class='kw'>unless</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_node'>node</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -876,8 +875,8 @@ writer = Bio::NeXML::Writer.new &gt;&gt; node = writer.send( :create_node,
   <div class="discussion">
     <p>
 Add one or more <em>otus</em> objects to <tt>self</tt>. This function
-delegates the actual addition to <tt>add_otus</tt> method. &gt;&gt; writer
-= Bio::NeXML::Writer.new &gt;&gt; writer &lt;&lt; nexml.otus
+delegates the actual addition to <tt>add_otus</tt> method. >> writer =
+Bio::NeXML::Writer.new >> writer << nexml.otus
 </p>
 
 
@@ -885,6 +884,7 @@ delegates the actual addition to <tt>add_otus</tt> method. &gt;&gt; writer
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -902,14 +902,13 @@ delegates the actual addition to <tt>add_otus</tt> method. &gt;&gt; writer
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 146</span>
 
-<span class='def def kw'>def</span> <span class='otus= identifier id'>otus=</span><span class='lparen token'>(</span> <span class='otus identifier id'>otus</span> <span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='otus identifier id'>otus</span><span class='dot token'>.</span><span class='instance_of? fid id'>instance_of?</span> <span class='Array constant id'>Array</span>
-    <span class='otus identifier id'>otus</span><span class='dot token'>.</span><span class='each identifier id'>each</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span> <span class='add_otus identifier id'>add_otus</span><span class='lparen token'>(</span> <span class='o identifier id'>o</span> <span class='rparen token'>)</span> <span class='rbrace token'>}</span>
-  <span class='else else kw'>else</span>
-    <span class='add_otus identifier id'>add_otus</span><span class='lparen token'>(</span> <span class='otus identifier id'>otus</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_otus='>otus=</span><span class='lparen'>(</span> <span class='id identifier rubyid_otus'>otus</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_otus'>otus</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span> <span class='const'>Array</span>
+    <span class='id identifier rubyid_otus'>otus</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_o'>o</span><span class='op'>|</span> <span class='id identifier rubyid_add_otus'>add_otus</span><span class='lparen'>(</span> <span class='id identifier rubyid_o'>o</span> <span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_add_otus'>add_otus</span><span class='lparen'>(</span> <span class='id identifier rubyid_otus'>otus</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -925,8 +924,8 @@ delegates the actual addition to <tt>add_otus</tt> method. &gt;&gt; writer
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Create the root <em>nexml</em> node. &gt;&gt; writer =
-Bio::NeXML::Writer.new &gt;&gt; writer.root
+Create the root <em>nexml</em> node. >> writer = Bio::NeXML::Writer.new >>
+writer.root
 </p>
 
 
@@ -934,6 +933,7 @@ Bio::NeXML::Writer.new &gt;&gt; writer.root
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -950,13 +950,12 @@ Bio::NeXML::Writer.new &gt;&gt; writer.root
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 202</span>
 
-<span class='def def kw'>def</span> <span class='root identifier id'>root</span>
-  <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;nexml&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:&quot;xsi:schemaLocation&quot;</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;http://www.nexml.org/2009 http://www.nexml.org/2009/xsd/nexml.xsd&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:generator</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;bioruby&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:version</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;0.9&quot;</span> <span class='rparen token'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_root'>root</span>
+  <span class='id identifier rubyid_root'>root</span> <span class='op'>=</span> <span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>nexml</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:xsi:schemaLocation</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.nexml.org/2009 http://www.nexml.org/2009/xsd/nexml.xsd</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:generator</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bioruby</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:version</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.9</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span>
 
-  <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='namespaces identifier id'>namespaces</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span> <span class='nil nil kw'>nil</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;http://www.nexml.org/2009&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:xsi</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:xlink</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;http://www.w3.org/1999/xlink&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:nex</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;http://www.nexml.org/2009&quot;</span> <span class='rbrace token'>}</span>
-  <span class='root identifier id'>root</span>
-<span class='end end kw'>end</span>
-</pre>
+  <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_namespaces'>namespaces</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='kw'>nil</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.nexml.org/2009</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:xsi</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.w3.org/2001/XMLSchema-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:xlink</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.w3.org/1999/xlink</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:nex</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.nexml.org/2009</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_root'>root</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -972,23 +971,25 @@ Bio::NeXML::Writer.new &gt;&gt; writer.root
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Write to file. &gt;&gt; writer.save( &#8216;sample.xml&#8217;, true )
+Write to file. >> writer.save( &#8216;sample.xml&#8217;, true )
 </p>
-<hr size="1"></hr><p>
+<hr style="height: 1px"></hr><p>
 Arguments:
 </p>
 <ul>
-<li>filename( optional ) - the filename to write to. This need not be given if
-
+<li><p>
+filename( optional ) - the filename to write to. This need not be given if
+</p>
 </li>
 </ul>
 <p>
 a filename was provided while initializing Writer.
 </p>
 <ul>
-<li>indent( optional ) - wether to indent the output NeXML. This options
+<li><p>
+indent( optional ) - wether to indent the output NeXML. This options
 assumes
-
+</p>
 </li>
 </ul>
 <p>
@@ -1000,6 +1001,7 @@ assumes
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1015,12 +1017,11 @@ assumes
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 136</span>
 
-<span class='def def kw'>def</span> <span class='save identifier id'>save</span><span class='lparen token'>(</span> <span class='filename identifier id'>filename</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='indent identifier id'>indent</span> <span class='assign token'>=</span> <span class='false false kw'>false</span> <span class='rparen token'>)</span>
-  <span class='filename identifier id'>filename</span> <span class='opasgn op'>||=</span> <span class='@filename ivar id'>@filename</span>
-  <span class='indent identifier id'>indent</span> <span class='opasgn op'>||=</span> <span class='@indent ivar id'>@indent</span>
-  <span class='@doc ivar id'>@doc</span><span class='dot token'>.</span><span class='save identifier id'>save</span><span class='lparen token'>(</span> <span class='filename identifier id'>filename</span><span class='comma token'>,</span> <span class='symbol val'>:indent</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='indent identifier id'>indent</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_save'>save</span><span class='lparen'>(</span> <span class='id identifier rubyid_filename'>filename</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_indent'>indent</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_filename'>filename</span> <span class='op'>||=</span> <span class='ivar'>@filename</span>
+  <span class='id identifier rubyid_indent'>indent</span> <span class='op'>||=</span> <span class='ivar'>@indent</span>
+  <span class='ivar'>@doc</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span><span class='lparen'>(</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='symbol'>:indent</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_indent'>indent</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1037,8 +1038,8 @@ assumes
   <div class="discussion">
     <p>
 Add one or more <em>trees</em> objects to <tt>self</tt>. This function
-delegates the actual addition to <tt>add_trees</tt> method. &gt;&gt; writer
-= Bio::NeXML::Writer.new &gt;&gt; writer &lt;&lt; nexml.trees
+delegates the actual addition to <tt>add_trees</tt> method. >> writer =
+Bio::NeXML::Writer.new >> writer << nexml.trees
 </p>
 
 
@@ -1046,6 +1047,7 @@ delegates the actual addition to <tt>add_trees</tt> method. &gt;&gt; writer
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1063,14 +1065,13 @@ delegates the actual addition to <tt>add_trees</tt> method. &gt;&gt; writer
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/writer.rb', line 158</span>
 
-<span class='def def kw'>def</span> <span class='trees= identifier id'>trees=</span><span class='lparen token'>(</span> <span class='trees identifier id'>trees</span> <span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='trees identifier id'>trees</span><span class='dot token'>.</span><span class='instance_of? fid id'>instance_of?</span> <span class='Array constant id'>Array</span>
-    <span class='trees identifier id'>trees</span><span class='dot token'>.</span><span class='each identifier id'>each</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='t identifier id'>t</span><span class='bitor op'>|</span> <span class='add_trees identifier id'>add_trees</span><span class='lparen token'>(</span> <span class='t identifier id'>t</span> <span class='rparen token'>)</span> <span class='rbrace token'>}</span>
-  <span class='else else kw'>else</span>
-    <span class='add_trees identifier id'>add_trees</span><span class='lparen token'>(</span> <span class='trees identifier id'>trees</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_trees='>trees=</span><span class='lparen'>(</span> <span class='id identifier rubyid_trees'>trees</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_trees'>trees</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span> <span class='const'>Array</span>
+    <span class='id identifier rubyid_trees'>trees</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span> <span class='id identifier rubyid_add_trees'>add_trees</span><span class='lparen'>(</span> <span class='id identifier rubyid_t'>t</span> <span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_add_trees'>add_trees</span><span class='lparen'>(</span> <span class='id identifier rubyid_trees'>trees</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1081,9 +1082,9 @@ delegates the actual addition to <tt>add_trees</tt> method. &gt;&gt; writer
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:00 2011 by 
+  Generated on Thu Mar 29 12:34:01 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

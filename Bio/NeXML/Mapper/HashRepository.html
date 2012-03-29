@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Mapper::HashRepository
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -105,12 +105,13 @@ Repository is a hash based store for NeXML objects.
 </div>
 <div class="tags">
   
+
 </div>
 
-  
 
 
-  
+
+
 
   
     <h2>
@@ -359,6 +360,7 @@ Append a method to the Repository.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -373,11 +375,10 @@ Append a method to the Repository.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/repository.rb', line 9</span>
 
-<span class='def def kw'>def</span> <span class='lshft op'>&lt;&lt;</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='lbrack token'>[</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='id identifier id'>id</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='object identifier id'>object</span>
-  <span class='self self kw'>self</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='lbracket'>[</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -401,8 +402,7 @@ Append a method to the Repository.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/repository.rb', line 25</span>
 
-<span class='alias alias kw'>alias</span> <span class='__delete__ identifier id'>__delete__</span> <span class='delete identifier id'>delete</span>
-</pre>
+<span class='kw'>alias</span> <span class='id identifier rubyid___delete__'>__delete__</span> <span class='id identifier rubyid_delete'>delete</span></pre>
     </td>
   </tr>
 </table>
@@ -426,8 +426,7 @@ Append a method to the Repository.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/repository.rb', line 32</span>
 
-<span class='alias alias kw'>alias</span> <span class='__each__ identifier id'>__each__</span> <span class='each identifier id'>each</span>
-</pre>
+<span class='kw'>alias</span> <span class='id identifier rubyid___each__'>__each__</span> <span class='id identifier rubyid_each'>each</span></pre>
     </td>
   </tr>
 </table>
@@ -451,6 +450,7 @@ Delete an object.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -464,10 +464,9 @@ Delete an object.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/repository.rb', line 28</span>
 
-<span class='def def kw'>def</span> <span class='delete identifier id'>delete</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-  <span class='__delete__ identifier id'>__delete__</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='id identifier id'>id</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid___delete__'>__delete__</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -491,6 +490,7 @@ Iterate over each object in the repository.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -504,10 +504,9 @@ Iterate over each object in the repository.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/repository.rb', line 35</span>
 
-<span class='def def kw'>def</span> <span class='each identifier id'>each</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-  <span class='each_value identifier id'>each_value</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_each_value'>each_value</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -532,6 +531,7 @@ given.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -545,10 +545,9 @@ given.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/repository.rb', line 41</span>
 
-<span class='def def kw'>def</span> <span class='each_with_id identifier id'>each_with_id</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-  <span class='__each__ identifier id'>__each__</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_each_with_id'>each_with_id</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid___each__'>__each__</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -568,7 +567,8 @@ given.
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -595,10 +595,9 @@ given.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/repository.rb', line 45</span>
 
-<span class='def def kw'>def</span> <span class='include? fid id'>include?</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='lbrack token'>[</span> <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='id identifier id'>id</span> <span class='rbrack token'>]</span> <span class='eq op'>==</span> <span class='object identifier id'>object</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='lbracket'>[</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='rbracket'>]</span> <span class='op'>==</span> <span class='id identifier rubyid_object'>object</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -624,10 +623,9 @@ given.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/repository.rb', line 21</span>
 
-<span class='def def kw'>def</span> <span class='objects identifier id'>objects</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='values identifier id'>values</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_objects'>objects</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -651,6 +649,7 @@ Reset the object in the repository to use the ones passed.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -665,11 +664,10 @@ Reset the object in the repository to use the ones passed.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/repository.rb', line 16</span>
 
-<span class='def def kw'>def</span> <span class='objects= identifier id'>objects=</span><span class='lparen token'>(</span> <span class='objects identifier id'>objects</span> <span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='clear identifier id'>clear</span>
-  <span class='objects identifier id'>objects</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span> <span class='self self kw'>self</span> <span class='lshft op'>&lt;&lt;</span> <span class='o identifier id'>o</span> <span class='rbrace token'>}</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_objects='>objects=</span><span class='lparen'>(</span> <span class='id identifier rubyid_objects'>objects</span> <span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
+  <span class='id identifier rubyid_objects'>objects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_o'>o</span><span class='op'>|</span> <span class='kw'>self</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_o'>o</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -680,9 +678,9 @@ Reset the object in the repository to use the ones passed.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:02 2011 by 
+  Generated on Thu Mar 29 12:34:02 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

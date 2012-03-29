@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Nexml
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -96,7 +96,19 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+end module Base
+</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
   <h2>Constant Summary</h2>
   
     <dl class="constants">
@@ -104,18 +116,14 @@
         <dt id="writer-classvariable" class="">@@writer =
           
         </dt>
-        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-</pre></dd>
+        <dd><pre class="code"><span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
       
     </dl>
   
 
 
-  
-  
-  
-  
-  
+
+
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
     
@@ -177,10 +185,6 @@ Returns the value of attribute version.
 
 
 
-  
-  
-  
-  
 
   
     <h2>
@@ -359,25 +363,25 @@ A new instance of Nexml
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-52
-53
-54
-55</pre>
+39
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 39</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='version identifier id'>version</span> <span class='assign token'>=</span> <span class='string val'>'0.9'</span><span class='comma token'>,</span> <span class='generator identifier id'>generator</span> <span class='assign token'>=</span> <span class='string val'>'bioruby'</span> <span class='rparen token'>)</span>
-  <span class='@version ivar id'>@version</span> <span class='assign token'>=</span> <span class='version identifier id'>version</span>
-  <span class='@generator ivar id'>@generator</span> <span class='assign token'>=</span> <span class='generator identifier id'>generator</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>0.9</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_generator'>generator</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bioruby</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+  <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_version'>version</span>
+  <span class='ivar'>@generator</span> <span class='op'>=</span> <span class='id identifier rubyid_generator'>generator</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -409,23 +413,23 @@ Returns the value of attribute generator
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-46
-47
-48</pre>
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 33</span>
 
-<span class='def def kw'>def</span> <span class='generator identifier id'>generator</span>
-  <span class='@generator ivar id'>@generator</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_generator'>generator</span>
+  <span class='ivar'>@generator</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -452,23 +456,23 @@ Returns the value of attribute version
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-45
-46
-47</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 32</span>
 
-<span class='def def kw'>def</span> <span class='version identifier id'>version</span>
-  <span class='@version ivar id'>@version</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_version'>version</span>
+  <span class='ivar'>@version</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -499,37 +503,37 @@ Append a Otus, Trees, or Characters object to any Nexml object.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68</pre>
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 46</span>
 
-<span class='def def kw'>def</span> <span class='lshft op'>&lt;&lt;</span><span class='lparen token'>(</span> <span class='element identifier id'>element</span> <span class='rparen token'>)</span>
-  <span class='case case kw'>case</span> <span class='element identifier id'>element</span>
-  <span class='when when kw'>when</span> <span class='Otus constant id'>Otus</span>
-    <span class='add_otus identifier id'>add_otus</span> <span class='element identifier id'>element</span>
-  <span class='when when kw'>when</span> <span class='Trees constant id'>Trees</span>
-    <span class='add_trees identifier id'>add_trees</span> <span class='element identifier id'>element</span>
-  <span class='when when kw'>when</span> <span class='Characters constant id'>Characters</span>
-    <span class='add_characters identifier id'>add_characters</span> <span class='element identifier id'>element</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span> <span class='id identifier rubyid_element'>element</span> <span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_element'>element</span>
+  <span class='kw'>when</span> <span class='const'>Otus</span>
+    <span class='id identifier rubyid_add_otus'>add_otus</span> <span class='id identifier rubyid_element'>element</span>
+  <span class='kw'>when</span> <span class='const'>Trees</span>
+    <span class='id identifier rubyid_add_trees'>add_trees</span> <span class='id identifier rubyid_element'>element</span>
+  <span class='kw'>when</span> <span class='const'>Characters</span>
+    <span class='id identifier rubyid_add_characters'>add_characters</span> <span class='id identifier rubyid_element'>element</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -548,27 +552,26 @@ Append a Otus, Trees, or Characters object to any Nexml object.
       <pre class="lines">
 
 
-82
-83
-84
-85
-86
-87
-88
-89</pre>
+69
+70
+71
+72
+73
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 69</span>
 
-<span class='def def kw'>def</span> <span class='create_characters identifier id'>create_characters</span><span class='lparen token'>(</span> <span class='type identifier id'>type</span> <span class='assign token'>=</span> <span class='string val'>&quot;Dna&quot;</span><span class='comma token'>,</span> <span class='verbose identifier id'>verbose</span> <span class='assign token'>=</span> <span class='false false kw'>false</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='subtype identifier id'>subtype</span> <span class='assign token'>=</span> <span class='verbose identifier id'>verbose</span> <span class='integer val'>? </span><span class='string val'>&quot;Cells&quot;</span> <span class='colon op'>:</span> <span class='string val'>&quot;Seqs&quot;</span>
-  <span class='klass_name identifier id'>klass_name</span> <span class='assign token'>=</span> <span class='dstring node'>&quot;#{type.to_s.capitalize}#{subtype}&quot;</span>
-  <span class='klass identifier id'>klass</span> <span class='assign token'>=</span> <span class='NeXML constant id'>NeXML</span><span class='dot token'>.</span><span class='const_get identifier id'>const_get</span><span class='lparen token'>(</span> <span class='klass_name identifier id'>klass_name</span> <span class='rparen token'>)</span>
-  <span class='characters identifier id'>characters</span> <span class='assign token'>=</span> <span class='klass identifier id'>klass</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='dot token'>.</span><span class='generate_id identifier id'>generate_id</span><span class='lparen token'>(</span> <span class='klass identifier id'>klass</span> <span class='rparen token'>)</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
-  <span class='self self kw'>self</span> <span class='lshft op'>&lt;&lt;</span> <span class='characters identifier id'>characters</span>
-  <span class='characters identifier id'>characters</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_characters'>create_characters</span><span class='lparen'>(</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Dna</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_verbose'>verbose</span> <span class='op'>=</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_subtype'>subtype</span> <span class='op'>=</span> <span class='id identifier rubyid_verbose'>verbose</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cells</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Seqs</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_klass_name'>klass_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_capitalize'>capitalize</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_subtype'>subtype</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_klass'>klass</span> <span class='op'>=</span> <span class='const'>NeXML</span><span class='period'>.</span><span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span> <span class='id identifier rubyid_klass_name'>klass_name</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_characters'>characters</span> <span class='op'>=</span> <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='period'>.</span><span class='id identifier rubyid_generate_id'>generate_id</span><span class='lparen'>(</span> <span class='id identifier rubyid_klass'>klass</span> <span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span>
+  <span class='kw'>self</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_characters'>characters</span>
+  <span class='id identifier rubyid_characters'>characters</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -587,21 +590,20 @@ Append a Otus, Trees, or Characters object to any Nexml object.
       <pre class="lines">
 
 
-70
-71
-72
-73
-74</pre>
+57
+58
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 57</span>
 
-<span class='def def kw'>def</span> <span class='create_otus identifier id'>create_otus</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='otus identifier id'>otus</span> <span class='assign token'>=</span> <span class='Otus constant id'>Otus</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='dot token'>.</span><span class='generate_id identifier id'>generate_id</span><span class='lparen token'>(</span> <span class='Otus constant id'>Otus</span> <span class='rparen token'>)</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
-  <span class='self self kw'>self</span> <span class='lshft op'>&lt;&lt;</span> <span class='otus identifier id'>otus</span>
-  <span class='otus identifier id'>otus</span>        
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_otus'>create_otus</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_otus'>otus</span> <span class='op'>=</span> <span class='const'>Otus</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='period'>.</span><span class='id identifier rubyid_generate_id'>generate_id</span><span class='lparen'>(</span> <span class='const'>Otus</span> <span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span>
+  <span class='kw'>self</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_otus'>otus</span>
+  <span class='id identifier rubyid_otus'>otus</span>        
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -620,21 +622,20 @@ Append a Otus, Trees, or Characters object to any Nexml object.
       <pre class="lines">
 
 
-76
-77
-78
-79
-80</pre>
+63
+64
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 63</span>
 
-<span class='def def kw'>def</span> <span class='create_trees identifier id'>create_trees</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
-  <span class='trees identifier id'>trees</span> <span class='assign token'>=</span> <span class='Trees constant id'>Trees</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='dot token'>.</span><span class='generate_id identifier id'>generate_id</span><span class='lparen token'>(</span> <span class='Trees constant id'>Trees</span> <span class='rparen token'>)</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
-  <span class='self self kw'>self</span> <span class='lshft op'>&lt;&lt;</span> <span class='trees identifier id'>trees</span>
-  <span class='trees identifier id'>trees</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_trees'>create_trees</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_trees'>trees</span> <span class='op'>=</span> <span class='const'>Trees</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='period'>.</span><span class='id identifier rubyid_generate_id'>generate_id</span><span class='lparen'>(</span> <span class='const'>Trees</span> <span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span>
+  <span class='kw'>self</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_trees'>trees</span>
+  <span class='id identifier rubyid_trees'>trees</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -653,39 +654,38 @@ Append a Otus, Trees, or Characters object to any Nexml object.
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104</pre>
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/db/nexml.rb', line 78</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
-  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;nex:nexml&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:&quot;xsi:schemaLocation&quot;</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;http://www.nexml.org/2009 http://www.nexml.org/2009/xsd/nexml.xsd&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:generator</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='generator identifier id'>generator</span><span class='comma token'>,</span> <span class='symbol val'>:version</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='version identifier id'>version</span> <span class='rparen token'>)</span>
-  <span class='node identifier id'>node</span><span class='dot token'>.</span><span class='namespaces identifier id'>namespaces</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span> <span class='nil nil kw'>nil</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;http://www.nexml.org/2009&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:xsi</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:xlink</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;http://www.w3.org/1999/xlink&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:nex</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;http://www.nexml.org/2009&quot;</span> <span class='rbrace token'>}</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_otus identifier id'>each_otus</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='otus identifier id'>otus</span><span class='bitor op'>|</span>
-      <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='otus identifier id'>otus</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-  <span class='end end kw'>end</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_characters identifier id'>each_characters</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='characters identifier id'>characters</span><span class='bitor op'>|</span>
-      <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='characters identifier id'>characters</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-  <span class='end end kw'>end</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_trees identifier id'>each_trees</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='trees identifier id'>trees</span><span class='bitor op'>|</span>
-      <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='trees identifier id'>trees</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-  <span class='end end kw'>end</span>        
-  <span class='node identifier id'>node</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>nex:nexml</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:xsi:schemaLocation</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.nexml.org/2009 http://www.nexml.org/2009/xsd/nexml.xsd</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:generator</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_generator'>generator</span><span class='comma'>,</span> <span class='symbol'>:version</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_version'>version</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_namespaces'>namespaces</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='kw'>nil</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.nexml.org/2009</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:xsi</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.w3.org/2001/XMLSchema-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:xlink</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.w3.org/1999/xlink</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:nex</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.nexml.org/2009</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_each_otus'>each_otus</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_otus'>otus</span><span class='op'>|</span>
+      <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_otus'>otus</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_each_characters'>each_characters</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_characters'>characters</span><span class='op'>|</span>
+      <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_characters'>characters</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_each_trees'>each_trees</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_trees'>trees</span><span class='op'>|</span>
+      <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_trees'>trees</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='kw'>end</span>        
+  <span class='id identifier rubyid_node'>node</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -696,9 +696,9 @@ Append a Otus, Trees, or Characters object to any Nexml object.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:02 2011 by 
+  Generated on Thu Mar 29 12:34:00 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

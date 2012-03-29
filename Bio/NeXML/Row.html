@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Row
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -102,10 +102,8 @@
 </div>
 
 
-  
-  
-  
-  
+
+
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
     
@@ -167,9 +165,6 @@ A human readable description.
 
 
 
-  
-  
-  
 
   
     <h2>
@@ -239,6 +234,7 @@ A new instance of Row
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -254,12 +250,11 @@ A new instance of Row
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 657</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='@id ivar id'>@id</span> <span class='assign token'>=</span> <span class='id identifier id'>id</span>
-  <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-  <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='arity identifier id'>arity</span> <span class='lt op'>&lt;</span> <span class='integer val'>1</span> <span class='question op'>?</span> <span class='instance_eval identifier id'>instance_eval</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='call identifier id'>call</span><span class='lparen token'>(</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='ivar'>@id</span> <span class='op'>=</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='id identifier rubyid_properties'>properties</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_arity'>arity</span> <span class='op'>&lt;</span> <span class='int'>1</span> <span class='op'>?</span> <span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span> <span class='kw'>self</span> <span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -291,6 +286,7 @@ A file level unique identifier.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -304,10 +300,9 @@ A file level unique identifier.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 648</span>
 
-<span class='def def kw'>def</span> <span class='id identifier id'>id</span>
-  <span class='@id ivar id'>@id</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -334,6 +329,7 @@ A human readable description.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -347,10 +343,9 @@ A human readable description.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 651</span>
 
-<span class='def def kw'>def</span> <span class='label identifier id'>label</span>
-  <span class='@label ivar id'>@label</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
+  <span class='ivar'>@label</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -362,9 +357,9 @@ A human readable description.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:02 2011 by 
+  Generated on Thu Mar 29 12:34:02 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

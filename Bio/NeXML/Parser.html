@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Parser
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -95,8 +95,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>
-def self.parse( nexml, validate = false ) Parser.new( nexml, validate
-).parse end
+end
 </p>
 
 
@@ -104,7 +103,10 @@ def self.parse( nexml, validate = false ) Parser.new( nexml, validate
 </div>
 <div class="tags">
   
+
 </div>
+
+
 
 
 
@@ -216,6 +218,7 @@ A new instance of Parser
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -237,18 +240,17 @@ A new instance of Parser
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/parser.rb', line 14</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='nexml identifier id'>nexml</span><span class='comma token'>,</span> <span class='validate identifier id'>validate</span> <span class='assign token'>=</span> <span class='false false kw'>false</span> <span class='rparen token'>)</span>
-  <span class='comment val'>#initialize a cache</span>
-  <span class='@cache ivar id'>@cache</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_nexml'>nexml</span><span class='comma'>,</span> <span class='id identifier rubyid_validate'>validate</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='rparen'>)</span>
+  <span class='comment'>#initialize a cache
+</span>  <span class='ivar'>@cache</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-  <span class='comment val'>#initialize a libxml cursor</span>
-  <span class='@reader ivar id'>@reader</span> <span class='assign token'>=</span> <span class='read identifier id'>read</span><span class='lparen token'>(</span> <span class='nexml identifier id'>nexml</span> <span class='rparen token'>)</span>
+  <span class='comment'>#initialize a libxml cursor
+</span>  <span class='ivar'>@reader</span> <span class='op'>=</span> <span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span> <span class='id identifier rubyid_nexml'>nexml</span> <span class='rparen'>)</span>
   
-  <span class='comment val'>#validate</span>
-  <span class='validate_nexml identifier id'>validate_nexml</span> <span class='if if_mod kw'>if</span> <span class='validate identifier id'>validate</span>
+  <span class='comment'>#validate
+</span>  <span class='id identifier rubyid_validate_nexml'>validate_nexml</span> <span class='kw'>if</span> <span class='id identifier rubyid_validate'>validate</span>
 
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -280,6 +282,7 @@ like @nexml
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -293,10 +296,9 @@ like @nexml
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/parser.rb', line 63</span>
 
-<span class='def def kw'>def</span> <span class='close identifier id'>close</span>
-  <span class='@reader ivar id'>@reader</span><span class='dot token'>.</span><span class='close identifier id'>close</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span>
+  <span class='ivar'>@reader</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -320,6 +322,7 @@ Is a factory method that returns an object of class Bio::NeXML::Nexml
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -362,39 +365,38 @@ Is a factory method that returns an object of class Bio::NeXML::Nexml
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/parser.rb', line 28</span>
 
-<span class='def def kw'>def</span> <span class='parse identifier id'>parse</span>
-  <span class='comment val'>#return a cached version if it exists</span>
-  <span class='return return kw'>return</span> <span class='@nexml ivar id'>@nexml</span> <span class='if if_mod kw'>if</span> <span class='@nexml ivar id'>@nexml</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_parse'>parse</span>
+  <span class='comment'>#return a cached version if it exists
+</span>  <span class='kw'>return</span> <span class='ivar'>@nexml</span> <span class='kw'>if</span> <span class='ivar'>@nexml</span>
 
-  <span class='comment val'>#start at the root element</span>
-  <span class='skip_leader identifier id'>skip_leader</span>
+  <span class='comment'>#start at the root element
+</span>  <span class='id identifier rubyid_skip_leader'>skip_leader</span>
 
-  <span class='comment val'>#start with a new Nexml object</span>
-  <span class='version identifier id'>version</span> <span class='assign token'>=</span> <span class='attribute identifier id'>attribute</span><span class='lparen token'>(</span> <span class='string val'>'version'</span> <span class='rparen token'>)</span>
-  <span class='generator identifier id'>generator</span> <span class='assign token'>=</span> <span class='attribute identifier id'>attribute</span><span class='lparen token'>(</span> <span class='string val'>'generator'</span> <span class='rparen token'>)</span>
-  <span class='@nexml ivar id'>@nexml</span> <span class='assign token'>=</span> <span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Nexml constant id'>Nexml</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='version identifier id'>version</span><span class='comma token'>,</span> <span class='generator identifier id'>generator</span> <span class='rparen token'>)</span>
+  <span class='comment'>#start with a new Nexml object
+</span>  <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_attribute'>attribute</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>version</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_generator'>generator</span> <span class='op'>=</span> <span class='id identifier rubyid_attribute'>attribute</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>generator</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+  <span class='ivar'>@nexml</span> <span class='op'>=</span> <span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Nexml</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='id identifier rubyid_version'>version</span><span class='comma'>,</span> <span class='id identifier rubyid_generator'>generator</span> <span class='rparen'>)</span>
 
-  <span class='comment val'>#perhaps a namespace api as well</span>
-  
-  <span class='comment val'>#start parsing other elements</span>
-  <span class='while while kw'>while</span> <span class='next_node identifier id'>next_node</span>
-    <span class='case case kw'>case</span> <span class='local_name identifier id'>local_name</span>
-    <span class='when when kw'>when</span> <span class='string val'>&quot;otus&quot;</span>
-      <span class='@nexml ivar id'>@nexml</span><span class='dot token'>.</span><span class='add_otus identifier id'>add_otus</span><span class='lparen token'>(</span> <span class='parse_otus identifier id'>parse_otus</span> <span class='rparen token'>)</span>
-    <span class='when when kw'>when</span> <span class='string val'>&quot;trees&quot;</span>
-      <span class='@nexml ivar id'>@nexml</span><span class='dot token'>.</span><span class='add_trees identifier id'>add_trees</span><span class='lparen token'>(</span> <span class='parse_trees identifier id'>parse_trees</span> <span class='rparen token'>)</span>
-    <span class='when when kw'>when</span> <span class='string val'>&quot;characters&quot;</span>
-      <span class='@nexml ivar id'>@nexml</span><span class='dot token'>.</span><span class='add_characters identifier id'>add_characters</span><span class='lparen token'>(</span> <span class='parse_characters identifier id'>parse_characters</span> <span class='rparen token'>)</span>
-    <span class='end end kw'>end</span>
-  <span class='end end kw'>end</span>
+  <span class='comment'>#perhaps a namespace api as well
+</span>  
+  <span class='comment'>#start parsing other elements
+</span>  <span class='kw'>while</span> <span class='id identifier rubyid_next_node'>next_node</span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_local_name'>local_name</span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>otus</span><span class='tstring_end'>&quot;</span></span>
+      <span class='ivar'>@nexml</span><span class='period'>.</span><span class='id identifier rubyid_add_otus'>add_otus</span><span class='lparen'>(</span> <span class='id identifier rubyid_parse_otus'>parse_otus</span> <span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trees</span><span class='tstring_end'>&quot;</span></span>
+      <span class='ivar'>@nexml</span><span class='period'>.</span><span class='id identifier rubyid_add_trees'>add_trees</span><span class='lparen'>(</span> <span class='id identifier rubyid_parse_trees'>parse_trees</span> <span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>characters</span><span class='tstring_end'>&quot;</span></span>
+      <span class='ivar'>@nexml</span><span class='period'>.</span><span class='id identifier rubyid_add_characters'>add_characters</span><span class='lparen'>(</span> <span class='id identifier rubyid_parse_characters'>parse_characters</span> <span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
 
-  <span class='comment val'>#close the libxml parser object</span>
-  <span class='comment val'>#close</span>
-
-  <span class='comment val'>#return the Nexml object</span>
-  <span class='@nexml ivar id'>@nexml</span>
-<span class='end end kw'>end</span>
-</pre>
+  <span class='comment'>#close the libxml parser object
+</span>  <span class='comment'>#close
+</span>
+  <span class='comment'>#return the Nexml object
+</span>  <span class='ivar'>@nexml</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -405,9 +407,9 @@ Is a factory method that returns an object of class Bio::NeXML::Nexml
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:03 2011 by 
+  Generated on Thu Mar 29 12:34:01 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

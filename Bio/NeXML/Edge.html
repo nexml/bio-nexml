@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Edge
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -111,6 +111,7 @@ and optionally a &#8216;length&#8217; may be assigned to it.
 </div>
 <div class="tags">
   
+
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
   <p class="children"><span class='object_link'><a href="FloatEdge.html" title="Bio::NeXML::FloatEdge (class)">FloatEdge</a></span>, <span class='object_link'><a href="IntEdge.html" title="Bio::NeXML::IntEdge (class)">IntEdge</a></span>, <span class='object_link'><a href="RootEdge.html" title="Bio::NeXML::RootEdge (class)">RootEdge</a></span></p>
@@ -123,18 +124,14 @@ and optionally a &#8216;length&#8217; may be assigned to it.
         <dt id="writer-classvariable" class="">@@writer =
           
         </dt>
-        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-</pre></dd>
+        <dd><pre class="code"><span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
       
     </dl>
   
 
 
-  
-  
-  
-  
-  
+
+
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
     
@@ -250,10 +247,6 @@ Target of the edge.
 
 
 
-  
-  
-  
-  
 
   
     <h2>
@@ -387,17 +380,17 @@ Set the length of an edge.
     <p>
 Create a new edge.
 </p>
-<pre class="code">
-   <span class='edge identifier id'>edge</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Edge constant id'>Edge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'edge1'</span> <span class='rparen token'>)</span>
-   <span class='edge identifier id'>edge</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Edge constant id'>Edge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'edge1'</span><span class='comma token'>,</span> <span class='symbol val'>:source</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='node1 identifier id'>node1</span><span class='comma token'>,</span> <span class='symbol val'>:target</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='node2 identifier id'>node2</span> <span class='rparen token'>)</span>
-   <span class='edge identifier id'>edge</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Edge constant id'>Edge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'edge1'</span><span class='comma token'>,</span> <span class='symbol val'>:source</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='node1 identifier id'>node1</span><span class='comma token'>,</span> <span class='symbol val'>:target</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='node2 identifier id'>node2</span><span class='comma token'>,</span> <span class='symbol val'>:length</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='integer val'>1</span> <span class='rparen token'>)</span>
-</pre>
+<pre class="code ruby"><code>
+   <span class='id identifier rubyid_edge'>edge</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Edge</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>edge1</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+   <span class='id identifier rubyid_edge'>edge</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Edge</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>edge1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:source</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='symbol'>:target</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_node2'>node2</span> <span class='rparen'>)</span>
+   <span class='id identifier rubyid_edge'>edge</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Edge</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>edge1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:source</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='symbol'>:target</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_node2'>node2</span><span class='comma'>,</span> <span class='symbol'>:length</span> <span class='op'>=&gt;</span> <span class='int'>1</span> <span class='rparen'>)</span></code></pre>
 
 
   </div>
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -414,13 +407,12 @@ Create a new edge.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 84</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='length identifier id'>length</span> <span class='rparen token'>)</span>
-  <span class='@id ivar id'>@id</span> <span class='assign token'>=</span> <span class='id identifier id'>id</span>
-  <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-  <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='arity identifier id'>arity</span> <span class='lt op'>&lt;</span> <span class='integer val'>1</span> <span class='question op'>?</span> <span class='instance_eval identifier id'>instance_eval</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='call identifier id'>call</span><span class='lparen token'>(</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span> <span class='id identifier rubyid_length'>length</span> <span class='rparen'>)</span>
+  <span class='ivar'>@id</span> <span class='op'>=</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='id identifier rubyid_properties'>properties</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_arity'>arity</span> <span class='op'>&lt;</span> <span class='int'>1</span> <span class='op'>?</span> <span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span> <span class='kw'>self</span> <span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -452,6 +444,7 @@ A file level unique identifier.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -465,10 +458,9 @@ A file level unique identifier.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 66</span>
 
-<span class='def def kw'>def</span> <span class='id identifier id'>id</span>
-  <span class='@id ivar id'>@id</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -495,6 +487,7 @@ A human readable description.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -508,10 +501,9 @@ A human readable description.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 75</span>
 
-<span class='def def kw'>def</span> <span class='label identifier id'>label</span>
-  <span class='@label ivar id'>@label</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
+  <span class='ivar'>@label</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -538,6 +530,7 @@ Source of the edge.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -551,10 +544,9 @@ Source of the edge.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 69</span>
 
-<span class='def def kw'>def</span> <span class='source identifier id'>source</span>
-  <span class='@source ivar id'>@source</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_source'>source</span>
+  <span class='ivar'>@source</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -581,6 +573,7 @@ Target of the edge.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -594,10 +587,9 @@ Target of the edge.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 72</span>
 
-<span class='def def kw'>def</span> <span class='target identifier id'>target</span>
-  <span class='@target ivar id'>@target</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_target'>target</span>
+  <span class='ivar'>@target</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -628,6 +620,7 @@ Return the length of an edge.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -641,10 +634,9 @@ Return the length of an edge.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 92</span>
 
-<span class='def def kw'>def</span> <span class='length identifier id'>length</span>
-  <span class='distance identifier id'>distance</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_length'>length</span>
+  <span class='id identifier rubyid_distance'>distance</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -668,6 +660,7 @@ Set the length of an edge.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -681,10 +674,9 @@ Set the length of an edge.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 97</span>
 
-<span class='def def kw'>def</span> <span class='length= identifier id'>length=</span><span class='lparen token'>(</span> <span class='length identifier id'>length</span> <span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='distance identifier id'>distance</span> <span class='assign token'>=</span> <span class='length identifier id'>length</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_length='>length=</span><span class='lparen'>(</span> <span class='id identifier rubyid_length'>length</span> <span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_distance'>distance</span> <span class='op'>=</span> <span class='id identifier rubyid_length'>length</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -710,10 +702,9 @@ Set the length of an edge.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 61</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
-  <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;edge&quot;</span><span class='comma token'>,</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lparen token'>(</span> <span class='self self kw'>self</span><span class='comma token'>,</span> <span class='symbol val'>:id</span><span class='comma token'>,</span> <span class='symbol val'>:source</span><span class='comma token'>,</span> <span class='symbol val'>:target</span><span class='comma token'>,</span> <span class='symbol val'>:length</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='rparen token'>)</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>edge</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lparen'>(</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:id</span><span class='comma'>,</span> <span class='symbol'>:source</span><span class='comma'>,</span> <span class='symbol'>:target</span><span class='comma'>,</span> <span class='symbol'>:length</span><span class='comma'>,</span> <span class='symbol'>:label</span> <span class='rparen'>)</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -724,9 +715,9 @@ Set the length of an edge.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:01 2011 by 
+  Generated on Thu Mar 29 12:34:01 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

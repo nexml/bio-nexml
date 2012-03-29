@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::State
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -105,19 +105,19 @@ ambiguity mapping which may be &#8216;polymorphic&#8217;, resolved in an
 &#8216;and&#8217; context, or uncertain, resolved in a &#8216;or&#8217;
 context.
 </p>
-<pre class="code">
-   <span class='state identifier id'>state</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='State constant id'>State</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'state1'</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'A label'</span> <span class='rparen token'>)</span>
-   <span class='state identifier id'>state</span><span class='dot token'>.</span><span class='id identifier id'>id</span>            <span class='comment val'>#=&gt; 'state1'</span>
-   <span class='state identifier id'>state</span><span class='dot token'>.</span><span class='label identifier id'>label</span>         <span class='comment val'>#=&gt; 'A label'</span>
-   <span class='state identifier id'>state</span><span class='dot token'>.</span><span class='ambiguous? fid id'>ambiguous?</span>    <span class='comment val'>#=&gt; true</span>
-   <span class='state identifier id'>state</span><span class='dot token'>.</span><span class='ambiguity identifier id'>ambiguity</span>     <span class='comment val'>#=&gt; :polymorphic</span>
-</pre>
+<pre class="code ruby"><code>
+   <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>State</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>state1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A label</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+   <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>            <span class='comment'>#=&gt; 'state1'
+</span>   <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span>         <span class='comment'>#=&gt; 'A label'
+</span>   <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_ambiguous?'>ambiguous?</span>    <span class='comment'>#=&gt; true
+</span>   <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_ambiguity'>ambiguity</span>     <span class='comment'>#=&gt; :polymorphic</span></code></pre>
 
 
   </div>
 </div>
 <div class="tags">
   
+
 </div>
   <h2>Constant Summary</h2>
   
@@ -126,18 +126,14 @@ context.
         <dt id="writer-classvariable" class="">@@writer =
           
         </dt>
-        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-</pre></dd>
+        <dd><pre class="code"><span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
       
     </dl>
   
 
 
-  
-  
-  
-  
-  
+
+
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
     
@@ -253,10 +249,6 @@ Observation for this state.
 
 
 
-  
-  
-  
-  
 
   
     <h2>
@@ -333,11 +325,7 @@ Observation for this state.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Takes a Bio::NeXML::State object and adds it to the ambiguity mapping of
-the state.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -578,6 +566,7 @@ A new instance of State
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -594,13 +583,12 @@ A new instance of State
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 40</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span><span class='comma token'>,</span> <span class='symbol identifier id'>symbol</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-  <span class='@id ivar id'>@id</span> <span class='assign token'>=</span> <span class='id identifier id'>id</span>
-  <span class='symbol identifier id'>symbol</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span> <span class='Hash constant id'>Hash</span> <span class='rparen token'>)</span> <span class='question op'>?</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='symbol identifier id'>symbol</span> <span class='colon op'>:</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='symbol identifier id'>symbol</span> <span class='assign token'>=</span> <span class='symbol identifier id'>symbol</span>
-  <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-  <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='arity identifier id'>arity</span> <span class='lt op'>&lt;</span> <span class='integer val'>1</span> <span class='question op'>?</span> <span class='instance_eval identifier id'>instance_eval</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='call identifier id'>call</span><span class='lparen token'>(</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_symbol'>symbol</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='ivar'>@id</span> <span class='op'>=</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='id identifier rubyid_symbol'>symbol</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span> <span class='const'>Hash</span> <span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='id identifier rubyid_symbol'>symbol</span> <span class='op'>:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_symbol'>symbol</span> <span class='op'>=</span> <span class='id identifier rubyid_symbol'>symbol</span>
+  <span class='id identifier rubyid_properties'>properties</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_arity'>arity</span> <span class='op'>&lt;</span> <span class='int'>1</span> <span class='op'>?</span> <span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span> <span class='kw'>self</span> <span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -632,6 +620,7 @@ Polymorphic or uncertain.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -645,10 +634,9 @@ Polymorphic or uncertain.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 24</span>
 
-<span class='def def kw'>def</span> <span class='ambiguity identifier id'>ambiguity</span>
-  <span class='@ambiguity ivar id'>@ambiguity</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_ambiguity'>ambiguity</span>
+  <span class='ivar'>@ambiguity</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -675,6 +663,7 @@ A file level unique identifier.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -688,10 +677,9 @@ A file level unique identifier.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 18</span>
 
-<span class='def def kw'>def</span> <span class='id identifier id'>id</span>
-  <span class='@id ivar id'>@id</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -718,6 +706,7 @@ A human readable description of the state.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -731,10 +720,9 @@ A human readable description of the state.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 27</span>
 
-<span class='def def kw'>def</span> <span class='label identifier id'>label</span>
-  <span class='@label ivar id'>@label</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
+  <span class='ivar'>@label</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -761,6 +749,7 @@ Observation for this state.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -774,10 +763,9 @@ Observation for this state.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 21</span>
 
-<span class='def def kw'>def</span> <span class='symbol identifier id'>symbol</span>
-  <span class='@symbol ivar id'>@symbol</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_symbol'>symbol</span>
+  <span class='ivar'>@symbol</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -812,12 +800,11 @@ Observation for this state.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 106</span>
 
-<span class='def def kw'>def</span> <span class='polymorphic identifier id'>polymorphic</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span><span class='comma token'>,</span> <span class='symbol identifier id'>symbol</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-  <span class='state identifier id'>state</span> <span class='assign token'>=</span> <span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span><span class='comma token'>,</span> <span class='symbol identifier id'>symbol</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-  <span class='state identifier id'>state</span><span class='dot token'>.</span><span class='ambiguity identifier id'>ambiguity</span> <span class='assign token'>=</span> <span class='symbol val'>:polymorphic</span>
-  <span class='state identifier id'>state</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_polymorphic'>polymorphic</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_symbol'>symbol</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_symbol'>symbol</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_ambiguity'>ambiguity</span> <span class='op'>=</span> <span class='symbol'>:polymorphic</span>
+  <span class='id identifier rubyid_state'>state</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -845,12 +832,11 @@ Observation for this state.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 112</span>
 
-<span class='def def kw'>def</span> <span class='uncertain identifier id'>uncertain</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span><span class='comma token'>,</span> <span class='symbol identifier id'>symbol</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-  <span class='state identifier id'>state</span> <span class='assign token'>=</span> <span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span><span class='comma token'>,</span> <span class='symbol identifier id'>symbol</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-  <span class='state identifier id'>state</span><span class='dot token'>.</span><span class='ambiguity identifier id'>ambiguity</span> <span class='assign token'>=</span> <span class='symbol val'>:uncertain</span>
-  <span class='state identifier id'>state</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_uncertain'>uncertain</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_symbol'>symbol</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_state'>state</span> <span class='op'>=</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_symbol'>symbol</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_ambiguity'>ambiguity</span> <span class='op'>=</span> <span class='symbol'>:uncertain</span>
+  <span class='id identifier rubyid_state'>state</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -869,19 +855,7 @@ Observation for this state.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Takes a Bio::NeXML::State object and adds it to the ambiguity mapping of
-the state. Returns # <tt>self</tt>.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -892,8 +866,7 @@ the state. Returns # <tt>self</tt>.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 53</span>
 
-<span class='def def kw'>def</span> <span class='add_member identifier id'>add_member</span><span class='lparen token'>(</span> <span class='member identifier id'>member</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_member'>add_member</span><span class='lparen'>(</span> <span class='id identifier rubyid_member'>member</span> <span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -913,7 +886,8 @@ the state. Returns # <tt>self</tt>.
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -940,10 +914,9 @@ the state. Returns # <tt>self</tt>.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 55</span>
 
-<span class='def def kw'>def</span> <span class='ambiguous? fid id'>ambiguous?</span>
-  <span class='notop op'>!</span><span class='notop op'>!</span><span class='ambiguity identifier id'>ambiguity</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_ambiguous?'>ambiguous?</span>
+  <span class='op'>!</span><span class='op'>!</span><span class='id identifier rubyid_ambiguity'>ambiguity</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -973,10 +946,9 @@ the state. Returns # <tt>self</tt>.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 71</span>
 
-<span class='def def kw'>def</span> <span class='count identifier id'>count</span>
-  <span class='number_of_members identifier id'>number_of_members</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_count'>count</span>
+  <span class='id identifier rubyid_number_of_members'>number_of_members</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1001,6 +973,7 @@ no block is provided, it returns an Enumerator.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1014,10 +987,9 @@ no block is provided, it returns an Enumerator.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 78</span>
 
-<span class='def def kw'>def</span> <span class='each identifier id'>each</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-  <span class='@members ivar id'>@members</span><span class='dot token'>.</span><span class='each identifier id'>each</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='ivar'>@members</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1037,7 +1009,8 @@ no block is provided, it returns an Enumerator.
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -1064,10 +1037,9 @@ no block is provided, it returns an Enumerator.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 67</span>
 
-<span class='def def kw'>def</span> <span class='include? fid id'>include?</span><span class='lparen token'>(</span> <span class='member identifier id'>member</span> <span class='rparen token'>)</span>
-  <span class='has_member? fid id'>has_member?</span><span class='lparen token'>(</span> <span class='member identifier id'>member</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_member'>member</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_has_member?'>has_member?</span><span class='lparen'>(</span> <span class='id identifier rubyid_member'>member</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1087,7 +1059,8 @@ no block is provided, it returns an Enumerator.
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -1114,10 +1087,9 @@ no block is provided, it returns an Enumerator.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 59</span>
 
-<span class='def def kw'>def</span> <span class='polymorphic? fid id'>polymorphic?</span>
-  <span class='ambiguity identifier id'>ambiguity</span> <span class='eq op'>==</span> <span class='symbol val'>:polymorphic</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_polymorphic?'>polymorphic?</span>
+  <span class='id identifier rubyid_ambiguity'>ambiguity</span> <span class='op'>==</span> <span class='symbol'>:polymorphic</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1147,10 +1119,9 @@ no block is provided, it returns an Enumerator.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 82</span>
 
-<span class='def def kw'>def</span> <span class='to_str identifier id'>to_str</span>
-  <span class='symbol identifier id'>symbol</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_str'>to_str</span>
+  <span class='id identifier rubyid_symbol'>symbol</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1190,24 +1161,23 @@ no block is provided, it returns an Enumerator.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 87</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
-  <span class='tagname identifier id'>tagname</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span>
-  <span class='if if kw'>if</span> <span class='ambiguity identifier id'>ambiguity</span> <span class='eq op'>==</span> <span class='symbol val'>:polymorphic</span>
-    <span class='tagname identifier id'>tagname</span> <span class='assign token'>=</span> <span class='string val'>&quot;polymorphic_state_set&quot;</span>
-  <span class='elsif elsif kw'>elsif</span> <span class='ambiguity identifier id'>ambiguity</span> <span class='eq op'>==</span> <span class='symbol val'>:uncertain</span>
-    <span class='tagname identifier id'>tagname</span> <span class='assign token'>=</span> <span class='string val'>&quot;uncertain_state_set&quot;</span>
-  <span class='else else kw'>else</span>
-    <span class='tagname identifier id'>tagname</span> <span class='assign token'>=</span> <span class='string val'>&quot;state&quot;</span>
-  <span class='end end kw'>end</span>
-  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='tagname identifier id'>tagname</span><span class='comma token'>,</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lparen token'>(</span> <span class='self self kw'>self</span><span class='comma token'>,</span> <span class='symbol val'>:id</span><span class='comma token'>,</span> <span class='symbol val'>:label</span><span class='comma token'>,</span> <span class='symbol val'>:symbol</span> <span class='rparen token'>)</span> <span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='count identifier id'>count</span> <span class='gt op'>&gt;</span> <span class='integer val'>0</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_member identifier id'>each_member</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='member identifier id'>member</span><span class='bitor op'>|</span>
-      <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;member&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:state</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='member identifier id'>member</span><span class='dot token'>.</span><span class='id identifier id'>id</span> <span class='rparen token'>)</span>
-    <span class='end end kw'>end</span>
-  <span class='end end kw'>end</span>
-  <span class='node identifier id'>node</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='id identifier rubyid_tagname'>tagname</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_ambiguity'>ambiguity</span> <span class='op'>==</span> <span class='symbol'>:polymorphic</span>
+    <span class='id identifier rubyid_tagname'>tagname</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>polymorphic_state_set</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_ambiguity'>ambiguity</span> <span class='op'>==</span> <span class='symbol'>:uncertain</span>
+    <span class='id identifier rubyid_tagname'>tagname</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>uncertain_state_set</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_tagname'>tagname</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>state</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='id identifier rubyid_tagname'>tagname</span><span class='comma'>,</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lparen'>(</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:id</span><span class='comma'>,</span> <span class='symbol'>:label</span><span class='comma'>,</span> <span class='symbol'>:symbol</span> <span class='rparen'>)</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_count'>count</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_each_member'>each_member</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_member'>member</span><span class='op'>|</span>
+      <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>member</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:state</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_member'>member</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_node'>node</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1227,7 +1197,8 @@ no block is provided, it returns an Enumerator.
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -1254,10 +1225,9 @@ no block is provided, it returns an Enumerator.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 63</span>
 
-<span class='def def kw'>def</span> <span class='uncertain? fid id'>uncertain?</span>
-  <span class='ambiguity identifier id'>ambiguity</span> <span class='eq op'>==</span> <span class='symbol val'>:uncertain</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_uncertain?'>uncertain?</span>
+  <span class='id identifier rubyid_ambiguity'>ambiguity</span> <span class='op'>==</span> <span class='symbol'>:uncertain</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1268,9 +1238,9 @@ no block is provided, it returns an Enumerator.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:02 2011 by 
+  Generated on Thu Mar 29 12:34:01 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

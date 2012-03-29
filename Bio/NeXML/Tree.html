@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Tree
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -112,6 +112,7 @@ here.
 </div>
 <div class="tags">
   
+
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
   <p class="children"><span class='object_link'><a href="FloatTree.html" title="Bio::NeXML::FloatTree (class)">FloatTree</a></span>, <span class='object_link'><a href="IntTree.html" title="Bio::NeXML::IntTree (class)">IntTree</a></span>, <span class='object_link'><a href="Network.html" title="Bio::NeXML::Network (class)">Network</a></span></p>
@@ -124,18 +125,14 @@ here.
         <dt id="writer-classvariable" class="">@@writer =
           
         </dt>
-        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-</pre></dd>
+        <dd><pre class="code"><span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
       
     </dl>
   
 
 
-  
-  
-  
-  
-  
+
+
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
     
@@ -224,10 +221,6 @@ A rootedge to indicate a time span leading up to the root.
 
 
 
-  
-  
-  
-  
 
   
     <h2>
@@ -544,10 +537,7 @@ Fetch a node, or an edge by its id.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Iterate over each edge.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -568,10 +558,7 @@ Iterate over each edge.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Iterate over each node passing id and the node itself to the given block.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -592,10 +579,7 @@ Iterate over each node passing id and the node itself to the given block.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Iterate over each node.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -616,10 +600,7 @@ Iterate over each node.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Iterate over each node passing id and the node itself to the given block.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -640,10 +621,7 @@ Iterate over each node passing id and the node itself to the given block.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Fetch an edge by the given id.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -666,10 +644,7 @@ Fetch an edge by the given id.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Fetch a node by the given id.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -690,10 +665,7 @@ Fetch a node by the given id.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Returns true if the given edge is a part of <tt>self</tt>.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -714,10 +686,7 @@ Returns true if the given edge is a part of <tt>self</tt>.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Returns true if the given node is a part of <tt>self</tt>.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -812,10 +781,7 @@ Create a new tree.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Return the number of edges in the tree.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -836,10 +802,7 @@ Return the number of edges in the tree.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Return the number of nodes in the tree.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -994,35 +957,35 @@ Returns an array of root nodes.
     <p>
 Create a new tree.
 </p>
-<pre class="code">
-   <span class='tree identifier id'>tree</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Tree constant id'>Tree</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'tree1'</span> <span class='rparen token'>)</span>
-   <span class='tree identifier id'>tree</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Tree constant id'>Tree</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'tree1'</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'A tree'</span> <span class='rparen token'>)</span>
+<pre class="code ruby"><code>
+   <span class='id identifier rubyid_tree'>tree</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Tree</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tree1</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+   <span class='id identifier rubyid_tree'>tree</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Tree</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tree1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A tree</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
 
-   <span class='nodes identifier id'>nodes</span> <span class='assign token'>=</span> <span class='dstring node'>%w|node1 node2 node3|</span><span class='dot token'>.</span><span class='map identifier id'>map</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='n identifier id'>n</span><span class='bitor op'>|</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='n identifier id'>n</span> <span class='rparen token'>)</span> <span class='rbrace token'>}</span>
-   <span class='edge1 identifier id'>edge1</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Edge constant id'>Edge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'edge1'</span><span class='comma token'>,</span> <span class='symbol val'>:source</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='nodes identifier id'>nodes</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:target</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='nodes identifier id'>nodes</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span> <span class='rparen token'>)</span>
-   <span class='edge2 identifier id'>edge2</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Edge constant id'>Edge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'edge2'</span><span class='comma token'>,</span> <span class='symbol val'>:source</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='nodes identifier id'>nodes</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:target</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='nodes identifier id'>nodes</span><span class='lbrack token'>[</span><span class='integer val'>2</span><span class='rbrack token'>]</span> <span class='rparen token'>)</span>
+   <span class='id identifier rubyid_nodes'>nodes</span> <span class='op'>=</span> <span class='qwords_beg'>%w|</span><span class='tstring_content'>node1</span><span class='words_sep'> </span><span class='tstring_content'>node2</span><span class='words_sep'> </span><span class='tstring_content'>node3</span><span class='words_sep'>|</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_n'>n</span><span class='op'>|</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Node</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='id identifier rubyid_n'>n</span> <span class='rparen'>)</span> <span class='rbrace'>}</span>                
+   <span class='id identifier rubyid_edge1'>edge1</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Edge</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>edge1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:source</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_nodes'>nodes</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:target</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_nodes'>nodes</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='rparen'>)</span>
+   <span class='id identifier rubyid_edge2'>edge2</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Edge</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>edge2</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:source</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_nodes'>nodes</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:target</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_nodes'>nodes</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span> <span class='rparen'>)</span>
 
-   <span class='tree identifier id'>tree</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Tree constant id'>Tree</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'tree1'</span><span class='comma token'>,</span> <span class='symbol val'>:nodes</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='nodes identifier id'>nodes</span> <span class='rparen token'>)</span>
-   <span class='tree identifier id'>tree</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Tree constant id'>Tree</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='t identifier id'>t</span><span class='bitor op'>|</span>
-            <span class='t identifier id'>t</span><span class='dot token'>.</span><span class='label identifier id'>label</span> <span class='assign token'>=</span> <span class='string val'>'A tree'</span>
-            <span class='t identifier id'>t</span><span class='dot token'>.</span><span class='nodes identifier id'>nodes</span> <span class='assign token'>=</span> <span class='nodes identifier id'>nodes</span>
-            <span class='t identifier id'>t</span><span class='dot token'>.</span><span class='edges identifier id'>edges</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span> <span class='edge1 identifier id'>edge1</span><span class='comma token'>,</span> <span class='edge2 identifier id'>edge2</span> <span class='rbrack token'>]</span>
-            <span class='comment val'># or, t &lt;&lt; edge1 &lt;&lt; edge2</span>
-            <span class='comment val'># or, t.add_edge( edge1 ); t.add_edge( edge2 )</span>
+   <span class='id identifier rubyid_tree'>tree</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Tree</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tree1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:nodes</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_nodes'>nodes</span> <span class='rparen'>)</span>
+   <span class='id identifier rubyid_tree'>tree</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Tree</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>                                        
+            <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A tree</span><span class='tstring_end'>'</span></span>
+            <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_nodes'>nodes</span> <span class='op'>=</span> <span class='id identifier rubyid_nodes'>nodes</span>
+            <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_edges'>edges</span> <span class='op'>=</span> <span class='lbracket'>[</span> <span class='id identifier rubyid_edge1'>edge1</span><span class='comma'>,</span> <span class='id identifier rubyid_edge2'>edge2</span> <span class='rbracket'>]</span>
+            <span class='comment'># or, t &lt;&lt; edge1 &lt;&lt; edge2
+</span>            <span class='comment'># or, t.add_edge( edge1 ); t.add_edge( edge2 )
+</span>
+            <span class='id identifier rubyid_root'>root</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Node</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>root1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:root</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rparen'>)</span>
+            <span class='id identifier rubyid_rootedge'>rootedge</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>RootEdge</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>re1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:target</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_root'>root</span> <span class='rparen'>)</span>
 
-            <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'root1'</span><span class='comma token'>,</span> <span class='symbol val'>:root</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='true true kw'>true</span> <span class='rparen token'>)</span>
-            <span class='rootedge identifier id'>rootedge</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='RootEdge constant id'>RootEdge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'re1'</span><span class='comma token'>,</span> <span class='symbol val'>:target</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='root identifier id'>root</span> <span class='rparen token'>)</span>
-
-            <span class='t identifier id'>t</span> <span class='lshft op'>&lt;&lt;</span> <span class='root identifier id'>root</span> <span class='comment val'># or, t.add_otu( root )</span>
-            <span class='t identifier id'>t</span><span class='dot token'>.</span><span class='rootedge identifier id'>rootedge</span> <span class='assign token'>=</span> <span class='rootedge identifier id'>rootedge</span>
-          <span class='end end kw'>end</span>
-</pre>
+            <span class='id identifier rubyid_t'>t</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_root'>root</span> <span class='comment'># or, t.add_otu( root )
+</span>            <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_rootedge'>rootedge</span> <span class='op'>=</span> <span class='id identifier rubyid_rootedge'>rootedge</span>
+          <span class='kw'>end</span></code></pre>
 
 
   </div>
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1039,13 +1002,12 @@ Create a new tree.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 233</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
-  <span class='@id ivar id'>@id</span> <span class='assign token'>=</span> <span class='id identifier id'>id</span>
-  <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-  <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='arity identifier id'>arity</span> <span class='lt op'>&lt;</span> <span class='integer val'>1</span> <span class='question op'>?</span> <span class='instance_eval identifier id'>instance_eval</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='call identifier id'>call</span><span class='lparen token'>(</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='ivar'>@id</span> <span class='op'>=</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='id identifier rubyid_properties'>properties</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_arity'>arity</span> <span class='op'>&lt;</span> <span class='int'>1</span> <span class='op'>?</span> <span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span> <span class='kw'>self</span> <span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1077,6 +1039,7 @@ A file level unique identifier.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1090,10 +1053,9 @@ A file level unique identifier.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 194</span>
 
-<span class='def def kw'>def</span> <span class='id identifier id'>id</span>
-  <span class='@id ivar id'>@id</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1120,6 +1082,7 @@ A human readable description.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1133,10 +1096,9 @@ A human readable description.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 197</span>
 
-<span class='def def kw'>def</span> <span class='label identifier id'>label</span>
-  <span class='@label ivar id'>@label</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
+  <span class='ivar'>@label</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1163,6 +1125,7 @@ A rootedge to indicate a time span leading up to the root.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1176,10 +1139,9 @@ A rootedge to indicate a time span leading up to the root.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 200</span>
 
-<span class='def def kw'>def</span> <span class='rootedge identifier id'>rootedge</span>
-  <span class='@rootedge ivar id'>@rootedge</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_rootedge'>rootedge</span>
+  <span class='ivar'>@rootedge</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1211,6 +1173,7 @@ addition to <tt>add_node</tt>, <tt>add_edge</tt> methods.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1230,16 +1193,15 @@ addition to <tt>add_node</tt>, <tt>add_edge</tt> methods.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 247</span>
 
-<span class='def def kw'>def</span> <span class='lshft op'>&lt;&lt;</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-  <span class='case case kw'>case</span> <span class='object identifier id'>object</span>
-  <span class='when when kw'>when</span> <span class='Node constant id'>Node</span>
-    <span class='add_node identifier id'>add_node</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-  <span class='when when kw'>when</span> <span class='Edge constant id'>Edge</span>
-    <span class='add_edge identifier id'>add_edge</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
-  <span class='self self kw'>self</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_object'>object</span>
+  <span class='kw'>when</span> <span class='const'>Node</span>
+    <span class='id identifier rubyid_add_node'>add_node</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+  <span class='kw'>when</span> <span class='const'>Edge</span>
+    <span class='id identifier rubyid_add_edge'>add_edge</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1263,6 +1225,7 @@ Fetch a node, or an edge by its id.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1277,11 +1240,10 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 317</span>
 
-<span class='def def kw'>def</span> <span class='aref op'>[]</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span>
-  <span class='get_node_by_id identifier id'>get_node_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span> <span class='orop op'>||</span>
-    <span class='get_edge_by_id identifier id'>get_edge_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_get_node_by_id'>get_node_by_id</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span> <span class='op'>||</span>
+    <span class='id identifier rubyid_get_edge_by_id'>get_edge_by_id</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1305,6 +1267,7 @@ Fetch a node, or an edge by its id.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1316,8 +1279,7 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 267</span>
 
-<span class='alias alias kw'>alias</span> <span class='__add_edge__ identifier id'>__add_edge__</span> <span class='add_edge identifier id'>add_edge</span>
-</pre>
+<span class='kw'>alias</span> <span class='id identifier rubyid___add_edge__'>__add_edge__</span> <span class='id identifier rubyid_add_edge'>add_edge</span></pre>
     </td>
   </tr>
 </table>
@@ -1341,6 +1303,7 @@ Fetch a node, or an edge by its id.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1352,8 +1315,7 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 258</span>
 
-<span class='alias alias kw'>alias</span> <span class='__add_node__ identifier id'>__add_node__</span> <span class='add_node identifier id'>add_node</span>
-</pre>
+<span class='kw'>alias</span> <span class='id identifier rubyid___add_node__'>__add_node__</span> <span class='id identifier rubyid_add_node'>add_node</span></pre>
     </td>
   </tr>
 </table>
@@ -1377,6 +1339,7 @@ Fetch a node, or an edge by its id.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1391,11 +1354,10 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 270</span>
 
-<span class='def def kw'>def</span> <span class='add_edge identifier id'>add_edge</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span><span class='dot token'>.</span><span class='source identifier id'>source</span><span class='comma token'>,</span> <span class='edge identifier id'>edge</span><span class='dot token'>.</span><span class='target identifier id'>target</span><span class='comma token'>,</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
-  <span class='__add_edge__ identifier id'>__add_edge__</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_edge'>add_edge</span><span class='lparen'>(</span> <span class='id identifier rubyid_edge'>edge</span> <span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span> <span class='id identifier rubyid_edge'>edge</span><span class='period'>.</span><span class='id identifier rubyid_source'>source</span><span class='comma'>,</span> <span class='id identifier rubyid_edge'>edge</span><span class='period'>.</span><span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_edge'>edge</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid___add_edge__'>__add_edge__</span><span class='lparen'>(</span> <span class='id identifier rubyid_edge'>edge</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1419,6 +1381,7 @@ Fetch a node, or an edge by its id.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -1433,11 +1396,10 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 261</span>
 
-<span class='def def kw'>def</span> <span class='add_node identifier id'>add_node</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
-  <span class='__add_node__ identifier id'>__add_node__</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_node'>add_node</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span> <span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid___add_node__'>__add_node__</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1463,10 +1425,9 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 275</span>
 
-<span class='def def kw'>def</span> <span class='add_rootedge identifier id'>add_rootedge</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
-  <span class='@rootedge ivar id'>@rootedge</span> <span class='assign token'>=</span> <span class='edge identifier id'>edge</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_rootedge'>add_rootedge</span><span class='lparen'>(</span> <span class='id identifier rubyid_edge'>edge</span> <span class='rparen'>)</span>
+  <span class='ivar'>@rootedge</span> <span class='op'>=</span> <span class='id identifier rubyid_edge'>edge</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1500,18 +1461,17 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 414</span>
 
-<span class='def def kw'>def</span> <span class='ancestors identifier id'>ancestors</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='root identifier id'>root</span> <span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-    <span class='raise identifier id'>raise</span> <span class='IndexError constant id'>IndexError</span><span class='comma token'>,</span> <span class='string val'>'can not get parent for unrooted tree'</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-    <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span>
-  <span class='end end kw'>end</span>
-  <span class='ancestor identifier id'>ancestor</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
-  <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
-    <span class='ancestor identifier id'>ancestor</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='r identifier id'>r</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
-  <span class='ancestor identifier id'>ancestor</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_ancestors'>ancestors</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_root'>root</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>IndexError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>can not get parent for unrooted tree</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_root'>root</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_ancestor'>ancestor</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span>
+    <span class='id identifier rubyid_ancestor'>ancestor</span><span class='lbracket'>[</span> <span class='id identifier rubyid_r'>r</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_r'>r</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_ancestor'>ancestor</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1548,21 +1508,20 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 375</span>
 
-<span class='def def kw'>def</span> <span class='children identifier id'>children</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='root identifier id'>root</span> <span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-    <span class='raise identifier id'>raise</span> <span class='IndexError constant id'>IndexError</span><span class='comma token'>,</span> <span class='string val'>'can not get parent for unrooted tree'</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-    <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span>
-  <span class='end end kw'>end</span>
-  <span class='childrens identifier id'>childrens</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
-  <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
-    <span class='c identifier id'>c</span> <span class='assign token'>=</span> <span class='adjacent_nodes identifier id'>adjacent_nodes</span><span class='lparen token'>(</span><span class='node identifier id'>node</span><span class='rparen token'>)</span>
-    <span class='c identifier id'>c</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='parent identifier id'>parent</span><span class='lparen token'>(</span><span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='r identifier id'>r</span><span class='rparen token'>)</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span><span class='rparen token'>)</span>
-    <span class='childrens identifier id'>childrens</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='c identifier id'>c</span>
-  <span class='end end kw'>end</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_children'>children</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_root'>root</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>IndexError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>can not get parent for unrooted tree</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_root'>root</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_childrens'>childrens</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span>
+    <span class='id identifier rubyid_c'>c</span> <span class='op'>=</span> <span class='id identifier rubyid_adjacent_nodes'>adjacent_nodes</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_parent'>parent</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_r'>r</span><span class='rparen'>)</span><span class='lbracket'>[</span> <span class='id identifier rubyid_r'>r</span> <span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_childrens'>childrens</span><span class='lbracket'>[</span> <span class='id identifier rubyid_r'>r</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_c'>c</span>
+  <span class='kw'>end</span>
 
-  <span class='childrens identifier id'>childrens</span>
-<span class='end end kw'>end</span>
-</pre>
+  <span class='id identifier rubyid_childrens'>childrens</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1588,10 +1547,9 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 185</span>
 
-<span class='def def kw'>def</span> <span class='create_edge identifier id'>create_edge</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='raise identifier id'>raise</span> <span class='string val'>&quot;This is supposed to be an abstract method&quot;</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_edge'>create_edge</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This is supposed to be an abstract method</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1619,12 +1577,11 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 179</span>
 
-<span class='def def kw'>def</span> <span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='Node constant id'>Node</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='dot token'>.</span><span class='generate_id identifier id'>generate_id</span><span class='lparen token'>(</span> <span class='Node constant id'>Node</span> <span class='rparen token'>)</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span>
-  <span class='self self kw'>self</span> <span class='lshft op'>&lt;&lt;</span> <span class='node identifier id'>node</span>
-  <span class='node identifier id'>node</span>        
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='const'>Node</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='period'>.</span><span class='id identifier rubyid_generate_id'>generate_id</span><span class='lparen'>(</span> <span class='const'>Node</span> <span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span>
+  <span class='kw'>self</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_node'>node</span>
+  <span class='id identifier rubyid_node'>node</span>        
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1650,10 +1607,9 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 189</span>
 
-<span class='def def kw'>def</span> <span class='create_rootedge identifier id'>create_rootedge</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='raise identifier id'>raise</span> <span class='string val'>&quot;This is supposed to be an abstract method&quot;</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_rootedge'>create_rootedge</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This is supposed to be an abstract method</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1687,18 +1643,17 @@ Fetch a node, or an edge by its id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 390</span>
 
-<span class='def def kw'>def</span> <span class='descendents identifier id'>descendents</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='root identifier id'>root</span> <span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-    <span class='raise identifier id'>raise</span> <span class='IndexError constant id'>IndexError</span><span class='comma token'>,</span> <span class='string val'>'can not get parent for unrooted tree'</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-    <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span>
-  <span class='end end kw'>end</span>
-  <span class='descendent identifier id'>descendent</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
-  <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
-    <span class='descendent identifier id'>descendent</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='r identifier id'>r</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
-  <span class='descendent identifier id'>descendent</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_descendents'>descendents</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_root'>root</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>IndexError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>can not get parent for unrooted tree</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_root'>root</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_descendent'>descendent</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span>
+    <span class='id identifier rubyid_descendent'>descendent</span><span class='lbracket'>[</span> <span class='id identifier rubyid_r'>r</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_r'>r</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_descendent'>descendent</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1711,18 +1666,7 @@ Fetch a node, or an edge by its id.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Iterate over each edge. Return an Enumerator if no block is given.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -1733,8 +1677,7 @@ Iterate over each edge. Return an Enumerator if no block is given.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 343</span>
 
-<span class='def def kw'>def</span> <span class='each_edge identifier id'>each_edge</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_each_edge'>each_edge</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1747,19 +1690,7 @@ Iterate over each edge. Return an Enumerator if no block is given.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Iterate over each node passing id and the node itself to the given block.
-Returns an Enumerator if no block is given.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -1770,8 +1701,7 @@ Returns an Enumerator if no block is given.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 347</span>
 
-<span class='def def kw'>def</span> <span class='each_edge_with_id identifier id'>each_edge_with_id</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_each_edge_with_id'>each_edge_with_id</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1784,18 +1714,7 @@ Returns an Enumerator if no block is given.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Iterate over each node. Return an Enumerator if no block is given.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -1806,8 +1725,7 @@ Iterate over each node. Return an Enumerator if no block is given.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 336</span>
 
-<span class='def def kw'>def</span> <span class='each_node identifier id'>each_node</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_each_node'>each_node</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1820,19 +1738,7 @@ Iterate over each node. Return an Enumerator if no block is given.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Iterate over each node passing id and the node itself to the given block.
-Returns an Enumerator if no block is given.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -1843,8 +1749,7 @@ Returns an Enumerator if no block is given.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 340</span>
 
-<span class='def def kw'>def</span> <span class='each_node_with_id identifier id'>each_node_with_id</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_each_node_with_id'>each_node_with_id</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1857,18 +1762,7 @@ Returns an Enumerator if no block is given.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Fetch an edge by the given id.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -1879,8 +1773,7 @@ Fetch an edge by the given id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 314</span>
 
-<span class='def def kw'>def</span> <span class='get_edge_by_id identifier id'>get_edge_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_edge_by_id'>get_edge_by_id</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1897,18 +1790,7 @@ Fetch an edge by the given id.
     <span class="names"><span id='get_node_by_name-instance_method'>get_node_by_name</span></span>
     </span>
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Fetch a node by the given id.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -1919,8 +1801,7 @@ Fetch a node by the given id.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 307</span>
 
-<span class='def def kw'>def</span> <span class='get_node_by_id identifier id'>get_node_by_id</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_node_by_id'>get_node_by_id</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1935,15 +1816,13 @@ Fetch a node by the given id.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Returns true if the given edge is a part of <tt>self</tt>.
-</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -1968,8 +1847,7 @@ Returns true if the given edge is a part of <tt>self</tt>.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 326</span>
 
-<span class='def def kw'>def</span> <span class='has_edge? fid id'>has_edge?</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_has_edge?'>has_edge?</span><span class='lparen'>(</span> <span class='id identifier rubyid_edge'>edge</span> <span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1984,15 +1862,13 @@ Returns true if the given edge is a part of <tt>self</tt>.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Returns true if the given node is a part of <tt>self</tt>.
-</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -2017,8 +1893,7 @@ Returns true if the given node is a part of <tt>self</tt>.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 323</span>
 
-<span class='def def kw'>def</span> <span class='has_node? fid id'>has_node?</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_has_node?'>has_node?</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span> <span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -2046,7 +1921,8 @@ false otherwise.
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -2074,11 +1950,10 @@ false otherwise.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 329</span>
 
-<span class='def def kw'>def</span> <span class='include? fid id'>include?</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-  <span class='has_node? fid id'>has_node?</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span> <span class='orop op'>||</span>
-    <span class='has_edge? fid id'>has_edge?</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_has_node?'>has_node?</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span> <span class='op'>||</span>
+    <span class='id identifier rubyid_has_edge?'>has_edge?</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -2112,18 +1987,17 @@ false otherwise.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 402</span>
 
-<span class='def def kw'>def</span> <span class='lowest_common_ancestor identifier id'>lowest_common_ancestor</span><span class='lparen token'>(</span> <span class='node1 identifier id'>node1</span><span class='comma token'>,</span> <span class='node2 identifier id'>node2</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='root identifier id'>root</span> <span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-    <span class='raise identifier id'>raise</span> <span class='IndexError constant id'>IndexError</span><span class='comma token'>,</span> <span class='string val'>'can not get parent for unrooted tree'</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-    <span class='root identifier id'>root</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='root identifier id'>root</span>
-  <span class='end end kw'>end</span>
-  <span class='lca identifier id'>lca</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
-  <span class='root identifier id'>root</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
-    <span class='lca identifier id'>lca</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node1 identifier id'>node1</span><span class='comma token'>,</span> <span class='node2 identifier id'>node2</span><span class='comma token'>,</span> <span class='r identifier id'>r</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
-  <span class='lca identifier id'>lca</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_lowest_common_ancestor'>lowest_common_ancestor</span><span class='lparen'>(</span> <span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_root'>root</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>IndexError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>can not get parent for unrooted tree</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_root'>root</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_lca'>lca</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span>
+    <span class='id identifier rubyid_lca'>lca</span><span class='lbracket'>[</span> <span class='id identifier rubyid_r'>r</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span> <span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='comma'>,</span> <span class='id identifier rubyid_r'>r</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_lca'>lca</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -2136,18 +2010,7 @@ false otherwise.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Return the number of edges in the tree.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -2158,8 +2021,7 @@ Return the number of edges in the tree.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 353</span>
 
-<span class='def def kw'>def</span> <span class='number_of_edges identifier id'>number_of_edges</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_number_of_edges'>number_of_edges</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -2172,18 +2034,7 @@ Return the number of edges in the tree.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Return the number of nodes in the tree.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -2194,8 +2045,7 @@ Return the number of nodes in the tree.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 350</span>
 
-<span class='def def kw'>def</span> <span class='number_of_nodes identifier id'>number_of_nodes</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_number_of_nodes'>number_of_nodes</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -2219,6 +2069,7 @@ Returns the parent of the given node corresponding to each root.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -2240,18 +2091,17 @@ Returns the parent of the given node corresponding to each root.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 363</span>
 
-<span class='def def kw'>def</span> <span class='parent identifier id'>parent</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='roots identifier id'>roots</span> <span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='roots identifier id'>roots</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-    <span class='raise identifier id'>raise</span> <span class='IndexError constant id'>IndexError</span><span class='comma token'>,</span> <span class='string val'>'can not get parent for unrooted tree'</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='roots identifier id'>roots</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-    <span class='roots identifier id'>roots</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='roots identifier id'>roots</span>
-  <span class='end end kw'>end</span>
-  <span class='parents identifier id'>parents</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
-  <span class='roots identifier id'>roots</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
-    <span class='parents identifier id'>parents</span><span class='lbrack token'>[</span> <span class='r identifier id'>r</span> <span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span><span class='comma token'>,</span> <span class='r identifier id'>r</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
-  <span class='parents identifier id'>parents</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_parent'>parent</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_roots'>roots</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_roots'>roots</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>IndexError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>can not get parent for unrooted tree</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roots'>roots</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_roots'>roots</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roots'>roots</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_parents'>parents</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_roots'>roots</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span>
+    <span class='id identifier rubyid_parents'>parents</span><span class='lbracket'>[</span> <span class='id identifier rubyid_r'>r</span> <span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_r'>r</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_parents'>parents</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -2273,7 +2123,7 @@ Returns the parent of the given node corresponding to each root.
     <p>
 Remove an edge from the tree. Returns the edge deleted. If more than one
 edge exists between the source and the target, both of them will be
-removed. Raises IndexError if the edge is not found in the tree.
+removed. Raises IndexError if the edge is  not found in the tree.
 </p>
 
 
@@ -2281,6 +2131,7 @@ removed. Raises IndexError if the edge is not found in the tree.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -2296,12 +2147,11 @@ removed. Raises IndexError if the edge is not found in the tree.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 299</span>
 
-<span class='def def kw'>def</span> <span class='remove_edge identifier id'>remove_edge</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
-  <span class='return return kw'>return</span> <span class='unless unless_mod kw'>unless</span> <span class='include? fid id'>include?</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span><span class='dot token'>.</span><span class='source identifier id'>source</span><span class='comma token'>,</span> <span class='edge identifier id'>edge</span><span class='dot token'>.</span><span class='target identifier id'>target</span> <span class='rparen token'>)</span>
-  <span class='__delete_edge__ identifier id'>__delete_edge__</span><span class='lparen token'>(</span> <span class='edge identifier id'>edge</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_remove_edge'>remove_edge</span><span class='lparen'>(</span> <span class='id identifier rubyid_edge'>edge</span> <span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_edge'>edge</span> <span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span> <span class='id identifier rubyid_edge'>edge</span><span class='period'>.</span><span class='id identifier rubyid_source'>source</span><span class='comma'>,</span> <span class='id identifier rubyid_edge'>edge</span><span class='period'>.</span><span class='id identifier rubyid_target'>target</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid___delete_edge__'>__delete_edge__</span><span class='lparen'>(</span> <span class='id identifier rubyid_edge'>edge</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -2331,6 +2181,7 @@ not found in the tree.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -2346,12 +2197,11 @@ not found in the tree.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 285</span>
 
-<span class='def def kw'>def</span> <span class='remove_node identifier id'>remove_node</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
-  <span class='return return kw'>return</span> <span class='unless unless_mod kw'>unless</span> <span class='include? fid id'>include?</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
-  <span class='__delete_node__ identifier id'>__delete_node__</span><span class='lparen token'>(</span> <span class='node identifier id'>node</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_remove_node'>remove_node</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span> <span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span> <span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid___delete_node__'>__delete_node__</span><span class='lparen'>(</span> <span class='id identifier rubyid_node'>node</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -2375,6 +2225,7 @@ Returns an array of root nodes.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -2388,10 +2239,9 @@ Returns an array of root nodes.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 241</span>
 
-<span class='def def kw'>def</span> <span class='roots identifier id'>roots</span>
-  <span class='nodes identifier id'>nodes</span><span class='dot token'>.</span><span class='select identifier id'>select</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='n identifier id'>n</span><span class='bitor op'>|</span> <span class='n identifier id'>n</span><span class='dot token'>.</span><span class='root? fid id'>root?</span> <span class='rbrace token'>}</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_roots'>roots</span>
+  <span class='id identifier rubyid_nodes'>nodes</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_n'>n</span><span class='op'>|</span> <span class='id identifier rubyid_n'>n</span><span class='period'>.</span><span class='id identifier rubyid_root?'>root?</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -2430,23 +2280,22 @@ Returns an array of root nodes.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 162</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
-  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;tree&quot;</span><span class='comma token'>,</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lparen token'>(</span> <span class='self self kw'>self</span><span class='comma token'>,</span> <span class='symbol val'>:id</span><span class='comma token'>,</span> <span class='symbol val'>:'xsi:type'</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='rparen token'>)</span> <span class='rparen token'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tree</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lparen'>(</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:id</span><span class='comma'>,</span> <span class='symbol'>:xsi:type</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:label</span> <span class='rparen'>)</span> <span class='rparen'>)</span>
 
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_node identifier id'>each_node</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='n identifier id'>n</span><span class='bitor op'>|</span>
-    <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='n identifier id'>n</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-  <span class='end end kw'>end</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_each_node'>each_node</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_n'>n</span><span class='op'>|</span>
+    <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_n'>n</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='kw'>end</span>
 
-  <span class='rootedge identifier id'>rootedge</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='rootedge identifier id'>rootedge</span>
-  <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='rootedge identifier id'>rootedge</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span> <span class='if if_mod kw'>if</span> <span class='rootedge identifier id'>rootedge</span>
+  <span class='id identifier rubyid_rootedge'>rootedge</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rootedge'>rootedge</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_rootedge'>rootedge</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span> <span class='kw'>if</span> <span class='id identifier rubyid_rootedge'>rootedge</span>
 
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_edge identifier id'>each_edge</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='edge identifier id'>edge</span><span class='bitor op'>|</span>
-    <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='edge identifier id'>edge</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-  <span class='end end kw'>end</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_each_edge'>each_edge</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_edge'>edge</span><span class='op'>|</span>
+    <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_edge'>edge</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='kw'>end</span>
 
-  <span class='node identifier id'>node</span>
-<span class='end end kw'>end</span>
-</pre>
+  <span class='id identifier rubyid_node'>node</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -2457,9 +2306,9 @@ Returns an array of root nodes.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:01 2011 by 
+  Generated on Thu Mar 29 12:34:01 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Rna
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -106,53 +106,40 @@
         <dt id="lookup-classvariable" class="">@@lookup =
           
         </dt>
-        <dd><pre class="code"><span class='lbrace token'>{</span>
-  <span class='string val'>'A'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'A'</span>                <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'C'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'C'</span>                <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'G'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'G'</span>                <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'U'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'U'</span>                <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'M'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'A'</span><span class='comma token'>,</span> <span class='string val'>'C'</span>           <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'R'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'A'</span><span class='comma token'>,</span> <span class='string val'>'G'</span>           <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'W'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'A'</span><span class='comma token'>,</span> <span class='string val'>'U'</span>           <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'S'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'C'</span><span class='comma token'>,</span> <span class='string val'>'G'</span>           <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'Y'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'C'</span><span class='comma token'>,</span> <span class='string val'>'U'</span>           <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'K'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'G'</span><span class='comma token'>,</span> <span class='string val'>'U'</span>           <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'V'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'A'</span><span class='comma token'>,</span> <span class='string val'>'C'</span><span class='comma token'>,</span> <span class='string val'>'G'</span>      <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'H'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'A'</span><span class='comma token'>,</span> <span class='string val'>'C'</span><span class='comma token'>,</span> <span class='string val'>'U'</span>      <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'D'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'A'</span><span class='comma token'>,</span> <span class='string val'>'G'</span><span class='comma token'>,</span> <span class='string val'>'U'</span>      <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'B'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'C'</span><span class='comma token'>,</span> <span class='string val'>'G'</span><span class='comma token'>,</span> <span class='string val'>'U'</span>      <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'X'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'G'</span><span class='comma token'>,</span> <span class='string val'>'A'</span><span class='comma token'>,</span> <span class='string val'>'U'</span><span class='comma token'>,</span> <span class='string val'>'C'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'N'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'G'</span><span class='comma token'>,</span> <span class='string val'>'A'</span><span class='comma token'>,</span> <span class='string val'>'U'</span><span class='comma token'>,</span> <span class='string val'>'C'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'-'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span>                    <span class='rbrack token'>]</span><span class='comma token'>,</span>
-  <span class='string val'>'?'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span> <span class='string val'>'G'</span><span class='comma token'>,</span> <span class='string val'>'A'</span><span class='comma token'>,</span> <span class='string val'>'U'</span><span class='comma token'>,</span> <span class='string val'>'C'</span> <span class='rbrack token'>]</span><span class='comma token'>,</span>        
-<span class='rbrace token'>}</span>
-</pre></dd>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span>                <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span>                <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span>                <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span>                <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>M</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span>           <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>R</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span>           <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>W</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span>           <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>S</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span>           <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Y</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span>           <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>K</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span>           <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>V</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span>      <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>H</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span>      <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>D</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span>      <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>B</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span>      <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>X</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>N</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span>                    <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>?</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>G</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>U</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>C</span><span class='tstring_end'>'</span></span> <span class='rbracket'>]</span><span class='comma'>,</span>        
+<span class='rbrace'>}</span></pre></dd>
       
     </dl>
   
 
 
-  
-  
-  
-  
-  
-  
-  
-  
 
 
-  
-  
-  
+
+
   <h2>Instance Attribute Summary</h2>
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Characters.html" title="Bio::NeXML::Characters (class)">Characters</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Characters.html#format-instance_method" title="Bio::NeXML::Characters#format (method)">format</a></span>, <span class='object_link'><a href="Characters.html#id-instance_method" title="Bio::NeXML::Characters#id (method)">id</a></span>, <span class='object_link'><a href="Characters.html#label-instance_method" title="Bio::NeXML::Characters#label (method)">label</a></span>, <span class='object_link'><a href="Characters.html#matrix-instance_method" title="Bio::NeXML::Characters#matrix (method)">matrix</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Characters.html#format-instance_method" title="Bio::NeXML::Characters#format (method)">#format</a></span>, <span class='object_link'><a href="Characters.html#id-instance_method" title="Bio::NeXML::Characters#id (method)">#id</a></span>, <span class='object_link'><a href="Characters.html#label-instance_method" title="Bio::NeXML::Characters#label (method)">#label</a></span>, <span class='object_link'><a href="Characters.html#matrix-instance_method" title="Bio::NeXML::Characters#matrix (method)">#matrix</a></span></p>
 
-  
-  
-  
 
   
     <h2>
@@ -238,10 +225,9 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 967</span>
 
-<span class='def def kw'>def</span> <span class='lookup identifier id'>lookup</span>
-  <span class='@@lookup ivar id'>@@lookup</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_lookup'>lookup</span>
+  <span class='cvar'>@@lookup</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -252,9 +238,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:31:59 2011 by 
+  Generated on Thu Mar 29 12:34:02 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

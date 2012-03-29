@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::CellRow
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -102,34 +102,21 @@
         <dt id="writer-classvariable" class="">@@writer =
           
         </dt>
-        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-</pre></dd>
+        <dd><pre class="code"><span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
       
     </dl>
   
 
 
-  
-  
-  
-  
-  
-  
-  
-  
 
 
-  
-  
-  
+
+
   <h2>Instance Attribute Summary</h2>
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Row.html" title="Bio::NeXML::Row (class)">Row</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Row.html#id-instance_method" title="Bio::NeXML::Row#id (method)">id</a></span>, <span class='object_link'><a href="Row.html#label-instance_method" title="Bio::NeXML::Row#label (method)">label</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Row.html#id-instance_method" title="Bio::NeXML::Row#id (method)">#id</a></span>, <span class='object_link'><a href="Row.html#label-instance_method" title="Bio::NeXML::Row#label (method)">#label</a></span></p>
 
-  
-  
-  
 
   
     <h2>
@@ -155,18 +142,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Add a cell to the row
-</p>
-<ul>
-<li>Arguments :
-
-</li>
-</ul>
-<p>
-cell( required ) - a Bio::NeXML::Cell object.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -187,10 +163,7 @@ cell( required ) - a Bio::NeXML::Cell object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Returns an array of cells ( Bio::NeXML::Cell objects ) for the row.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -211,10 +184,7 @@ Returns an array of cells ( Bio::NeXML::Cell objects ) for the row.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Add cells to the row.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -235,18 +205,7 @@ Add cells to the row.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Remove a cell from the row
-</p>
-<ul>
-<li>Arguments :
-
-</li>
-</ul>
-<p>
-cell( required ) - a Bio::NeXML::Cell object.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -267,10 +226,7 @@ cell( required ) - a Bio::NeXML::Cell object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Iterate over each cell ( Bio::NeXML::Cell object ) defined for the row.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -291,11 +247,7 @@ Iterate over each cell ( Bio::NeXML::Cell object ) defined for the row.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Returns true if the given cell( Bio::NeXML::Cell object ) is defined for
-the row.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -316,10 +268,7 @@ the row.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Returns the number of cells defined for the row.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -387,36 +336,7 @@ Returns the number of cells defined for the row.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Add a cell to the row
-</p>
-<ul>
-<li>Arguments :
-
-</li>
-</ul>
-<p>
-cell( required ) - a Bio::NeXML::Cell object.
-</p>
-<ul>
-<li>Returns : <tt>self</tt>.
-
-<pre class="code">
- <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='add_cell identifier id'>add_cell</span><span class='lparen token'>(</span> <span class='cell identifier id'>cell</span> <span class='rparen token'>)</span>
- <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>               <span class='comment val'>#=&gt; [ .. cell .. ]</span>
- <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='row identifier id'>row</span>                <span class='comment val'>#=&gt; row</span>
-</pre>
-</li>
-</ul>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -429,10 +349,9 @@ cell( required ) - a Bio::NeXML::Cell object.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 741</span>
 
-<span class='def def kw'>def</span> <span class='add_cell identifier id'>add_cell</span><span class='lparen token'>(</span> <span class='cell identifier id'>cell</span> <span class='rparen token'>)</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_cell'>add_cell</span><span class='lparen'>(</span> <span class='id identifier rubyid_cell'>cell</span> <span class='rparen'>)</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -445,21 +364,7 @@ cell( required ) - a Bio::NeXML::Cell object.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Returns an array of cells ( Bio::NeXML::Cell objects ) for the row.
-</p>
-<pre class="code">
-   <span class='matrix identifier id'>matrix</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>  <span class='comment val'>#=&gt; [ .. .. ]</span>
-</pre>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -472,10 +377,9 @@ Returns an array of cells ( Bio::NeXML::Cell objects ) for the row.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 758</span>
 
-<span class='def def kw'>def</span> <span class='cells identifier id'>cells</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_cells'>cells</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -488,31 +392,7 @@ Returns an array of cells ( Bio::NeXML::Cell objects ) for the row.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Add cells to the row. This function will override previous cells if any.
-</p>
-<ul>
-<li>Arguments :
-
-</li>
-</ul>
-<p>
-cells( required ) - an array of Bio::NeXML::Cell object.
-</p>
-<pre class="code">
-   <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span> <span class='cells identifier id'>cells</span> <span class='rbrack token'>]</span>
-   <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>    <span class='comment val'>#=&gt; [ cells ]</span>
-   <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='row identifier id'>row</span>     <span class='comment val'>#=&gt; row</span>
-</pre>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -525,10 +405,9 @@ cells( required ) - an array of Bio::NeXML::Cell object.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 768</span>
 
-<span class='def def kw'>def</span> <span class='cells= identifier id'>cells=</span><span class='lparen token'>(</span> <span class='cells identifier id'>cells</span> <span class='rparen token'>)</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_cells='>cells=</span><span class='lparen'>(</span> <span class='id identifier rubyid_cells'>cells</span> <span class='rparen'>)</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -541,36 +420,7 @@ cells( required ) - an array of Bio::NeXML::Cell object.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Remove a cell from the row
-</p>
-<ul>
-<li>Arguments :
-
-</li>
-</ul>
-<p>
-cell( required ) - a Bio::NeXML::Cell object.
-</p>
-<ul>
-<li>Returns : the deleted object.
-
-<pre class="code">
- <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='delete_cell identifier id'>delete_cell</span><span class='lparen token'>(</span> <span class='cell identifier id'>cell</span> <span class='rparen token'>)</span>
- <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>               <span class='comment val'>#=&gt; [ .. .. ]</span>
- <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='row identifier id'>row</span>                <span class='comment val'>#=&gt; nil</span>
-</pre>
-</li>
-</ul>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -583,10 +433,9 @@ cell( required ) - a Bio::NeXML::Cell object.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 752</span>
 
-<span class='def def kw'>def</span> <span class='delete_cell identifier id'>delete_cell</span><span class='lparen token'>(</span> <span class='cell identifier id'>cell</span> <span class='rparen token'>)</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_cell'>delete_cell</span><span class='lparen'>(</span> <span class='id identifier rubyid_cell'>cell</span> <span class='rparen'>)</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -599,19 +448,7 @@ cell( required ) - a Bio::NeXML::Cell object.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Iterate over each cell ( Bio::NeXML::Cell object ) defined for the row.
-Returns an Enumerator if no block is provided.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -624,10 +461,9 @@ Returns an Enumerator if no block is provided.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 779</span>
 
-<span class='def def kw'>def</span> <span class='each_cell identifier id'>each_cell</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_each_cell'>each_cell</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -642,16 +478,13 @@ Returns an Enumerator if no block is provided.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Returns true if the given cell( Bio::NeXML::Cell object ) is defined for
-the row.
-</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -678,10 +511,9 @@ the row.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 773</span>
 
-<span class='def def kw'>def</span> <span class='has_cell? fid id'>has_cell?</span><span class='lparen token'>(</span> <span class='cell identifier id'>cell</span> <span class='rparen token'>)</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_has_cell?'>has_cell?</span><span class='lparen'>(</span> <span class='id identifier rubyid_cell'>cell</span> <span class='rparen'>)</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -694,18 +526,7 @@ the row.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Returns the number of cells defined for the row.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -718,10 +539,9 @@ Returns the number of cells defined for the row.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 784</span>
 
-<span class='def def kw'>def</span> <span class='number_of_cells identifier id'>number_of_cells</span>
-  <span class='comment val'># dummy for rdoc</span>
-<span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_number_of_cells'>number_of_cells</span>
+  <span class='comment'># dummy for rdoc
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -751,14 +571,13 @@ Returns the number of cells defined for the row.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/matrix.rb', line 788</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
-  <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;row&quot;</span><span class='comma token'>,</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lparen token'>(</span> <span class='self self kw'>self</span><span class='comma token'>,</span> <span class='symbol val'>:id</span><span class='comma token'>,</span> <span class='symbol val'>:otu</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='rparen token'>)</span> <span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each_cell identifier id'>each_cell</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='cell identifier id'>cell</span><span class='bitor op'>|</span>
-    <span class='node identifier id'>node</span> <span class='lshft op'>&lt;&lt;</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-  <span class='end end kw'>end</span>
-  <span class='node identifier id'>node</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>row</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lparen'>(</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:id</span><span class='comma'>,</span> <span class='symbol'>:otu</span><span class='comma'>,</span> <span class='symbol'>:label</span> <span class='rparen'>)</span> <span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_each_cell'>each_cell</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_cell'>cell</span><span class='op'>|</span>
+    <span class='id identifier rubyid_node'>node</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_cell'>cell</span><span class='period'>.</span><span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_node'>node</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -769,9 +588,9 @@ Returns the number of cells defined for the row.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:31:59 2011 by 
+  Generated on Thu Mar 29 12:34:02 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

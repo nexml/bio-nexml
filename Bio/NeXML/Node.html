@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Class: Bio::NeXML::Node
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -111,6 +111,7 @@ link to an &#8216;otu&#8217;.
 </div>
 <div class="tags">
   
+
 </div>
   <h2>Constant Summary</h2>
   
@@ -119,18 +120,14 @@ link to an &#8216;otu&#8217;.
         <dt id="writer-classvariable" class="">@@writer =
           
         </dt>
-        <dd><pre class="code"><span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Writer constant id'>Writer</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-</pre></dd>
+        <dd><pre class="code"><span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Writer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></pre></dd>
       
     </dl>
   
 
 
-  
-  
-  
-  
-  
+
+
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
     
@@ -219,10 +216,6 @@ Stores a boolean value to indicate a root node.
 
 
 
-  
-  
-  
-  
 
   
     <h2>
@@ -274,10 +267,7 @@ Create a new otu.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Return the otu to which the node links to.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -298,10 +288,7 @@ Return the otu to which the node links to.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Link the node to the given otu.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -382,17 +369,17 @@ Create a new otu. Passing an &#8216;id&#8217; is a must. While
 &#8216;label&#8217; and &#8216;otu&#8217; may be passed as an optional
 hash.
 </p>
-<pre class="code">
-   <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'node1'</span> <span class='rparen token'>)</span>
-   <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'node1'</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'A node'</span> <span class='rparen token'>)</span>
-   <span class='node identifier id'>node</span> <span class='assign token'>=</span> <span class='Bio constant id'>Bio</span><span class='colon2 op'>::</span><span class='NeXML constant id'>NeXML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span> <span class='string val'>'node1'</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'A node'</span><span class='comma token'>,</span> <span class='symbol val'>:otu</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='otu identifier id'>otu</span> <span class='rparen token'>)</span>
-</pre>
+<pre class="code ruby"><code>
+   <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Node</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>node1</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+   <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Node</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>node1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A node</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+   <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='const'>Bio</span><span class='op'>::</span><span class='const'>NeXML</span><span class='op'>::</span><span class='const'>Node</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>node1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:label</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A node</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:otu</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_otu'>otu</span> <span class='rparen'>)</span></code></pre>
 
 
   </div>
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -409,13 +396,12 @@ hash.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 36</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span> <span class='id identifier id'>id</span> <span class='rparen token'>)</span>
-  <span class='@id ivar id'>@id</span> <span class='assign token'>=</span> <span class='id identifier id'>id</span>
-  <span class='properties identifier id'>properties</span><span class='lparen token'>(</span> <span class='options identifier id'>options</span> <span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-  <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='arity identifier id'>arity</span> <span class='lt op'>&lt;</span> <span class='integer val'>1</span> <span class='question op'>?</span> <span class='instance_eval identifier id'>instance_eval</span><span class='lparen token'>(</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span> <span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='block identifier id'>block</span><span class='dot token'>.</span><span class='call identifier id'>call</span><span class='lparen token'>(</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span> <span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span>
+  <span class='ivar'>@id</span> <span class='op'>=</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='id identifier rubyid_properties'>properties</span><span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span> <span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_arity'>arity</span> <span class='op'>&lt;</span> <span class='int'>1</span> <span class='op'>?</span> <span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span> <span class='kw'>self</span> <span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -447,6 +433,7 @@ A file level unique identifier.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -460,10 +447,9 @@ A file level unique identifier.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 17</span>
 
-<span class='def def kw'>def</span> <span class='id identifier id'>id</span>
-  <span class='@id ivar id'>@id</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -490,6 +476,7 @@ A human readable description.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -503,10 +490,9 @@ A human readable description.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 23</span>
 
-<span class='def def kw'>def</span> <span class='label identifier id'>label</span>
-  <span class='@label ivar id'>@label</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
+  <span class='ivar'>@label</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -533,6 +519,7 @@ Stores a boolean value to indicate a root node.
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -546,10 +533,9 @@ Stores a boolean value to indicate a root node.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 20</span>
 
-<span class='def def kw'>def</span> <span class='root identifier id'>root</span>
-  <span class='@root ivar id'>@root</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_root'>root</span>
+  <span class='ivar'>@root</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -569,18 +555,7 @@ Stores a boolean value to indicate a root node.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Return the otu to which the node links to.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -591,8 +566,7 @@ Return the otu to which the node links to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 44</span>
 
-<span class='def def kw'>def</span> <span class='otu identifier id'>otu</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_otu'>otu</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -605,18 +579,7 @@ Return the otu to which the node links to.
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Link the node to the given otu.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -627,8 +590,7 @@ Link the node to the given otu.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 47</span>
 
-<span class='def def kw'>def</span> <span class='otu= identifier id'>otu=</span><span class='lparen token'>(</span> <span class='otu identifier id'>otu</span> <span class='rparen token'>)</span> <span class='end end kw'>end</span> <span class='if if_mod kw'>if</span> <span class='false false kw'>false</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_otu='>otu=</span><span class='lparen'>(</span> <span class='id identifier rubyid_otu'>otu</span> <span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -651,7 +613,8 @@ Returns true if the node is a root node; false otherwise.
   </div>
 </div>
 <div class="tags">
-  <h3>Returns:</h3>
+  
+<h3>Returns:</h3>
 <ul class="return">
   
     <li>
@@ -678,10 +641,9 @@ Returns true if the node is a root node; false otherwise.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 50</span>
 
-<span class='def def kw'>def</span> <span class='root? fid id'>root?</span>
-  <span class='root identifier id'>root</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_root?'>root?</span>
+  <span class='id identifier rubyid_root'>root</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -707,10 +669,9 @@ Returns true if the node is a root node; false otherwise.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/trees.rb', line 12</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
-  <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='create_node identifier id'>create_node</span><span class='lparen token'>(</span> <span class='string val'>&quot;node&quot;</span><span class='comma token'>,</span> <span class='@@writer ivar id'>@@writer</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lparen token'>(</span> <span class='self self kw'>self</span><span class='comma token'>,</span> <span class='symbol val'>:id</span><span class='comma token'>,</span> <span class='symbol val'>:otu</span><span class='comma token'>,</span> <span class='symbol val'>:root</span><span class='comma token'>,</span> <span class='symbol val'>:label</span> <span class='rparen token'>)</span> <span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_xml'>to_xml</span>
+  <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_create_node'>create_node</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>node</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='cvar'>@@writer</span><span class='period'>.</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lparen'>(</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:id</span><span class='comma'>,</span> <span class='symbol'>:otu</span><span class='comma'>,</span> <span class='symbol'>:root</span><span class='comma'>,</span> <span class='symbol'>:label</span> <span class='rparen'>)</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -721,9 +682,9 @@ Returns true if the node is a root node; false otherwise.
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:31:59 2011 by 
+  Generated on Thu Mar 29 12:34:01 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>

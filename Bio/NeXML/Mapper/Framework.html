@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=en_in" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   Module: Bio::NeXML::Mapper::Framework
   
-    &mdash; Documentation by YARD 0.7.2
+    &mdash; Documentation by YARD 0.7.5
   
 </title>
 
@@ -88,7 +88,10 @@ Framework is the real workhorse of Mapper.
 </div>
 <div class="tags">
   
+
 </div>
+
+
 
 
 
@@ -170,15 +173,15 @@ Define target set for the source.
     <p>
 Define a source for the target.
 </p>
-<pre class="code">
-   <span class='belongs_to identifier id'>belongs_to</span> <span class='symbol val'>:source</span>
-</pre>
+<pre class="code ruby"><code>
+   <span class='id identifier rubyid_belongs_to'>belongs_to</span> <span class='symbol'>:source</span></code></pre>
 
 
   </div>
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -238,56 +241,55 @@ Define a source for the target.
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/framework.rb', line 10</span>
 
-<span class='def def kw'>def</span> <span class='belongs_to identifier id'>belongs_to</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='update identifier id'>update</span> <span class='assign token'>=</span> <span class='lparen token'>(</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span> <span class='symbol val'>:update</span> <span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='name identifier id'>name</span><span class='dot token'>.</span><span class='key identifier id'>key</span> <span class='rparen token'>)</span><span class='dot token'>.</span><span class='to_sym identifier id'>to_sym</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_belongs_to'>belongs_to</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_update'>update</span> <span class='op'>=</span> <span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span> <span class='symbol'>:update</span> <span class='rbracket'>]</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
 
-  <span class='comment val'># create attribute reader for source</span>
-  <span class='attr_reader identifier id'>attr_reader</span> <span class='name identifier id'>name</span>
+  <span class='comment'># create attribute reader for source
+</span>  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='id identifier rubyid_name'>name</span>
 
-  <span class='comment val'># Add this target to a source.</span>
-  <span class='comment val'>#    def add_to_source( source )</span>
-  <span class='comment val'>#      return if @source == source or source.nil?</span>
-  <span class='comment val'>#      @source = source</span>
-  <span class='comment val'>#      source.add_target( self )</span>
-  <span class='comment val'>#    end</span>
-  <span class='define_method identifier id'>define_method</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;add_to_#{name}&quot;</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='source identifier id'>source</span><span class='comma token'>,</span><span class='bitor op'>|</span>
-    <span class='comment val'># return if the target already belongs to</span>
-    <span class='comment val'># the given source or if the source is nil.</span>
-    <span class='return return kw'>return</span> <span class='if if_mod kw'>if</span> <span class='ivget identifier id'>ivget</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span> <span class='rparen token'>)</span> <span class='eq op'>==</span> <span class='source identifier id'>source</span> <span class='or or kw'>or</span> <span class='source identifier id'>source</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+  <span class='comment'># Add this target to a source.
+</span>  <span class='comment'>#    def add_to_source( source )
+</span>  <span class='comment'>#      return if @source == source or source.nil?
+</span>  <span class='comment'>#      @source = source
+</span>  <span class='comment'>#      source.add_target( self )
+</span>  <span class='comment'>#    end
+</span>  <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>add_to_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_source'>source</span><span class='comma'>,</span><span class='op'>|</span>
+    <span class='comment'># return if the target already belongs to
+</span>    <span class='comment'># the given source or if the source is nil.
+</span>    <span class='kw'>return</span> <span class='kw'>if</span> <span class='id identifier rubyid_ivget'>ivget</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span> <span class='rparen'>)</span> <span class='op'>==</span> <span class='id identifier rubyid_source'>source</span> <span class='kw'>or</span> <span class='id identifier rubyid_source'>source</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
 
-    <span class='comment val'># add source and send a message to source</span>
-    <span class='comment val'># to add self as target.</span>
-    <span class='ivset identifier id'>ivset</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='source identifier id'>source</span> <span class='rparen token'>)</span>
-    <span class='source identifier id'>source</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;add_#{update}&quot;</span><span class='comma token'>,</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
+    <span class='comment'># add source and send a message to source
+</span>    <span class='comment'># to add self as target.
+</span>    <span class='id identifier rubyid_ivset'>ivset</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_source'>source</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_source'>source</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>add_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_update'>update</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>self</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
 
-  <span class='comment val'># Set or remove source.</span>
-  <span class='comment val'>#    def source=( source )</span>
-  <span class='comment val'>#      return remove_from_source if source.nil?</span>
-  <span class='comment val'>#      return add_to_source( self )</span>
-  <span class='comment val'>#    end</span>
-  <span class='define_method identifier id'>define_method</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;#{name}=&quot;</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='source identifier id'>source</span><span class='comma token'>,</span><span class='bitor op'>|</span>
-    <span class='return return kw'>return</span> <span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;remove_from_#{name}&quot;</span> <span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='source identifier id'>source</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-    <span class='return return kw'>return</span> <span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;add_to_#{name}&quot;</span><span class='comma token'>,</span> <span class='source identifier id'>source</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
+  <span class='comment'># Set or remove source.
+</span>  <span class='comment'>#    def source=( source )
+</span>  <span class='comment'>#      return remove_from_source if source.nil?
+</span>  <span class='comment'>#      return add_to_source( self )
+</span>  <span class='comment'>#    end
+</span>  <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_source'>source</span><span class='comma'>,</span><span class='op'>|</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>remove_from_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_source'>source</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>add_to_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_source'>source</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
 
-  <span class='comment val'># Remove this target from an existing source.</span>
-  <span class='comment val'>#    def remove_from_source</span>
-  <span class='comment val'>#      return unless source = @source</span>
-  <span class='comment val'>#      @source = nil</span>
-  <span class='comment val'>#      source.delete_target( self )</span>
-  <span class='comment val'>#    end</span>
-  <span class='define_method identifier id'>define_method</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;remove_from_#{name}&quot;</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span>
-    <span class='comment val'># return if a sourc is not set.</span>
-    <span class='return return kw'>return</span> <span class='unless unless_mod kw'>unless</span> <span class='source identifier id'>source</span> <span class='assign token'>=</span> <span class='ivget identifier id'>ivget</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span> <span class='rparen token'>)</span>
+  <span class='comment'># Remove this target from an existing source.
+</span>  <span class='comment'>#    def remove_from_source
+</span>  <span class='comment'>#      return unless source = @source
+</span>  <span class='comment'>#      @source = nil
+</span>  <span class='comment'>#      source.delete_target( self )
+</span>  <span class='comment'>#    end
+</span>  <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>remove_from_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='comment'># return if a sourc is not set.
+</span>    <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_source'>source</span> <span class='op'>=</span> <span class='id identifier rubyid_ivget'>ivget</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span> <span class='rparen'>)</span>
 
-    <span class='comment val'># remove source and send a message to source</span>
-    <span class='comment val'># to remove itself as target.</span>
-    <span class='ivset identifier id'>ivset</span><span class='lparen token'>(</span> <span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span> <span class='rparen token'>)</span>
-    <span class='source identifier id'>source</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;delete_#{update}&quot;</span><span class='comma token'>,</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+    <span class='comment'># remove source and send a message to source
+</span>    <span class='comment'># to remove itself as target.
+</span>    <span class='id identifier rubyid_ivset'>ivset</span><span class='lparen'>(</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='kw'>nil</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_source'>source</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_update'>update</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>self</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -303,7 +305,7 @@ Define a source for the target.
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Define target set for the source. has_n :otu
+Define target set for the source.
 </p>
 
 
@@ -311,6 +313,7 @@ Define target set for the source. has_n :otu
 </div>
 <div class="tags">
   
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -399,95 +402,104 @@ Define target set for the source. has_n :otu
 141
 142
 143
-144</pre>
+144
+145
+146
+147
+148
+149</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/db/nexml/mapper/framework.rb', line 62</span>
 
-<span class='def def kw'>def</span> <span class='has_n identifier id'>has_n</span><span class='lparen token'>(</span> <span class='target identifier id'>target</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span> <span class='rparen token'>)</span>
-  <span class='name identifier id'>name</span> <span class='assign token'>=</span> <span class='lparen token'>(</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span> <span class='symbol val'>:singularize</span> <span class='rbrack token'>]</span> <span class='eq op'>==</span> <span class='false false kw'>false</span> <span class='rparen token'>)</span> <span class='question op'>?</span> <span class='target identifier id'>target</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span> <span class='colon op'>:</span> <span class='target identifier id'>target</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='dot token'>.</span><span class='singular identifier id'>singular</span>
-  <span class='type identifier id'>type</span> <span class='assign token'>=</span> <span class='lparen token'>(</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span> <span class='symbol val'>:index</span> <span class='rbrack token'>]</span> <span class='eq op'>==</span> <span class='false false kw'>false</span> <span class='rparen token'>)</span> <span class='question op'>?</span> <span class='ArrayRepository constant id'>ArrayRepository</span> <span class='colon op'>:</span> <span class='HashRepository constant id'>HashRepository</span>
-  <span class='update identifier id'>update</span> <span class='assign token'>=</span> <span class='lparen token'>(</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span> <span class='symbol val'>:update</span> <span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='name identifier id'>name</span><span class='dot token'>.</span><span class='key identifier id'>key</span> <span class='rparen token'>)</span><span class='dot token'>.</span><span class='to_sym identifier id'>to_sym</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_has_n'>has_n</span><span class='lparen'>(</span> <span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span> <span class='symbol'>:singularize</span> <span class='rbracket'>]</span> <span class='op'>==</span> <span class='kw'>false</span> <span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_target'>target</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>:</span> <span class='id identifier rubyid_target'>target</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_singular'>singular</span>
+  <span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span> <span class='symbol'>:index</span> <span class='rbracket'>]</span> <span class='op'>==</span> <span class='kw'>false</span> <span class='rparen'>)</span> <span class='op'>?</span> <span class='const'>ArrayRepository</span> <span class='op'>:</span> <span class='const'>HashRepository</span>
+  <span class='id identifier rubyid_update'>update</span> <span class='op'>=</span> <span class='lparen'>(</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span> <span class='symbol'>:update</span> <span class='rbracket'>]</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
 
-  <span class='comment val'># Return an Array of targets.</span>
-  <span class='comment val'>#    def targets</span>
-  <span class='comment val'>#      @targets.objects</span>
-  <span class='comment val'>#    end</span>
-  <span class='define_method identifier id'>define_method</span><span class='lparen token'>(</span> <span class='target identifier id'>target</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span>
-    <span class='repository identifier id'>repository</span><span class='lparen token'>(</span> <span class='target identifier id'>target</span><span class='comma token'>,</span> <span class='type identifier id'>type</span> <span class='rparen token'>)</span><span class='dot token'>.</span><span class='objects identifier id'>objects</span>
-  <span class='end end kw'>end</span>
+  <span class='comment'># Return an Array of targets.
+</span>  <span class='comment'>#    def targets
+</span>  <span class='comment'>#      @targets.objects
+</span>  <span class='comment'>#    end
+</span>  <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span> <span class='id identifier rubyid_target'>target</span> <span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_repository'>repository</span><span class='lparen'>(</span> <span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_objects'>objects</span>
+  <span class='kw'>end</span>
 
-  <span class='comment val'># Set an Array as a target.</span>
-  <span class='comment val'>#    def targets=( targets )</span>
-  <span class='comment val'>#      @targets.clear</span>
-  <span class='comment val'>#      targets.each do |t|</span>
-  <span class='comment val'>#        add_target( t )</span>
-  <span class='comment val'>#      end</span>
-  <span class='comment val'>#    end</span>
-  <span class='define_method identifier id'>define_method</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;#{target}=&quot;</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='objects identifier id'>objects</span><span class='comma token'>,</span><span class='bitor op'>|</span>
-    <span class='repository identifier id'>repository</span><span class='lparen token'>(</span> <span class='target identifier id'>target</span><span class='comma token'>,</span> <span class='type identifier id'>type</span> <span class='rparen token'>)</span><span class='dot token'>.</span><span class='clear identifier id'>clear</span>
-    <span class='objects identifier id'>objects</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>                     
-      <span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;add_#{name}&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span> <span class='rparen token'>)</span>  
-    <span class='end end kw'>end</span>                        
-  <span class='end end kw'>end</span>                         
+  <span class='comment'># Set an Array as a target.
+</span>  <span class='comment'>#    def targets=( targets )
+</span>  <span class='comment'>#      @targets.clear
+</span>  <span class='comment'>#      targets.each do |t|
+</span>  <span class='comment'>#        add_target( t )
+</span>  <span class='comment'>#      end
+</span>  <span class='comment'>#    end
+</span>  <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_target'>target</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_objects'>objects</span><span class='comma'>,</span><span class='op'>|</span>
+    <span class='id identifier rubyid_repository'>repository</span><span class='lparen'>(</span> <span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
+    <span class='id identifier rubyid_objects'>objects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_o'>o</span><span class='op'>|</span>                     
+      <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>add_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span> <span class='rparen'>)</span>  
+    <span class='kw'>end</span>                        
+  <span class='kw'>end</span>                         
 
-  <span class='comment val'># Add a target.</span>
-  <span class='comment val'>#    def add_target( target )</span>
-  <span class='comment val'>#      return if @targets.include?( target )</span>
-  <span class='comment val'>#      @targets.append( target )</span>
-  <span class='comment val'>#      target.source = self</span>
-  <span class='comment val'>#    end</span>
-  <span class='define_method identifier id'>define_method</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;add_#{name}&quot;</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='object identifier id'>object</span><span class='comma token'>,</span><span class='bitor op'>|</span>
-    <span class='repository identifier id'>repository</span> <span class='assign token'>=</span> <span class='repository identifier id'>repository</span><span class='lparen token'>(</span> <span class='target identifier id'>target</span><span class='comma token'>,</span> <span class='type identifier id'>type</span> <span class='rparen token'>)</span>
-    <span class='return return kw'>return</span> <span class='if if_mod kw'>if</span> <span class='repository identifier id'>repository</span><span class='dot token'>.</span><span class='include? fid id'>include?</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-    <span class='repository identifier id'>repository</span><span class='dot token'>.</span><span class='append identifier id'>append</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-    <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;#{update}=&quot;</span><span class='comma token'>,</span> <span class='self self kw'>self</span> <span class='rparen token'>)</span>
-    <span class='self self kw'>self</span>
-  <span class='end end kw'>end</span>
+  <span class='comment'># Add a target.
+</span>  <span class='comment'>#    def add_target( target )
+</span>  <span class='comment'>#      return if @targets.include?( target )
+</span>  <span class='comment'>#      @targets.append( target )
+</span>  <span class='comment'>#      target.source = self
+</span>  <span class='comment'>#    end
+</span>  <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>add_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_object'>object</span><span class='comma'>,</span><span class='op'>|</span>
+    <span class='id identifier rubyid_repository'>repository</span> <span class='op'>=</span> <span class='id identifier rubyid_repository'>repository</span><span class='lparen'>(</span> <span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span> <span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>if</span> <span class='id identifier rubyid_repository'>repository</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_repository'>repository</span><span class='period'>.</span><span class='id identifier rubyid_append'>append</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_update'>update</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>self</span> <span class='rparen'>)</span>
+    <span class='kw'>self</span>
+  <span class='kw'>end</span>
 
-  <span class='comment val'># Delete a target.</span>
-  <span class='comment val'>#    def delete_target( target )</span>
-  <span class='comment val'>#      return unless @targets.include?( target )</span>
-  <span class='comment val'>#      return unless deleted = @targets.delete( target )</span>
-  <span class='comment val'>#      target.source = nil</span>
-  <span class='comment val'>#    end</span>
-  <span class='define_method identifier id'>define_method</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;delete_#{name}&quot;</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='object identifier id'>object</span><span class='comma token'>,</span><span class='bitor op'>|</span>
-    <span class='repository identifier id'>repository</span> <span class='assign token'>=</span> <span class='repository identifier id'>repository</span><span class='lparen token'>(</span> <span class='target identifier id'>target</span><span class='comma token'>,</span> <span class='type identifier id'>type</span> <span class='rparen token'>)</span>
-    <span class='return return kw'>return</span> <span class='unless unless_mod kw'>unless</span> <span class='deleted identifier id'>deleted</span> <span class='assign token'>=</span> <span class='repository identifier id'>repository</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-    <span class='object identifier id'>object</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;#{update}=&quot;</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span> <span class='rparen token'>)</span>
-    <span class='deleted identifier id'>deleted</span>
-  <span class='end end kw'>end</span>                                          
+  <span class='comment'># Delete a target.
+</span>  <span class='comment'>#    def delete_target( target )
+</span>  <span class='comment'>#      return unless @targets.include?( target )
+</span>  <span class='comment'>#      return unless deleted = @targets.delete( target )
+</span>  <span class='comment'>#      target.source = nil
+</span>  <span class='comment'>#    end
+</span>  <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_object'>object</span><span class='comma'>,</span><span class='op'>|</span>
+    <span class='id identifier rubyid_repository'>repository</span> <span class='op'>=</span> <span class='id identifier rubyid_repository'>repository</span><span class='lparen'>(</span> <span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span> <span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_deleted'>deleted</span> <span class='op'>=</span> <span class='id identifier rubyid_repository'>repository</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_update'>update</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>nil</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_deleted'>deleted</span>
+  <span class='kw'>end</span>                                          
 
-  <span class='comment val'># Return the number of targets a source has.</span>
-  <span class='comment val'>#    def number_of_targets</span>
-  <span class='comment val'>#      @targets.length</span>
-  <span class='comment val'>#    end</span>
-  <span class='define_method identifier id'>define_method</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;number_of_#{target}&quot;</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span>
-    <span class='repository identifier id'>repository</span><span class='lparen token'>(</span> <span class='target identifier id'>target</span><span class='comma token'>,</span> <span class='type identifier id'>type</span> <span class='rparen token'>)</span><span class='dot token'>.</span><span class='length identifier id'>length</span>
-  <span class='end end kw'>end</span>
+  <span class='comment'># Return the number of targets a source has.
+</span>  <span class='comment'>#    def number_of_targets
+</span>  <span class='comment'>#      @targets.length
+</span>  <span class='comment'>#    end
+</span>  <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>number_of_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_target'>target</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_repository'>repository</span><span class='lparen'>(</span> <span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
+  <span class='kw'>end</span>
 
-  <span class='comment val'># Return true if the source has the given target.</span>
-  <span class='comment val'>#    def has_target?( target )</span>
-  <span class='comment val'>#      @targets.include?( target )</span>
-  <span class='comment val'>#    end</span>
-  <span class='define_method identifier id'>define_method</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;has_#{name}?&quot;</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='object identifier id'>object</span><span class='comma token'>,</span><span class='bitor op'>|</span>
-    <span class='repository identifier id'>repository</span><span class='lparen token'>(</span> <span class='target identifier id'>target</span><span class='comma token'>,</span> <span class='type identifier id'>type</span> <span class='rparen token'>)</span><span class='dot token'>.</span><span class='include? fid id'>include?</span><span class='lparen token'>(</span> <span class='object identifier id'>object</span> <span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
+  <span class='comment'># Return true if the source has the given target.
+</span>  <span class='comment'>#    def has_target?( target )
+</span>  <span class='comment'>#      @targets.include?( target )
+</span>  <span class='comment'>#    end
+</span>  <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>has_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>?</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_object'>object</span><span class='comma'>,</span><span class='op'>|</span>
+    <span class='id identifier rubyid_repository'>repository</span><span class='lparen'>(</span> <span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_object'>object</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
 
-  <span class='comment val'># Iterate over each target.</span>
-  <span class='comment val'>#    def each( &amp;block )</span>
-  <span class='comment val'>#      @targets.each( &amp;block )</span>
-  <span class='comment val'>#    end</span>
-  <span class='class_eval identifier id'>class_eval</span> <span class='string val'>&quot;            def each_\#{name}( &amp;block )\n              repository( \&quot;\#{target}\&quot;, \#{type} ).each( &amp;block )\n            end\n&quot;</span>
+  <span class='comment'># Iterate over each target.
+</span>  <span class='comment'>#    def each( &amp;block )
+</span>  <span class='comment'>#      @targets.each( &amp;block )
+</span>  <span class='comment'>#    end
+</span>  <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>each_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span>
+    <span class='id identifier rubyid_repository'>repository</span><span class='lparen'>(</span><span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
 
-  <span class='if if kw'>if</span> <span class='type identifier id'>type</span> <span class='eq op'>==</span> <span class='HashRepository constant id'>HashRepository</span>
-    <span class='define_method identifier id'>define_method</span><span class='lparen token'>(</span> <span class='dstring node'>&quot;get_#{name}_by_id&quot;</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='id identifier id'>id</span><span class='comma token'>,</span><span class='bitor op'>|</span>
-      <span class='repository identifier id'>repository</span><span class='lparen token'>(</span> <span class='target identifier id'>target</span><span class='comma token'>,</span> <span class='type identifier id'>type</span> <span class='rparen token'>)</span><span class='lbrack token'>[</span> <span class='id identifier id'>id</span> <span class='rbrack token'>]</span>          
-    <span class='end end kw'>end</span>                                        
-  <span class='class_eval identifier id'>class_eval</span> <span class='string val'>&quot;            def each_\#{name}_with_id( &amp;block )\n              repository( \#{target }, \#{type } ).each_with_id( &amp;block )\n            end\n&quot;</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+  <span class='kw'>if</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'>HashRepository</span>
+    <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>_by_id</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span><span class='op'>|</span>
+      <span class='id identifier rubyid_repository'>repository</span><span class='lparen'>(</span> <span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span> <span class='rparen'>)</span><span class='lbracket'>[</span> <span class='id identifier rubyid_id'>id</span> <span class='rbracket'>]</span>          
+    <span class='kw'>end</span>                                        
+
+    <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>each_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>_with_id</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span>
+      <span class='id identifier rubyid_repository'>repository</span><span class='lparen'>(</span><span class='id identifier rubyid_target'>target</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each_with_id'>each_with_id</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -498,9 +510,9 @@ Define target set for the source. has_n :otu
 </div>
     
     <div id="footer">
-  Generated on Sun Aug  7 15:32:03 2011 by 
+  Generated on Thu Mar 29 12:34:02 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.5 (ruby-1.9.2).
 </div>
 
   </body>
