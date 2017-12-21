@@ -246,12 +246,12 @@ module Bio
 
       # tag should create a XML::Node
       def test_create_node
-        node1 = XML::Node.new( 'nexml' )
+        node1 = XML::Node.new( 'nexml')
         node1.attributes = { :version => '0.9' }
 
         node2 = @writer.send( :create_node, 'nexml', :version => '0.9' )
 
-        assert_equal node1, node2
+        assert_equal node1.to_s, node2.to_s
       end
 
       def test_serialize_otu

@@ -119,8 +119,8 @@ module Bio
       end
 
       def validate_nexml
-        valid = @reader.schema_validate( File.join( File.dirname(__FILE__),
-                                                    "schema/nexml.xsd" ) )
+        schema = XML::Document.file(File.join(File.dirname(__FILE__), 'schema/nexml.xsd'))
+        valid = @reader.schema_validate( XML::Schema.document(schema) ) 
         return true if valid == 0
       end
 

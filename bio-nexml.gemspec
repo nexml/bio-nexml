@@ -16,8 +16,10 @@ Gem::Specification.new do |s|
   s.description = %q{This plugin reads, writes and generates NeXML}
 
   # dependencies
-  s.add_dependency('bio', '>= 1.4.1')
-  s.add_dependency('libxml-ruby', '= 1.1.4')
+  s.add_dependency('bio', '>= 1.5.1')
+  s.add_dependency('libxml-ruby', '= 3.0.0')
+
+  s.add_development_dependency('test-unit', '~> 3.2.3')
 
   # gem
   s.files         = `git ls-files`.split("\n") rescue ''
