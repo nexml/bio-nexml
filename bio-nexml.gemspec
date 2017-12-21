@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.add_dependency('bio', '>= 1.4.1')
   s.add_dependency('libxml-ruby', '= 3.0.0')
 
+  s.add_development_dependency('test-unit', '~> 3.2.3')
+
   # gem
   s.files         = `git ls-files`.split("\n") rescue ''
   s.test_file     = "test/test_bio-nexml.rb"
