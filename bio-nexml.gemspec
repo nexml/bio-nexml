@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency('libxml-ruby', '= 3.0.0')
 
   s.add_development_dependency('test-unit', '~> 3.2.3')
+  s.add_development_dependency('rdoc')
 
   # gem
   s.files         = `git ls-files`.split("\n") rescue ''
